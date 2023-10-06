@@ -3,7 +3,6 @@
 import { sendContactForm } from "@/actions/contact";
 import { useState } from "react";
 import { StyledLink } from "./StyledLink";
-import { Input } from "./Input";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"Send" | "Loading..." | "Sent">("Send");
