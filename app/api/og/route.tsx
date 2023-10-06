@@ -17,23 +17,23 @@ export async function GET(req: NextRequest) {
 
   return new ImageResponse(
     (
-      <div
-        tw="flex bg-white w-full h-full items-center justify-center bg-white"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, #80808012 1px, transparent 1px), linear-gradient(to bottom, #80808012 1px, transparent 1px)",
-        }}
-      >
+      <div tw="flex bg-white w-full h-full items-center justify-center bg-white">
         <div tw="flex flex-col w-1/2 ml-16 text-neutral-700">
-          <h1 tw="text-7xl font-extrabold mb-2 max-w-xl">{title}</h1>
-          <p tw="text-4xl font-semibold max-w-xl">{subtitle}</p>
+          <h1 tw="text-9xl font-extrabold mb-2">{title}</h1>
+          <p tw="text-7xl font-semibold">{subtitle}</p>
         </div>
-        <img tw="max-w-1/2 h-full w-full" src={`${origin}/headshot.jpg`} />
+        <img
+          tw="max-w-1/2 h-full w-full"
+          src={`${origin}/headshot.jpg`}
+          style={{
+            objectFit: "cover",
+          }}
+        />
       </div>
     ),
     {
-      width: 1200,
-      height: 600,
+      width: 1920,
+      height: 1080,
       fonts: [
         {
           name: "Inter",

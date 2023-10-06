@@ -18,30 +18,34 @@ export function ContactForm() {
   return (
     <section
       id="contact"
-      className="w-full min-h-screen flex items-center justify-between"
+      className="lg:w-full lg:min-h-screen flex flex-col lg:flex-row items-center justify-center lg:justify-between"
     >
-      <div className="w-1/2 ml-8 text-neutral-700">
-        <h2 className="text-7xl font-extrabold mb-2 max-w-xl">Get in touch</h2>
-        <p className="text-xl max-w-xl my-8">
+      <div className="w-full lg:w-1/2 lg:ml-8 mt-4 text-neutral-700">
+        <h2 className="text-center lg:text-left text-5xl lg:text-7xl font-extrabold mb-2 lg:max-w-xl">
+          Get in touch
+        </h2>
+        <p className="text-center lg:text-left text-xl my-8 mr-2">
           Have a project in mind? Looking to partner or work together? Reach out
           through the form and I&apos;ll get back to you as soon as possible.
         </p>
 
-        <div className="my-8 flex flex-col gap-2">
-          <StyledLink href="mailto:hi@scidroid.co" external>
-            Send me an email {"->"}
-          </StyledLink>
-          <StyledLink href="https://linkedin.com/in/scidroid" external>
-            Connect in Linkedin {"->"}
-          </StyledLink>
-          <StyledLink href="https://x.com/scidroid" external>
-            Follow me on X {"->"}
-          </StyledLink>
+        <div className="flex flex-col items-center justify-center w-full text-center lg:block lg:text-left">
+          <div className="my-8 flex flex-col gap-2">
+            <StyledLink href="mailto:hi@scidroid.co" external>
+              Send me an email {"->"}
+            </StyledLink>
+            <StyledLink href="https://linkedin.com/in/scidroid" external>
+              Connect in Linkedin {"->"}
+            </StyledLink>
+            <StyledLink href="https://x.com/scidroid" external>
+              Follow me on X {"->"}
+            </StyledLink>
+          </div>
         </div>
       </div>
 
-      <div className="w-1/2">
-        <form action={handleSubmit} className="space-y-4">
+      <div className="w-full lg:w-1/2">
+        <form action={handleSubmit} className="space-y-4 mx-4 lg:mx-0">
           <div className="flex flex-col max-w-xl gap-1 my-2">
             <label
               htmlFor="name"

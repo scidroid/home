@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export function StaticIcon() {
   return (
-    <div className="h-[28px] flex items-end space-x-1">
+    <div className="h-[28px] items-end space-x-1 hidden lg:flex">
       <div className="flex flex-col items-center">
         <div className="w-[6px] h-[12px] bg-slate-700" />
       </div>
@@ -20,7 +20,7 @@ export function StaticIcon() {
 
 export function Icon() {
   return (
-    <div className="h-[28px] w-[30px] flex items-end space-x-1">
+    <div className="h-[28px] w-[30px] items-end space-x-1 hidden lg:flex">
       <div className="flex flex-col items-center">
         <motion.div
           className="w-[6px] bg-slate-700"

@@ -59,7 +59,7 @@ export default function RootLayout({
         className={`${mainFont.className} absolute inset-0 h-full w-full bg-white bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]`}
       >
         <div className="flex justify-center scroll-smooth">
-          <div className="max-w-7xl w-full">{children}</div>
+          <div className="max-w-2xl lg:max-w-7xl w-full m-1 lg:m-0">{children}</div>
         </div>
         <Analytics />
       </body>
