@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 
 const mainFont = Inter({
   subsets: ["latin"],
@@ -8,19 +9,26 @@ const mainFont = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://scidroid.co"),
+  metadataBase: new URL("https://home.scidroid.co"),
   title: {
     default: "Juan Almanza",
     template: "%s | Juan Almanza",
   },
-  description: "Builder and researcher",
+  description:
+    "Juan is a 16 years old passionate High School student from Colombia with solid leadership and engineering skills. Focused on creating solutions for rural populations and advocating for STEM education and gender equality.",
   openGraph: {
     title: "Juan Almanza",
-    description: "Builder and researcher",
-    url: "https://scidroid.co",
+    description:
+      "Juan is a 16 years old passionate High School student from Colombia with solid leadership and engineering skills. Focused on creating solutions for rural populations and advocating for STEM education and gender equality.",
+    url: "https://home.scidroid.co",
     siteName: "Juan Almanza",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "https://home.scidroid.co/api/og",
+      },
+    ],
   },
   robots: {
     index: true,
@@ -36,6 +44,7 @@ export const metadata: Metadata = {
   twitter: {
     title: "Juan Almanza",
     card: "summary_large_image",
+    images: ["https://home.scidroid.co/api/og"],
   },
 };
 
@@ -52,6 +61,7 @@ export default function RootLayout({
         <div className="flex justify-center scroll-smooth">
           <div className="max-w-7xl w-full">{children}</div>
         </div>
+        <Analytics />
       </body>
     </html>
   );

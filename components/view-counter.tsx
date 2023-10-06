@@ -16,6 +16,8 @@ export function ViewCounter({
   const viewsForSlug = allViews && allViews.find((view) => view.slug === slug);
   const number = new Number(viewsForSlug?.count || 0);
 
+  /* eslint-disable react-hooks/exhaustive-deps */
+
   useEffect(() => {
     if (trackView) {
       increment(slug);

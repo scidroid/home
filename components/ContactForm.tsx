@@ -24,7 +24,7 @@ export function ContactForm() {
         <h2 className="text-7xl font-extrabold mb-2 max-w-xl">Get in touch</h2>
         <p className="text-xl max-w-xl my-8">
           Have a project in mind? Looking to partner or work together? Reach out
-          through the form and I'll get back to you as soon as possible.
+          through the form and I&apos;ll get back to you as soon as possible.
         </p>
 
         <div className="my-8 flex flex-col gap-2">
