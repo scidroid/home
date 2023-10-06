@@ -11,9 +11,7 @@ export function AnimatedHeart({ bpm }: { bpm: number }) {
       height="30"
       viewBox="0 0 24 24"
       fill="none"
-      initial={{ scale: 0.8, rotate: 0 }}
-      whileHover={{ scale: 1.1, rotate: 10 }}
-      whileTap={{ scale: 0.9, rotate: -10 }}
+      initial={{ scale: 0.8 }}
       animate={{ scale: 1 }}
       transition={{
         type: "spring",

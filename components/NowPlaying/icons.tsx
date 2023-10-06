@@ -20,7 +20,7 @@ export function StaticIcon() {
 
 export function Icon() {
   return (
-    <div className="h-[28px] flex items-end space-x-1">
+    <div className="h-[28px] w-[30px] flex items-end space-x-1">
       <div className="flex flex-col items-center">
         <motion.div
           className="w-[6px] bg-slate-700"

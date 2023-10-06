@@ -1,10 +1,10 @@
 import "@/styles/globals.css";
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Inter } from "next/font/google";
 
-const mainFont = Plus_Jakarta_Sans({
+const mainFont = Inter({
   subsets: ["latin"],
-  variable: "--font-main",
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -46,7 +46,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={mainFont.className}>{children}</body>
+      <body
+        className={`${mainFont.className} absolute inset-0 h-full w-full bg-white bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]`}
+      >
+        <div className="flex justify-center scroll-smooth">
+          <div className="max-w-7xl w-full">{children}</div>
+        </div>
+      </body>
     </html>
   );
 }

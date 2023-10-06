@@ -8,7 +8,7 @@ export async function NowPlaying() {
     return (
       <div className="flex items-center space-x-2">
         <StaticIcon />
-        <p className="text-lg text-gray-700">Not playing anything</p>
+        <p className="text-xl">Not playing anything</p>
       </div>
     );
   }
@@ -27,7 +27,7 @@ export async function NowPlaying() {
         target="_blank"
         rel="noopener noreferrer"
         href={song.url}
-        className="text-lg text-gray-700"
+        className="text-xl"
       >
         Playing {truncatedTitle} by {truncatedArtist}
       </a>

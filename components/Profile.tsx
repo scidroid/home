@@ -3,32 +3,41 @@ import Image from "next/image";
 import headshot from "@/public/headshot.jpg";
 import { NowPlaying } from "./NowPlaying";
 import { HealthData } from "./Health";
+import { Subtitle } from "./Subtitle";
+import { Age } from "./Age";
+import { StyledLink } from "@/components/StyledLink";
 
 export function Profile() {
   return (
-    <div className="bg-gradient-to-r from-gray-50 to-white p-8 m-4 max-w-xl mx-auto shadow-2xl rounded-xl">
-      <div className="flex flex-col items-center text-center">
-        <div className="w-40 h-40 relative rounded-full overflow-hidden shadow-lg mb-6">
-          <Image
-            src={headshot}
-            className="absolute inset-0"
-            alt="A selfie of Juan Almanza"
-          />
-        </div>
-        <h1 className="text-4xl font-extrabold text-gray-800 mb-2">
-          Juan Almanza
-        </h1>
-        <h2 className="text-2xl font-bold text-gray-600 mb-4">
-          High School Junior
-        </h2>
-        <p className="text-lg text-gray-700 mb-6">
-          Passionate High School student with solid leadership and engineering
-          skills. Focused on creating solutions for rural populations and
-          advocating for STEM education, gender equality, and climate crisis.
+    <section className="w-full min-h-screen flex items-center justify-between">
+      <div className="w-1/2 ml-8 text-neutral-700">
+        <h1 className="text-7xl font-extrabold mb-2 max-w-xl">Juan Almanza</h1>
+        <Subtitle />
+
+        <p className="text-xl max-w-xl my-8">
+          Juan is a <Age /> years old passionate High School student from
+          Colombia with solid leadership and engineering skills. Focused on
+          creating solutions for rural populations and advocating for STEM
+          education and gender equality.
         </p>
+
         <NowPlaying />
         <HealthData />
+
+        <div className="my-8 flex flex-col gap-2">
+          <StyledLink external href="/resume.pdf">
+            Read my resume {"->"}
+          </StyledLink>
+          <StyledLink href="/#contact">Contact me {"->"}</StyledLink>
+        </div>
       </div>
-    </div>
+
+      <Image
+        src={headshot}
+        alt="Selfie of Juan Almanza, a High School student from Colombia"
+        className="w-1/2 min-h-screen object-cover"
+        priority
+      />
+    </section>
   );
 }

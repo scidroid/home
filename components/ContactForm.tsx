@@ -2,6 +2,8 @@
 
 import { sendContactForm } from "@/actions/contact";
 import { useState } from "react";
+import { StyledLink } from "./StyledLink";
+import { Input } from "./Input";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"Send" | "Loading..." | "Sent">("Send");
@@ -15,42 +17,71 @@ export function ContactForm() {
   }
 
   return (
-    <div className="bg-gradient-to-r from-gray-50 to-white p-8 m-4 max-w-xl mx-auto shadow-2xl rounded-xl">
-      <div className="flex flex-col items-center text-center">
-        <form action={handleSubmit} className="w-full">
-          <div className="flex space-x-4 mb-4">
-            <div className="flex-1">
-              <label htmlFor="name" className="block mb-2">
-                Name:
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                minLength={2}
-                placeholder="Enter your name"
-                className="w-full border border-gray-300 rounded p-2"
-              />
-            </div>
-            <div className="flex-1">
-              <label htmlFor="email" className="block mb-2">
-                Email:
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                placeholder="Enter your email"
-                className="w-full border border-gray-300 rounded p-2"
-              />
-            </div>
-          </div>
+    <section
+      id="contact"
+      className="w-full min-h-screen flex items-center justify-between"
+    >
+      <div className="w-1/2 ml-8 text-neutral-700">
+        <h2 className="text-7xl font-extrabold mb-2 max-w-xl">Get in touch</h2>
+        <p className="text-xl max-w-xl my-8">
+          Have a project in mind? Looking to partner or work together? Reach out
+          through the form and I'll get back to you as soon as possible.
+        </p>
 
-          <div className="mb-4">
-            <label htmlFor="message" className="block mb-2">
-              Message:
+        <div className="my-8 flex flex-col gap-2">
+          <StyledLink href="mailto:hi@scidroid.co" external>
+            Send me an email {"->"}
+          </StyledLink>
+          <StyledLink href="https://linkedin.com/in/scidroid" external>
+            Connect in Linkedin {"->"}
+          </StyledLink>
+          <StyledLink href="https://x.com/scidroid" external>
+            Follow me on X {"->"}
+          </StyledLink>
+        </div>
+      </div>
+
+      <div className="w-1/2">
+        <form action={handleSubmit} className="space-y-4">
+          <div className="flex flex-col max-w-xl gap-1 my-2">
+            <label
+              htmlFor="name"
+              className="text-xl font-bold text-neutral-700"
+            >
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              minLength={2}
+              placeholder="Enter your name"
+              className="max-w-3xl rounded-md py-2 px-2 text-neutral-700 border-2 border-gray-200 text-lg"
+            />
+          </div>
+          <div className="flex flex-col max-w-xl gap-1 my-2">
+            <label
+              htmlFor="email"
+              className="text-xl font-bold text-neutral-700"
+            >
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="Enter your email"
+              className="max-w-3xl rounded-md py-2 px-2 text-neutral-700 border-2 border-gray-200 text-lg"
+            />
+          </div>
+          <div className="flex flex-col max-w-xl gap-1 my-2">
+            <label
+              htmlFor="message"
+              className="text-xl font-bold text-neutral-700"
+            >
+              Message
             </label>
             <textarea
               id="message"
@@ -58,19 +89,21 @@ export function ContactForm() {
               required
               minLength={5}
               placeholder="Enter your message"
-              className="w-full border border-gray-300 rounded p-2 h-32"
-            ></textarea>
+              className="max-w-3xl rounded-md py-2 px-2 text-neutral-700 border-2 border-gray-200 text-lg"
+            />
           </div>
 
-          <button
-            type="submit"
-            disabled={status != "Send"}
-            className="w-full bg-white border border-gray-300 text-gray-700 py-2 rounded transition duration-300 ease-in-out hover:bg-gray-100"
-          >
-            {status}
-          </button>
+          <div className="flex flex-col max-w-xl gap-1 my-2">
+            <button
+              disabled={status !== "Send"}
+              type="submit"
+              className="text-xl font-bold text-neutral-700 max-w-3xl rounded-md py-2 px-2 border-2 border-gray-200"
+            >
+              {status}
+            </button>
+          </div>
         </form>
       </div>
-    </div>
+    </section>
   );
 }
