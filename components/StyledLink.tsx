@@ -32,8 +32,8 @@ export function StyledLink({
   }
 
   return (
-    <Link href={href} passHref>
-      <span className={LINK_STYLE}>{content}</span>
+    <Link href={href} className={LINK_STYLE}>
+      {content}
     </Link>
   );
 }

@@ -1,12 +1,8 @@
 import "@/styles/globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
-
-const mainFont = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
+import { GeistSans, GeistMono } from "geist/font";
+import { ConsoleHelper } from "@/components/ConsoleHelper";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://home.scidroid.co"),
@@ -56,12 +52,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${mainFont.className} absolute inset-0 h-full w-full bg-white bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]`}
+        className={`${GeistSans.variable} ${GeistMono.variable} antialised absolute inset-0 h-full w-full bg-white bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]`}
       >
         <div className="flex justify-center scroll-smooth">
-          <div className="max-w-2xl lg:max-w-7xl w-full m-1 lg:m-0">{children}</div>
+          <div className="font-sans max-w-2xl lg:max-w-7xl w-full m-1 lg:m-0 text-neutral-700">
+            {children}
+          </div>
         </div>
         <Analytics />
+        <ConsoleHelper />
       </body>
     </html>
   );

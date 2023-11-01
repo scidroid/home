@@ -7,8 +7,8 @@ export const getViewsCount = cache(
     await Promise.all(
       allReadings.map(async (reading) => {
         return {
-          slug: reading._raw.flattenedPath,
-          count: await kv.get(reading._raw.flattenedPath),
+          slug: reading.slug,
+          count: await kv.get(reading.slug),
         };
       })
     )

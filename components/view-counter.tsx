@@ -24,5 +24,5 @@ export function ViewCounter({
     }
   }, []);
 
-  return <p>{`${number.toLocaleString()} views`}</p>;
+  return <span>{`${number.toLocaleString()} views`}</span>;
 }

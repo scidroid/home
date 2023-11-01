@@ -1,4 +1,8 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
+import remarkGfm from "remark-gfm";
+import rehypePrettyCode from "rehype-pretty-code";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 export const Reading = defineDocumentType(() => ({
   name: "Reading",
@@ -10,9 +14,9 @@ export const Reading = defineDocumentType(() => ({
     summary: { type: "string", required: true },
   },
   computedFields: {
-    url: {
+    slug: {
       type: "string",
-      resolve: (post) => `/${post._raw.flattenedPath}`,
+      resolve: (doc) => doc._raw.flattenedPath,
     },
   },
 }));
@@ -20,5 +24,20 @@ export const Reading = defineDocumentType(() => ({
 export default makeSource({
   contentDirPath: "readings",
   documentTypes: [Reading],
-  disableImportAliasWarning: true
+  disableImportAliasWarning: true,
+  mdx: {
+    remarkPlugins: [remarkGfm],
+    rehypePlugins: [
+      rehypeSlug,
+      [rehypePrettyCode],
+      [
+        rehypeAutolinkHeadings,
+        {
+          properties: {
+            className: ["anchor"],
+          },
+        },
+      ],
+    ],
+  },
 });

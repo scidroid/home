@@ -1,6 +1,8 @@
 import type { Config } from "tailwindcss";
 
 import formsPlugin from "@tailwindcss/forms";
+import typographyPlugin from "@tailwindcss/typography";
+import { createFluidValue } from "./utils/fluidTypes";
 
 const config: Config = {
   content: [
@@ -10,7 +12,17 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-inter)"],
+        sans: ["var(--font-geist-sans)"],
+        mono: ["var(--font-geist-mono)"],
+      },
+      fontSize: {
+        "text-xs": createFluidValue(12, 14),
+        "text-sm": createFluidValue(14, 16),
+        "text-base": createFluidValue(16, 18),
+        "text-lg": createFluidValue(18, 20),
+        "text-xl": createFluidValue(20, 24),
+        "text-2xl": createFluidValue(24, 28),
+        "text-3xl": createFluidValue(28, 32),
       },
       animation: {
         slide: "slide 2.5s linear infinite",
@@ -26,7 +38,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [formsPlugin],
+  plugins: [formsPlugin, typographyPlugin],
 };
 
 export default config;

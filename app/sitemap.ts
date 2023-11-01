@@ -2,7 +2,7 @@ import { allReadings } from "contentlayer/generated";
 
 export default async function sitemap() {
   const readings = allReadings.map((reading) => ({
-    url: `https://scidroid.co/${reading._raw.flattenedPath}`,
+    url: `https://scidroid.co/${reading.slug}`,
     lastModified: reading.date,
   }));
 

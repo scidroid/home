@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 const titles = [
   {
@@ -26,19 +26,21 @@ export function Subtitle() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
+  const prefersReducedMotion = useReducedMotion();
+
   useEffect(() => {
-    if (!isHovered) {
+    if (!isHovered && !prefersReducedMotion) {
       const interval = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % titles.length);
       }, 2000);
 
       return () => clearInterval(interval);
     }
-  }, [isHovered]);
+  }, [isHovered, prefersReducedMotion]);
 
   return (
     <h2
-      className="text-center lg:text-left text-3xl lg:text-4xl font-semibold lg:max-w-xl relative"
+      className="text-2xl font-semibold lg:text-4xl"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

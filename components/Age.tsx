@@ -27,5 +27,5 @@ export function Age() {
     }
   }, [prefersReducedMotion]);
 
-  return <span className="font-mono">{age}</span>;
+  return <span className="tabular-nums">{age}</span>;
 }

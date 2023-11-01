@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import headshot from "@/public/headshot.jpg";
+import headshot from "@/public/headshot.png";
 import { NowPlaying } from "./NowPlaying";
 import { HealthData } from "./Health";
 import { Subtitle } from "./Subtitle";
@@ -9,37 +9,37 @@ import { StyledLink } from "@/components/StyledLink";
 
 export function Profile() {
   return (
-    <section className="lg:w-full lg:min-h-screen flex flex-col-reverse lg:flex-row items-center justify-center lg:justify-between">
-      <div className="w-full lg:w-1/2 lg:ml-8 mt-4 text-neutral-700">
-        <h1 className="text-center lg:text-left text-5xl lg:text-7xl font-extrabold mb-2 lg:max-w-xl">
-          Juan Almanza
-        </h1>
-        <Subtitle />
+    <section className="flex flex-col-reverse items-center text-center m-4 lg:m-0 lg:flex-row lg:text-left lg:max-h-[1000px]">
+      <div className="lg:w-1/2 lg:m-8">
+        <div className="my-4 lg:my-8">
+          <h1 className="text-4xl font-extrabold lg:text-7xl">Juan Almanza</h1>
+          <Subtitle />
+        </div>
 
-        <p className="text-center lg:text-left text-xl my-8 mr-2">
+        <p className="my-4 text-lg lg:text-xl lg:my-8">
           Juan is a <Age /> years old passionate High School student from
           Colombia with solid leadership and engineering skills. Focused on
           creating solutions for rural populations and advocating for STEM
           education and gender equality.
         </p>
 
-        <div className="flex flex-col items-center justify-center w-full text-center lg:block lg:text-left">
+        <div className="my-4 flex flex-col items-center gap-y-2 lg:items-start lg:my-8">
           <NowPlaying />
           <HealthData />
+        </div>
 
-          <div className="my-8 flex flex-col gap-2">
-            <StyledLink external href="/resume.pdf">
-              Read my resume {"->"}
-            </StyledLink>
-            <StyledLink href="/#contact">Contact me {"->"}</StyledLink>
-          </div>
+        <div className="my-4 flex flex-col items-center gap-y-2 lg:items-start lg:my-8">
+          <StyledLink external href="/resume.pdf">
+            Read my resume {"->"}
+          </StyledLink>
+          <StyledLink href="/#contact">Contact me {"->"}</StyledLink>
         </div>
       </div>
 
       <Image
         src={headshot}
         alt="Selfie of Juan Almanza, a High School student from Colombia"
-        className="w-40 rounded-full lg:rounded-none mt-10 lg:mt-0 lg:w-1/2 lg:min-h-screen object-cover"
+        className="w-40 rounded-full object-cover lg:rounded-none lg:w-1/2"
         priority
       />
     </section>

@@ -3,7 +3,7 @@ import { Profile } from "@/components/Profile";
 
 export default function Home() {
   return (
-    <main className="w-full min-h-screen flex flex-col items-center justify-center">
+    <main>
       <Profile />
       <ContactForm />
     </main>

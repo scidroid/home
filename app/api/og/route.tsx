@@ -1,14 +1,22 @@
 /* eslint-disable jsx-a11y/alt-text, @next/next/no-img-element */
-import { NextRequest, ImageResponse } from "next/server";
+import { NextRequest } from "next/server";
+import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 
-const boldFont = fetch(
-  new URL("../../../public/fonts/Inter-Bold.ttf", import.meta.url)
+const extraboldFont = fetch(
+  new URL("../../../public/fonts/Geist-Black.otf", import.meta.url)
+).then((res) => res.arrayBuffer());
+
+const semiboldFont = fetch(
+  new URL("../../../public/fonts/Geist-SemiBold.otf", import.meta.url)
 ).then((res) => res.arrayBuffer());
 
 export async function GET(req: NextRequest) {
-  const bold = await boldFont;
+  const [extrabold, semibold] = await Promise.all([
+    extraboldFont,
+    semiboldFont,
+  ]);
 
   const { searchParams, origin } = new URL(req.url);
   const title = searchParams.get("title") || "Juan Almanza";
@@ -24,7 +32,7 @@ export async function GET(req: NextRequest) {
         </div>
         <img
           tw="max-w-1/2 h-full w-full"
-          src={`${origin}/headshot.jpg`}
+          src={`${origin}/headshot.png`}
           style={{
             objectFit: "cover",
           }}
@@ -36,9 +44,14 @@ export async function GET(req: NextRequest) {
       height: 1080,
       fonts: [
         {
-          name: "Inter",
-          data: bold,
-          weight: 700,
+          name: "Vercel Sans",
+          data: extrabold,
+          weight: 800,
+        },
+        {
+          name: "Vercel Sans",
+          data: semibold,
+          weight: 600,
         },
       ],
     }
