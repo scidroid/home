@@ -1,8 +1,6 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
-import remarkGfm from "remark-gfm";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 export const Reading = defineDocumentType(() => ({
   name: "Reading",
@@ -26,18 +24,6 @@ export default makeSource({
   documentTypes: [Reading],
   disableImportAliasWarning: true,
   mdx: {
-    remarkPlugins: [remarkGfm],
-    rehypePlugins: [
-      rehypeSlug,
-      [rehypePrettyCode],
-      [
-        rehypeAutolinkHeadings,
-        {
-          properties: {
-            className: ["anchor"],
-          },
-        },
-      ],
-    ],
+    rehypePlugins: [rehypeSlug, rehypePrettyCode],
   },
 });
