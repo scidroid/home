@@ -47,9 +47,9 @@ export function Subtitle() {
       <AnimatePresence mode="wait">
         <motion.span
           key={titles[currentIndex].title}
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 10 }}
+          initial={false}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
         >
           {titles[currentIndex].link ? (

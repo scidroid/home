@@ -40,6 +40,7 @@ export function Profile() {
         src={headshot}
         alt="Selfie of Juan Almanza, a High School student from Colombia"
         className="w-40 rounded-full object-cover lg:rounded-none lg:w-1/2"
+        width={800}
         priority
       />
     </section>

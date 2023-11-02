@@ -3,6 +3,10 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { GeistSans, GeistMono } from "geist/font";
 import { ConsoleHelper } from "@/components/ConsoleHelper";
+import Header from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import { allReadings } from "@/.contentlayer/generated";
+import { Container } from "@/components/Containing";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://home.scidroid.co"),
@@ -49,14 +53,20 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const reading = allReadings.sort((a, b) => {
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  })[0];
+
   return (
     <html lang="en">
       <body
         className={`${GeistSans.variable} ${GeistMono.variable} antialised absolute inset-0 h-full w-full bg-white bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]`}
       >
-        <div className="flex justify-center scroll-smooth">
-          <div className="font-sans max-w-2xl lg:max-w-7xl w-full m-1 lg:m-0 text-neutral-700">
-            {children}
+        <div className="flex justify-center">
+          <div className="font-sans w-full m-1 lg:m-0 text-neutral-700">
+            <Header reading={reading} />
+            <Container>{children}</Container>
+            <Footer />
           </div>
         </div>
         <Analytics />

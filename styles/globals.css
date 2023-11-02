@@ -6,3 +6,7 @@
   background: #485fd2;
   color: white;
 }
+
+* {
+  scroll-behavior: smooth;
+}
