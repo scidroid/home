@@ -74,19 +74,16 @@ function RoundedImage(props: any) {
   return (
     <figure className="flex flex-col items-center justify-center">
       <Image
-        alt={props.alt}
         className="rounded-lg"
-        width={600}
-        height={800}
         {...props}
       />
-      <figcaption>{props.alt}</figcaption>
+      <figcaption aria-hidden>{props.alt}</figcaption>
     </figure>
   );
 }
 
 const components = {
-  img: RoundedImage,
+  Image: RoundedImage,
   a: CustomLink,
 };
 
@@ -144,7 +141,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           {post.summary}
         </p>
 
-        <article className="prose prose-xl prose-neutral">
+        <article className="prose prose-sm lg:prose-xl prose-neutral mt-4">
           <Content components={components} />
         </article>
       </section>

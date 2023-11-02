@@ -6,6 +6,9 @@ import { useScrollPosition } from "@/hooks/scroll";
 import { Container } from "./Containing";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { GithubLogo } from "./icons/GithubLogo";
+import { LinkedinLogo } from "./icons/LinkedinLogo";
+import { XLogo } from "./icons/XLogo";
 
 export default function Header({ reading }: { reading: Reading }) {
   let pathname = usePathname() || "/";
@@ -22,14 +25,19 @@ export default function Header({ reading }: { reading: Reading }) {
             - <Clock />
           </span>
         </p>
-        <nav>
-          <span className="font-bold">Read:</span>{" "}
+        <nav className="flex items-center gap-2">
+          <span className="font-bold hidden lg:block">Read:</span>{" "}
           <Link
             href={`/${reading.slug}`}
-            className="underline hover:no-underline"
+            className="underline hover:no-underline hidden lg:block"
           >
             {reading.title}
           </Link>
+          <div className="flex gap-2">
+            <GithubLogo />
+            <LinkedinLogo />
+            <XLogo />
+          </div>
         </nav>
       </Container>
     </header>
