@@ -4,6 +4,16 @@ import formsPlugin from "@tailwindcss/forms";
 import typographyPlugin from "@tailwindcss/typography";
 import { createFluidValue } from "./utils/fluidTypes";
 
+const disabledCss = {
+  "code::before": false,
+  "code::after": false,
+  "blockquote p:first-of-type::before": false,
+  "blockquote p:last-of-type::after": false,
+  pre: false,
+  code: false,
+  "pre code": false,
+};
+
 const config: Config = {
   content: [
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -35,6 +45,13 @@ const config: Config = {
           "45%": { transform: "translateY(-100%)", opacity: "1" },
           "100%": { transform: "translateY(-100%)", opacity: "0.1" },
         },
+      },
+      typography: {
+        DEFAULT: { css: disabledCss },
+        sm: { css: disabledCss },
+        lg: { css: disabledCss },
+        xl: { css: disabledCss },
+        "2xl": { css: disabledCss },
       },
     },
   },

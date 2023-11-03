@@ -24,6 +24,14 @@ export default makeSource({
   documentTypes: [Reading],
   disableImportAliasWarning: true,
   mdx: {
-    rehypePlugins: [rehypeSlug, rehypePrettyCode],
+    rehypePlugins: [
+      rehypeSlug,
+      [
+        rehypePrettyCode,
+        {
+          theme: "one-dark-pro",
+        },
+      ],
+    ],
   },
 });

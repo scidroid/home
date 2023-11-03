@@ -18,22 +18,28 @@ export default function Header({ reading }: { reading: Reading }) {
     <header className="bg-white p-2 sticky top-0 z-50 text-xl px-4 border-b-2">
       <Container className="flex items-center justify-between">
         <p aria-label="Juan Almanza">
-          <span className={pathname == "/" && scrollY < 150 ? "hidden" : ""}>
+          <span
+            className={
+              pathname == "/" && scrollY < 150 ? "hidden" : " flex items-center"
+            }
+          >
             <Link href={"/"} className="font-bold">
               Juan Almanza
             </Link>{" "}
-            - <Clock />
+            <span className="hidden lg:block ml-2">
+              - <Clock /> in Colombia
+            </span>
           </span>
         </p>
-        <nav className="flex items-center gap-2">
-          <span className="font-bold hidden lg:block">Read:</span>{" "}
+        <nav className="flex items-center gap-1">
+          <span className="font-bold hidden lg:block">Read:</span>
           <Link
             href={`/${reading.slug}`}
-            className="underline hover:no-underline hidden lg:block"
+            className="underline hover:no-underline hidden lg:block mr-2"
           >
             {reading.title}
           </Link>
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <GithubLogo />
             <LinkedinLogo />
             <XLogo />

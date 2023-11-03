@@ -1,7 +1,7 @@
 "use server";
 
 import { resend } from "@/lib/resend";
-import { Contact } from "@/emails/Contact";
+import { generateContactEmail } from "@/emails/contact";
 
 function isValidEmail(email: string): boolean {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -18,9 +18,11 @@ export async function sendContactForm(formData: FormData) {
   }
 
   await resend.emails.send({
-    from: "Juan Almanza <hi@scidroid.co>",
-    to: [email, "scidroidgames@gmail.com"],
-    subject: "You sent a message to Juan Almanza",
-    react: <Contact name={name} email={email} message={message} />,
+    from: "Juan Almanza <contact@automated.scidroid.co>",
+    reply_to: "hi@scidroid.co",
+    to: email,
+    bcc: "hi@scidroid.co",
+    subject: "Message sent to Juan Almanza",
+    html: generateContactEmail(name, message, email),
   });
 }

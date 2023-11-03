@@ -141,7 +141,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           {post.summary}
         </p>
 
-        <article className="prose prose-sm lg:prose-xl prose-neutral mt-4">
+        <article className="prose lg:prose-xl prose-neutral mt-4 mx-4">
           <Content components={components} />
         </article>
       </section>
