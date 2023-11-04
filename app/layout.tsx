@@ -24,6 +24,11 @@ export const metadata: Metadata = {
     siteName: "Juan Almanza",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "https://home.scidroid.co/api/og",
+      },
+    ],
   },
   robots: {
     index: true,
@@ -39,6 +44,7 @@ export const metadata: Metadata = {
   twitter: {
     title: "Juan Almanza",
     card: "summary_large_image",
+    images: ["https://home.scidroid.co/api/og"],
   },
 };
 

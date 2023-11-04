@@ -1,16 +1,20 @@
 /* eslint-disable jsx-a11y/alt-text, @next/next/no-img-element */
+import { NextRequest } from "next/server";
 import { ImageResponse } from "next/og";
 
-export async function OGImage(title: string = "") {
+export const runtime = "edge";
+
+export async function GET(req: NextRequest) {
   const extraboldFont = fetch(
-    new URL("../public/fonts/Geist-Black.otf", import.meta.url)
+    new URL("../../../public/fonts/Geist-Black.otf", import.meta.url)
   ).then((res) => res.arrayBuffer());
 
   const boldFont = fetch(
-    new URL("../public/fonts/Geist-Bold.otf", import.meta.url)
+    new URL("../../../public/fonts/Geist-Bold.otf", import.meta.url)
   ).then((res) => res.arrayBuffer());
 
-  const origin = "https://home.scidroid.co";
+  const { searchParams, origin } = new URL(req.url);
+  const title = searchParams.get("title") || "";
 
   return new ImageResponse(
     (

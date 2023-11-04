@@ -29,6 +29,8 @@ export async function generateMetadata({
     _raw: { flattenedPath: slug },
   } = reading;
 
+  const ogImage = `https://home.scidroid.co/api/og?title=${title}`;
+
   return {
     title,
     description,
@@ -38,11 +40,17 @@ export async function generateMetadata({
       type: "article",
       publishedTime,
       url: `https://home.scidroid.co/${slug}`,
+      images: [
+        {
+          url: ogImage,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: [ogImage],
     },
   };
 }
