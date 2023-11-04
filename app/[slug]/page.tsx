@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* The alt attribute is defined by the mdx component */
+
 import { allReadings } from "contentlayer/generated";
 import { getMDXComponent } from "next-contentlayer/hooks";
 import { notFound } from "next/navigation";
@@ -26,8 +29,6 @@ export async function generateMetadata({
     _raw: { flattenedPath: slug },
   } = reading;
 
-  const ogImage = `https://home.scidroid.co/api/og?title=${title}`;
-
   return {
     title,
     description,
@@ -37,17 +38,11 @@ export async function generateMetadata({
       type: "article",
       publishedTime,
       url: `https://home.scidroid.co/${slug}`,
-      images: [
-        {
-          url: ogImage,
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [ogImage],
     },
   };
 }
@@ -73,10 +68,7 @@ function CustomLink(props: any) {
 function RoundedImage(props: any) {
   return (
     <figure className="flex flex-col items-center justify-center">
-      <Image
-        className="rounded-lg"
-        {...props}
-      />
+      <Image className="rounded-lg" {...props} />
       <figcaption aria-hidden>{props.alt}</figcaption>
     </figure>
   );

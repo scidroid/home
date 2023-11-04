@@ -1,22 +1,16 @@
 /* eslint-disable jsx-a11y/alt-text, @next/next/no-img-element */
-import { NextRequest } from "next/server";
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
+export async function OGImage(title: string = "") {
+  const extraboldFont = fetch(
+    new URL("../public/fonts/Geist-Black.otf", import.meta.url)
+  ).then((res) => res.arrayBuffer());
 
-const extraboldFont = fetch(
-  new URL("../../../public/fonts/Geist-Black.otf", import.meta.url)
-).then((res) => res.arrayBuffer());
+  const boldFont = fetch(
+    new URL("../public/fonts/Geist-Bold.otf", import.meta.url)
+  ).then((res) => res.arrayBuffer());
 
-const boldFont = fetch(
-  new URL("../../../public/fonts/Geist-Bold.otf", import.meta.url)
-).then((res) => res.arrayBuffer());
-
-export async function GET(req: NextRequest) {
-  const [extrabold, bold] = await Promise.all([extraboldFont, boldFont]);
-
-  const { searchParams, origin } = new URL(req.url);
-  const title = searchParams.get("title") || "";
+  const origin = "https://home.scidroid.co";
 
   return new ImageResponse(
     (
@@ -47,7 +41,7 @@ export async function GET(req: NextRequest) {
           </div>
           {title.length > 0 && (
             <p
-              tw="text-6xl font-bold text-neutral-700 max-w-[600px] text-center ml-12"
+              tw="text-6xl font-bold text-neutral-700 max-w-[600px] text-center ml-20"
               style={{
                 // @ts-ignore - looks like the API it's not correctly typed lol
                 textWrap: "balance",
@@ -65,12 +59,12 @@ export async function GET(req: NextRequest) {
       fonts: [
         {
           name: "Vercel Sans",
-          data: extrabold,
+          data: await extraboldFont,
           weight: 800,
         },
         {
           name: "Vercel Sans",
-          data: bold,
+          data: await boldFont,
           weight: 700,
         },
       ],
