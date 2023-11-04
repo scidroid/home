@@ -8,40 +8,60 @@ const extraboldFont = fetch(
   new URL("../../../public/fonts/Geist-Black.otf", import.meta.url)
 ).then((res) => res.arrayBuffer());
 
-const semiboldFont = fetch(
-  new URL("../../../public/fonts/Geist-SemiBold.otf", import.meta.url)
+const boldFont = fetch(
+  new URL("../../../public/fonts/Geist-Bold.otf", import.meta.url)
 ).then((res) => res.arrayBuffer());
 
 export async function GET(req: NextRequest) {
-  const [extrabold, semibold] = await Promise.all([
-    extraboldFont,
-    semiboldFont,
-  ]);
+  const [extrabold, bold] = await Promise.all([extraboldFont, boldFont]);
 
   const { searchParams, origin } = new URL(req.url);
-  const title = searchParams.get("title") || "Juan Almanza";
-  const subtitle =
-    title === "Juan Almanza" ? "Builder and researcher" : "Juan Almanza";
+  const title = searchParams.get("title") || "";
 
   return new ImageResponse(
     (
-      <div tw="flex bg-white w-full h-full items-center justify-center bg-white">
-        <div tw="flex flex-col w-1/2 ml-16 text-neutral-700">
-          <h1 tw="text-9xl font-extrabold mb-2">{title}</h1>
-          <p tw="text-7xl font-semibold">{subtitle}</p>
+      <div
+        style={{
+          position: "absolute",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          inset: 0,
+          height: "100%",
+          width: "100%",
+          backgroundImage:
+            "linear-gradient(to right, #80808012 1px, transparent 1px), linear-gradient(to bottom, #80808012 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+          backgroundColor: "white",
+        }}
+      >
+        <div tw="flex items-center justify-center">
+          <div tw="flex flex-col items-center">
+            <img
+              src={`${origin}/headshot.jpg`}
+              width="800"
+              height="800"
+              tw="w-72 h-72 rounded-full"
+            />
+            <p tw="text-4xl text-neutral-700 font-extrabold">Juan Almanza</p>
+          </div>
+          {title.length > 0 && (
+            <p
+              tw="text-6xl font-bold text-neutral-700 max-w-[600px] text-center ml-12"
+              style={{
+                // @ts-ignore - looks like the API it's not correctly typed lol
+                textWrap: "balance",
+              }}
+            >
+              {title}
+            </p>
+          )}
         </div>
-        <img
-          tw="max-w-1/2 h-full w-full"
-          src={`${origin}/headshot.png`}
-          style={{
-            objectFit: "cover",
-          }}
-        />
       </div>
     ),
     {
-      width: 1920,
-      height: 1080,
+      width: 1200,
+      height: 630,
       fonts: [
         {
           name: "Vercel Sans",
@@ -50,8 +70,8 @@ export async function GET(req: NextRequest) {
         },
         {
           name: "Vercel Sans",
-          data: semibold,
-          weight: 600,
+          data: bold,
+          weight: 700,
         },
       ],
     }

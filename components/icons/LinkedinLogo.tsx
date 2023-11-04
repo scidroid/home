@@ -4,6 +4,7 @@ export function LinkedinLogo() {
       href="https://linkedin.com/in/scidroid"
       target="_blank"
       rel="noopener noreferrer"
+      aria-label="Linkedin profile of Juan"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

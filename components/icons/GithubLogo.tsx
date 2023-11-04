@@ -4,6 +4,7 @@ export function GithubLogo() {
       href="https://github.com/scidroid"
       target="_blank"
       rel="noopener noreferrer"
+      aria-label="Github profile of Juan"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

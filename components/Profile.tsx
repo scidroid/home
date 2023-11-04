@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import headshot from "@/public/headshot.png";
+import headshot from "@/public/headshot.avif";
 import { NowPlaying } from "./NowPlaying";
 import { HealthData } from "./Health";
 import { Subtitle } from "./Subtitle";
@@ -40,7 +40,8 @@ export function Profile() {
         src={headshot}
         alt="Selfie of Juan Almanza, a High School student from Colombia"
         className="w-40 rounded-full object-cover lg:rounded-none lg:w-1/2"
-        width={800}
+        width={640}
+        quality={80}
         priority
       />
     </section>

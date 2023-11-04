@@ -18,7 +18,7 @@ export function ContactForm() {
   return (
     <section
       id="contact"
-      className="flex flex-col-reverse items-center text-center m-4 lg:m-0 lg:flex-row lg:text-left lg:max-h-[1000px]"
+      className="flex flex-col items-center text-center m-4 lg:m-0 lg:flex-row lg:text-left lg:max-h-[1000px]"
     >
       <div className="lg:w-1/2 lg:m-8">
         <h2 className="text-4xl font-semibold lg:text-6xl my-4 lg:my-8">
@@ -98,7 +98,7 @@ export function ContactForm() {
             <button
               disabled={status !== "Send"}
               type="submit"
-              className="text-xl font-bold text-neutral-700 max-w-3xl rounded-md py-2 px-2 border-2 border-gray-200 hover:bg-neutral-200 transition-colors"
+              className="text-xl font-bold text-neutral-700 max-w-3xl rounded-md py-2 px-2 border-2 border-gray-200 bg-white hover:bg-neutral-200 transition-colors"
             >
               {status}
             </button>

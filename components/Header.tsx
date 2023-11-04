@@ -17,7 +17,7 @@ export default function Header({ reading }: { reading: Reading }) {
   return (
     <header className="bg-white p-2 sticky top-0 z-50 text-xl px-4 border-b-2">
       <Container className="flex items-center justify-between">
-        <p aria-label="Juan Almanza">
+        <p aria-hidden>
           <span
             className={
               pathname == "/" && scrollY < 150 ? "hidden" : " flex items-center"
