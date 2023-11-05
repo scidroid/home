@@ -1,7 +1,7 @@
 "use server";
 
-import { resend } from "@/lib/resend";
 import { generateContactEmail } from "@/emails/contact";
+import { resend } from "@/lib/resend";
 
 function isValidEmail(email: string): boolean {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -23,6 +23,6 @@ export async function sendContactForm(formData: FormData) {
     to: email,
     bcc: "hi@scidroid.co",
     subject: "Message sent to Juan Almanza",
-    html: generateContactEmail(name, message, email),
+    html: generateContactEmail(name, message, email)
   });
 }

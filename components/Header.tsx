@@ -1,11 +1,13 @@
 "use client";
 
-import { Reading } from "@/.contentlayer/generated";
-import { Clock } from "./Clock";
-import { useScrollPosition } from "@/hooks/scroll";
-import { Container } from "./Containing";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
+import { Reading } from "@/.contentlayer/generated";
+import { useScrollPosition } from "@/hooks/scroll";
+
+import { Clock } from "./Clock";
+import { Container } from "./Containing";
 import { GithubLogo } from "./icons/GithubLogo";
 import { LinkedinLogo } from "./icons/LinkedinLogo";
 import { XLogo } from "./icons/XLogo";
@@ -15,7 +17,7 @@ export default function Header({ reading }: { reading: Reading }) {
   const scrollY = useScrollPosition();
 
   return (
-    <header className="bg-white p-2 sticky top-0 z-50 text-xl px-4 border-b-2">
+    <header className="sticky top-0 z-50 border-b-2 bg-white p-2 px-4 text-xl">
       <Container className="flex items-center justify-between">
         <p aria-hidden>
           <span
@@ -26,16 +28,16 @@ export default function Header({ reading }: { reading: Reading }) {
             <Link href={"/"} className="font-bold">
               Juan Almanza
             </Link>{" "}
-            <span className="hidden lg:block ml-2">
+            <span className="ml-2 hidden lg:block">
               - <Clock /> in Colombia
             </span>
           </span>
         </p>
         <nav className="flex items-center gap-1">
-          <span className="font-bold hidden lg:block">Read:</span>
+          <span className="hidden font-bold lg:block">Read:</span>
           <Link
             href={`/${reading.slug}`}
-            className="underline hover:no-underline hidden lg:block mr-2"
+            className="mr-2 hidden underline hover:no-underline lg:block"
           >
             {reading.title}
           </Link>

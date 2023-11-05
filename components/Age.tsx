@@ -1,7 +1,8 @@
 "use client";
 
-import { usePrefersReducedMotion } from "@/hooks/motion";
 import { useEffect, useState } from "react";
+
+import { usePrefersReducedMotion } from "@/hooks/motion";
 
 export function Age() {
   const prefersReducedMotion = usePrefersReducedMotion();

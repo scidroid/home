@@ -1,7 +1,8 @@
 "use client";
 
-import { showConsoleMessage } from "@/utils/console";
 import { useEffect } from "react";
+
+import { showConsoleMessage } from "@/utils/console";
 
 export function ConsoleHelper() {
   useEffect(() => {

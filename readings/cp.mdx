@@ -359,64 +359,64 @@ bool isValid(vll list, vll copy) {
 			} else {
 				vll copy2;
 				vll copy3;
- 
+
 				for (ll xx = i; xx <= j; xx++) {
 					copy2.pb(list[xx]);
 					copy3.pb(copy[xx]);
 				}
- 
+
 				sort(copy3.begin(), copy3.end());
- 
+
 				bool aaanns = true;
- 
+
 				for (ll xx = 0; xx < copy2.size(); xx++) {
 					if (copy2[xx] != copy3[xx]) {
 						aaanns = false;
 					}
 				}
- 
+
 				if (aaanns) {
 					return false;
 				}
 			}
-		}	
+		}
 	}
- 
+
 	return true;
 }
- 
+
 void solve(vll list, vll copy) {
-	if (list.size() > 8) {	
+	if (list.size() > 8) {
 		ll changed = 0;
 		ll first = 0;
-	
+
 		for (ll i = 0; i < list.size(); i++) {
 			if (list[i] == copy[i]) {
 				changed++;
 				first = i;
-	
+
 				ll a = list[i];
 				ll b = list[0];
-	
+
 				list[0] = a;
 				list[i] = b;
 			}
 		}
-	
+
 		bool terminar = true;
-	
+
 		while (terminar) {
 			ll aps = 0;
-	
+
 			for (ll i = 0; i < list.size(); i++) {
 				if (list[i] == copy[i]) {
 					aps++;
 				}
 			}
-	
+
 			if (aps > 0) {
 				ll last = list[0];
-	
+
 				for (ll i = 0; i < list.size(); i++) {
 					ll a, b;
 					if (i != list.size() - 1) {
@@ -431,50 +431,50 @@ void solve(vll list, vll copy) {
 				break;
 			}
 		}
-	
+
 		for (ll i = 0; i < list.size(); i++) {
 			cout << list[i] << " ";
 		}
-	
+
 		cout << endl;
 	} else {
 		if (isValid(list, copy)) {
 			for (ll i = 0; i < list.size(); i++) {
 				cout << list[i] << " ";
 			}
- 
+
 			cout << endl;
 		} else {
 			next_permutation(list.begin(), list.end());
- 
+
 			solve(list, copy);
 		}
 	}
 }
- 
+
 int main()
 {
 	ios_base::sync_with_stdio(0);
 	cin.tie(0);
 	cout.tie(0);
- 
+
 	ll n; cin >> n;
- 
+
 	while (n--) {
 		vll list;
 		vll copy;
- 
+
 		ll k; cin >> k;
- 
+
 		while(k--) {
 			ll x; cin >> x;
- 
+
 			list.pb(x);
 			copy.pb(x);
 		}
- 
+
 		sort(list.begin(), list.end(), greater<ll>());
- 
+
 		solve(list, copy);
 	}
 

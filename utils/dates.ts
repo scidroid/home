@@ -21,7 +21,7 @@ export function formatDate(date: string) {
   const fullDate = targetDate.toLocaleString("en-us", {
     month: "long",
     day: "numeric",
-    year: "numeric",
+    year: "numeric"
   });
 
   return `${fullDate} (${formattedDate})`;

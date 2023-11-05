@@ -18,7 +18,7 @@ export function AnimatedHeart({ bpm }: { bpm: number }) {
       transition={{
         type: "spring",
         duration: timePerBeat,
-        repeat: prefersReducedMotion ? 0 : Infinity,
+        repeat: prefersReducedMotion ? 0 : Infinity
       }}
     >
       <motion.path

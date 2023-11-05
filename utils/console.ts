@@ -1,7 +1,7 @@
 const messageStyles = [
   "font-size:34px;margin-right:0px;line-height:32px;",
   "font-size:20px;font-weight:900;margin-bottom:12px;line-height:24px;",
-  "font-size:14px;",
+  "font-size:14px;"
 ];
 
 function printText(text: string, styleIndex: number, color = "inherit") {
@@ -22,5 +22,5 @@ function printTextBody(textBody: string, color = "inherit") {
 
 export function showConsoleMessage() {
   printTitle("Juan Almanza");
-  printSubtitle("You found the secret place of my website")
+  printSubtitle("You found the secret place of my website");
 }

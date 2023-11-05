@@ -3,7 +3,7 @@ import querystring from "querystring";
 const {
   SPOTIFY_CLIENT_ID: client_id,
   SPOTIFY_CLIENT_SECRET: client_secret,
-  SPOTIFY_REFRESH_TOKEN: refresh_token,
+  SPOTIFY_REFRESH_TOKEN: refresh_token
 } = process.env;
 
 const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
@@ -15,13 +15,13 @@ async function getAccessToken() {
     method: "POST",
     headers: {
       Authorization: `Basic ${basic}`,
-      "Content-Type": "application/x-www-form-urlencoded",
+      "Content-Type": "application/x-www-form-urlencoded"
     },
     body: querystring.stringify({
       grant_type: "refresh_token",
-      refresh_token,
+      refresh_token
     }),
-    cache: "no-store",
+    cache: "no-store"
   });
 
   return response.json();
@@ -32,9 +32,9 @@ export async function getNowPlaying() {
 
   const songData = await fetch(NOW_PLAYING_ENDPOINT, {
     headers: {
-      Authorization: `Bearer ${access_token}`,
+      Authorization: `Bearer ${access_token}`
     },
-    cache: "no-store",
+    cache: "no-store"
   });
 
   if (songData.status != 200) return { isPlaying: false };
@@ -46,7 +46,7 @@ export async function getNowPlaying() {
         isPlaying: true,
         title: song.name,
         artist: song.show.name,
-        url: song.external_urls.spotify,
+        url: song.external_urls.spotify
       }
     : {
         isPlaying: true,
@@ -54,6 +54,6 @@ export async function getNowPlaying() {
         artist: song.artists
           .map((artistInfo: { name: string }) => artistInfo.name)
           .join(", "),
-        url: song.external_urls.spotify,
+        url: song.external_urls.spotify
       };
 }

@@ -1,22 +1,24 @@
 /* eslint-disable jsx-a11y/alt-text */
-/* The alt attribute is defined by the mdx component */
 
+/* The alt attribute is defined by the mdx component */
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+
+import { Suspense } from "react";
+
+import { ViewsComponent } from "@/components/Views";
+import { MetadataProps } from "@/types/metadata";
+import { formatDate } from "@/utils/dates";
 import { allReadings } from "contentlayer/generated";
 import { getMDXComponent } from "next-contentlayer/hooks";
-import { notFound } from "next/navigation";
-import type { Metadata } from "next";
-import { MetadataProps } from "@/types/metadata";
-import { Suspense } from "react";
-import { ViewsComponent } from "@/components/Views";
-import { formatDate } from "@/utils/dates";
 import { Balancer } from "react-wrap-balancer";
-import Link from "next/link";
-import Image from "next/image";
 
 export async function generateMetadata({
-  params,
+  params
 }: MetadataProps): Promise<Metadata | undefined> {
-  const reading = allReadings.find((reading) => reading.slug === params.slug);
+  const reading = allReadings.find(reading => reading.slug === params.slug);
 
   if (!reading) {
     return;
@@ -26,7 +28,7 @@ export async function generateMetadata({
     title,
     date: publishedTime,
     summary: description,
-    _raw: { flattenedPath: slug },
+    _raw: { flattenedPath: slug }
   } = reading;
 
   const ogImage = `https://home.scidroid.co/api/og?title=${title}`;
@@ -42,16 +44,16 @@ export async function generateMetadata({
       url: `https://home.scidroid.co/${slug}`,
       images: [
         {
-          url: ogImage,
-        },
-      ],
+          url: ogImage
+        }
+      ]
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [ogImage],
-    },
+      images: [ogImage]
+    }
   };
 }
 
@@ -84,17 +86,17 @@ function RoundedImage(props: any) {
 
 const components = {
   Image: RoundedImage,
-  a: CustomLink,
+  a: CustomLink
 };
 
 export async function generateStaticParams() {
-  return allReadings.map((reading) => ({
-    slug: reading.slug,
+  return allReadings.map(reading => ({
+    slug: reading.slug
   }));
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
-  const post = allReadings.find((reading) => reading.slug === params.slug);
+  const post = allReadings.find(reading => reading.slug === params.slug);
 
   if (!post) notFound();
 
@@ -111,37 +113,37 @@ export default async function Page({ params }: { params: { slug: string } }) {
     url: `https://scidroid.co/${post.slug}`,
     author: {
       "@type": "Person",
-      name: "Juan Almanza",
-    },
+      name: "Juan Almanza"
+    }
   };
 
   return (
     <main className="flex justify-center">
-      <section className="max-w-3xl my-4 lg:my-8">
+      <section className="my-4 max-w-3xl lg:my-8">
         <script
           type="application/ld+json"
           suppressHydrationWarning
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(structuredData),
+            __html: JSON.stringify(structuredData)
           }}
         ></script>
 
-        <h1 className="text-4xl font-extrabold lg:text-7xl text-center">
+        <h1 className="text-center text-4xl font-extrabold lg:text-7xl">
           <Balancer>{post.title}</Balancer>
         </h1>
 
-        <p className="my-2 text-lg lg:text-xl lg:my-4 text-center">
+        <p className="my-2 text-center text-lg lg:my-4 lg:text-xl">
           <Suspense>
             <ViewsComponent slug={post.slug} />
           </Suspense>
           {" - "}
           {formatDate(post.date)}
         </p>
-        <p className="my-2 text-lg lg:text-xl lg:my-4 text-center">
+        <p className="my-2 text-center text-lg lg:my-4 lg:text-xl">
           {post.summary}
         </p>
 
-        <article className="prose lg:prose-xl prose-neutral mt-4 mx-4">
+        <article className="prose prose-neutral mx-4 mt-4 lg:prose-xl">
           <Content components={components} />
         </article>
       </section>

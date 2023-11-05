@@ -1,6 +1,7 @@
 import { getViewsCount } from "@/lib/views";
-import { ViewCounter } from "./view-counter";
 import { Views } from "@/types/views";
+
+import { ViewCounter } from "./view-counter";
 
 export async function ViewsComponent({ slug }: { slug: string }) {
   const views = (await getViewsCount()) as Views[];

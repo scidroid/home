@@ -9,14 +9,14 @@ export const Reading = defineDocumentType(() => ({
   fields: {
     title: { type: "string", required: true },
     date: { type: "date", required: true },
-    summary: { type: "string", required: true },
+    summary: { type: "string", required: true }
   },
   computedFields: {
     slug: {
       type: "string",
-      resolve: (doc) => doc._raw.flattenedPath,
-    },
-  },
+      resolve: doc => doc._raw.flattenedPath
+    }
+  }
 }));
 
 export default makeSource({
@@ -29,9 +29,9 @@ export default makeSource({
       [
         rehypePrettyCode,
         {
-          theme: "one-dark-pro",
-        },
-      ],
-    ],
-  },
+          theme: "one-dark-pro"
+        }
+      ]
+    ]
+  }
 });

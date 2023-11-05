@@ -1,25 +1,26 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 const titles = [
   {
     title: "Founder @ ASOFI",
-    link: "https://asofi.us",
+    link: "https://asofi.us"
   },
   {
     title: "Informatics Gold Medal",
-    link: "https://oc.uan.edu.co",
+    link: "https://oc.uan.edu.co"
   },
   {
     title: "Research @ Stanford",
-    link: "https://stanford.edu",
+    link: "https://stanford.edu"
   },
   {
     title: "High School Junior",
-    link: null,
-  },
+    link: null
+  }
 ];
 
 export function Subtitle() {
@@ -27,14 +28,31 @@ export function Subtitle() {
   const [isHovered, setIsHovered] = useState(false);
 
   const prefersReducedMotion = useReducedMotion();
+  const intervalId = useRef<NodeJS.Timeout | null>(null);
+
+  const handleVisibilityChange = () => {
+    if (document.hidden && intervalId.current) {
+      clearInterval(intervalId.current);
+      intervalId.current = null;
+    } else {
+      intervalId.current = setInterval(() => {
+        setCurrentIndex(prevIndex => (prevIndex + 1) % titles.length);
+      }, 2000);
+    }
+  };
 
   useEffect(() => {
     if (!isHovered && !prefersReducedMotion) {
-      const interval = setInterval(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % titles.length);
-      }, 2000);
+      handleVisibilityChange();
+      document.addEventListener("visibilitychange", handleVisibilityChange);
 
-      return () => clearInterval(interval);
+      return () => {
+        if (intervalId.current) clearInterval(intervalId.current);
+        document.removeEventListener(
+          "visibilitychange",
+          handleVisibilityChange
+        );
+      };
     }
   }, [isHovered, prefersReducedMotion]);
 

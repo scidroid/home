@@ -1,3 +1,3 @@
 export function About() {
-    return( <section></section>)
+  return <section></section>;
 }

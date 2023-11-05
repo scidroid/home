@@ -14,7 +14,7 @@ interface StyledLinkProps {
 export function StyledLink({
   href,
   external = false,
-  children,
+  children
 }: StyledLinkProps) {
   const content = <span className={HOVER_UNDERLINE_STYLE}>{children}</span>;
 

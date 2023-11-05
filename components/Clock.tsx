@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export function Clock() {
   function getColombianHour() {
@@ -8,7 +8,7 @@ export function Clock() {
       hour: "2-digit",
       minute: "2-digit",
       hour12: false,
-      timeZone: "America/Bogota",
+      timeZone: "America/Bogota"
     });
   }
 

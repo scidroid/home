@@ -1,4 +1,5 @@
 import { getNowPlaying } from "@/lib/music";
+
 import { Icon, StaticIcon } from "./icons";
 
 export async function NowPlaying() {

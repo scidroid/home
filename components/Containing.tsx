@@ -2,14 +2,16 @@ import { ReactNode } from "react";
 
 export function Container({
   children,
-  className = "",
+  className = ""
 }: {
   children: ReactNode;
   className?: string;
 }) {
   return (
     <div className="flex items-center justify-center">
-      <div className={`max-w-2xl lg:max-w-7xl w-full ${className}`}>{children}</div>
+      <div className={`w-full max-w-2xl lg:max-w-7xl ${className}`}>
+        {children}
+      </div>
     </div>
   );
 }

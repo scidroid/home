@@ -1,6 +1,5 @@
 // this endpoint is being fetched by a shortcut on my iphone that retrieves data
 // from the heatlh app and send the data to this endpoint to be stored in key-value
-
 import { kv } from "@vercel/kv";
 
 const { PASSWORD } = process.env;
@@ -11,7 +10,7 @@ export async function POST(request: Request) {
   if (password != PASSWORD) {
     return Response.json(
       {
-        error: "incorrect password",
+        error: "incorrect password"
       },
       { status: 401 }
     );
