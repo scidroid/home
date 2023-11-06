@@ -42,7 +42,6 @@ export function Profile() {
         alt="Selfie of Juan Almanza, a High School student from Colombia"
         className="w-40 rounded-full object-cover lg:w-1/2 lg:rounded-none"
         width={640}
-        quality={80}
         priority
       />
     </section>

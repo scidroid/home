@@ -18,7 +18,6 @@ export function Gallery() {
             key={key}
             src={image.src}
             alt={image.alt}
-            height={320}
             placeholder="blur"
             className={`${
               lastSelectedId == image.id ? "z-30" : "z-0"
@@ -48,8 +47,7 @@ export function Gallery() {
                   src={selected.src}
                   alt={selected.alt}
                   placeholder="blur"
-                  height={500}
-                  className="h-[500px] rounded-lg object-cover"
+                  className="max-h-[60vh] h-[500px] rounded-lg object-cover"
                   layoutId={selected.id}
                   ref={ref}
                 />
