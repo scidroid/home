@@ -25,6 +25,7 @@ export function Gallery() {
             draggable={false}
             onClick={() => setSelected(image)}
             tabIndex={0}
+            height={320}
             onKeyDown={e => {
               if (e.key === "Enter") setSelected(image);
             }}
