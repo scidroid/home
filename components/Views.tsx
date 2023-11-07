@@ -1,10 +1,13 @@
-import { getViewsCount } from "@/lib/views";
-import { Views } from "@/types/views";
+import { addView, getReadingViews } from "@/lib/views";
 
-import { ViewCounter } from "./view-counter";
+export async function Views({
+  slug,
+  trackView
+}: {
+  slug: string;
+  trackView?: boolean;
+}) {
+  const number = trackView ? await addView(slug) : await getReadingViews(slug);
 
-export async function ViewsComponent({ slug }: { slug: string }) {
-  const views = (await getViewsCount()) as Views[];
-
-  return <ViewCounter allViews={views} slug={slug} trackView />;
+  return <span>{`${number} views`}</span>;
 }

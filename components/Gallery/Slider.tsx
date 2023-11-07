@@ -4,7 +4,15 @@ import React, { ReactNode, useEffect, useRef, useState } from "react";
 
 import { motion, useMotionValue } from "framer-motion";
 
-export function DragSlider({ children }: { children: ReactNode }) {
+export function DragSlider({
+  children,
+  onDragStart,
+  onDragEnd
+}: {
+  children: ReactNode;
+  onDragStart: () => void;
+  onDragEnd: () => void;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
 
@@ -47,6 +55,8 @@ export function DragSlider({ children }: { children: ReactNode }) {
           left: -sliderConstraints,
           right: 0
         }}
+        onDragStart={onDragStart}
+        onDragEnd={onDragEnd}
         className="flex cursor-grab flex-nowrap justify-between"
       >
         {children}

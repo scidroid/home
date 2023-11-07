@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { galleryData } from "@/lib/gallery";
 import { AnimatePresence } from "framer-motion";
 
@@ -10,9 +12,14 @@ import { useGallerySelect } from "./useGallerySelect";
 export function Gallery() {
   const { selected, setSelected, ref, lastSelectedId } = useGallerySelect();
 
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+
   return (
     <section className="my-6">
-      <DragSlider>
+      <DragSlider
+        onDragStart={() => setIsDragging(true)}
+        onDragEnd={() => setIsDragging(false)}
+      >
         {galleryData.map((image, key) => (
           <MotionImage
             key={key}
@@ -21,9 +28,11 @@ export function Gallery() {
             placeholder="blur"
             className={`${
               lastSelectedId == image.id ? "z-30" : "z-0"
-            } m-4 h-72 w-80 rounded-lg object-cover transition-shadow hover:shadow-xl`}
+            } m-4 h-72 rounded-lg object-cover`}
             draggable={false}
-            onClick={() => setSelected(image)}
+            onClick={() => {
+              if (!isDragging) setSelected(image);
+            }}
             tabIndex={0}
             height={320}
             onKeyDown={e => {
@@ -48,7 +57,7 @@ export function Gallery() {
                   src={selected.src}
                   alt={selected.alt}
                   placeholder="blur"
-                  className="max-h-[60vh] h-[500px] rounded-lg object-cover"
+                  className="max-h-[60vh] h-[500px] w-min rounded-lg object-cover"
                   layoutId={selected.id}
                   ref={ref}
                 />

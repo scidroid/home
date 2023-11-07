@@ -6,9 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { Suspense } from "react";
-
-import { ViewsComponent } from "@/components/Views";
+import { Views } from "@/components/Views";
 import { MetadataProps } from "@/types/metadata";
 import { formatDate } from "@/utils/dates";
 import { allReadings } from "contentlayer/generated";
@@ -133,9 +131,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         </h1>
 
         <p className="my-2 text-center text-lg lg:my-4 lg:text-xl">
-          <Suspense>
-            <ViewsComponent slug={post.slug} />
-          </Suspense>
+          <Views slug={post.slug} trackView />
           {" - "}
           {formatDate(post.date)}
         </p>

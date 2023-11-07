@@ -1,16 +1,18 @@
-import { cache } from "react";
-
 import { kv } from "@vercel/kv";
 import { allReadings } from "contentlayer/generated";
 
-export const getViewsCount = cache(
-  async () =>
-    await Promise.all(
-      allReadings.map(async reading => {
-        return {
-          slug: reading.slug,
-          count: await kv.get(reading.slug)
-        };
-      })
-    )
-);
+export function getReadingViews(slug: string) {
+  const reading = allReadings.find(reading => slug == reading.slug);
+
+  if (!reading) return 0;
+
+  return kv.get(reading.slug);
+}
+
+export function addView(slug: string) {
+  const reading = allReadings.find(reading => slug == reading.slug);
+
+  if (!reading) return 0;
+
+  return kv.incr(reading.slug);
+}
