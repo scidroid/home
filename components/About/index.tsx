@@ -73,7 +73,7 @@ export function About() {
             ))}
           </ul>
         </Card>
-        <Card bg="pink-50">
+        <Card bg="" className="bg-pink-50">
           <h3 className="text-3xl font-semibold">My work at ASOFI</h3>
           <ul>
             {asofiData.map((experience, key) => (
