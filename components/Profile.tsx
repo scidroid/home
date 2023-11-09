@@ -18,7 +18,7 @@ export function Profile() {
         </div>
 
         <p className="my-4 text-lg lg:my-8 lg:text-xl">
-          Juan is a <Age /> years old passionate High School student from
+          I&apos;m a <Age /> years old passionate High School student from
           Colombia with solid leadership and engineering skills. Focused on
           creating solutions for rural populations and advocating for STEM
           education and gender equality.

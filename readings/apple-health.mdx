@@ -1,0 +1,50 @@
+---
+title: Apple Health data in your website
+date: 2023-11-08
+summary: Create a shortcut in the iPhone that send data from Apple Health to an endpoint in your website
+---
+
+## Creating the shortcut
+
+## Creating the API Endpoint
+
+```ts
+import { kv } from "@vercel/kv";
+
+const { PASSWORD } = process.env;
+
+export async function POST(request: Request) {
+  const password = new URL(request.url).searchParams.get("password");
+
+  if (password != PASSWORD) {
+    return Response.json(
+      {
+        error: "incorrect password"
+      },
+      { status: 401 }
+    );
+  }
+
+  const res = await request.json();
+
+  const data = { date: new Date(res.date).toISOString(), value: res.value };
+
+  await kv.set("health", data);
+
+  return Response.json(data);
+}
+```
+
+## Display the data using RSC
+
+If you are using the Next.js app router or any other implementation of RSC you can directly fetch the Vercel KV service in the component.
+
+```ts
+import { kv } from "@vercel/kv";
+
+export async function HealthData() {
+  const health = (await kv.get("health")) as { value: number };
+
+  return <p>{health?.value} BPM</p>;
+}
+```

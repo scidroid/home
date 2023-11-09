@@ -16,6 +16,7 @@
     "contentlayer": "0.3.4",
     "framer-motion": "10.16.4",
     "geist": "1.0.0",
+    "million": "latest",
     "next": "latest",
     "next-contentlayer": "0.3.4",
     "querystring": "0.2.1",
