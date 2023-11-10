@@ -93,14 +93,16 @@ export function Award({
       href={link}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex flex-col items-center"
+      className="flex flex-col items-center m-auto p-2"
     >
       <div className="flex items-center">
         <Wing flip />
         <p className="font-bold text-3xl text-center">{title}</p>
         <Wing />
       </div>
-      <p className="text-center font-semibold text-xl mt-1 w-[20ch]">{organization}</p>
+      <p className="text-center font-semibold text-xl mt-1 w-[20ch]">
+        {organization}
+      </p>
       <p className="text-center text-xl mt-1">{year}</p>
     </a>
   );

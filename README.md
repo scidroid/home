@@ -29,7 +29,7 @@ Also, I use [Vercel](https://vercel.com/) to deploy the website and [ContentLaye
 
 ## Features
 
-- [ ] About me
+- [x] About me
 - [ ] Projects
 - [x] Blog
 - [x] Contact
