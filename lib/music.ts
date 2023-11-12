@@ -27,7 +27,12 @@ async function getAccessToken() {
   return response.json();
 }
 
-export async function getNowPlaying() {
+export async function getNowPlaying(): Promise<{
+  isPlaying: boolean;
+  title?: string;
+  artist?: string;
+  url?: string;
+}> {
   const { access_token } = await getAccessToken();
 
   const songData = await fetch(NOW_PLAYING_ENDPOINT, {

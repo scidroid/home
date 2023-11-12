@@ -19,8 +19,10 @@ export function StaticIcon() {
   );
 }
 
-export function Icon() {
+export function Icon({ isPlaying }: { isPlaying: boolean }) {
   const prefersReducedMotion = usePrefersReducedMotion();
+
+  if (!isPlaying) return <StaticIcon />;
 
   return (
     <div className="flex h-[30px] w-[30px] items-end space-x-1">

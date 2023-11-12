@@ -2,7 +2,7 @@ import { Suspense } from "react";
 
 import { addView, getReadingViews } from "@/lib/views";
 
-export async function Views({
+async function ViewsFetcher({
   slug,
   trackView
 }: {
@@ -11,9 +11,19 @@ export async function Views({
 }) {
   const number = trackView ? await addView(slug) : await getReadingViews(slug);
 
+  return <span>{`${number} views`}</span>;
+}
+
+export function Views({
+  slug,
+  trackView
+}: {
+  slug: string;
+  trackView?: boolean;
+}) {
   return (
-    <span>
-      <Suspense fallback="Loading views">{`${number} views`}</Suspense>
-    </span>
+    <Suspense fallback={<span>... views</span>}>
+      <ViewsFetcher slug={slug} trackView={trackView} />
+    </Suspense>
   );
 }

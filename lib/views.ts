@@ -1,18 +1,18 @@
 import { kv } from "@vercel/kv";
 import { allReadings } from "contentlayer/generated";
 
-export function getReadingViews(slug: string) {
+export async function getReadingViews(slug: string) {
   const reading = allReadings.find(reading => slug == reading.slug);
 
   if (!reading) return 0;
 
-  return kv.get(reading.slug);
+  return await kv.get(reading.slug);
 }
 
-export function addView(slug: string) {
+export async function addView(slug: string) {
   const reading = allReadings.find(reading => slug == reading.slug);
 
   if (!reading) return 0;
 
-  return kv.incr(reading.slug);
+  return await kv.incr(reading.slug);
 }
