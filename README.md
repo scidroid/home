@@ -19,9 +19,7 @@
 
 </div>
 
-> This website is a beta and is Work In Progress. You can see the actual version in [scidroid.co](https://scidroid.co/).
->
-> Try the beta live version in [home.scidroid.co](https://home.scidroid.co/)
+> Try the live version in [scidroid.co](https://scidroid.co/)
 
 This is the source code for my personal website. It is built using [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/), and [TypeScript](https://www.typescriptlang.org/).
 

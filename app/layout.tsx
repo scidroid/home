@@ -11,7 +11,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { GeistMono, GeistSans } from "geist/font";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://home.scidroid.co"),
+  metadataBase: new URL("https://scidroid.co"),
   title: {
     default: "Juan Almanza",
     template: "%s | Juan Almanza"
@@ -22,13 +22,13 @@ export const metadata: Metadata = {
     title: "Juan Almanza",
     description:
       "Juan is a 16 years old passionate High School student from Colombia with solid leadership and engineering skills. Focused on creating solutions for rural populations and advocating for STEM education and gender equality.",
-    url: "https://home.scidroid.co",
+    url: "https://scidroid.co",
     siteName: "Juan Almanza",
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "https://home.scidroid.co/api/og"
+        url: "https://scidroid.co/api/og"
       }
     ]
   },
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   twitter: {
     title: "Juan Almanza",
     card: "summary_large_image",
-    images: ["https://home.scidroid.co/api/og"]
+    images: ["https://scidroid.co/api/og"]
   }
 };
 
