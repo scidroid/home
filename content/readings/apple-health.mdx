@@ -4,9 +4,35 @@ date: 2023-11-08
 summary: Create a shortcut in the iPhone that send data from Apple Health to an endpoint in your website
 ---
 
+While Apple Health data is typically stored solely on the device and lacks an official API for data exposure, there are ways around this. In this guide, we'll explore a creative solution to this challenge by crafting a custom API. We'll use an iPhone shortcut to automate the process of fetching health data and sending it to an endpoint on your website.
+
 ## Creating the shortcut
 
+Let's begin creating the shortcut and retrieving health samples of a specific type. For this demonstration, we'll fetch the heart rate.
+
+The 'Find Health Sample' action offers different options based on the metric you're seeking. In this case let's select 'Hearth rate' with the condition 'is in the last 3 days', and create a variable to store the result. Just like in this screenshot:
+
+<Image
+  alt="Accesing the health data inside the shortcut."
+  src="/images/apple-health/fetch.avif"
+  width={400}
+  height={720}
+/>
+
+Next, the 'Get Contents Of' action is triggered, which sends a request to our endpoint and the body of our POST request. The body of the request is a JSON object containing the current date, along with the 'heart' field. This field references the 'hrate' variable declared earlier. For the URL you can add a search param with the password so you can prevent abuse of your database.
+
+<Image
+  alt="Sending the information to our endpoint."
+  src="/images/apple-health/post.avif"
+  width={400}
+  height={720}
+/>
+
 ## Creating the API Endpoint
+
+Once your shortcut is ready, the next step involves setting up your API endpoint. The code snippet below outlines the process for Next.js with Vercel KV but you are free to use the service you most like:
+
+Make sure to create a `.env` file and add the `PASSWORD` variable and the keys for the key-value service.
 
 ```ts
 import { kv } from "@vercel/kv";
@@ -27,9 +53,7 @@ export async function POST(request: Request) {
 
   const res = await request.json();
 
-  const data = { date: new Date(res.date).toISOString(), value: res.value };
-
-  await kv.set("health", data);
+  await kv.set("health", res.value);
 
   return Response.json(data);
 }
@@ -43,8 +67,8 @@ If you are using the Next.js app router or any other implementation of RSC you c
 import { kv } from "@vercel/kv";
 
 export async function HealthData() {
-  const health = (await kv.get("health")) as { value: number };
+  const bpm = await kv.get("health");
 
-  return <p>{health?.value} BPM</p>;
+  return <p>{bpm} BPM</p>;
 }
 ```
