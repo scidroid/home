@@ -22,7 +22,7 @@ function BaseComponent({
   const { isPlaying = false, title = "...", artist = "..." } = song || {};
   const notPlaying = !isLoading && !isPlaying;
 
-  let message = `Playing ${truncate(title, 20)} by ${truncate(artist, 20)}`;
+  let message = `Playing ${truncate(title, 17)} by ${truncate(artist, 17)}`;
   if (notPlaying) message = "Not playing anything";
 
   return (

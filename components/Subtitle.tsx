@@ -6,6 +6,10 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 const titles = [
   {
+    title: "High School Junior",
+    link: null
+  },
+  {
     title: "Founder @ ASOFI",
     link: "https://asofi.us"
   },
@@ -14,12 +18,8 @@ const titles = [
     link: "https://oc.uan.edu.co"
   },
   {
-    title: "Research @ Stanford",
-    link: "https://stanford.edu"
-  },
-  {
-    title: "High School Junior",
-    link: null
+    title: "CS Researcher",
+    link: "https://theinformaticists.com/2023/10/09/unveiling-the-orchestra-a-novel-system-for-audio-separation-and-instrument-identification-in-musical-recordings/"
   }
 ];
 

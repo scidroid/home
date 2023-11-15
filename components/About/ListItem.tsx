@@ -20,6 +20,7 @@ export function ListItem({
             href={link.url}
             about="_blank"
             rel="noopener noreferrer"
+            target="_blank"
             className="underline hover:no-underline"
           >
             {link.content}

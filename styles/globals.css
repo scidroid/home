@@ -57,6 +57,10 @@ code[data-line-numbers-max-digits="3"] > [data-line]::before {
   width: 1.75rem;
 }
 
+.modal-content > * {
+  @apply my-4;
+}
+
 @media (max-width: 700px) {
   div[data-rehype-pretty-code-fragment] {
     width: 90vw;

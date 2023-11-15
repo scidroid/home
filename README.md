@@ -30,7 +30,7 @@ Also, I use [Vercel](https://vercel.com/) to deploy the website and [ContentLaye
 ## Features
 
 - [x] About me
-- [ ] Projects
+- [x] Projects
 - [x] Blog
 - [x] Contact
 - [x] Now Playing
@@ -38,7 +38,7 @@ Also, I use [Vercel](https://vercel.com/) to deploy the website and [ContentLaye
 - [x] Open Graph Image generation
 - [x] Analytics
 - [x] Sitemap
-- [ ] Terminal easter egg
+- [x] Terminal easter egg
 
 ## Getting Started
 

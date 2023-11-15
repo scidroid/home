@@ -14,7 +14,9 @@ export function Card({
   return (
     <div
       className={`w-full bg-${bg} rounded-md border-2 px-8 py-6 ${
-        hover ? "shadow-inner hover:shadow-md transition-shadow" : ""
+        hover
+          ? "shadow-inner hover:shadow-md hover:bg-neutral-50 transition-colors"
+          : ""
       } ${className}`}
     >
       {children}

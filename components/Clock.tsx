@@ -12,7 +12,7 @@ export function Clock() {
     });
   }
 
-  const [time, setTime] = useState(() => getColombianHour());
+  const [time, setTime] = useState(getColombianHour);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -22,5 +22,5 @@ export function Clock() {
     return () => clearInterval(interval);
   }, []);
 
-  return <span>{time}</span>;
+  return <span suppressHydrationWarning>{time}</span>;
 }

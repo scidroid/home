@@ -2,15 +2,15 @@
 
 import { useState } from "react";
 
+import { useModal } from "@/hooks/modal";
 import { galleryData } from "@/lib/gallery";
 import { AnimatePresence } from "framer-motion";
 
 import { MotionImage } from "./MotionImage";
 import { DragSlider } from "./Slider";
-import { useGallerySelect } from "./useGallerySelect";
 
 export function Gallery() {
-  const { selected, setSelected, ref, lastSelectedId } = useGallerySelect();
+  const { selected, setSelected, ref, lastSelectedId } = useModal();
 
   const [isDragging, setIsDragging] = useState<boolean>(false);
 
@@ -36,7 +36,7 @@ export function Gallery() {
             tabIndex={0}
             height={320}
             onKeyDown={e => {
-              if (e.key === "Enter") setSelected(image);
+              if (e.key === "Enter" || e.key === " ") setSelected(image);
             }}
             layoutId={image.id}
             whileHover={{ scale: 1.025 }}

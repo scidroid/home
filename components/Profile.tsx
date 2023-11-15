@@ -11,7 +11,7 @@ import { Subtitle } from "./Subtitle";
 export function Profile() {
   return (
     <section className="m-4 flex flex-col-reverse items-center text-center lg:m-0 lg:max-h-[1000px] lg:flex-row lg:text-left">
-      <div className="lg:m-8 lg:w-1/2">
+      <div className="lg:m-4 lg:w-1/2">
         <div className="my-4 lg:my-8">
           <h1 className="text-4xl font-extrabold lg:text-7xl">Juan Almanza</h1>
           <Subtitle />

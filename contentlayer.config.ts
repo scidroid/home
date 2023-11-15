@@ -4,7 +4,7 @@ import rehypeSlug from "rehype-slug";
 
 export const Reading = defineDocumentType(() => ({
   name: "Reading",
-  filePathPattern: `**/*.mdx`,
+  filePathPattern: `readings/**/*.mdx`,
   contentType: "mdx",
   fields: {
     title: { type: "string", required: true },
@@ -14,14 +14,32 @@ export const Reading = defineDocumentType(() => ({
   computedFields: {
     slug: {
       type: "string",
-      resolve: doc => doc._raw.flattenedPath
+      resolve: doc => doc._raw.sourceFileName.split(".")[0]
+    }
+  }
+}));
+
+export const Project = defineDocumentType(() => ({
+  name: "Project",
+  filePathPattern: "projects/**/*.mdx",
+  contentType: "mdx",
+  fields: {
+    title: { type: "string", required: true },
+    summary: { type: "string", required: true },
+    image: { type: "string", required: true },
+    alt: { type: "string", required: true }
+  },
+  computedFields: {
+    id: {
+      type: "string",
+      resolve: doc => doc._raw.sourceFileName.split(".")[0]
     }
   }
 }));
 
 export default makeSource({
-  contentDirPath: "readings",
-  documentTypes: [Reading],
+  contentDirPath: "content",
+  documentTypes: [Reading, Project],
   disableImportAliasWarning: true,
   mdx: {
     rehypePlugins: [

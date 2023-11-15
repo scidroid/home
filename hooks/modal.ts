@@ -2,10 +2,13 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { GalleryItem } from "@/types/gallery";
+interface ModalType {
+  id: string;
+  [key: string]: any;
+}
 
-export function useGallerySelect() {
-  const [selected, setSelected] = useState<GalleryItem | null>(null);
+export function useModal() {
+  const [selected, setSelected] = useState<ModalType | null>(null);
   const [lastSelectedId, setLastSelectedId] = useState<string | null>(null);
   const ref = useRef<HTMLImageElement | null>(null);
 
