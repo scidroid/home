@@ -12,7 +12,7 @@ export function ListItem({
 }) {
   return (
     <li className="my-4">
-      <p className="text-xl lg:text-2xl font-semibold">{title}</p>
+      <p className="text-xl xl:text-2xl font-semibold">{title}</p>
       <p className="text-lg">
         {description}{" "}
         {link && (

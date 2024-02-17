@@ -3,7 +3,7 @@ import Link from "next/link";
 const LINK_STYLE =
   "group first-letter:transition-all duration-300 ease-in-out text-2xl font-semibold";
 const HOVER_UNDERLINE_STYLE =
-  "pb-1 bg-left-bottom bg-gradient-to-r from-neutral-700 to-neutral-700 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out";
+  "pb-1 bg-left-bottom bg-gradient-to-r from-gray-200 to-gray-200 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out";
 
 interface StyledLinkProps {
   href: string;

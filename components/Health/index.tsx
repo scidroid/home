@@ -8,7 +8,7 @@ function BaseComponent({ bpm }: { bpm: number }) {
   return (
     <div className="flex items-center gap-x-2">
       <AnimatedHeart bpm={bpm} />
-      <p className="text-lg lg:text-xl">{`My heart is beating ${
+      <p className="text-lg text-left">{`My heart is beating ${
         bpm === 0 ? "..." : bpm
       } times per minute`}</p>
     </div>
@@ -18,7 +18,7 @@ function BaseComponent({ bpm }: { bpm: number }) {
 async function AsyncHealthComponent() {
   const health = (await kv.get("health")) as { value: number };
 
-  return <BaseComponent bpm={health?.value} />;
+  return <BaseComponent bpm={health.value} />;
 }
 
 export function HealthData() {

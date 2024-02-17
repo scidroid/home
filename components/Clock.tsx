@@ -22,5 +22,5 @@ export function Clock() {
     return () => clearInterval(interval);
   }, []);
 
-  return <span suppressHydrationWarning>{time}</span>;
+  return <span className="text-xl text-neutral-700" suppressHydrationWarning>{time}</span>;
 }

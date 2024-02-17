@@ -35,7 +35,9 @@ const config: Config = {
         "text-3xl": createFluidValue(28, 32)
       },
       animation: {
-        slide: "slide 2.5s linear infinite"
+        "slide-in-top": "slide-in-top 0.6s ease-out",
+        marquee: "marquee 60s linear infinite",
+        marquee2: "marquee2 60s linear infinite"
       },
       keyframes: {
         slide: {
@@ -44,6 +46,14 @@ const config: Config = {
           "30%": { transform: "translateY(0)", opacity: "1" },
           "45%": { transform: "translateY(-100%)", opacity: "1" },
           "100%": { transform: "translateY(-100%)", opacity: "0.1" }
+        },
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-100%)" }
+        },
+        marquee2: {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(0%)" }
         }
       },
       typography: {
@@ -55,6 +65,7 @@ const config: Config = {
       }
     }
   },
+  safelist: ["rotate-1", "-rotate-1", "rotate-2", "-rotate-2"],
   plugins: [formsPlugin, typographyPlugin]
 };
 

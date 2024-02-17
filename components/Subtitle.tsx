@@ -58,7 +58,7 @@ export function Subtitle() {
 
   return (
     <h2
-      className="text-2xl font-semibold lg:text-4xl"
+      className="text-2xl xl:text-4xl font-semibold"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

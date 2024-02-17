@@ -7,13 +7,15 @@ import { Readings } from "@/components/Readings";
 
 export default function Home() {
   return (
-    <main>
+    <>
       <Profile />
       <Gallery />
       <About />
-      <Projects />
-      <Readings />
-      <ContactForm />
-    </main>
+      {/*
+        <Projects />
+        <Readings />
+        <ContactForm />
+      */}
+    </>
   );
 }

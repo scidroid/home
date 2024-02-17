@@ -28,7 +28,7 @@ function BaseComponent({
   return (
     <div className="flex items-center gap-x-2">
       <Icon isPlaying={isPlaying} />
-      <p className="text-lg lg:text-xl">{message}</p>
+      <p className="text-lg text-left">{message}</p>
     </div>
   );
 }

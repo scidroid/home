@@ -1,26 +1,25 @@
 "use client";
 
-import { usePrefersReducedMotion } from "@/hooks/motion";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 export function StaticIcon() {
   return (
     <div className="flex h-[30px] w-[30px] items-end space-x-1">
       <div className="flex flex-col items-center">
-        <div className="h-[4px] w-[6px] bg-slate-700" />
+        <div className="h-[4px] w-[6px] bg-gray-200" />
       </div>
       <div className="flex flex-col items-center">
-        <div className="h-[4px] w-[6px] bg-slate-700" />
+        <div className="h-[4px] w-[6px] bg-gray-200" />
       </div>
       <div className="flex flex-col items-center">
-        <div className="h-[4px] w-[6px] bg-slate-700" />
+        <div className="h-[4px] w-[6px] bg-gray-200" />
       </div>
     </div>
   );
 }
 
 export function Icon({ isPlaying }: { isPlaying: boolean }) {
-  const prefersReducedMotion = usePrefersReducedMotion();
+  const prefersReducedMotion = useReducedMotion();
 
   if (!isPlaying) return <StaticIcon />;
 
@@ -28,7 +27,7 @@ export function Icon({ isPlaying }: { isPlaying: boolean }) {
     <div className="flex h-[30px] w-[30px] items-end space-x-1">
       <div className="flex flex-col items-center">
         <motion.div
-          className="w-[6px] bg-slate-700"
+          className="w-[6px] bg-gray-200"
           animate={{
             height: prefersReducedMotion ? [4, 22] : [4, 30, 4]
           }}
@@ -41,7 +40,7 @@ export function Icon({ isPlaying }: { isPlaying: boolean }) {
       </div>
       <div className="flex flex-col items-center">
         <motion.div
-          className="w-[6px] bg-slate-700"
+          className="w-[6px] bg-gray-200"
           animate={{
             height: prefersReducedMotion ? [4, 30] : [4, 30, 4]
           }}
@@ -55,7 +54,7 @@ export function Icon({ isPlaying }: { isPlaying: boolean }) {
       </div>
       <div className="flex flex-col items-center">
         <motion.div
-          className="w-[6px] bg-slate-700"
+          className="w-[6px] bg-gray-200"
           animate={{
             height: prefersReducedMotion ? [4, 18] : [4, 30, 4]
           }}

@@ -14,10 +14,10 @@ export function Projects() {
 
   return (
     <section className="mx-4 my-8">
-      <h2 className="font-semibold text-xl lg:text-2xl uppercase my-2">
+      <h2 className="font-semibold text-xl xl:text-2xl uppercase my-2">
         Projects
       </h2>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 my-8">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 my-8">
         {allProjects.map((project, key) => (
           <MotionCard
             hover
@@ -39,7 +39,7 @@ export function Projects() {
               quality={100}
               className="m-auto"
             />
-            <h3 className="text-xl lg:text-2xl font-semibold">
+            <h3 className="text-xl xl:text-2xl font-semibold">
               {project.title}
             </h3>
             <p className="text-lg">{project.summary}</p>
@@ -67,11 +67,11 @@ export function Projects() {
                 <div className="text-xl modal-content">
                   <h3
                     id="dialog-title"
-                    className="text-2xl lg:text-4xl font-bold"
+                    className="text-2xl xl:text-4xl font-bold"
                   >
                     {selected.title}
                   </h3>
-                  <p className="font-semibold text-xl lg:text-2xl">
+                  <p className="font-semibold text-xl xl:text-2xl">
                     {selected.summary}
                   </p>
                   <ModalContent content={selected.body.code} />

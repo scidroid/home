@@ -2,36 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  color-scheme: dark;
+}
+
 ::selection {
-  background: #485fd2;
-  color: white;
+  background: rgba(255, 255, 0, 0.8);
+  color: black;
 }
 
 * {
   scroll-behavior: smooth;
 }
 
-::-webkit-scrollbar {
-  width: 15px;
-}
-
-::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #d6dee1;
-  border-radius: 20px;
-  border: 4px solid transparent;
-  background-clip: content-box;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: #a8bbbf;
-}
-
 pre {
-  @apply overflow-auto rounded-lg p-2 text-sm lg:p-4 lg:text-base;
+  @apply overflow-auto rounded-lg p-2 text-sm xl:p-4 xl:text-base;
 }
 
 code {
@@ -64,5 +49,25 @@ code[data-line-numbers-max-digits="3"] > [data-line]::before {
 @media (max-width: 700px) {
   div[data-rehype-pretty-code-fragment] {
     width: 90vw;
+  }
+}
+
+.shiny {
+  mask-image: linear-gradient(
+    -75deg,
+    rgba(255, 255, 255, 0.8) 30%,
+    #fff 50%,
+    rgba(255, 255, 255, 0.8) 70%
+  );
+  mask-size: 200%;
+  animation: shine 2s linear infinite;
+}
+
+@keyframes shine {
+  from {
+    -webkit-mask-position: 150%;
+  }
+  to {
+    -webkit-mask-position: -50%;
   }
 }

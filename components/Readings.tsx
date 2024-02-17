@@ -10,7 +10,7 @@ export function Readings() {
   return (
     <section className="mx-4 my-8">
       <h2 className="font-semibold text-2xl uppercase my-2">Readings</h2>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 my-4">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 my-4">
         {allReadings.map((reading, key) => (
           <Link href={`/${reading.slug}`} key={key}>
             <Card hover>

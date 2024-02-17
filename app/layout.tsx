@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 
-import { allReadings } from "@/.contentlayer/generated";
 import { ConsoleHelper } from "@/components/ConsoleHelper";
-import { Container } from "@/components/Containing";
 import { Footer } from "@/components/Footer";
-import { Gallery } from "@/components/Gallery";
-import Header from "@/components/Header";
+import { Header } from "@/components/Header";
 import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { GeistMono, GeistSans } from "geist/font";
@@ -55,22 +52,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const reading = allReadings.sort((a, b) => {
-    return new Date(b.date).getTime() - new Date(a.date).getTime();
-  })[0];
-
   return (
     <html lang="en">
       <body
-        className={`${GeistSans.variable} ${GeistMono.variable} antialised absolute inset-0 h-full w-full bg-white bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]`}
+        className={`${GeistSans.variable} ${GeistMono.variable} text-gray-200 dark font-sans antialiased bg-fixed bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-slate-900 via-purple-900 to-slate-900 p-4`}
       >
+        <Header />
         <div className="flex justify-center">
-          <div className="m-1 w-full font-sans text-neutral-700 lg:m-0">
-            <Header reading={reading} />
-            <Container>{children}</Container>
-            <Footer />
-          </div>
+          <main className="max-w-[95vw] xl:max-w-6xl">{children}</main>
         </div>
+        <Footer />
         <Analytics />
         <ConsoleHelper />
       </body>

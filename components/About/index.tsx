@@ -12,16 +12,16 @@ import {
 export function About() {
   return (
     <section className="mx-4 my-8">
-      <h2 className="font-semibold text-xl lg:text-2xl uppercase my-2">
+      <h2 className="font-semibold text-xl xl:text-2xl uppercase my-2">
         About me
       </h2>
-      <p className="font-bold text-3xl lg:text-6xl">
-        I&apos;m building innovative solutions to the most pressing problems in
-        Colombia and the world.
+      <p className="font-bold text-3xl xl:text-5xl">
+        I&apos;m building <span className="shiny">innovative</span> solutions to
+        pressing problems in 🇨🇴 Colombia and the 🌎 world.
       </p>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 my-8">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 my-8">
         <Card bg="" className="bg-blue-50">
-          <h3 className="text-2xl lg:text-3xl font-semibold">My Experience</h3>
+          <h3 className="text-2xl xl:text-3xl font-semibold">My Experience</h3>
           <ul>
             {experienceData.map((experience, key) => (
               <ListItem
@@ -34,7 +34,7 @@ export function About() {
           </ul>
         </Card>
         <Card bg="" className="bg-pink-50">
-          <h3 className="text-2xl lg:text-3xl font-semibold">
+          <h3 className="text-2xl xl:text-3xl font-semibold">
             My work at ASOFI
           </h3>
           <ul>
@@ -49,7 +49,7 @@ export function About() {
           </ul>
         </Card>
         <Card bg="" className="bg-yellow-50">
-          <h3 className="text-2xl lg:text-3xl font-semibold">My skills</h3>
+          <h3 className="text-2xl xl:text-3xl font-semibold">My skills</h3>
           <ul>
             {skillsData.map((experience, key) => (
               <ListItem
@@ -61,7 +61,7 @@ export function About() {
           </ul>
         </Card>
         <Card bg="" className="bg-green-50">
-          <h3 className="text-2xl lg:text-3xl font-semibold">My education</h3>
+          <h3 className="text-2xl xl:text-3xl font-semibold">My education</h3>
           <ul>
             {educationData.map((experience, key) => (
               <ListItem

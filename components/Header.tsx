@@ -1,53 +1,47 @@
 "use client";
 
+// if you know a better way to do this please let me know
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { Reading } from "@/.contentlayer/generated";
+import { useEffect } from "react";
+
 import { useScrollPosition } from "@/hooks/scroll";
+import { motion, useAnimation } from "framer-motion";
 
 import { Clock } from "./Clock";
-import { Container } from "./Containing";
 import { GithubLogo } from "./icons/GithubLogo";
 import { LinkedinLogo } from "./icons/LinkedinLogo";
 import { XLogo } from "./icons/XLogo";
 
-export default function Header({ reading }: { reading: Reading }) {
-  let pathname = usePathname() || "/";
-  const scrollY = useScrollPosition();
+export function Header() {
+  const positionY = useScrollPosition();
+  const controls = useAnimation();
+  const pathname = usePathname() || "/";
+
+  useEffect(() => {
+    controls.start({
+      y: (pathname == "/" ? positionY > 250 : true) ? 0 : "-200%",
+      transition: { duration: 0.3 }
+    });
+  }, [positionY, controls]);
 
   return (
-    <header className="sticky top-0 z-50 border-b-2 bg-white p-2 px-4 text-xl">
-      <Container className="flex items-center justify-between">
-        <p aria-hidden>
-          <span
-            className={
-              pathname == "/" && scrollY < 150 ? "hidden" : " flex items-center"
-            }
-          >
-            <Link href={"/"} className="font-bold">
-              Juan Almanza
-            </Link>{" "}
-            <span className="ml-2 hidden lg:block">
-              - <Clock /> in Colombia
-            </span>
-          </span>
-        </p>
-        <nav className="flex items-center gap-1">
-          <span className="hidden font-bold lg:block">Read:</span>
-          <Link
-            href={`/${reading.slug}`}
-            className="mr-2 hidden underline hover:no-underline lg:block"
-          >
-            {reading.title}
-          </Link>
-          <div className="flex gap-3">
-            <GithubLogo />
-            <LinkedinLogo />
-            <XLogo />
-          </div>
-        </nav>
-      </Container>
-    </header>
+    <motion.header
+      initial={{ y: "-200%" }}
+      animate={controls}
+      className="text-neutral-700 fixed top-4 left-2 right-2 z-40 bg-gradient-to-t from-gray-300 to-gray-50 bg-opacity-80 p-4 rounded-full flex items-center justify-between max-w-xl mx-auto"
+      aria-hidden={pathname == "/"}
+    >
+      <Link href="/" className="font-bold text-xl">
+        Juan Almanza
+      </Link>
+      <nav className="flex items-center gap-2">
+        <Clock />
+        <GithubLogo />
+        <LinkedinLogo />
+        <XLogo />
+      </nav>
+    </motion.header>
   );
 }

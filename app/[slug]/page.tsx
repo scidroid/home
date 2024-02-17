@@ -117,7 +117,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <main className="flex justify-center">
-      <section className="my-4 max-w-3xl lg:my-8">
+      <section className="my-4 max-w-3xl xl:my-8">
         <script
           type="application/ld+json"
           suppressHydrationWarning
@@ -126,20 +126,20 @@ export default async function Page({ params }: { params: { slug: string } }) {
           }}
         ></script>
 
-        <h1 className="text-center text-4xl font-extrabold lg:text-7xl">
+        <h1 className="text-center text-4xl font-extrabold xl:text-7xl">
           <Balancer>{post.title}</Balancer>
         </h1>
 
-        <p className="my-2 text-center text-lg lg:my-4 lg:text-xl">
+        <p className="my-2 text-center text-lg xl:my-4 xl:text-xl">
           <Views slug={post.slug} trackView />
           {" - "}
           {formatDate(post.date)}
         </p>
-        <p className="my-2 text-center text-lg lg:my-4 lg:text-xl">
+        <p className="my-2 text-center text-lg xl:my-4 xl:text-xl">
           {post.summary}
         </p>
 
-        <article className="prose prose-neutral mx-4 mt-4 lg:prose-xl">
+        <article className="prose prose-neutral mx-4 mt-4 xl:prose-xl">
           <Content components={components} />
         </article>
       </section>

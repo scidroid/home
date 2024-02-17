@@ -41,11 +41,11 @@ export async function GET(req: NextRequest) {
               height="800"
               tw="w-72 h-72 rounded-full"
             />
-            <p tw="text-4xl text-neutral-700 font-extrabold">Juan Almanza</p>
+            <p tw="text-4xl text-gray-200 font-extrabold">Juan Almanza</p>
           </div>
           {title.length > 0 && (
             <p
-              tw="text-6xl font-bold text-neutral-700 max-w-[600px] text-center ml-20"
+              tw="text-6xl font-bold text-gray-200 max-w-[600px] text-center ml-20"
               style={{
                 // @ts-ignore - looks like the API it's not correctly typed lol
                 textWrap: "balance"

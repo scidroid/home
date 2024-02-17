@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 
-import { usePrefersReducedMotion } from "@/hooks/motion";
+import { useReducedMotion } from "framer-motion";
 
 export function Age() {
-  const prefersReducedMotion = usePrefersReducedMotion();
+  const prefersReducedMotion = useReducedMotion();
 
   const calcAge = () => {
     const birthday = +new Date("August 16, 2007");
