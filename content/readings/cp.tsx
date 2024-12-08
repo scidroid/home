@@ -1,0 +1,531 @@
+import { CodeBlock } from "@/components/code-block";
+import {
+  ExternalLink,
+  Heading2,
+  ImageWithCaption,
+  Paragraph
+} from "@/components/content";
+
+const metadata = {
+  slug: "cp",
+  title: "Competitive Programming",
+  date: "2023-10-31",
+  summary:
+    "Some Competitive Programming snippets and algorithms that I personally use, incluiding my template."
+};
+
+function Page() {
+  return (
+    <>
+      <ImageWithCaption
+        alt="A silly photo of me in the International Olympiad in Informatics Cultural Night."
+        src="/images/cp/ioi.avif"
+        width={1000}
+        height={720}
+        priority
+      />
+
+      <Heading2>My Template</Heading2>
+
+      <CodeBlock language="cpp" filename="template.cpp">
+        {`#include <bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long
+#define vll vector<ll>
+#define pb push_back
+#define popb pop_back
+#define pp pair
+#define pll pp<ll, ll>
+#define vpll vector<pll>
+#define plll pp<pll, ll>
+#define vplll vector<plll>
+#define ff first
+#define ss second
+
+int main() {
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+
+    return 0;
+}`}
+      </CodeBlock>
+
+      <Heading2>Fenwick Tree</Heading2>
+
+      <Paragraph>
+        This one is my favorite data structure, implemented for the{" "}
+        <ExternalLink href="https://cses.fi/alon/task/1648">
+          Dynamic Range Sum Queries
+        </ExternalLink>{" "}
+        problem.
+      </Paragraph>
+
+      <CodeBlock language="cpp" filename="fenwick.cpp">
+        {`const ll N = 1e7 + 5;
+
+ll tree[N];
+
+void update(ll idx, ll val) {
+    for (; idx < N; idx += idx & (-idx)) {
+        tree[idx] += val;
+    }
+}
+
+ll query(ll idx) {
+    ll val = 0;
+
+    for (; idx > 0; idx -= idx & (-idx)) {
+        val += tree[idx];
+    }
+
+    return val;
+}
+
+ll rangeQuery(ll x, ll y) {
+    return query(y) - query(x - 1);
+}
+
+void replace(ll idx, ll val) {
+    ll changed = rangeQuery(idx, idx);
+
+    update(idx, -changed);
+    update(idx, val);
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    ll n, k; cin >> n >> k;
+
+    for (ll i = 1; i <= n; i++) {
+        ll kk; cin >> kk;
+
+        update(i, kk);
+    }
+
+    while (k--) {
+        ll op, x, y; cin >> op >> x >> y;
+
+        if (op == 1) {
+            replace(x, y);
+        } else if (op == 2) {
+            cout << query(y) - query(x - 1) << endl;
+        }
+    }
+
+    return 0;
+}`}
+      </CodeBlock>
+
+      <Heading2>Segment Tree</Heading2>
+
+      <Paragraph>
+        Inspired in the implementations of{" "}
+        <ExternalLink href="https://codeforces.com/profile/ahoraSoyPeor">
+          Roger
+        </ExternalLink>{" "}
+        and{" "}
+        <ExternalLink href="https://codeforces.com/profile/mcqueencin">
+          Oscar
+        </ExternalLink>{" "}
+        for the{" "}
+        <ExternalLink href="https://codeforces.com/problemset/problem/380/C">
+          Sereja and Brackets
+        </ExternalLink>{" "}
+        problem.
+      </Paragraph>
+
+      <CodeBlock language="cpp" filename="segment-tree.cpp">
+        {`struct info {
+    ll ans = 0;
+    ll open = 0;
+    ll closed = 0;
+};
+
+const ll N = 1e6 + 5;
+
+info ST[4 * N];
+
+info merge(info a, info b) {
+    info c;
+
+    ll x = min(a.open, b.closed);
+
+    c.ans = a.ans + b.ans + x;
+
+    c.open = (a.open + b.open) - x;
+
+    c.closed = (b.closed + a.closed) - x;
+
+    return c;
+}
+
+void update(ll node, ll l, ll r, ll i, string x) {
+    if (l == r) {
+        info c;
+
+        if (x == "(") {
+            c.open = 1;
+        } else if (x == ")") {
+            c.closed = 1;
+        }
+
+        ST[node] = c;
+
+        return;
+    }
+
+    ll mid = (l + r) / 2;
+
+    if (i <= mid) {
+        update(node * 2, l, mid, i, x);
+    } else {
+        update((node * 2) + 1, mid + 1, r, i, x);
+    }
+
+    ST[node] = merge(ST[node * 2], ST[(node * 2) + 1]);
+}
+
+info query(ll node, ll l, ll r, ll a, ll b) {
+    if (l == a && r == b) {
+        return ST[node];
+    }
+
+    ll mid = (l + r) / 2;
+
+    if (b <= mid) {
+        return query(node * 2, l, mid, a, b);
+    }
+
+    if (a > mid) {
+        return query(node * 2 + 1, mid + 1, r, a, b);
+    }
+
+    return merge(query(node * 2, l, mid, a, mid), query(node * 2 + 1, mid + 1, r, mid + 1, b));
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    string a;
+    ll counter = 0, open = 0;
+
+    cin >> a;
+
+    for (ll i = 0; i < a.size(); i++) {
+        string x;
+
+        x.push_back(a[i]);
+
+        update(1, 0, a.size() - 1, i, x);
+    }
+
+    ll q;
+
+    cin >> q;
+
+    for (ll i = 0; i < q; i++) {
+        ll c, d;
+
+        cin >> c >> d;
+
+        info q = query(1, 0, a.size() - 1, c - 1, d - 1);
+
+        cout << q.ans * 2 << endl;
+    }
+
+    return 0;
+}`}
+      </CodeBlock>
+
+      <Heading2>Segment Tree (Lazy Propagation)</Heading2>
+
+      <Paragraph>
+        This implementation is for the{" "}
+        <ExternalLink href="https://oi.edu.pl/boi2001/task/marzad.html">
+          BOI2001's Mars Map
+        </ExternalLink>{" "}
+        problem.
+      </Paragraph>
+
+      <CodeBlock language="cpp" filename="segment-tree-lazy.cpp">
+        {`struct info {
+	ll min = 0;
+	ll cnt = 1;
+	ll lazy = 0;
+};
+
+const ll NMAX = 3e4 + 5;
+const ll MAX2D = 30001 * 30001;
+const ll oo = 50000;
+
+info ST[8 * NMAX];
+
+info merge(info a, info b)
+{
+	info c;
+
+	c.min = min(a.min, b.min);
+
+	if (a.min == b.min) {
+		c.cnt = a.cnt + b.cnt;
+	} else if (a.min == min(a.min, b.min)) {
+		c.cnt = a.cnt;
+	} else {
+		c.cnt = b.cnt;
+	}
+
+	return c;
+}
+
+void propagate(ll node)
+{
+	ST[(node * 2) + 1].lazy += ST[node].lazy;
+	ST[node * 2].lazy += ST[node].lazy;
+	ST[node].min += ST[node].lazy;
+	ST[node].lazy = 0;
+}
+
+void update(ll node, ll l, ll r, ll a, ll b, ll x) {
+	propagate(node);
+
+	if (r < a || l > b) return;
+
+	if (a <= l && r <= b) {
+		ST[node].lazy = x;
+
+		propagate(node);
+
+		return;
+	}
+
+	ll mid = (l + r) / 2;
+
+	update(node * 2, l, mid, a, b, x);
+	update(node * 2 + 1, mid + 1, r, a, b, x);
+
+	ST[node] = merge(ST[node * 2], ST[node * 2 + 1]);
+}
+
+info query(ll node, ll l, ll r, ll a, ll b)
+{
+	propagate(node);
+
+	if (r < a || l > b) {
+		info o;
+
+		o.min = oo;
+
+		return o;
+	};
+
+    if (a <= l && r <= b)
+    {
+        return ST[node];
+    }
+
+    ll mid = (l + r) / 2;
+
+    return merge(query(node * 2, l, mid, a, b), query(node * 2 + 1, mid + 1, r, a, b));
+}
+
+void build(ll node, ll l, ll r) {
+	if (l == r) {
+	   ST[node] = {0,1,0};
+	   return;
+	}
+	ll mid = (l + r) / 2;
+
+	build(node * 2, l, mid);
+	build(node * 2 + 1, mid + 1, r);
+    ST[node] = merge(ST[node*2], ST[node*2+1]);
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+	ll n, a, b, c, d, res = 0; cin >> n;
+
+	vplll xs[30005];
+
+	build(1, 0, NMAX);
+
+	while (n--) {
+		cin >> a >> b >> c >> d;
+
+		xs[a].pb({{b, d-1}, 1});
+		xs[c].pb({{b, d-1}, -1});
+	}
+
+	for (ll i = 0; i < NMAX; i++) {
+		for(ll j = 0; j < xs[i].size(); j++)
+			update(1, 0, NMAX, xs[i][j].ff.ff, xs[i][j].ff.ss, xs[i][j].ss);
+
+		info q = query(1, 0, NMAX, 0, NMAX);
+
+		if (q.min == 0) {
+			res += NMAX+1  - q.cnt;
+		}
+	}
+
+	cout << res;
+
+	return 0;
+}`}
+      </CodeBlock>
+
+      <Heading2>My favorite piece of code</Heading2>
+
+      <Paragraph>
+        This is a terrible implementation but it's probably the one I'm most
+        proud of.
+      </Paragraph>
+
+      <CodeBlock
+        language="cpp"
+        filename="dont-try-this.cpp"
+      >{`bool isValid(vll list, vll copy) {
+	for (ll i = 0; i < list.size(); i++) {
+		for (ll j = i; j < list.size(); j++) {
+			if (i == j) {
+				if (copy[i] == list[i]) {
+					return false;
+				}
+			} else {
+				vll copy2;
+				vll copy3;
+
+				for (ll xx = i; xx <= j; xx++) {
+					copy2.pb(list[xx]);
+					copy3.pb(copy[xx]);
+				}
+
+				sort(copy3.begin(), copy3.end());
+
+				bool aaanns = true;
+
+				for (ll xx = 0; xx < copy2.size(); xx++) {
+					if (copy2[xx] != copy3[xx]) {
+						aaanns = false;
+					}
+				}
+
+				if (aaanns) {
+					return false;
+				}
+			}
+		}
+	}
+
+	return true;
+}
+
+void solve(vll list, vll copy) {
+	if (list.size() > 8) {
+		ll changed = 0;
+		ll first = 0;
+
+		for (ll i = 0; i < list.size(); i++) {
+			if (list[i] == copy[i]) {
+				changed++;
+				first = i;
+
+				ll a = list[i];
+				ll b = list[0];
+
+				list[0] = a;
+				list[i] = b;
+			}
+		}
+
+		bool terminar = true;
+
+		while (terminar) {
+			ll aps = 0;
+
+			for (ll i = 0; i < list.size(); i++) {
+				if (list[i] == copy[i]) {
+					aps++;
+				}
+			}
+
+			if (aps > 0) {
+				ll last = list[0];
+
+				for (ll i = 0; i < list.size(); i++) {
+					ll a, b;
+					if (i != list.size() - 1) {
+						ll bb = list[i + 1];
+						list[i + 1] = last;
+						last = bb;
+					} else {
+						list[0] = last;
+					}
+				}
+			} else {
+				break;
+			}
+		}
+
+		for (ll i = 0; i < list.size(); i++) {
+			cout << list[i] << " ";
+		}
+
+		cout << endl;
+	} else {
+		if (isValid(list, copy)) {
+			for (ll i = 0; i < list.size(); i++) {
+				cout << list[i] << " ";
+			}
+
+			cout << endl;
+		} else {
+			next_permutation(list.begin(), list.end());
+
+			solve(list, copy);
+		}
+	}
+}
+
+int main()
+{
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+
+	ll n; cin >> n;
+
+	while (n--) {
+		vll list;
+		vll copy;
+
+		ll k; cin >> k;
+
+		while(k--) {
+			ll x; cin >> x;
+
+			list.pb(x);
+			copy.pb(x);
+		}
+
+		sort(list.begin(), list.end(), greater<ll>());
+
+		solve(list, copy);
+	}
+
+	return 0;
+}`}</CodeBlock>
+    </>
+  );
+}
+
+export const cp = { metadata, Page };

@@ -6,8 +6,8 @@ import { allProjects } from "@/.contentlayer/generated";
 import { useModal } from "@/hooks/modal";
 import { AnimatePresence } from "framer-motion";
 
-import { ModalContent } from "./ModalContent";
-import { MotionCard } from "./MotionCard";
+import { ModalContent } from "./modal-content";
+import { MotionCard } from "./motion-card";
 
 export function Projects() {
   const { selected, setSelected, ref } = useModal();

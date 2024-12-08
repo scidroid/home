@@ -61,7 +61,7 @@ Finally, run the development server:
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3333](http://localhost:3333) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
@@ -96,7 +96,7 @@ This project is licensed under the GNU AGPLv3 License - see the [LICENSE](LICENS
 - [TypeScript](https://www.typescriptlang.org/)
 - [Contentlayer](https://contentlayer.dev/)
 - [Vercel](https://vercel.com/)
-- [Vercel KV](https://www.sanity.io/docs/storage/kv)
+- [Vercel KV](https://www.vercel.com/docs/storage/kv)
 - [Resend](https://resend.com/)
 - [Bun](https://bun.sh/)
 - [Spotify API](https://developer.spotify.com/)

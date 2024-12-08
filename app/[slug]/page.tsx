@@ -1,45 +1,40 @@
-/* eslint-disable jsx-a11y/alt-text */
-
-/* The alt attribute is defined by the mdx component */
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { Views } from "@/components/Views";
-import { MetadataProps } from "@/types/metadata";
+import { Age } from "@/components/age";
+import { Views } from "@/components/views";
+import { copy } from "@/content/copy";
+import { readings } from "@/content/readings";
+import headshot from "@/public/juan.jpg";
 import { formatDate } from "@/utils/dates";
-import { allReadings } from "contentlayer/generated";
-import { getMDXComponent } from "next-contentlayer/hooks";
+import type { Metadata } from "next";
 import { Balancer } from "react-wrap-balancer";
 
 export async function generateMetadata({
   params
-}: MetadataProps): Promise<Metadata | undefined> {
-  const reading = allReadings.find(reading => reading.slug === params.slug);
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata | undefined> {
+  const { slug } = await params;
 
-  if (!reading) {
-    return;
-  }
+  const reading = readings.find(reading => reading.metadata.slug === slug);
 
-  const {
-    title,
-    date: publishedTime,
-    summary: description,
-    _raw: { flattenedPath: slug }
-  } = reading;
+  if (!reading) return;
 
-  const ogImage = `https://scidroid.co/api/og?title=${title}`;
+  const { metadata } = reading;
+
+  const ogImage = `https://scidroid.co/api/og?title=${metadata.title}`;
 
   return {
-    title,
-    description,
+    title: metadata.title,
+    description: metadata.summary,
     openGraph: {
-      title,
-      description,
+      title: metadata.title,
+      description: metadata.summary,
       type: "article",
-      publishedTime,
-      url: `https://scidroid.co/${slug}`,
+      publishedTime: metadata.date,
+      url: `https://scidroid.co/${metadata.slug}`,
       images: [
         {
           url: ogImage
@@ -48,67 +43,41 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title,
-      description,
+      title: metadata.title,
+      description: metadata.summary,
       images: [ogImage]
     }
   };
 }
 
-function CustomLink(props: any) {
-  const href = props.href;
-
-  if (href.startsWith("/")) {
-    return (
-      <Link href={href} {...props}>
-        {props.children}
-      </Link>
-    );
-  }
-
-  if (href.startsWith("#")) {
-    return <a {...props} />;
-  }
-
-  return <a target="_blank" rel="noopener noreferrer" {...props} />;
-}
-
-function RoundedImage(props: any) {
-  return (
-    <figure className="flex flex-col items-center justify-center">
-      <Image className="rounded-lg" {...props} />
-      <figcaption aria-hidden>{props.alt}</figcaption>
-    </figure>
-  );
-}
-
-const components = {
-  Image: RoundedImage,
-  a: CustomLink
-};
-
 export async function generateStaticParams() {
-  return allReadings.map(reading => ({
-    slug: reading.slug
+  return readings.map(reading => ({
+    slug: reading.metadata.slug
   }));
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const post = allReadings.find(reading => reading.slug === params.slug);
+export default async function Page({
+  params
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
 
-  if (!post) notFound();
+  const reading = readings.find(reading => reading.metadata.slug === slug);
 
-  const Content = getMDXComponent(post.body.code);
+  if (!reading) notFound();
+
+  const { metadata, Page } = reading;
 
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    headline: post.title,
-    datePublished: post.date,
-    dateModified: post.date,
-    description: post.summary,
-    image: `https://scidroid.co/api/og?title=${post.title}`,
-    url: `https://scidroid.co/${post.slug}`,
+    headline: metadata.title,
+    datePublished: metadata.date,
+    dateModified: metadata.date,
+    description: metadata.summary,
+    image: `https://scidroid.co/api/og?title=${metadata.title}`,
+    url: `https://scidroid.co/${metadata.slug}`,
     author: {
       "@type": "Person",
       name: "Juan Almanza"
@@ -116,8 +85,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
   };
 
   return (
-    <main className="flex justify-center">
-      <section className="my-4 max-w-3xl xl:my-8">
+    <main className="flex mt-24 justify-center">
+      <section className="my-8 max-w-3xl xl:my-12">
         <script
           type="application/ld+json"
           suppressHydrationWarning
@@ -126,22 +95,45 @@ export default async function Page({ params }: { params: { slug: string } }) {
           }}
         ></script>
 
-        <h1 className="text-center text-4xl font-extrabold xl:text-7xl">
-          <Balancer>{post.title}</Balancer>
+        <h1 className="text-center text-4xl font-extrabold xl:text-7xl font-heading mb-8">
+          <Balancer>{metadata.title}</Balancer>
         </h1>
 
-        <p className="my-2 text-center text-lg xl:my-4 xl:text-xl">
-          <Views slug={post.slug} trackView />
+        <p className="my-4 text-center text-lg xl:my-6 xl:text-xl">
+          <Views slug={metadata.slug} />
           {" - "}
-          {formatDate(post.date)}
+          {formatDate(metadata.date)}
         </p>
-        <p className="my-2 text-center text-lg xl:my-4 xl:text-xl">
-          {post.summary}
+        <p className="my-4 text-center text-lg xl:my-6 xl:text-xl">
+          {metadata.summary}
         </p>
 
-        <article className="prose prose-neutral mx-4 mt-4 xl:prose-xl">
-          <Content components={components} />
+        <article className="text-justify mt-12">
+          <Page />
         </article>
+
+        <section className="mt-16 p-6 bg-gray-50 rounded-2xl border-2 border-gray-200 max-w-2xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center gap-6">
+            <Image
+              src={headshot}
+              alt="Headshot of Juan Almanza, an undergraduate student from Colombia"
+              className="w-40 h-40 rounded-lg object-cover"
+              width={200}
+              priority
+              placeholder="blur"
+              draggable={false}
+            />
+
+            <div className="flex flex-col items-center md:items-start text-center md:text-left">
+              <h2 className="text-2xl font-bold text-gray-800 mb-2 font-heading">
+                Written by Juan Almanza
+              </h2>
+              <p className="text-gray-600">
+                A <Age /> years old {copy.about}
+              </p>
+            </div>
+          </div>
+        </section>
       </section>
     </main>
   );

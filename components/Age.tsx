@@ -14,7 +14,7 @@ export function Age() {
     return ageWithDecimals;
   };
 
-  const [age, setAge] = useState("16");
+  const [age, setAge] = useState("17.000000000");
 
   useEffect(() => {
     if (!prefersReducedMotion) {

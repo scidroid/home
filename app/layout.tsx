@@ -1,26 +1,42 @@
-import type { Metadata } from "next";
+import { Geist_Mono, Lato, Playfair_Display } from "next/font/google";
 
-import { ConsoleHelper } from "@/components/ConsoleHelper";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
+import { ConsoleHelper } from "@/components/console";
+import { Footer } from "@/components/footer";
+import { Header } from "@/components/header";
+import { copy } from "@/content/copy";
 import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
-import { GeistMono, GeistSans } from "geist/font";
+import type { Metadata } from "next";
+
+const headingFont = Playfair_Display({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-heading"
+});
+
+const bodyFont = Lato({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-body"
+});
+
+const monoFont = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono"
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://scidroid.co"),
   title: {
-    default: "Juan Almanza",
-    template: "%s | Juan Almanza"
+    default: copy.name,
+    template: `%s | ${copy.name}`
   },
-  description:
-    "Juan is a 16 years old passionate High School student from Colombia with solid leadership and engineering skills. Focused on creating solutions for rural populations and advocating for STEM education and gender equality.",
+  description: copy.about,
   openGraph: {
-    title: "Juan Almanza",
-    description:
-      "Juan is a 16 years old passionate High School student from Colombia with solid leadership and engineering skills. Focused on creating solutions for rural populations and advocating for STEM education and gender equality.",
+    title: copy.name,
+    description: copy.about,
     url: "https://scidroid.co",
-    siteName: "Juan Almanza",
+    siteName: copy.name,
     locale: "en_US",
     type: "website",
     images: [
@@ -41,7 +57,7 @@ export const metadata: Metadata = {
     }
   },
   twitter: {
-    title: "Juan Almanza",
+    title: copy.name,
     card: "summary_large_image",
     images: ["https://scidroid.co/api/og"]
   }
@@ -55,7 +71,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${GeistSans.variable} ${GeistMono.variable} text-gray-200 dark font-sans antialiased bg-fixed bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-slate-900 via-purple-900 to-slate-900 p-4`}
+        className={`${headingFont.variable} ${bodyFont.variable} ${monoFont.variable} text-gray-800 dark font-body antialiased bg-fixed bg-gradient-to-bl from-gray-100 to-yellow-50 p-4`}
       >
         <Header />
         <div className="flex justify-center">

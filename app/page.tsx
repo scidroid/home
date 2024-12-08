@@ -1,21 +1,21 @@
-import { About } from "@/components/About";
-import { ContactForm } from "@/components/ContactForm";
-import { Gallery } from "@/components/Gallery";
-import { Profile } from "@/components/Profile";
-import { Projects } from "@/components/Projects";
-import { Readings } from "@/components/Readings";
+import { About } from "@/components/about";
+import { ContactForm } from "@/components/contact";
+import { Gallery } from "@/components/gallery";
+import { Profile } from "@/components/profile";
+import { Projects } from "@/components/projects";
+import { Readings } from "@/components/readings";
 
 export default function Home() {
   return (
     <>
       <Profile />
       <Gallery />
-      <About />
       {/*
-        <Projects />
-        <Readings />
-        <ContactForm />
+      <About />
+      <Projects />
       */}
+      <Readings />
+      <ContactForm />
     </>
   );
 }

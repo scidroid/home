@@ -5,54 +5,64 @@ import { NextRequest } from "next/server";
 export const runtime = "edge";
 
 export async function GET(req: NextRequest) {
-  const extraboldFont = fetch(
-    new URL("../../../public/fonts/Geist-Black.otf", import.meta.url)
+  const titleFont = fetch(
+    new URL("../../../public/fonts/title.ttf", import.meta.url)
   ).then(res => res.arrayBuffer());
 
-  const boldFont = fetch(
-    new URL("../../../public/fonts/Geist-Bold.otf", import.meta.url)
+  const bodyFont = fetch(
+    new URL("../../../public/fonts/body.ttf", import.meta.url)
   ).then(res => res.arrayBuffer());
 
   const { searchParams, origin } = new URL(req.url);
-  const title = searchParams.get("title") || "";
+
+  const title =
+    (searchParams.get("title") || "") === ""
+      ? "Juan Almanza"
+      : searchParams.get("title");
 
   return new ImageResponse(
     (
       <div
         style={{
-          position: "absolute",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          inset: 0,
           height: "100%",
           width: "100%",
-          backgroundImage:
-            "linear-gradient(to right, #80808012 1px, transparent 1px), linear-gradient(to bottom, #80808012 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
-          backgroundColor: "white"
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "#fff",
+          backgroundImage: "linear-gradient(to bottom left, #F3F4F6, #FEFCE8)",
+          padding: "40px"
         }}
       >
-        <div tw="flex items-center justify-center">
-          <div tw="flex flex-col items-center">
-            <img
-              src={`${origin}/headshot.jpg`}
-              width="800"
-              height="800"
-              tw="w-72 h-72 rounded-full"
-            />
-            <p tw="text-4xl text-gray-200 font-extrabold">Juan Almanza</p>
-          </div>
-          {title.length > 0 && (
-            <p
-              tw="text-6xl font-bold text-gray-200 max-w-[600px] text-center ml-20"
-              style={{
-                // @ts-ignore - looks like the API it's not correctly typed lol
-                textWrap: "balance"
-              }}
-            >
-              {title}
-            </p>
+        <img
+          src={`${origin}/juan.jpg`}
+          width="500"
+          height="500"
+          style={{
+            borderRadius: "12px",
+            objectFit: "cover"
+          }}
+        />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            marginLeft: "40px",
+            flex: 1
+          }}
+        >
+          <p
+            style={{
+              fontSize: "60px",
+              fontFamily: "Playfair Display",
+              textWrap: "balance"
+            }}
+          >
+            {title}
+          </p>
+          {title !== "Juan Almanza" && (
+            <p style={{ fontSize: "45px", fontFamily: "Lato" }}>Juan Almanza</p>
           )}
         </div>
       </div>
@@ -62,14 +72,14 @@ export async function GET(req: NextRequest) {
       height: 630,
       fonts: [
         {
-          name: "Vercel Sans",
-          data: await extraboldFont,
-          weight: 800
+          name: "Playfair Display",
+          data: await titleFont,
+          weight: 700
         },
         {
-          name: "Vercel Sans",
-          data: await boldFont,
-          weight: 700
+          name: "Lato",
+          data: await bodyFont,
+          weight: 500
         }
       ]
     }

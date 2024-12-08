@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: dark;
-}
-
 ::selection {
   background: rgba(255, 255, 0, 0.8);
   color: black;
@@ -13,43 +9,6 @@
 
 * {
   scroll-behavior: smooth;
-}
-
-pre {
-  @apply overflow-auto rounded-lg p-2 text-sm xl:p-4 xl:text-base;
-}
-
-code {
-  counter-reset: line;
-  overflow: auto;
-}
-
-code > [data-line]::before {
-  counter-increment: line;
-  content: counter(line);
-  display: inline-block;
-  width: 1.75rem;
-  margin-right: 1rem;
-  color: gray;
-  text-align: right;
-}
-
-code[data-line-numbers-max-digits="2"] > [data-line]::before {
-  width: 1.75rem;
-}
-
-code[data-line-numbers-max-digits="3"] > [data-line]::before {
-  width: 1.75rem;
-}
-
-.modal-content > * {
-  @apply my-4;
-}
-
-@media (max-width: 700px) {
-  div[data-rehype-pretty-code-fragment] {
-    width: 90vw;
-  }
 }
 
 .shiny {

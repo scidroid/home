@@ -19,10 +19,10 @@ export async function POST(request: Request) {
 
   const res = await request.json();
 
-  if (res.value > 200) {
+  if (res.value < 20 || res.value > 300) {
     return Response.json(
       {
-        erorr: "Max hearth rate is 200 BPM"
+        erorr: "BPM out of bounds lol."
       },
       { status: 400 }
     );

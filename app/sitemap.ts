@@ -1,9 +1,9 @@
-import { allReadings } from "contentlayer/generated";
+import { readings } from "@/content/readings";
 
 export default async function sitemap() {
-  const readings = allReadings.map(reading => ({
-    url: `https://scidroid.co/${reading.slug}`,
-    lastModified: reading.date
+  const readingsData = readings.map(reading => ({
+    url: `https://scidroid.co/${reading.metadata.slug}`,
+    lastModified: reading.metadata.date
   }));
 
   const routes = [""].map(route => ({
@@ -11,5 +11,5 @@ export default async function sitemap() {
     lastModified: new Date().toISOString().split("T")[0]
   }));
 
-  return [...routes, ...readings];
+  return [...routes, ...readingsData];
 }

@@ -2,15 +2,14 @@ import { Suspense } from "react";
 
 import { kv } from "@vercel/kv";
 
+import { BPM } from "./bpm";
 import { AnimatedHeart } from "./hearth";
 
 function BaseComponent({ bpm }: { bpm: number }) {
   return (
-    <div className="flex items-center gap-x-2">
+    <div className="h-auto xl:h-52 rounded-xl border-2 border-red-50 w-full flex flex-row xl:flex-col items-center justify-center gap-4 p-4 bg-gradient-to-bl from-red-50 via-red-100 to-red-50">
       <AnimatedHeart bpm={bpm} />
-      <p className="text-lg text-left">{`My heart is beating ${
-        bpm === 0 ? "..." : bpm
-      } times per minute`}</p>
+      <BPM bpm={bpm} />
     </div>
   );
 }
