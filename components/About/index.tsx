@@ -1,18 +1,19 @@
+import { awards } from "@/content/awards";
+
 import { Award } from "./award";
-import { awardsData } from "./data";
 
 export function About() {
   return (
-    <section className="mx-4 my-8">
-      <h2 className="font-semibold font-heading text-xl xl:text-2xl uppercase my-2">
+    <section className="mx-auto my-8 xl:my-12 max-w-xl xl:max-w-none xl:mx-4">
+      <h2 className="font-semibold font-heading text-xl xl:text-2xl uppercase my-2 text-center xl:text-left">
         About me
       </h2>
-      <p className="font-bold text-3xl xl:text-5xl">
-        I&apos;m building <span className="shiny">innovative</span> solutions to
-        pressing problems in 🇨🇴 Colombia and the 🌎 world.
+      <p className="font-bold text-2xl xl:text-5xl text-center xl:text-left my-4 xl:my-8">
+        I&apos;m building <span className="shiny">innovative solutions</span> to
+        the most pressing challenges in 🇨🇴 Colombia and the 🌎 world.
       </p>
-      <div className="flex flex-wrap items-center justify-between my-4">
-        {awardsData.map((award, key) => (
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 my-4 xl:flex">
+        {awards.map((award, key) => (
           <Award
             key={key}
             title={award.title}

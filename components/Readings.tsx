@@ -1,6 +1,7 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 
 import { readings } from "@/content/readings";
+
 import { formatDate } from "@/utils/dates";
 
 import { Views } from "./views";
@@ -11,7 +12,7 @@ export function Readings() {
       <h2 className="font-semibold text-2xl uppercase my-2 font-heading text-center xl:text-left">
         Readings
       </h2>
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 my-4 max-w-xl xl:max-w-none">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 my-4 max-w-xl xl:max-w-none mx-auto xl:mx-0">
         {readings.map(({ metadata }, key) => (
           <Link
             href={`/${metadata.slug}`}

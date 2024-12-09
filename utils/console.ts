@@ -23,4 +23,6 @@ function printTextBody(textBody: string, color = "inherit") {
 export function showConsoleMessage() {
   printTitle("Juan Almanza");
   printSubtitle("You found the secret place of my website");
+  printTextBody("Wanna see a secret?");
+  printTextBody("there's something here or not?");
 }

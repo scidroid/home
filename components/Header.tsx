@@ -1,13 +1,13 @@
 "use client";
 
 // if you know a better way to do this please let me know
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { useEffect } from "react";
 
 import { useScrollPosition } from "@/hooks/scroll";
 import { motion, useAnimation } from "framer-motion";
+import { Link } from "next-view-transitions";
 
 import { Clock } from "./clock";
 import { GithubLogo } from "./icons/github";

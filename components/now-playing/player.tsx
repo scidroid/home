@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -47,6 +49,7 @@ export function Player({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
+      {/* @ts-ignore */}
       <img
         src={artwork}
         alt=""

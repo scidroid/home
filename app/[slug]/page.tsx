@@ -1,15 +1,17 @@
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { Age } from "@/components/age";
 import { Views } from "@/components/views";
 import { copy } from "@/content/copy";
 import { readings } from "@/content/readings";
-import headshot from "@/public/juan.jpg";
-import { formatDate } from "@/utils/dates";
 import type { Metadata } from "next";
+import { Link } from "next-view-transitions";
 import { Balancer } from "react-wrap-balancer";
+
+import { formatDate } from "@/utils/dates";
+
+import headshot from "@/public/juan.jpg";
 
 export async function generateMetadata({
   params
@@ -131,6 +133,12 @@ export default async function Page({
               <p className="text-gray-600">
                 A <Age /> years old {copy.about}
               </p>
+              <Link
+                href="/#contact"
+                className="text-gray-800 underline hover:no-underline transition-all duration-300"
+              >
+                Contact me
+              </Link>
             </div>
           </div>
         </section>

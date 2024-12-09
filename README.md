@@ -19,35 +19,50 @@
 
 </div>
 
-> Try the live version in [scidroid.co](https://scidroid.co/)
+> Try the live version at [scidroid.co](https://scidroid.co/)
 
-This is the source code for my personal website. It is built using [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/), and [TypeScript](https://www.typescriptlang.org/).
+This is my personal website built with the latest web technologies. It serves as my digital home, showcasing my work, thoughts, and experiences.
 
-Also, I use [Vercel](https://vercel.com/) to deploy the website and [ContentLayer](https://contentlayer.dev/) to manage the content and [Vercel KV](https://vercel.com/docs/storage/vercel-kv) as database.
+## Tech Stack
+
+- [Next.js](https://nextjs.org/) - React framework for production
+- [TailwindCSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [TypeScript](https://www.typescriptlang.org/) - JavaScript with syntax for types
+- [Vercel](https://vercel.com/) - Platform for deployment and hosting
+- [Vercel KV](https://vercel.com/docs/storage/vercel-kv) - Redis database
+- [Bun](https://bun.sh/) - JavaScript runtime & package manager
 
 ## Features
 
-- [x] About me
-- [x] Projects
+- [x] About me section with profile
+- [x] Projects portfolio
 - [x] Blog
-- [x] Contact
-- [x] Now Playing
-- [x] Health Data
-- [x] Open Graph Image generation
+- [x] Contact form with email and telegram notifications
+- [x] Now Playing integration with Apple Music
+- [x] Health data integration
+- [x] Dynamic OG image generation
 - [x] Analytics
-- [x] Sitemap
+- [x] Auto-generated sitemap
 - [x] Terminal easter egg
+- [x] View transitions API
+- [x] Responsive design
 
 ## Getting Started
 
 First do you need to add the environment variables. You can do this by creating a `.env.local` file in the root directory. You can use the `.env.example` file as a template.
 
-You need 9 environment variables:
+You need the following environment variables:
 
-- `RESEND_API_KEY` This is the API key for [Resend](https://resend.com) service that allow me to send emails.
-- `KV_URL`, `KV_REST_API_URL`, `KV_REST_API_TOKEN` and `KV_REST_API_READ_ONLY_TOKEN` is the API key for [Vercel KV](https://vercel.com/docs/storage/vercel-kv) database.
-- `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, and `SPOTIFY_REFRESH_TOKEN` is the ids of your Spotify app. This is needed for the Now Playing section.
-- `PASSWORD` is the password for the health endpoint, needed to secure the `/api/health` endpoint.
+- `KV_REST_API_READ_ONLY_TOKEN` - Read-only access token for [KV REST API](https://vercel.com/docs/storage/vercel-kv)
+- `KV_REST_API_TOKEN` - Full access token for [KV REST API](https://vercel.com/docs/storage/vercel-kv)
+- `KV_REST_API_URL` - Base URL for [KV REST API](https://vercel.com/docs/storage/vercel-kv) endpoints
+- `KV_URL` - Redis connection URL for [KV database](https://vercel.com/docs/storage/vercel-kv)
+- `PASSWORD` - Application password for secure access
+- `RESEND_API_KEY` - API key for [Resend](https://resend.com) email service
+- `APPLE_MUSIC_JWT` - JSON Web Token for [Apple Music API](https://developer.apple.com/documentation/applemusicapi) authentication
+- `APPLE_MUSIC_MUT` - Music User Token for [Apple Music API](https://developer.apple.com/documentation/applemusicapi)
+- `TELEGRAM_BOT_TOKEN` - API token for [Telegram Bot API](https://core.telegram.org/bots/api)
+- `TELEGRAM_CHAT_ID` - Chat ID for [Telegram](https://telegram.org) notifications
 
 Then, install the dependencies:
 
@@ -88,18 +103,6 @@ If you want to deploy it in Vercel, you can just run `vercel` in the root direct
 ## License
 
 This project is licensed under the GNU AGPLv3 License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- [Next.js](https://nextjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Contentlayer](https://contentlayer.dev/)
-- [Vercel](https://vercel.com/)
-- [Vercel KV](https://www.vercel.com/docs/storage/kv)
-- [Resend](https://resend.com/)
-- [Bun](https://bun.sh/)
-- [Spotify API](https://developer.spotify.com/)
 
 ## Contact
 

@@ -23,7 +23,7 @@ export function CodeBlock({
   }
 
   return (
-    <div className="relative w-full max-w-full overflow-x-auto">
+    <div className="relative w-[95vw] md:w-full overflow-x-auto">
       <div className="flex items-center justify-between bg-gray-100 px-4 py-2 rounded-t-xl">
         <span className="text-sm text-gray-600 font-mono truncate">
           {`${filename ? `${filename} • ` : ""}${language}`}

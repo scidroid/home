@@ -31,7 +31,7 @@ export function Profile() {
 
         <div className="my-4 flex items-center justify-between w-full gap-2">
           <a
-            href="/resume.pdf"
+            href="/Juan_Almanza_resume.pdf"
             target="_blank"
             className="h-12 rounded-xl border-2 border-gray-300 w-full flex flex-col items-center justify-center gap-4 p-4 bg-gradient-to-bl from-gray-100 via-gray-100 to-gray-100 text-center duration-300 transition-all hover:bg-gradient-to-tr hover:from-gray-100 hover:via-gray-200 hover:to-gray-100 hover:text-gray-800"
           >
@@ -50,7 +50,7 @@ export function Profile() {
         <Image
           src={headshot}
           alt="Headshot of Juan Almanza, an undergraduate student from Colombia"
-          className="w-full h-full rounded-lg object-cover"
+          className="w-full h-full object-cover rounded-xl shadow-lg border-2 border-gray-300"
           width={640}
           priority
           placeholder="blur"

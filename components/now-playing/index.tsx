@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+
 import { Suspense } from "react";
 
 import { type NowPlaying, getNowPlaying } from "@/lib/music";

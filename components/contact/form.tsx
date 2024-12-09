@@ -14,7 +14,7 @@ export function Form() {
   const isDisabled = isPending || state.done;
 
   return (
-    <form action={action} className="">
+    <form action={action}>
       <div className="my-2 flex max-w-xl flex-col gap-1">
         <label
           htmlFor="name"

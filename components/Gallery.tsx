@@ -17,7 +17,7 @@ export function Gallery() {
             src={galleryItem.src}
             alt={galleryItem.alt}
             placeholder="blur"
-            className="object-cover h-72 w-96"
+            className="object-cover h-72 w-96 rounded-xl shadow-lg border-2 border-gray-300"
             draggable={false}
             tabIndex={0}
             height={320}

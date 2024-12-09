@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 
 const LINK_STYLE =
   "group first-letter:transition-all duration-300 ease-in-out text-2xl font-semibold";

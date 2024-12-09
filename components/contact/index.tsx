@@ -40,7 +40,7 @@ export function ContactForm() {
         </div>
       </div>
 
-      <div className="w-full xl:m-8 xl:w-1/2">
+      <div className="w-full max-w-xl mx-auto xl:mx-0 xl:m-8 xl:w-1/2">
         <Form />
       </div>
     </section>

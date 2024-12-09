@@ -1,5 +1,5 @@
+import { Link } from "next-view-transitions";
 import Image, { ImageProps } from "next/image";
-import Link from "next/link";
 
 export function Paragraph({ children }: { children: React.ReactNode }) {
   return (
@@ -58,14 +58,16 @@ export function Heading6({ children }: { children: React.ReactNode }) {
 }
 
 export function ImageWithCaption(props: ImageProps) {
+  const { alt, ...rest } = props;
   return (
     <figure className="flex flex-col items-center justify-center my-8">
       <Image
         className="rounded-xl shadow-lg border-2 border-gray-300"
-        {...props}
+        alt={alt}
+        {...rest}
       />
       <figcaption className="mt-2 text-gray-600 text-sm xl:text-base text-center">
-        {props.alt}
+        {alt}
       </figcaption>
     </figure>
   );
