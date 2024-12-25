@@ -1,10 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-
 import { Suspense } from "react";
 
-import { type NowPlaying, getNowPlaying } from "@/lib/music";
+import { Player } from "@/components/sections/profile/now-playing/player";
 
-import { Player } from "./player";
+import { type NowPlaying, getNowPlaying } from "@/lib/music";
 
 export function NowPlayingWidget({ song }: { song: NowPlaying }) {
   return (

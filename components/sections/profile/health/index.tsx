@@ -1,9 +1,8 @@
 import { Suspense } from "react";
 
+import { BPM } from "@/components/sections/profile/health/bpm";
+import { AnimatedHeart } from "@/components/sections/profile/health/hearth";
 import { kv } from "@vercel/kv";
-
-import { BPM } from "./bpm";
-import { AnimatedHeart } from "./hearth";
 
 function BaseComponent({ bpm }: { bpm: number }) {
   return (
@@ -20,7 +19,7 @@ async function AsyncHealthComponent() {
   return <BaseComponent bpm={health.value} />;
 }
 
-export function HealthData() {
+export function Health() {
   return (
     <Suspense fallback={<BaseComponent bpm={0} />}>
       <AsyncHealthComponent />

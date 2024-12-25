@@ -10,9 +10,9 @@ import React, {
   useRef,
   useState
 } from "react";
+import { createPortal } from "react-dom";
 
 import { useClickOutside } from "@/hooks/click-outside";
-import { cn } from "@/utils/classnames";
 import { XIcon } from "lucide-react";
 import {
   AnimatePresence,
@@ -21,7 +21,8 @@ import {
   Variant,
   motion
 } from "motion/react";
-import { createPortal } from "react-dom";
+
+import { cn } from "@/utils/classnames";
 
 interface DialogContextType {
   isOpen: boolean;

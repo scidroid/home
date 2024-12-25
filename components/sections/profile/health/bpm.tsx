@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { useReducedMotion } from "motion/react";
 
-import { AnimatedNumber } from "../ui/animated-number";
+import { AnimatedNumber } from "@/components/ui/animated-number";
 
 export function BPM({ bpm }: { bpm: number }) {
   const isReducedMotion = useReducedMotion();

@@ -25,7 +25,6 @@
     "react-dom": "latest",
     "react-use-measure": "2.1.1",
     "react-wrap-balancer": "1.1.1",
-    "resend": "4.0.1",
     "server-only": "0.0.1",
     "sharp": "0.33.5",
     "shiki": "1.24.0",

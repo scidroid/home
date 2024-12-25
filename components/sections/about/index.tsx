@@ -1,6 +1,5 @@
+import { Award } from "@/components/sections/about/award";
 import { awards } from "@/content/awards";
-
-import { Award } from "./award";
 
 export function About() {
   return (

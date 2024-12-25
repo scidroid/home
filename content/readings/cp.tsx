@@ -1,10 +1,12 @@
-import { CodeBlock } from "@/components/code-block";
 import {
   ExternalLink,
   Heading2,
   ImageWithCaption,
   Paragraph
 } from "@/components/content";
+import { CodeBlock } from "@/components/content/code-block";
+
+import ioi from "@/public/images/cp/ioi.avif";
 
 const metadata = {
   slug: "cp",
@@ -19,7 +21,7 @@ function Page() {
     <>
       <ImageWithCaption
         alt="A silly photo of me in the International Olympiad in Informatics Cultural Night."
-        src="/images/cp/ioi.avif"
+        src={ioi}
         width={1000}
         height={720}
         priority

@@ -2,8 +2,9 @@
 
 import { useEffect } from "react";
 
-import { cn } from "@/utils/classnames";
 import { SpringOptions, motion, useSpring, useTransform } from "motion/react";
+
+import { cn } from "@/utils/classnames";
 
 export function AnimatedNumber({
   value,

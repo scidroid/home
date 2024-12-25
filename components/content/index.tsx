@@ -1,5 +1,6 @@
-import { Link } from "next-view-transitions";
 import Image, { ImageProps } from "next/image";
+
+import { Link } from "@/components/ui/link";
 
 export function Paragraph({ children }: { children: React.ReactNode }) {
   return (
@@ -64,6 +65,7 @@ export function ImageWithCaption(props: ImageProps) {
       <Image
         className="rounded-xl shadow-lg border-2 border-gray-300"
         alt={alt}
+        placeholder="blur"
         {...rest}
       />
       <figcaption className="mt-2 text-gray-600 text-sm xl:text-base text-center">

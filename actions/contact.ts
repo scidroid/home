@@ -1,14 +1,17 @@
 "use server";
 
 import { generateContactEmail } from "@/emails/contact";
-import { resend } from "@/lib/resend";
 
-function isValidEmail(email: string): boolean {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return regex.test(email);
+interface FormResponse {
+  message: string;
+  previous: FormData;
+  done: boolean;
 }
 
-export async function sendContactForm(_state: any, formData: FormData) {
+export async function sendContactForm(
+  _state: any,
+  formData: FormData
+): Promise<FormResponse> {
   const name = formData.get("name")?.toString().trim() ?? "";
   const email = formData.get("email")?.toString().trim() ?? "";
   const message = formData.get("message")?.toString().trim() ?? "";
@@ -17,7 +20,9 @@ export async function sendContactForm(_state: any, formData: FormData) {
     return { message: "Name is required", previous: formData, done: false };
   }
 
-  if (!isValidEmail(email)) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(email)) {
     return {
       message: "Please provide a valid email address",
       previous: formData,
@@ -26,58 +31,64 @@ export async function sendContactForm(_state: any, formData: FormData) {
   }
 
   if (message.length < 1) {
-    return {
-      message: "Message is required",
-      previous: formData,
-      done: false
-    };
+    return { message: "Message is required", previous: formData, done: false };
   }
 
-  const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-  const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
-
-  const telegramMessage = `New message from ${name} (${email}):\n\n${message}`;
+  const { TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, RESEND_API_KEY } = process.env;
 
   try {
+    let telegramSent = false,
+      emailSent = false;
+
     try {
-      const response = await fetch(
+      const telegramResponse = await fetch(
         `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             chat_id: TELEGRAM_CHAT_ID,
-            text: telegramMessage
+            text: `New message from ${name} (${email}):\n\n${message}`
           })
         }
       );
 
-      if (!response.ok) {
-        console.error(
-          "Telegram notification failed, falling back to email only"
-        );
-      }
-    } catch (telegramError) {
-      console.error("Telegram error:", telegramError);
+      telegramSent = telegramResponse.ok;
+    } catch (error) {
+      console.error("Telegram notification failed:", error);
     }
 
-    await resend.emails.send({
-      from: "Juan Almanza <contact@automated.scidroid.co>",
-      replyTo: "hi@scidroid.co",
-      to: email,
-      bcc: "hi@scidroid.co",
-      subject: "Message sent to Juan Almanza",
-      html: generateContactEmail(name, message, email)
-    });
+    try {
+      const emailResponse = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${RESEND_API_KEY}`
+        },
+        body: JSON.stringify({
+          from: "Juan Almanza <contact@automated.scidroid.co>",
+          reply_to: "hi@scidroid.co",
+          to: email,
+          bcc: "hi@scidroid.co",
+          subject: "Message sent to Juan Almanza",
+          html: generateContactEmail(name, message, email)
+        })
+      });
+
+      emailSent = emailResponse.ok;
+    } catch (error) {
+      console.error("Email notification failed:", error);
+    }
+
+    if (!telegramSent && !emailSent) {
+      throw new Error("Both notifications failed");
+    }
 
     return { message: "", previous: formData, done: true };
   } catch (error) {
     console.error("Contact form error:", error);
-
     return {
-      message: "Something went wrong. Please try again later.",
+      message: "Failed to send message. Please try again later.",
       previous: formData,
       done: false
     };

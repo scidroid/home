@@ -1,10 +1,8 @@
-import { Link } from "next-view-transitions";
-
+import { Views } from "@/components/content/views";
+import { Link } from "@/components/ui/link";
 import { readings } from "@/content/readings";
 
 import { formatDate } from "@/utils/dates";
-
-import { Views } from "./views";
 
 export function Readings() {
   return (

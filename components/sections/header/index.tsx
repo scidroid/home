@@ -5,14 +5,13 @@ import { usePathname } from "next/navigation";
 
 import { useEffect } from "react";
 
+import { Clock } from "@/components/sections/header/clock";
+import { GithubLogo } from "@/components/ui/icons/github";
+import { LinkedinLogo } from "@/components/ui/icons/linkedin";
+import { XLogo } from "@/components/ui/icons/x";
+import { Link } from "@/components/ui/link";
 import { useScrollPosition } from "@/hooks/scroll";
 import { motion, useAnimation } from "framer-motion";
-import { Link } from "next-view-transitions";
-
-import { Clock } from "./clock";
-import { GithubLogo } from "./icons/github";
-import { LinkedinLogo } from "./icons/linkedin";
-import { XLogo } from "./icons/x";
 
 export function Header() {
   const positionY = useScrollPosition();

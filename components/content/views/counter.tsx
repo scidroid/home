@@ -2,9 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import { AnimatedNumber } from "@/components/ui/animated-number";
 import { useInView, useReducedMotion } from "motion/react";
-
-import { AnimatedNumber } from "../ui/animated-number";
 
 export function ViewsCounter({ views }: { views: number }) {
   const ref = useRef(null);

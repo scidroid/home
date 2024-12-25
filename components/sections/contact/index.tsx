@@ -1,8 +1,8 @@
-import { GithubLogo } from "../icons/github";
-import { LinkedinLogo } from "../icons/linkedin";
-import { XLogo } from "../icons/x";
-import { Form } from "./form";
-import { MailLink, SocialLink } from "./links";
+import { Form } from "@/components/sections/contact/form";
+import { MailLink, SocialLink } from "@/components/sections/contact/links";
+import { GithubLogo } from "@/components/ui/icons/github";
+import { LinkedinLogo } from "@/components/ui/icons/linkedin";
+import { XLogo } from "@/components/ui/icons/x";
 
 export function ContactForm() {
   return (

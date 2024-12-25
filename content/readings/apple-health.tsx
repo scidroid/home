@@ -1,4 +1,3 @@
-import { CodeBlock } from "@/components/code-block";
 import {
   Bold,
   Heading2,
@@ -7,6 +6,10 @@ import {
   Italic,
   Paragraph
 } from "@/components/content";
+import { CodeBlock } from "@/components/content/code-block";
+
+import fetch from "@/public/images/apple-health/fetch.avif";
+import post from "@/public/images/apple-health/post.avif";
 
 const metadata = {
   slug: "apple-health",
@@ -46,7 +49,7 @@ function Page() {
 
       <ImageWithCaption
         alt="Accessing the health data inside the shortcut."
-        src="/images/apple-health/fetch.avif"
+        src={fetch}
         width={400}
         height={720}
       />
@@ -63,7 +66,7 @@ function Page() {
 
       <ImageWithCaption
         alt="Sending the information to our endpoint."
-        src="/images/apple-health/post.avif"
+        src={post}
         width={400}
         height={720}
       />

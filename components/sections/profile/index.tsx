@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { Age } from "@/components/sections/profile/age";
+import { Health } from "@/components/sections/profile/health";
+import { NowPlaying } from "@/components/sections/profile/now-playing";
+import { Subtitle } from "@/components/sections/profile/subtitle";
 import { copy } from "@/content/copy";
-import headshot from "@/public/juan.jpg";
 
-import { Age } from "./age";
-import { HealthData } from "./health";
-import { NowPlaying } from "./now-playing";
-import { Subtitle } from "./subtitle";
+import headshot from "@/public/juan.jpg";
 
 export function Profile() {
   return (
@@ -26,7 +26,7 @@ export function Profile() {
 
         <div className="my-4 flex flex-col xl:flex-row items-center justify-between w-full gap-2">
           <NowPlaying />
-          <HealthData />
+          <Health />
         </div>
 
         <div className="my-4 flex items-center justify-between w-full gap-2">

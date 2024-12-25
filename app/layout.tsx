@@ -2,8 +2,8 @@ import { ViewTransitions } from "next-view-transitions";
 import { Geist_Mono, Lato, Playfair_Display } from "next/font/google";
 
 import { ConsoleHelper } from "@/components/console";
-import { Footer } from "@/components/footer";
-import { Header } from "@/components/header";
+import { Footer } from "@/components/sections/footer";
+import { Header } from "@/components/sections/header";
 import { copy } from "@/content/copy";
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";

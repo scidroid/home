@@ -1,8 +1,8 @@
-import { About } from "@/components/about";
-import { ContactForm } from "@/components/contact";
-import { Gallery } from "@/components/gallery";
-import { Profile } from "@/components/profile";
-import { Readings } from "@/components/readings";
+import { About } from "@/components/sections/about";
+import { ContactForm } from "@/components/sections/contact";
+import { Gallery } from "@/components/sections/gallery";
+import { Profile } from "@/components/sections/profile";
+import { Readings } from "@/components/sections/readings";
 
 export default function Home() {
   return (

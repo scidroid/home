@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 
-import { addView, getReadingViews } from "@/lib/views";
+import { ViewsCounter } from "@/components/content/views/counter";
 
-import { ViewsCounter } from "./counter";
+import { addView, getReadingViews } from "@/lib/views";
 
 async function ViewsFetcher({
   slug,

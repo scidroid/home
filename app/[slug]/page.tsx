@@ -1,13 +1,14 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-import { Age } from "@/components/age";
-import { Views } from "@/components/views";
+import { Balancer } from "react-wrap-balancer";
+
+import { Views } from "@/components/content/views";
+import { Age } from "@/components/sections/profile/age";
+import { Link } from "@/components/ui/link";
 import { copy } from "@/content/copy";
 import { readings } from "@/content/readings";
 import type { Metadata } from "next";
-import { Link } from "next-view-transitions";
-import { Balancer } from "react-wrap-balancer";
 
 import { formatDate } from "@/utils/dates";
 
