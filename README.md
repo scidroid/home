@@ -15,7 +15,7 @@
 
 <div align="center">
 
-![Website Preview](https://raw.githubusercontent.com/scidroid/home/refs/heads/testing/public/screenshot.jpg)
+![Website Preview](https://raw.githubusercontent.com/scidroid/home/refs/heads/testing/public/screenshot.png)
 
 </div>
 
