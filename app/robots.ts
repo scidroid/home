@@ -2,10 +2,12 @@ export default function robots() {
   return {
     rules: [
       {
-        userAgent: "*"
+        userAgent: "*",
+        disallow: "/",
+        allow: []
       }
     ],
-    sitemap: "https://scidroid.co/sitemap.xml",
-    host: "https://scidroid.co"
+    sitemap: "https://testing.scidroid.co/sitemap.xml",
+    host: "https://testing.scidroid.co"
   };
 }

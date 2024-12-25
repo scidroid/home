@@ -27,7 +27,7 @@ export async function generateMetadata({
 
   const { metadata } = reading;
 
-  const ogImage = `https://scidroid.co/api/og?title=${metadata.title}`;
+  const ogImage = `https://testing.scidroid.co/api/og?title=${metadata.title}`;
 
   return {
     title: metadata.title,
@@ -37,7 +37,7 @@ export async function generateMetadata({
       description: metadata.summary,
       type: "article",
       publishedTime: metadata.date,
-      url: `https://scidroid.co/${metadata.slug}`,
+      url: `https://testing.scidroid.co/${metadata.slug}`,
       images: [
         {
           url: ogImage
@@ -79,8 +79,8 @@ export default async function Page({
     datePublished: metadata.date,
     dateModified: metadata.date,
     description: metadata.summary,
-    image: `https://scidroid.co/api/og?title=${metadata.title}`,
-    url: `https://scidroid.co/${metadata.slug}`,
+    image: `https://testing.scidroid.co/api/og?title=${metadata.title}`,
+    url: `https://testing.scidroid.co/${metadata.slug}`,
     author: {
       "@type": "Person",
       name: "Juan Almanza"

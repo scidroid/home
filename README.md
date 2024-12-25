@@ -15,11 +15,11 @@
 
 <div align="center">
 
-![Website Preview](https://raw.githubusercontent.com/scidroid/home/main/public/screenshot.png)
+![Website Preview](https://raw.githubusercontent.com/scidroid/home/refs/heads/testing/public/screenshot.jpg)
 
 </div>
 
-> Try the live version at [scidroid.co](https://scidroid.co/)
+> Try the live version at [testing.scidroid.co](https://testing.scidroid.co/)
 
 This is my personal website built with the latest web technologies. It serves as my digital home, showcasing my work, thoughts, and experiences.
 
@@ -35,7 +35,7 @@ This is my personal website built with the latest web technologies. It serves as
 ## Features
 
 - [x] About me section with profile
-- [x] Projects portfolio
+- [] Projects portfolio
 - [x] Blog
 - [x] Contact form with email and telegram notifications
 - [x] Now Playing integration with Apple Music

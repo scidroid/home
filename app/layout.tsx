@@ -31,7 +31,7 @@ const monoFont = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://scidroid.co"),
+  metadataBase: new URL("https://testing.scidroid.co"),
   title: {
     default: copy.name,
     template: `%s | ${copy.name}`
@@ -40,13 +40,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: copy.name,
     description: copy.about,
-    url: "https://scidroid.co",
+    url: "https://testing.scidroid.co",
     siteName: copy.name,
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "https://scidroid.co/api/og"
+        url: "https://testing.scidroid.co/api/og"
       }
     ]
   },
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
   twitter: {
     title: copy.name,
     card: "summary_large_image",
-    images: ["https://scidroid.co/api/og"]
+    images: ["https://testing.scidroid.co/api/og"]
   }
 };
 
