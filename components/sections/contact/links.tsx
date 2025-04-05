@@ -7,7 +7,7 @@ import { Mail } from "lucide-react";
 export function MailLink() {
   const [copied, setCopied] = useState(false);
 
-  const email = "hi@scidroid.co";
+  const email = "juan@almanza.cc";
 
   const handleClick = () => {
     navigator.clipboard.writeText(email);
@@ -24,7 +24,7 @@ export function MailLink() {
     >
       <Mail className="h-6 w-6 sm:h-8 sm:w-8" />
       <p className="font-heading text-xl">
-        {copied ? "Copied!" : "hi [at] scidroid [dot] co"}
+        {copied ? "Copied!" : "juan [at] almanza [dot] cc"}
       </p>
     </div>
   );
