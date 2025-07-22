@@ -1,13 +1,13 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { Age } from "@/components/sections/profile/age";
+import { Gallery } from "@/components/sections/profile/gallery";
 import { Health } from "@/components/sections/profile/health";
 import { NowPlaying } from "@/components/sections/profile/now-playing";
 import { Subtitle } from "@/components/sections/profile/subtitle";
 import { copy } from "@/content/copy";
-
-import headshot from "@/public/juan.jpg";
+import { CallIcon, LicenseIcon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 
 export function Profile() {
   return (
@@ -17,11 +17,13 @@ export function Profile() {
           <h1 className="text-4xl xl:text-6xl font-extrabold bg-gradient-to-t from-gray-600 to-gray-800 bg-clip-text text-transparent font-heading xl:leading-tight leading-tight">
             {copy.name}
           </h1>
+
           <Subtitle />
         </div>
 
         <p className="my-4 text-lg text-justify">
-          I&apos;m a <Age /> years old {copy.about}
+          I&apos;m a <Age /> years old{" "}
+          {copy.about.charAt(0).toLowerCase() + copy.about.slice(1)}
         </p>
 
         <div className="my-4 flex flex-col xl:flex-row items-center justify-between w-full gap-2">
@@ -31,35 +33,34 @@ export function Profile() {
 
         <div className="my-4 flex items-center justify-between w-full gap-2">
           <a
-            href="/Juan_Almanza_resume.pdf"
+            href="https://almanza.cc/resume.pdf"
             target="_blank"
-            className="h-12 rounded-xl border-2 border-gray-300 w-full flex flex-col items-center justify-center gap-4 p-4 bg-gradient-to-bl from-gray-100 via-gray-100 to-gray-100 text-center duration-300 transition-all hover:bg-gradient-to-tr hover:from-gray-100 hover:via-gray-200 hover:to-gray-100 hover:text-gray-800"
+            className="bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-600 rounded-xl px-4 py-3 w-full text-center transition-colors font-medium shadow-lg flex items-center justify-center gap-2"
           >
-            Read my resume
+            <HugeiconsIcon
+              icon={LicenseIcon}
+              className="h-5 w-5"
+              color="gray"
+              strokeWidth={1.5}
+            />
+            Read my resume →
           </a>
           <Link
             href="/#contact"
-            className="h-12 rounded-xl border-2 border-gray-300 w-full flex flex-col items-center justify-center gap-4 p-4 bg-gradient-to-bl from-gray-100 via-gray-100 to-gray-100 text-center duration-300 transition-all hover:bg-gradient-to-tr hover:from-gray-100 hover:via-gray-200 hover:to-gray-100 hover:text-gray-800"
+            className="bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-600 rounded-xl px-4 py-3 w-full text-center transition-colors font-medium shadow-lg flex items-center justify-center gap-2"
           >
-            Contact me
+            <HugeiconsIcon
+              icon={CallIcon}
+              className="h-5 w-5"
+              color="gray"
+              strokeWidth={1.5}
+            />
+            Contact me →
           </Link>
         </div>
       </div>
 
-      <figure className="w-40 h-40 xl:w-[550px] xl:h-[550px] rounded-lg object-cover">
-        <Image
-          src={headshot}
-          alt="Headshot of Juan Almanza, an undergraduate student from Colombia"
-          className="w-full h-full object-cover rounded-xl shadow-lg border-2 border-gray-300"
-          width={640}
-          priority
-          placeholder="blur"
-          draggable={false}
-        />
-        <figcaption className="text-left mt-1 text-gray-500 font-heading text-lg hidden xl:block">
-          Burgas, Bulgaria. August 14th, 2024.
-        </figcaption>
-      </figure>
+      <Gallery />
     </section>
   );
 }

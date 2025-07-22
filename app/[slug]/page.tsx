@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
@@ -8,7 +9,6 @@ import { Age } from "@/components/sections/profile/age";
 import { Link } from "@/components/ui/link";
 import { copy } from "@/content/copy";
 import { readings } from "@/content/readings";
-import type { Metadata } from "next";
 
 import { formatDate } from "@/utils/dates";
 
@@ -132,7 +132,8 @@ export default async function Page({
                 Written by Juan Almanza
               </h2>
               <p className="text-gray-600">
-                A <Age /> years old {copy.about}
+                A <Age /> years old{" "}
+                {copy.about.charAt(0).toLowerCase() + copy.about.slice(1)}
               </p>
               <Link
                 href="/#contact"

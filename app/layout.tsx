@@ -1,31 +1,25 @@
+import type { Metadata } from "next";
 import { ViewTransitions } from "next-view-transitions";
-import { Geist_Mono, Lato, Playfair_Display } from "next/font/google";
+import { IBM_Plex_Mono, Onest } from "next/font/google";
 
 import { ConsoleHelper } from "@/components/console";
 import { Footer } from "@/components/sections/footer";
 import { Header } from "@/components/sections/header";
 import { copy } from "@/content/copy";
 import { Analytics } from "@vercel/analytics/react";
-import type { Metadata } from "next";
 
 import "@/styles/globals.css";
 
-const headingFont = Playfair_Display({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-heading",
-  fallback: ["Georgia", "serif"]
-});
-
-const bodyFont = Lato({
+const sansFont = Onest({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-body",
   fallback: ["system-ui", "sans-serif"]
 });
 
-const monoFont = Geist_Mono({
+const monoFont = IBM_Plex_Mono({
   subsets: ["latin"],
+  weight: "400",
   variable: "--font-mono",
   fallback: ["monospace"]
 });
@@ -77,7 +71,7 @@ export default function RootLayout({
     <ViewTransitions>
       <html lang="en">
         <body
-          className={`${headingFont.variable} ${bodyFont.variable} ${monoFont.variable} text-gray-800 dark font-body antialiased bg-fixed bg-gradient-to-bl from-gray-100 to-yellow-50 p-4`}
+          className={`${sansFont.variable} ${monoFont.variable} text-gray-800 dark font-body antialiased bg-fixed bg-gradient-to-bl from-blue-50 to-gray-50 p-4`}
         >
           <Header />
           <div className="flex justify-center">

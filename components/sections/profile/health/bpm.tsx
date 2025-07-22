@@ -2,9 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-import { useReducedMotion } from "motion/react";
-
 import { AnimatedNumber } from "@/components/ui/animated-number";
+import { useReducedMotion } from "motion/react";
 
 export function BPM({ bpm }: { bpm: number }) {
   const isReducedMotion = useReducedMotion();
@@ -16,15 +15,15 @@ export function BPM({ bpm }: { bpm: number }) {
   }, [bpm]);
 
   return (
-    <p className="font-bold text-4xl xl:text-5xl">
+    <p className="font-bold text-4xl text-red-600">
       <AnimatedNumber
         springOptions={{
           bounce: 0,
           duration: isReducedMotion ? 0 : 2000
         }}
         value={value}
-      />{" "}
-      <span className="font-normal text-xl">BPM</span>
+      />
+      <span className="m-1 font-normal text-xl text-red-600">BPM</span>
     </p>
   );
 }

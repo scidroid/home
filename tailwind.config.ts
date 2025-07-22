@@ -44,6 +44,11 @@ const config: Config = {
         marquee2: {
           "0%": { transform: "translateX(100%)" },
           "100%": { transform: "translateX(0%)" }
+        },
+        wave: {
+          "0%, 100%": { transform: "skewX(0deg)" },
+          "25%": { transform: "skewX(-10deg)" },
+          "75%": { transform: "skewX(10deg)" }
         }
       },
       typography: {

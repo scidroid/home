@@ -1,8 +1,7 @@
 import { Form } from "@/components/sections/contact/form";
 import { MailLink, SocialLink } from "@/components/sections/contact/links";
-import { GithubLogo } from "@/components/ui/icons/github";
-import { LinkedinLogo } from "@/components/ui/icons/linkedin";
-import { XLogo } from "@/components/ui/icons/x";
+import { GithubIcon, LinkedinIcon, NewTwitterIcon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 
 export function ContactForm() {
   return (
@@ -24,17 +23,17 @@ export function ContactForm() {
           <MailLink />
           <SocialLink
             href="https://github.com/scidroid"
-            icon={<GithubLogo />}
+            icon={<HugeiconsIcon icon={GithubIcon} />}
             text="/scidroid"
           />
           <SocialLink
             href="https://www.linkedin.com/in/scidroid/"
-            icon={<LinkedinLogo />}
+            icon={<HugeiconsIcon icon={LinkedinIcon} />}
             text="/in/scidroid"
           />
           <SocialLink
             href="https://x.com/scidroid"
-            icon={<XLogo />}
+            icon={<HugeiconsIcon icon={NewTwitterIcon} />}
             text="/scidroid"
           />
         </div>

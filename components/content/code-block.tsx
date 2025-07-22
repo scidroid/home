@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { CodeBlock as CodeBlockPrimitive } from "react-code-block";
 
 import { themes } from "prism-react-renderer";
-import { CodeBlock as CodeBlockPrimitive } from "react-code-block";
 
 export function CodeBlock({
   children,
@@ -40,7 +40,7 @@ export function CodeBlock({
         language={language}
         theme={themes.github}
       >
-        <CodeBlockPrimitive.Code className="bg-gray-50 p-4 rounded-b-xl shadow-lg overflow-x-auto">
+        <CodeBlockPrimitive.Code className="bg-gray-50 p-4 rounded-b-xl shadow-lg overflow-x-auto font-mono">
           <div className="grid grid-cols-[auto_1fr] gap-4">
             <CodeBlockPrimitive.LineNumber className="text-sm text-gray-500 text-right select-none w-[30px]" />
             <CodeBlockPrimitive.LineContent>

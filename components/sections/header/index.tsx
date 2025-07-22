@@ -6,11 +6,15 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 import { Clock } from "@/components/sections/header/clock";
-import { GithubLogo } from "@/components/ui/icons/github";
-import { LinkedinLogo } from "@/components/ui/icons/linkedin";
-import { XLogo } from "@/components/ui/icons/x";
 import { Link } from "@/components/ui/link";
 import { useScrollPosition } from "@/hooks/scroll";
+import {
+  GithubIcon,
+  InstagramIcon,
+  LinkedinIcon,
+  NewTwitterIcon
+} from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 import { motion, useAnimation } from "framer-motion";
 
 export function Header() {
@@ -29,7 +33,7 @@ export function Header() {
     <motion.header
       initial={{ y: "-200%" }}
       animate={controls}
-      className="fixed top-4 left-2 right-2 z-40 bg-white bg-opacity-95 p-4 rounded-full flex items-center justify-between max-w-xl mx-auto"
+      className="fixed top-4 left-2 right-2 z-40 bg-gray-50 border border-gray-200 text-gray-600 bg-opacity-80 p-4 rounded-full flex items-center justify-between max-w-xl mx-auto"
       aria-hidden={pathname == "/"}
     >
       <Link href="/" className="font-bold sm:text-xl font-heading">
@@ -37,9 +41,55 @@ export function Header() {
       </Link>
       <nav className="flex items-center gap-2">
         <Clock />
-        <GithubLogo link />
-        <LinkedinLogo link />
-        <XLogo link />
+        <a
+          href="https://github.com/scott-almanza"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <HugeiconsIcon
+            icon={GithubIcon}
+            className="h-5 w-5"
+            color="black"
+            strokeWidth={2}
+          />
+        </a>
+
+        <a
+          href="https://linkedin.com/in/scidroid"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <HugeiconsIcon
+            icon={LinkedinIcon}
+            className="h-5 w-5"
+            color="black"
+            strokeWidth={2}
+          />
+        </a>
+        <a
+          href="https://x.com/scidroid"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <HugeiconsIcon
+            icon={NewTwitterIcon}
+            className="h-5 w-5"
+            color="black"
+            strokeWidth={2}
+          />
+        </a>
+        <a
+          href="https://instagram.com/scidroid"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <HugeiconsIcon
+            icon={InstagramIcon}
+            className="h-5 w-5"
+            color="black"
+            strokeWidth={2}
+          />
+        </a>
       </nav>
     </motion.header>
   );

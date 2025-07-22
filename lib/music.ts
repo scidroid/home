@@ -1,6 +1,3 @@
-// Is more powerful than the spotify API but a pain in the ass to get those tokens ;(
-// I actually have to pay 100USD/yr to get the apple developer account
-
 interface SpotifyTrack {
   name: string;
   artists: { name: string }[];
@@ -10,7 +7,7 @@ interface SpotifyTrack {
   album?: { images: { url: string }[] };
 }
 
-interface SpotifyResponse {
+interface NowPlayingResponse {
   item: SpotifyTrack;
   is_playing: boolean;
   progress_ms: number;
@@ -20,7 +17,7 @@ interface RecentlyPlayedResponse {
   items: { track: SpotifyTrack }[];
 }
 
-export interface NowPlaying {
+export interface Music {
   isPlaying: boolean;
   title?: string;
   artist?: string;
@@ -82,25 +79,30 @@ function formatArtist(track: SpotifyTrack): string {
   );
 }
 
-export async function getNowPlaying(): Promise<NowPlaying> {
+export async function getNowPlaying(): Promise<Music> {
   try {
     const access_token = await getAccessToken();
     const headers = { Authorization: `Bearer ${access_token}` };
 
-    // 1st attempt: get currently playing
-    const nowPlayingResponse = await fetch(ENDPOINTS.nowPlaying, { headers });
+    try {
+      // 1st attempt: get currently playing
+      const nowPlayingResponse = await fetch(ENDPOINTS.nowPlaying, { headers });
 
-    if (nowPlayingResponse.ok) {
-      const { item } = (await nowPlayingResponse.json()) as SpotifyResponse;
+      if (nowPlayingResponse.ok) {
+        const { item } =
+          (await nowPlayingResponse.json()) as NowPlayingResponse;
 
-      return {
-        isPlaying: true,
-        title: item.name,
-        artist: formatArtist(item),
-        url: item.external_urls.spotify,
-        artwork: item.album?.images[0]?.url
-      };
-    }
+        if (item?.name) {
+          return {
+            isPlaying: true,
+            title: item.name,
+            artist: formatArtist(item),
+            url: item.external_urls.spotify,
+            artwork: item.album?.images[0]?.url
+          };
+        }
+      }
+    } catch (error) {}
 
     // 2nd attempt: get the last played track
     const recentlyPlayedResponse = await fetch(ENDPOINTS.recentlyPlayed, {

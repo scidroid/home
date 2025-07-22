@@ -1,5 +1,5 @@
 export const copy = {
   name: "Juan Almanza",
   about:
-    "Passionate undergraduate student with solid leadership and engineering skills. Focused on creating solutions for underserved populations and advocating for STEM education and gender equality."
+    "Working on solving the world's most pressing problems by creating reliable and scalable technologies for underserved communities."
 };

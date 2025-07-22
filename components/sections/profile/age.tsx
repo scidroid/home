@@ -7,12 +7,12 @@ import { useReducedMotion } from "framer-motion";
 export function Age() {
   const prefersReducedMotion = useReducedMotion();
 
-  const calcAge = () => {
+  function calcAge() {
     const birthday = +new Date("August 16, 2007");
     const ageWithDecimals = ((Date.now() - birthday) / 31557600000).toFixed(9);
 
     return ageWithDecimals;
-  };
+  }
 
   const [age, setAge] = useState("17.000000000");
 
