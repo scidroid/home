@@ -46,11 +46,11 @@ export function LatamProductivityChart() {
     <div className="bg-gray-50 rounded-lg p-4 space-y-3">
       <div className="space-y-2">
         <h3 className="text-lg font-medium">
-          Work Hours vs. Compensation Comparison
+          Annual Working Hours vs. Average Wages
         </h3>
         <p className="text-sm text-gray-600 space-y-1">
-          Colombian workers spend 38% more time at work than Spanish
-          counterparts but receive 46% less compensation.
+          Colombian workers work 2,282 hours annually (38% more than Spain) 
+          while earning $29,304 USD PPP (46% less than Spain).
         </p>
       </div>
 
@@ -104,15 +104,15 @@ export function ProductivityArticle() {
   return (
     <article className="w-full rounded-lg bg-gradient-to-br from-purple-100 via-purple-200 to-purple-50 p-6 shadow-md space-y-5">
       <h3 className="text-2xl font-bold mb-2">
-        Low productivity in the Developing World
+        Low productivity in Latin America
       </h3>
       <p className="leading-relaxed">
-        Latin America, and Colombia specifically, is one of the least productive
-        regions in the world. Latin American workers have{" "}
-        <span className="font-bold italic">more working hours</span> than anyone
-        else in the world, but despite this, they receive{" "}
-        <span className="font-bold italic">low wages</span> and low human
-        development.
+        Latin America, and Colombia specifically, faces significant productivity
+        challenges compared to OECD economies. Latin American workers have{" "}
+        <span className="font-bold italic">among the highest working hours</span>
+        {" "}globally, yet compensation levels remain{" "}
+        <span className="font-bold italic">below international standards</span> relative to
+        hours worked.
         <sup>
           <a
             href="https://blogs.worldbank.org/en/latinamerica/low-productivity-growth-latin-america-caribbean"
@@ -129,8 +129,9 @@ export function ProductivityArticle() {
       </div>
 
       <p className="leading-relaxed">
-        Clearly our system is broken. More than 80% of the population in LATAM
-        does not have access to higher education
+        These systemic challenges stem from multiple factors, including limited
+        access to quality education, with less than 20% of the population in Latin
+        America completing higher education
         <sup>
           <a
             href="https://publications.iadb.org/en/publications/english/viewer/The-state-of-education-in-Latin-America-and-the-Caribbean-2024.pdf"
@@ -141,10 +142,9 @@ export function ProductivityArticle() {
             [2]
           </a>
         </sup>
-        , technology is limited and expensive, combined with highly unstable
-        economies and governments. The result is that workers are forced to work
-        in exploitative conditions, many times with wages below living standards
-        and no benefits.
+        . Combined with infrastructure gaps and economic volatility,
+        these factors create challenging working conditions where compensation
+        often doesn't match the cost of living, and benefits remain limited.
       </p>
 
       <p className="leading-relaxed">
@@ -178,8 +178,7 @@ export function ProductivityArticle() {
               className="text-purple-800 underline hover:no-underline"
             >
               World Bank, "Low productivity growth in Latin America and the
-              Caribbean," 2023. [Online]. Available:
-              https://blogs.worldbank.org/en/latinamerica/low-productivity-growth-latin-america-caribbean
+              Caribbean," 2023.
             </a>
           </li>
           <li>
@@ -190,8 +189,7 @@ export function ProductivityArticle() {
               className="text-purple-800 underline hover:no-underline"
             >
               Inter-American Development Bank, "The State of Education in Latin
-              America and the Caribbean 2024," 2024. [Online]. Available:
-              https://publications.iadb.org/en/publications/english/viewer/The-state-of-education-in-Latin-America-and-the-Caribbean-2024.pdf
+              America and the Caribbean 2024," 2024.
             </a>
           </li>
         </ol>

@@ -23,16 +23,16 @@ export function CodeBlock({
   }
 
   return (
-    <div className="relative w-[95vw] md:w-full overflow-x-auto">
-      <div className="flex items-center justify-between bg-gray-100 px-4 py-2 rounded-t-xl">
-        <span className="text-sm text-gray-600 font-mono truncate">
+    <div className="relative w-[95vw] md:w-full overflow-x-auto my-8">
+      <div className="flex items-center justify-between bg-gradient-to-r from-gray-100 to-gray-50 px-4 py-3 rounded-t-xl">
+        <span className="text-sm text-gray-700 font-mono truncate font-medium">
           {`${filename ? `${filename} • ` : ""}${language}`}
         </span>
         <button
           onClick={copyToClipboard}
-          className="text-sm text-gray-600 hover:text-gray-800 transition-colors"
+          className="text-sm text-gray-600 hover:text-gray-800 transition-all duration-200 bg-white px-3 py-1 rounded-md hover:shadow-sm"
         >
-          {copied ? "Copied!" : "Copy"}
+          {copied ? "✓ Copied!" : "Copy"}
         </button>
       </div>
       <CodeBlockPrimitive
@@ -40,9 +40,9 @@ export function CodeBlock({
         language={language}
         theme={themes.github}
       >
-        <CodeBlockPrimitive.Code className="bg-gray-50 p-4 rounded-b-xl shadow-lg overflow-x-auto font-mono">
+        <CodeBlockPrimitive.Code className="bg-white p-4 rounded-b-xl shadow-xl overflow-x-auto font-mono text-sm">
           <div className="grid grid-cols-[auto_1fr] gap-4">
-            <CodeBlockPrimitive.LineNumber className="text-sm text-gray-500 text-right select-none w-[30px]" />
+            <CodeBlockPrimitive.LineNumber className="text-xs text-gray-400 text-right select-none w-[30px]" />
             <CodeBlockPrimitive.LineContent>
               <CodeBlockPrimitive.Token />
             </CodeBlockPrimitive.LineContent>

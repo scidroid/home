@@ -4,7 +4,7 @@ import { Link } from "@/components/ui/link";
 
 export function Paragraph({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-base xl:text-lg text-gray-800 font-body leading-relaxed my-4">
+    <p className="text-base xl:text-lg text-gray-700 font-body leading-relaxed my-4">
       {children}
     </p>
   );
@@ -20,7 +20,7 @@ export function Italic({ children }: { children: React.ReactNode }) {
 
 export function Heading2({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="text-2xl xl:text-4xl font-heading font-semibold text-gray-800 my-6">
+    <h2 className="text-2xl xl:text-4xl font-heading font-bold text-gray-800 my-8">
       {children}
     </h2>
   );
@@ -61,14 +61,14 @@ export function Heading6({ children }: { children: React.ReactNode }) {
 export function ImageWithCaption(props: ImageProps) {
   const { alt, ...rest } = props;
   return (
-    <figure className="flex flex-col items-center justify-center my-8">
+    <figure className="flex flex-col items-center justify-center my-10">
       <Image
-        className="rounded-xl shadow-lg border-2 border-gray-300"
+        className="rounded-xl shadow-2xl"
         alt={alt}
         placeholder="blur"
         {...rest}
       />
-      <figcaption className="mt-2 text-gray-600 text-sm xl:text-base text-center">
+      <figcaption className="mt-3 text-gray-600 text-sm xl:text-base text-center italic">
         {alt}
       </figcaption>
     </figure>

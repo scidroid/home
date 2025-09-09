@@ -27,7 +27,7 @@ export async function generateMetadata({
 
   const { metadata } = reading;
 
-  const ogImage = `https://testing.scidroid.co/api/og?title=${metadata.title}`;
+  const ogImage = `https://testing.scidroid.co/api/og?id=${metadata.slug}`;
 
   return {
     title: metadata.title,
@@ -79,7 +79,7 @@ export default async function Page({
     datePublished: metadata.date,
     dateModified: metadata.date,
     description: metadata.summary,
-    image: `https://testing.scidroid.co/api/og?title=${metadata.title}`,
+    image: `https://testing.scidroid.co/api/og?id=${metadata.slug}`,
     url: `https://testing.scidroid.co/${metadata.slug}`,
     author: {
       "@type": "Person",

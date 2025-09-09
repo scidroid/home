@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 
-import { Mail } from "lucide-react";
+import { Mail01Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 
 export function MailLink() {
   const [copied, setCopied] = useState(false);
@@ -22,7 +23,7 @@ export function MailLink() {
       className="flex items-center gap-2 cursor-pointer"
       onClick={handleClick}
     >
-      <Mail className="h-6 w-6 sm:h-8 sm:w-8" />
+      <HugeiconsIcon icon={Mail01Icon} />
       <p className="font-heading text-xl">
         {copied ? "Copied!" : "juan [at] almanza [dot] cc"}
       </p>
@@ -43,6 +44,7 @@ export function SocialLink({
     <a
       href={href}
       target="_blank"
+      rel="noopener noreferrer"
       className="flex items-center gap-2 cursor-pointer"
     >
       {icon}

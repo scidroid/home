@@ -1,68 +1,59 @@
 import Image from "next/image";
-import pulpoo from "@/components/sections/about/images/pulpoo.webp";
+
 import asofi from "@/components/sections/about/images/asofi.png";
+import pulpoo from "@/components/sections/about/images/pulpoo.webp";
 import stanford from "@/components/sections/about/images/stanford.webp";
 
 export function Work() {
+  const experiences = [
+    {
+      logo: pulpoo,
+      title: "Founder - Pulpoo",
+      description:
+        "Building AI-powered productivity tools that help companies scale operations.",
+      url: "https://pulpoo.com",
+      logoClass: "h-8 w-8"
+    },
+    {
+      logo: asofi,
+      title: "Founder - ASOFI",
+      description:
+        "Democratizing AI for rural communities through accessible educational technology. Sponsored by UN Women.",
+      url: "https://github.com/asofiorg",
+      logoClass: "h-8 w-8"
+    },
+    {
+      logo: stanford,
+      title: "Research Intern - Stanford",
+      description:
+        "Applied ML research in drug discovery and signal processing.",
+      url: "https://stanford.edu",
+      logoClass: "h-8 w-auto"
+    }
+  ];
+
   return (
     <section>
-      <h3 className="text-xl font-semibold mb-1">Where I&apos;ve worked</h3>
-      <ul className="list-disc pl-6 space-y-1">
-        <li>
-          Founder of{" "}
-          <a
-            href="https://pulpoo.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-purple-800 underline hover:no-underline"
-          >
-            <Image
-              src={pulpoo}
-              alt="Pulpoo"
-              className="inline-block h-6 w-6 mr-1 rounded-lg object-cover"
-            />
-            Pulpoo
-          </a>
-          , building scalable software platforms to help companies boost
-          productivity (astronomically).
-        </li>
-        <li>
-          Founder & technical leader at{" "}
-          <a
-            href="https://asofi.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-pink-400 underline hover:no-underline"
-          >
-            <Image
-              src={asofi}
-              alt="ASOFI"
-              className="inline-block h-6 w-6 mr-1 rounded-lg object-cover"
-            />
-            ASOFI
-          </a>
-          , developing AI solutions for rural communities and leading
-          educational initiatives.
-        </li>
-        <li>
-          Research intern at{" "}
-          <a
-            href="https://stanford.edu"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-red-600 underline hover:no-underline"
-          >
-            <Image
-              src={stanford}
-              alt="Stanford University"
-              className="inline-block h-8 w-[21px] mr-1 object-cover"
-            />
-            Stanford University
-          </a>
-          , working on AI research for drug discovery and signal
-          processing.
-        </li>
-      </ul>
+      <h3 className="text-xl font-semibold mb-2">Experience</h3>
+      <div className="space-y-2">
+        {experiences.map((exp, index) => (
+          <div key={index} className="flex items-start gap-3">
+            <div className="flex-shrink-0 w-8 flex justify-center mt-0.5">
+              <a href={exp.url} target="_blank" rel="noopener noreferrer">
+                <Image
+                  src={exp.logo}
+                  alt={exp.title.split(" - ")[1]}
+                  className={`${exp.logoClass} object-cover ${exp.url !== "https://stanford.edu" ? "rounded-lg" : ""} hover:opacity-80 transition-opacity`}
+                />
+              </a>
+            </div>
+            <div>
+              <h4 className="font-medium text-base">{exp.title}</h4>
+              <p className="text-sm text-gray-600">{exp.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </section>
   );
-} 
+}

@@ -72,6 +72,7 @@ export default function RootLayout({
       <html lang="en">
         <body
           className={`${sansFont.variable} ${monoFont.variable} text-gray-800 dark font-body antialiased bg-fixed bg-gradient-to-bl from-blue-50 to-gray-50 p-4`}
+          suppressHydrationWarning={true}
         >
           <Header />
           <div className="flex justify-center">

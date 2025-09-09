@@ -6,7 +6,7 @@ import {
 } from "@/components/content";
 import { CodeBlock } from "@/components/content/code-block";
 
-import ioi from "@/public/images/cp/ioi.avif";
+import ioi from "@/public/images/cp/ioi.webp";
 
 const metadata = {
   slug: "cp",

@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+
 import minerva from "@/components/sections/about/images/minerva.jpeg";
 
 export function Bio() {
   return (
     <section>
-      <h3 className="text-xl font-semibold mb-1">Who I Am</h3>
-      <p>
+      <h3 className="text-xl font-semibold mb-2">About</h3>
+      <p className="text-gray-700 leading-relaxed">
         Freshman at{" "}
         <a
           href="https://minerva.edu"
@@ -21,18 +22,10 @@ export function Bio() {
           />
           Minerva University
         </a>
-        , passionate about applying computational science to create
-        real-world impact. I work at the intersection of technology,
-        research, and social good. I like to do weird things, so feel free
-        to{" "}
-        <Link
-          className="text-black underline hover:no-underline"
-          href="/#contact"
-        >
-          contact me
-        </Link>{" "}
-        with all your ideas.
+        . Passionate about leveraging computational science to solve real-world
+        problems at the intersection of technology and social impact. Always
+        open to collaborating on unconventional ideas, contact me.
       </p>
     </section>
   );
-} 
+}

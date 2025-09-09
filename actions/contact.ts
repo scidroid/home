@@ -48,7 +48,15 @@ export async function sendContactForm(
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             chat_id: TELEGRAM_CHAT_ID,
-            text: `New message from ${name} (${email}):\n\n${message}`
+            text: `New message from ${name} (${email}):\n\n${message}`,
+            reply_markup: {
+              inline_keyboard: [[
+                {
+                  text: "📧 Send Reply Email",
+                  callback_data: `reply_${encodeURIComponent(email)}_${encodeURIComponent(name)}`
+                }
+              ]]
+            }
           })
         }
       );

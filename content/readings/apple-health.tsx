@@ -8,8 +8,8 @@ import {
 } from "@/components/content";
 import { CodeBlock } from "@/components/content/code-block";
 
-import fetch from "@/public/images/apple-health/fetch.avif";
-import post from "@/public/images/apple-health/post.avif";
+import fetch from "@/public/images/apple-health/fetch.webp";
+import post from "@/public/images/apple-health/post.webp";
 
 const metadata = {
   slug: "apple-health",

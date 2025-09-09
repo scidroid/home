@@ -1,24 +1,34 @@
 /* eslint-disable jsx-a11y/alt-text, @next/next/no-img-element */
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
+import { readings } from "@/content/readings";
 
 export const runtime = "edge";
 
 export async function GET(req: NextRequest) {
-  const titleFont = fetch(
-    new URL("../../../public/fonts/title.ttf", import.meta.url)
+  const fontRegular = fetch(
+    new URL("../../../public/fonts/onest-400.ttf", import.meta.url)
   ).then(res => res.arrayBuffer());
 
-  const bodyFont = fetch(
-    new URL("../../../public/fonts/body.ttf", import.meta.url)
+  const fontBold = fetch(
+    new URL("../../../public/fonts/onest-700.ttf", import.meta.url)
   ).then(res => res.arrayBuffer());
 
   const { searchParams, origin } = new URL(req.url);
 
-  const title =
-    (searchParams.get("title") || "") === ""
-      ? "Juan Almanza"
-      : searchParams.get("title");
+  // Get the article ID from search params
+  const articleId = searchParams.get("id");
+  
+  let title = "Juan Almanza"; // Default title
+  
+  if (articleId) {
+    // Find the article by slug
+    const article = readings.find(reading => reading.metadata.slug === articleId);
+    if (article) {
+      title = article.metadata.title;
+    }
+    // If article not found, keep default title
+  }
 
   return new ImageResponse(
     (
@@ -27,59 +37,87 @@ export async function GET(req: NextRequest) {
           height: "100%",
           width: "100%",
           display: "flex",
-          flexDirection: "row",
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#fff",
-          backgroundImage: "linear-gradient(to bottom left, #F3F4F6, #FEFCE8)",
-          padding: "40px"
+          backgroundColor: "#FAFAFA",
+          padding: "160px"
         }}
       >
-        <img
-          src={`${origin}/juan.jpg`}
-          width="500"
-          height="500"
-          style={{
-            borderRadius: "12px",
-            objectFit: "cover"
-          }}
-        />
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            marginLeft: "40px",
-            flex: 1
+            alignItems: "center",
+            textAlign: "center",
+            maxWidth: "1800px"
           }}
         >
-          <p
+          <img
+            src={`${origin}/juan.jpg`}
+            width="480"
+            height="480"
             style={{
-              fontSize: "60px",
-              fontFamily: "Playfair Display",
+              borderRadius: "40px",
+              objectFit: "cover",
+              marginBottom: "80px",
+              border: "8px solid #E5E7EB"
+            }}
+          />
+          <h1
+            style={{
+              fontSize: title.length > 30 ? "112px" : "144px",
+              fontFamily: "Onest",
+              color: "#1F2937",
+              lineHeight: 1.2,
+              marginBottom: "48px",
+              fontWeight: 700,
               textWrap: "balance"
             }}
           >
             {title}
-          </p>
+          </h1>
           {title !== "Juan Almanza" && (
-            <p style={{ fontSize: "45px", fontFamily: "Lato" }}>Juan Almanza</p>
+            <p 
+              style={{ 
+                fontSize: "64px", 
+                fontFamily: "Onest",
+                color: "#6B7280",
+                fontWeight: 500
+              }}
+            >
+              by Juan Almanza
+            </p>
           )}
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            bottom: "80px",
+            fontSize: "48px",
+            fontFamily: "Onest",
+            color: "#9CA3AF"
+          }}
+        >
+          scidroid.co
         </div>
       </div>
     ),
     {
-      width: 1200,
-      height: 630,
+      width: 2400,
+      height: 1260,
       fonts: [
         {
-          name: "Playfair Display",
-          data: await titleFont,
-          weight: 700
+          name: "Onest",
+          data: await fontRegular,
+          weight: 400,
+          style: "normal"
         },
         {
-          name: "Lato",
-          data: await bodyFont,
-          weight: 500
+          name: "Onest",
+          data: await fontBold,
+          weight: 700,
+          style: "normal"
         }
       ]
     }
