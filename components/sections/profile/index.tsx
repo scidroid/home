@@ -11,7 +11,7 @@ import { HugeiconsIcon } from "@hugeicons/react";
 
 export function Profile() {
   return (
-    <section className=" mx-auto my-4 flex flex-col-reverse items-center text-center xl:flex-row xl:justify-between xl:gap-8 overflow-hidden">
+    <section className=" mx-auto my-4 flex flex-col-reverse items-center text-center xl:flex-row xl:justify-between xl:gap-8 overflow-visible">
       <div className="max-w-md xl:max-w-lg">
         <div className="my-4 xl:text-left flex flex-col items-center xl:block">
           <h1 className="text-4xl xl:text-6xl font-extrabold bg-gradient-to-t from-gray-600 to-gray-800 bg-clip-text text-transparent font-heading xl:leading-tight leading-tight">
@@ -60,7 +60,7 @@ export function Profile() {
         </div>
       </div>
 
-      <div className="overflow-hidden px-4">
+      <div className="px-4">
         <Gallery />
       </div>
     </section>

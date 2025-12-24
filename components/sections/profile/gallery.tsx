@@ -120,37 +120,33 @@ export function Gallery() {
       return {
         x: 0,
         y: 0,
-        scale: 1,
         zIndex: 3,
         opacity: 1,
         rotate: 0
       };
     } else if (position === 1) {
       return {
-        x: 10,
-        y: 5,
-        scale: 0.993,
+        x: 20,
+        y: 8,
         zIndex: 2,
-        opacity: 0.96,
-        rotate: 0.8
+        opacity: 0.95,
+        rotate: 2
       };
     } else if (position === 2) {
       return {
-        x: -6,
-        y: 10,
-        scale: 0.987,
+        x: -15,
+        y: 16,
         zIndex: 1,
-        opacity: 0.91,
-        rotate: -0.8
+        opacity: 0.9,
+        rotate: -2.5
       };
     } else {
       return {
-        x: 3,
-        y: 15,
-        scale: 0.983,
+        x: 8,
+        y: 24,
         zIndex: 0,
-        opacity: 0.7,
-        rotate: 0.4
+        opacity: 0.8,
+        rotate: 1.5
       };
     }
   }
@@ -172,15 +168,14 @@ export function Gallery() {
               animate={position}
               transition={{
                 type: "spring",
-                stiffness: 250,
-                damping: 40,
-                mass: 1,
-                bounce: 0.08
+                stiffness: 120,
+                damping: 20,
+                mass: 0.8
               }}
-              whileHover={isActive ? { scale: 1.004, rotate: 0 } : {}}
+              whileHover={isActive ? { rotate: 0 } : {}}
               drag={isActive ? "x" : false}
-              dragConstraints={{ left: -8, right: 8 }}
-              dragElastic={0.8}
+              dragConstraints={{ left: -25, right: 25 }}
+              dragElastic={0.1}
               onDragStart={pauseAutoPlay}
               onDragEnd={(e, { offset, velocity }) => {
                 if (isActive) {

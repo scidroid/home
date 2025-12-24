@@ -14,41 +14,41 @@ import { easeOut, motion } from "motion/react";
 const titlePills = [
   {
     icon: EarthIcon,
-    label: "Barranquilla, soon in SF",
+    label: "San Francisco, CA",
     tooltip:
-      "I'm currently in Colombia, but moving to San Francisco in August.",
-    color: "#2563eb" // Blue for earth/location
+      "I'm most of the time in SF.",
+    color: "#2563eb"
   },
   {
     icon: RocketIcon,
     label: "Founder",
     tooltip: "I'm the CTO at Pulpoo.com",
-    color: "#dc2626" // Red for startup/rocket
+    color: "#dc2626"
   },
   {
     icon: MicroscopeIcon,
     label: "Researcher",
     tooltip: "I work on AI and Medical research.",
-    color: "#059669" // Green for science/research
+    color: "#059669"
   },
   {
     icon: ComputerIcon,
     label: "Software Engineer",
     tooltip: "I have been coding for the last 5 years.",
-    color: "#7c3aed" // Purple for technology
+    color: "#7c3aed"
   },
   {
     icon: Mortarboard02Icon,
     label: "Minerva '29",
     tooltip:
       "I'm a student at Minerva University, Class of 2029, majoring in CS and Biology.",
-    color: "#c2410c" // Orange for education
+    color: "#c2410c"
   },
   {
     icon: StudentCardIcon,
     label: "RISE Fellow",
     tooltip: "Eric Schmidt pays me to study and do research.",
-    color: "#b91c1c" // Dark red for fellowship
+    color: "#b91c1c"
   }
 ];
 
@@ -71,7 +71,7 @@ export function Subtitle() {
       {titlePills.map((pill, idx) => (
         <motion.span
           key={idx}
-          className="relative group inline-flex items-center gap-1 text-sm text-gray-600 bg-gray-50 border border-gray-200 rounded-full px-3 py-1 shadow-sm cursor-default"
+          className="relative group inline-flex items-center gap-1 text-sm text-gray-600 bg-gray-50 border border-gray-200 rounded-full px-3 py-1 shadow-sm cursor-default hover:z-50"
           custom={idx}
           initial="hidden"
           animate="visible"
@@ -91,7 +91,7 @@ export function Subtitle() {
           </span>
           {pill.label}
           <span
-            className="absolute left-1/2 -translate-x-1/2 top-full mt-2 z-10 w-max max-w-xs px-3 py-2 rounded-lg text-white font-semibold shadow-lg border border-white/10 leading-relaxed bg-black/70 backdrop-blur-md text-xs opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 whitespace-pre-line"
+            className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-max max-w-xs px-3 py-2 rounded-lg text-white font-semibold shadow-lg border border-white/10 leading-relaxed bg-black/70 backdrop-blur-md text-xs opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 whitespace-pre-line z-50"
             role="tooltip"
           >
             {pill.tooltip}
