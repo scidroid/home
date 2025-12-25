@@ -29,43 +29,51 @@ function StatusBadge({
 
 function SongCard({
   children,
-  className = ""
+  className = "",
+  ariaLabel
 }: {
   children: React.ReactNode;
   className?: string;
+  ariaLabel?: string;
 }) {
   return (
-    <div
+    <article
       className={`relative h-auto min-h-32 xl:h-52 rounded-xl shadow-lg w-full overflow-hidden bg-red-200 ${className}`}
+      aria-label={ariaLabel}
     >
       {children}
-    </div>
+    </article>
   );
 }
 
 export function NowPlayingWidget({ song }: { song: Music }) {
   if (!song.artwork || !song.title) {
     return (
-      <SongCard>
+      <SongCard ariaLabel="Music player loading">
         <StatusBadge isPlaying={song.isPlaying} hasContent={false} />
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 animate-pulse" />
+        <div
+          className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 motion-safe:animate-pulse"
+          aria-hidden="true"
+        />
         <div className="absolute bottom-4 left-4 right-4">
           <div className="block bg-black/40 backdrop-blur-md px-4 py-2 rounded-lg shadow-lg border border-white/10">
-            <div className="h-4 w-32 bg-white/20 rounded mb-2 animate-pulse" />
-            <div className="h-3 w-24 bg-white/10 rounded animate-pulse" />
+            <div className="h-4 w-32 bg-white/20 rounded mb-2 motion-safe:animate-pulse" aria-hidden="true" />
+            <div className="h-3 w-24 bg-white/10 rounded motion-safe:animate-pulse" aria-hidden="true" />
           </div>
         </div>
       </SongCard>
     );
   }
 
+  const statusText = song.isPlaying ? "Now playing" : "Last played";
+
   return (
-    <SongCard>
+    <SongCard ariaLabel={`${statusText}: ${song.title} by ${song.artist}`}>
       <StatusBadge isPlaying={song.isPlaying} hasContent={!!song.title} />
-      <div className="absolute inset-0">
+      <div className="absolute inset-0" aria-hidden="true">
         <img
           src={song.artwork}
-          alt="Album artwork"
+          alt=""
           className="w-full h-full object-cover select-none pointer-events-none"
           draggable="false"
         />
@@ -75,7 +83,8 @@ export function NowPlayingWidget({ song }: { song: Music }) {
           href={song.url ?? "/"}
           target="_blank"
           rel="noopener noreferrer"
-          className="block bg-black/40 backdrop-blur-md px-4 py-2 rounded-lg text-white shadow-lg border border-white/10 text-left max-w-full"
+          aria-label={`Listen to ${song.title} by ${song.artist} (opens in new tab)`}
+          className="block bg-black/40 backdrop-blur-md px-4 py-2 rounded-lg text-white shadow-lg border border-white/10 text-left max-w-full focus:outline-none focus:ring-2 focus:ring-white/50"
         >
           <div className="w-full overflow-hidden">
             <p className="font-semibold text-base truncate">{song.title}</p>

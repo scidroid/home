@@ -15,7 +15,7 @@ import {
   NewTwitterIcon
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation } from "motion/react";
 
 export function Header() {
   const positionY = useScrollPosition();

@@ -5,4 +5,6 @@ export type GalleryItem = {
   src: StaticImageData;
   alt: string;
   caption: string;
+  date?: string;
+  location?: string;
 };

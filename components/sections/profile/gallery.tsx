@@ -1,23 +1,44 @@
 "use client";
 
-import Image from "next/image";
-
-import { useEffect, useRef, useState } from "react";
+import Image, { StaticImageData } from "next/image";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { galleryData } from "@/content/gallery";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-interface ProfileCardProps {
-  caption: string;
-  src: any;
-  alt: string;
-  id: string;
-}
+const TIMER_DURATION = 3000;
+const SWIPE_THRESHOLD = 3000;
 
-function ProfileCard({ caption, src, alt }: ProfileCardProps) {
+const CARD_POSITIONS = [
+  { x: 0, y: 0, zIndex: 3, rotate: 0 },
+  { x: 18, y: 6, zIndex: 2, rotate: 1.5 },
+  { x: -12, y: 12, zIndex: 1, rotate: -1.5 },
+  { x: 6, y: 18, zIndex: 0, rotate: 1 }
+];
+
+const REDUCED_MOTION_POSITIONS = [
+  { x: 0, y: 0, zIndex: 3, rotate: 0 },
+  { x: 10, y: 4, zIndex: 2, rotate: 0 },
+  { x: -6, y: 8, zIndex: 1, rotate: 0 },
+  { x: 4, y: 12, zIndex: 0, rotate: 0 }
+];
+
+function ProfileCard({
+  caption,
+  src,
+  alt,
+  date,
+  location
+}: {
+  caption: string;
+  src: StaticImageData;
+  alt: string;
+  date?: string;
+  location?: string;
+}) {
   return (
-    <div className="relative w-60 h-60 xl:w-[550px] xl:h-[550px] rounded-lg overflow-hidden text-left">
+    <div className="relative w-60 h-60 xl:w-[550px] xl:h-[550px] rounded-xl overflow-hidden text-left shadow-md">
       <Image
         src={src}
         alt={alt}
@@ -27,11 +48,16 @@ function ProfileCard({ caption, src, alt }: ProfileCardProps) {
         priority
         draggable={false}
       />
-
-      <div className="absolute bottom-4 left-4 hidden xl:block text-left max-w-[420px]">
-        <p className="bg-black/40 backdrop-blur-md px-5 py-3 rounded-lg text-white  font-semibold shadow-lg border border-white/10 leading-relaxed">
-          {caption}
-        </p>
+      <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent" />
+      <div className="absolute bottom-4 left-4 right-4 hidden xl:block text-left">
+        <div className="bg-black/30 backdrop-blur-md px-5 py-3 rounded-xl shadow-lg border border-white/10">
+          <p className="text-white font-medium leading-relaxed">{caption}</p>
+          {(date || location) && (
+            <p className="text-white/70 text-sm mt-1">
+              {[location, date].filter(Boolean).join(" · ")}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -41,194 +67,159 @@ export function Gallery() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
   const progressRef = useRef<NodeJS.Timeout | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
-  const TIMER_DURATION = 3 * 1000;
-
-  const SWIPE_CONFIDENCE_THRESHOLD = 3000;
-
-  function swipePower(offset: number, velocity: number) {
-    return Math.abs(offset) * velocity;
-  }
-
-  function resetTimer() {
+  const clearTimers = useCallback(() => {
     setProgress(0);
-    if (progressRef.current) {
-      clearInterval(progressRef.current);
-    }
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-  }
+    if (progressRef.current) clearInterval(progressRef.current);
+    if (timerRef.current) clearTimeout(timerRef.current);
+  }, []);
 
-  function startTimer() {
-    if (!isPlaying) return;
+  const paginate = useCallback(
+    (direction: number) => {
+      setCurrentIndex(i => (i + direction + galleryData.length) % galleryData.length);
+      clearTimers();
+    },
+    [clearTimers]
+  );
 
-    resetTimer();
+  const pause = useCallback(() => {
+    setIsPlaying(false);
+    clearTimers();
+  }, [clearTimers]);
+
+  const resume = useCallback(() => setIsPlaying(true), []);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!containerRef.current?.contains(document.activeElement)) return;
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        paginate(-1);
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        paginate(1);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [paginate]);
+
+  // Auto-play timer
+  useEffect(() => {
+    if (!isPlaying || prefersReducedMotion) return;
 
     progressRef.current = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
-          return 0;
-        }
-        return prev + 100 / (TIMER_DURATION / 8);
-      });
-    }, 8);
+      setProgress(p => (p >= 100 ? 0 : p + 100 / (TIMER_DURATION / 16)));
+    }, 16);
 
-    intervalRef.current = setTimeout(() => {
-      setCurrentIndex(prev => (prev + 1) % galleryData.length);
-    }, TIMER_DURATION);
-  }
+    timerRef.current = setTimeout(() => paginate(1), TIMER_DURATION);
 
-  function paginate(newDirection: number) {
-    setCurrentIndex(prevIndex => {
-      if (newDirection === 1) {
-        return prevIndex === galleryData.length - 1 ? 0 : prevIndex + 1;
-      } else {
-        return prevIndex === 0 ? galleryData.length - 1 : prevIndex - 1;
-      }
-    });
+    return clearTimers;
+  }, [currentIndex, isPlaying, paginate, clearTimers, prefersReducedMotion]);
 
-    resetTimer();
-  }
+  const getPosition = (index: number) => {
+    const positions = prefersReducedMotion ? REDUCED_MOTION_POSITIONS : CARD_POSITIONS;
+    const pos = (index - currentIndex + galleryData.length) % galleryData.length;
+    return positions[Math.min(pos, positions.length - 1)];
+  };
 
-  function pauseAutoPlay() {
-    setIsPlaying(false);
-    resetTimer();
-  }
-
-  function resumeAutoPlay() {
-    setIsPlaying(true);
-  }
-
-  useEffect(() => {
-    if (isPlaying) {
-      startTimer();
-    }
-
-    return () => {
-      resetTimer();
-    };
-  }, [currentIndex, isPlaying]);
-
-  function getCardPosition(cardIndex: number) {
-    const position =
-      (cardIndex - currentIndex + galleryData.length) % galleryData.length;
-
-    if (position === 0) {
-      return {
-        x: 0,
-        y: 0,
-        zIndex: 3,
-        opacity: 1,
-        rotate: 0
-      };
-    } else if (position === 1) {
-      return {
-        x: 20,
-        y: 8,
-        zIndex: 2,
-        opacity: 0.95,
-        rotate: 2
-      };
-    } else if (position === 2) {
-      return {
-        x: -15,
-        y: 16,
-        zIndex: 1,
-        opacity: 0.9,
-        rotate: -2.5
-      };
-    } else {
-      return {
-        x: 8,
-        y: 24,
-        zIndex: 0,
-        opacity: 0.8,
-        rotate: 1.5
-      };
-    }
-  }
+  const currentItem = galleryData[currentIndex];
 
   return (
     <div
+      ref={containerRef}
       className="relative w-fit mx-auto"
-      onMouseEnter={pauseAutoPlay}
-      onMouseLeave={resumeAutoPlay}
+      onMouseEnter={pause}
+      onMouseLeave={resume}
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Photo gallery"
     >
-      <div className="relative w-60 h-60 xl:w-[550px] xl:h-[550px]">
+      <div
+        className="relative w-60 h-60 xl:w-[550px] xl:h-[550px]"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        <p className="sr-only">
+          Showing image {currentIndex + 1} of {galleryData.length}: {currentItem.alt}
+        </p>
         {galleryData.map((item, index) => {
-          const position = getCardPosition(index);
+          const position = getPosition(index);
           const isActive = index === currentIndex;
 
           return (
             <motion.div
               key={item.id}
               animate={position}
-              transition={{
-                type: "spring",
-                stiffness: 120,
-                damping: 20,
-                mass: 0.8
-              }}
-              whileHover={isActive ? { rotate: 0 } : {}}
-              drag={isActive ? "x" : false}
+              transition={
+                prefersReducedMotion
+                  ? { duration: 0 }
+                  : { type: "spring", stiffness: 100, damping: 18, mass: 0.9 }
+              }
+              drag={isActive && !prefersReducedMotion ? "x" : false}
               dragConstraints={{ left: -25, right: 25 }}
               dragElastic={0.1}
-              onDragStart={pauseAutoPlay}
-              onDragEnd={(e, { offset, velocity }) => {
-                if (isActive) {
-                  const swipe = swipePower(offset.x, velocity.x);
-                  if (swipe < -SWIPE_CONFIDENCE_THRESHOLD) {
-                    paginate(1);
-                  } else if (swipe > SWIPE_CONFIDENCE_THRESHOLD) {
-                    paginate(-1);
-                  }
-                }
-                resumeAutoPlay();
+              onDragStart={pause}
+              onDragEnd={(_, { offset, velocity }) => {
+                const swipe = Math.abs(offset.x) * velocity.x;
+                if (swipe < -SWIPE_THRESHOLD) paginate(1);
+                else if (swipe > SWIPE_THRESHOLD) paginate(-1);
+                resume();
               }}
               className="absolute inset-0 cursor-grab active:cursor-grabbing"
               style={{ zIndex: position.zIndex }}
+              aria-hidden={!isActive}
             >
               <ProfileCard
                 caption={item.caption}
                 src={item.src}
                 alt={item.alt}
-                id={item.id}
+                date={item.date}
+                location={item.location}
               />
             </motion.div>
           );
         })}
       </div>
 
-      <div className="flex justify-end items-center gap-3 mt-4">
+      <div className="flex justify-end items-center gap-3 mt-8" role="group" aria-label="Gallery controls">
         <div
-          className="relative bg-gray-50 border border-gray-200 rounded-full px-4 py-2"
+          className="relative bg-gray-50 rounded-full px-4 py-2"
           style={{
             border: "2px solid transparent",
-            backgroundImage: `conic-gradient(from 0deg, rgba(0,0,0,0.3) 0deg, rgba(0,0,0,0.3) ${progress * 3.6}deg, rgba(0,0,0,0.05) ${progress * 3.6}deg, rgba(0,0,0,0.05) 360deg)`,
+            backgroundImage: prefersReducedMotion
+              ? "none"
+              : `conic-gradient(from 0deg, rgba(0,0,0,0.3) ${progress * 3.6}deg, rgba(0,0,0,0.05) ${progress * 3.6}deg)`,
             backgroundOrigin: "border-box",
             backgroundClip: "padding-box, border-box"
           }}
+          aria-live="polite"
         >
-          <span className="relative text-gray-600 text-sm font-medium tabular-nums">
+          <span className="text-gray-600 text-sm font-medium tabular-nums">
             {currentIndex + 1}/{galleryData.length}
           </span>
         </div>
 
         <button
           onClick={() => paginate(-1)}
-          className="bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-600 rounded-full p-2 transition-colors shadow-lg"
+          className="bg-gray-50 border border-gray-200 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 text-gray-600 rounded-full p-2 motion-safe:transition-colors shadow-lg"
+          aria-label="Previous image"
         >
-          <ChevronLeft className="h-4 w-4" />
+          <ChevronLeft className="h-4 w-4" aria-hidden="true" />
         </button>
 
         <button
           onClick={() => paginate(1)}
-          className="bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-600 rounded-full p-2 transition-colors shadow-lg"
+          className="bg-gray-50 border border-gray-200 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 text-gray-600 rounded-full p-2 motion-safe:transition-colors shadow-lg"
+          aria-label="Next image"
         >
-          <ChevronRight className="h-4 w-4" />
+          <ChevronRight className="h-4 w-4" aria-hidden="true" />
         </button>
       </div>
     </div>

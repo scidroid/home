@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import { projects, type Project } from "@/content/projects";
 import { Link04Icon, CodeIcon, ArrowDown01Icon, ArrowUp01Icon, CheckmarkCircle02Icon, Clock01Icon, Loading03Icon } from "@hugeicons/core-free-icons";
@@ -23,7 +23,7 @@ const statusConfig = {
     icon: Clock01Icon,
     label: "Ongoing"
   }
-};
+} as const;
 
 const colorSchemes = {
   blue: {
@@ -56,12 +56,15 @@ const colorSchemes = {
     accent: "bg-gray-500",
     text: "text-gray-900"
   }
-};
+} as const;
+
+type StatusKey = keyof typeof statusConfig;
+type ColorKey = keyof typeof colorSchemes;
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const statusInfo = statusConfig[project.status];
-  const colorScheme = colorSchemes[project.color];
+  const statusInfo = statusConfig[project.status as StatusKey];
+  const colorScheme = colorSchemes[project.color as ColorKey];
 
   return (
     <motion.div

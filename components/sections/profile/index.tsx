@@ -35,6 +35,8 @@ export function Profile() {
           <a
             href="https://almanza.cc/resume.pdf"
             target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Read my resume (opens in new tab)"
             className="bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-600 rounded-xl px-4 py-3 w-full text-center transition-colors font-medium shadow-lg flex items-center justify-center gap-2"
           >
             <HugeiconsIcon

@@ -1,82 +1,94 @@
-import andes from "@/public/images/gallery/andes.jpg";
 import asofi from "@/public/images/gallery/asofi.jpg";
-import caribe from "@/public/images/gallery/caribe.jpg";
-import cityjs from "@/public/images/gallery/cityjs.jpg";
-import grado from "@/public/images/gallery/grado.jpg";
+import einstein from "@/public/images/gallery/einstein.jpg";
+import farolito from "@/public/images/gallery/farolito.jpg";
 import ioai from "@/public/images/gallery/ioai.jpg";
 import ioi from "@/public/images/gallery/ioi.jpg";
 import jsconf from "@/public/images/gallery/jsconf.jpg";
-import noi from "@/public/images/gallery/noi.jpg";
-import tacos from "@/public/images/gallery/tacos.jpg";
+import microplastics from "@/public/images/gallery/microplastics.jpg";
+import mpesa from "@/public/images/gallery/mpesa.jpg";
+import scrapyard from "@/public/images/gallery/scrapyard.jpg";
 import headshot from "@/public/juan.jpg";
 
 export const galleryData = [
   {
     id: "headshot",
     src: headshot,
-    alt: "Headshot of Juan Almanza, an undergraduate student from Colombia",
-    caption: "Black sea"
-  },
-  {
-    id: "andes",
-    src: andes,
-    alt: "A university classroom with a presenter giving a talk",
-    caption: "Presenting projects at COPA in Universidad de los Andes"
-  },
-  {
-    id: "asofi",
-    src: asofi,
-    alt: "Students in a computer classroom during an ASOFI Bootcamp",
-    caption:
-      "A pilot of the ASOFI Bootcamp - an initiative teaching computer science to girls in rural areas"
-  },
-  {
-    id: "caribe",
-    src: caribe,
-    alt: "Three people posing at TechCaribeExpo 2024",
-    caption: "TechCaribeExpo 2024"
-  },
-  {
-    id: "cityjs",
-    src: cityjs,
-    alt: "Three attendees at CityJS Medellin 2024",
-    caption: "CityJS Medellin 2024"
-  },
-  {
-    id: "grado",
-    src: grado,
-    alt: "Two students at high school graduation",
-    caption: "Finally graduating 🥲"
-  },
-  {
-    id: "ioai",
-    src: ioai,
-    alt: "Participant with bronze medal",
-    caption: "I won bronze at IOAI 2024"
+    alt: "Juan Almanza smiling in formal attire while seated at a table",
+    caption: "Too much aura",
+    date: "Aug 2025",
+    location: "Rhodes House, Oxford, UK"
   },
   {
     id: "ioi",
     src: ioi,
-    alt: "Competition room with computer workstations",
-    caption: "Participating in the International Olympiad in Informatics"
+    alt: "Rows of contestants at computers during the IOI competition",
+    caption: "Competing at the International Olympiad in Informatics",
+    date: "Sep 2023",
+    location: "Szeged, Hungary"
+  },
+  {
+    id: "scrapyard",
+    src: scrapyard,
+    alt: "Group of young hackers collaborating around laptops at Scrapyard",
+    caption: "Organizing a Hack Club hackathon back home",
+    date: "Mar 2025",
+    location: "Barranquilla, Colombia"
   },
   {
     id: "jsconf",
     src: jsconf,
-    alt: "Speaker presenting at conference",
+    alt: "Juan on stage presenting with slides behind him at JSConf",
+    caption: "Speaking about offline-first development at JSConf Colombia",
+    date: "Oct 2023",
+    location: "Medellín, Colombia"
+  },
+  {
+    id: "einstein",
+    src: einstein,
+    alt: "Juan posing playfully with the Albert Einstein bronze statue",
+    caption: "Absorbing some Nobel Prize energy",
+    date: "Dec 2025",
+    location: "Institute for Advanced Study, Princeton, NJ"
+  },
+  {
+    id: "farolito",
+    src: farolito,
+    alt: "Juan and friends sharing burritos at a restaurant",
+    caption: "Celebrating after surviving the first EA assignment",
+    date: "Sept 2025",
+    location: "Taqueria El Farolito, San Francisco, CA"
+  },
+  {
+    id: "mpesa",
+    src: mpesa,
+    alt: "Lecture hall with a speaker presenting slides about MPESA",
+    caption: "Oxford lecture about innovation",
+    date: "Aug 2025",
+    location: "Oxford, UK"
+  },
+  {
+    id: "asofi",
+    src: asofi,
+    alt: "Young women learning to code during an ASOFI workshop session",
     caption:
-      "Presenting about offline software development at JSConf Colombia 2024"
+      "Teaching CS to girls in rural Colombia through the ASOFI Bootcamp",
+    date: "Oct 2023",
+    location: "Minuto de Dios, Bogotá, Colombia"
   },
   {
-    id: "noi",
-    src: noi,
-    alt: "Group photo at bowling alley",
-    caption: "IOI Training Camp 2024"
+    id: "microplastics",
+    src: microplastics,
+    alt: "Microscope view showing microplastic particles on a water sample",
+    caption: "Measuring microplastics in the Bay Area",
+    date: "Oct 2025",
+    location: "Sausalito, CA"
   },
   {
-    id: "tacos",
-    src: tacos,
-    alt: "tacos and burritos",
-    caption: "I love food, these are from Renata in Chicó"
+    id: "ioai",
+    src: ioai,
+    alt: "Juan proudly holding a bronze medal at the IOAI ceremony",
+    caption: "Bronze medal at the International Olympiad in AI",
+    date: "Aug 2024",
+    location: "Burgas, Bulgaria"
   }
 ];

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "motion/react";
 
 export function Age() {
   const prefersReducedMotion = useReducedMotion();
@@ -14,7 +14,7 @@ export function Age() {
     return ageWithDecimals;
   }
 
-  const [age, setAge] = useState("17.000000000");
+  const [age, setAge] = useState("18.000000000");
 
   useEffect(() => {
     if (!prefersReducedMotion) {
