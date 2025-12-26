@@ -52,7 +52,7 @@ export function NowPlayingWidget({ song }: { song: Music }) {
       <SongCard ariaLabel="Music player loading">
         <StatusBadge isPlaying={song.isPlaying} hasContent={false} />
         <div
-          className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 motion-safe:animate-pulse"
+          className="absolute inset-0 bg-linear-to-br from-gray-900 via-gray-700 to-gray-900 motion-safe:animate-pulse"
           aria-hidden="true"
         />
         <div className="absolute bottom-4 left-4 right-4">

@@ -6,11 +6,16 @@ import { formatDate } from "@/utils/dates";
 
 export function Readings() {
   return (
-    <section className="w-[95%] mx-auto my-4">
-      <h2 className="text-4xl xl:text-6xl font-bold text-gray-800 font-heading xl:leading-tight leading-tight my-8 text-center xl:text-left">
-        Readings
-      </h2>
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 my-4">
+    <section className="px-4 lg:px-8 my-12">
+      <div className="text-center xl:text-left mb-12">
+        <h2 className="text-4xl xl:text-6xl font-bold text-gray-800 font-heading xl:leading-tight leading-tight mb-4">
+          Readings
+        </h2>
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto xl:mx-0">
+          Technical deep-dives and tutorials on topics I find interesting.
+        </p>
+      </div>
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
         {readings.map(({ metadata }, key) => (
           <Link
             href={`/${metadata.slug}`}

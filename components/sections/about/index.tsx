@@ -3,7 +3,7 @@ import { RightColumn } from "./layout/right-column";
 
 export function About() {
   return (
-    <section className="flex flex-col-reverse lg:flex-row gap-8 items-start my-8 mx-2 lg:my-16 lg:mx-4">
+    <section className="flex flex-col-reverse lg:flex-row gap-8 items-start my-8 px-4 lg:px-8 lg:my-16">
       <LeftColumn />
       <RightColumn />
     </section>

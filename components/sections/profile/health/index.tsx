@@ -11,7 +11,7 @@ function BaseComponent({ bpm, date }: { bpm: number; date?: string }) {
 
   return (
     <article
-      className="h-auto xl:h-52 rounded-xl shadow-lg w-full overflow-hidden bg-gradient-to-br from-red-50 via-rose-100 to-red-50 flex flex-col justify-between"
+      className="h-auto xl:h-52 rounded-xl shadow-lg w-full overflow-hidden bg-linear-to-br from-red-50 via-rose-100 to-red-50 flex flex-col justify-between"
       aria-label={bpm > 0 ? `Heart rate: ${bpm} beats per minute` : "Heart rate loading"}
     >
       <div className="flex flex-col items-center justify-center h-full pt-4" aria-hidden="true">

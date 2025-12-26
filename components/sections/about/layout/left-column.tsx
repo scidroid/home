@@ -6,8 +6,8 @@ import { SolutionsArticle } from "@/components/sections/about/articles/solutions
 export function LeftColumn() {
   return (
     <div className="flex flex-col gap-4 flex-1 w-full">
-      <ProductivityArticle />
       <HealthArticle />
+      <ProductivityArticle />
       <EducationArticle />
       <SolutionsArticle />
     </div>

@@ -38,7 +38,7 @@ function ProfileCard({
   location?: string;
 }) {
   return (
-    <div className="relative w-60 h-60 xl:w-[550px] xl:h-[550px] rounded-xl overflow-hidden text-left shadow-md">
+    <div className="relative w-48 h-48 sm:w-60 sm:h-60 xl:w-[550px] xl:h-[550px] rounded-xl overflow-hidden text-left shadow-md">
       <Image
         src={src}
         alt={alt}
@@ -142,7 +142,7 @@ export function Gallery() {
       aria-label="Photo gallery"
     >
       <div
-        className="relative w-60 h-60 xl:w-[550px] xl:h-[550px]"
+        className="relative w-48 h-48 sm:w-60 sm:h-60 xl:w-[550px] xl:h-[550px]"
         aria-live="polite"
         aria-atomic="true"
       >
@@ -188,7 +188,7 @@ export function Gallery() {
         })}
       </div>
 
-      <div className="flex justify-end items-center gap-3 mt-8" role="group" aria-label="Gallery controls">
+      <div className="flex justify-end items-center gap-2 sm:gap-3 mt-4 sm:mt-8" role="group" aria-label="Gallery controls">
         <div
           className="relative bg-gray-50 rounded-full px-4 py-2"
           style={{

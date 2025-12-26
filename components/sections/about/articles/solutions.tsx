@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import {
   Line,
   LineChart,
@@ -8,126 +9,117 @@ import {
   Tooltip,
   XAxis,
   YAxis,
-  Legend
+  ReferenceLine
 } from "recharts";
 
+import pulpoo from "@/components/sections/about/images/pulpoo.webp";
+
 const impactData = [
-  {
-    year: "2019",
-    "Traditional Aid": 100,
-    "Tech-Enabled Solutions": 100,
-    "Community-Led Programs": 100
-  },
-  {
-    year: "2020",
-    "Traditional Aid": 110,
-    "Tech-Enabled Solutions": 150,
-    "Community-Led Programs": 130
-  },
-  {
-    year: "2021",
-    "Traditional Aid": 115,
-    "Tech-Enabled Solutions": 280,
-    "Community-Led Programs": 200
-  },
-  {
-    year: "2022",
-    "Traditional Aid": 120,
-    "Tech-Enabled Solutions": 450,
-    "Community-Led Programs": 320
-  },
-  {
-    year: "2023",
-    "Traditional Aid": 125,
-    "Tech-Enabled Solutions": 750,
-    "Community-Led Programs": 500
-  },
-  {
-    year: "2024",
-    "Traditional Aid": 130,
-    "Tech-Enabled Solutions": 1200,
-    "Community-Led Programs": 800
-  }
+  { year: "2019", traditional: 100, tech: 100, community: 100 },
+  { year: "2020", traditional: 110, tech: 150, community: 130 },
+  { year: "2021", traditional: 115, tech: 280, community: 200 },
+  { year: "2022", traditional: 120, tech: 450, community: 320 },
+  { year: "2023", traditional: 125, tech: 750, community: 500 },
+  { year: "2024", traditional: 130, tech: 1200, community: 800 }
 ];
 
-export function ScalableImpactChart() {
-  return (
-    <div className="bg-gray-50 rounded-lg p-4 space-y-3">
-      <div className="space-y-2">
-        <h3 className="text-lg font-medium">
-          Impact Growth: Traditional vs. Scalable Solutions
-        </h3>
-        <p className="text-sm text-gray-600">
-          Technology-enabled and community-led solutions show exponential growth 
-          compared to traditional aid models.
-        </p>
-      </div>
+const approaches = [
+  { name: "Tech-Enabled", color: "#10b981", growth: "12x", key: "tech" },
+  { name: "Community-Led", color: "#3b82f6", growth: "8x", key: "community" },
+  { name: "Traditional Aid", color: "#ef4444", growth: "1.3x", key: "traditional" }
+];
 
+function ImpactChart() {
+  return (
+    <div>
       <div className="h-[300px]">
         <ResponsiveContainer>
           <LineChart
             data={impactData}
-            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+            margin={{ top: 20, right: 20, left: 20, bottom: 20 }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-            <XAxis dataKey="year" stroke="#6b7280" />
-            <YAxis
-              label={{ value: "Impact Index", angle: -90, position: "insideLeft" }}
+            <XAxis
+              dataKey="year"
               stroke="#6b7280"
+              fontSize={11}
+            />
+            <YAxis
+              stroke="#6b7280"
+              fontSize={10}
+              tickFormatter={(v) => `${v}`}
+              domain={[0, 1300]}
+            />
+            <ReferenceLine
+              y={100}
+              stroke="#9ca3af"
+              strokeDasharray="5 5"
+              label={{ value: "Baseline", position: "right", fontSize: 10, fill: "#9ca3af" }}
             />
             <Tooltip
-              formatter={(value) => [`${value}%`, "Growth"]}
-              contentStyle={{
-                backgroundColor: "white",
-                border: "1px solid #e5e7eb",
-                borderRadius: "0.375rem"
+              content={({ active, payload, label }) => {
+                if (!active || !payload?.length) return null;
+
+                return (
+                  <div className="bg-white/95 backdrop-blur-sm border border-gray-200 rounded-md px-2.5 py-1.5 shadow-md text-xs">
+                    <p className="font-semibold text-gray-900">{label}</p>
+                    {payload.map((entry, index) => {
+                      const growth = ((entry.value as number) / 100).toFixed(1);
+                      const name = entry.dataKey === "tech" ? "Tech-Enabled" :
+                                   entry.dataKey === "community" ? "Community-Led" :
+                                   "Traditional";
+                      return (
+                        <p key={index} style={{ color: entry.color }}>
+                          {name}: <span className="font-medium">{growth}x</span> growth
+                        </p>
+                      );
+                    })}
+                  </div>
+                );
               }}
             />
-            <Legend />
-            <Line 
-              type="monotone" 
-              dataKey="Traditional Aid" 
-              stroke="#ef4444" 
-              strokeWidth={2}
-              dot={{ r: 4 }}
-            />
-            <Line 
-              type="monotone" 
-              dataKey="Tech-Enabled Solutions" 
-              stroke="#10b981" 
+            <Line
+              type="monotone"
+              dataKey="tech"
+              stroke="#10b981"
               strokeWidth={3}
-              dot={{ r: 4 }}
+              dot={{ r: 4, fill: "#10b981" }}
+              activeDot={{ r: 6, stroke: "#1e1b4b", strokeWidth: 2 }}
             />
-            <Line 
-              type="monotone" 
-              dataKey="Community-Led Programs" 
-              stroke="#3b82f6" 
+            <Line
+              type="monotone"
+              dataKey="community"
+              stroke="#3b82f6"
               strokeWidth={2}
-              dot={{ r: 4 }}
+              dot={{ r: 3, fill: "#3b82f6" }}
+            />
+            <Line
+              type="monotone"
+              dataKey="traditional"
+              stroke="#ef4444"
+              strokeWidth={2}
+              dot={{ r: 3, fill: "#ef4444" }}
             />
           </LineChart>
         </ResponsiveContainer>
       </div>
 
-      <div className="grid grid-cols-3 gap-2 pt-2">
-        <div className="bg-green-50 p-2 rounded text-center">
-          <p className="text-xs font-medium text-green-900">12x</p>
-          <p className="text-xs text-green-700">Tech Impact</p>
-        </div>
-        <div className="bg-blue-50 p-2 rounded text-center">
-          <p className="text-xs font-medium text-blue-900">8x</p>
-          <p className="text-xs text-blue-700">Community Impact</p>
-        </div>
-        <div className="bg-red-50 p-2 rounded text-center">
-          <p className="text-xs font-medium text-red-900">1.3x</p>
-          <p className="text-xs text-red-700">Traditional Impact</p>
-        </div>
-      </div>
-
-      <div className="text-xs text-gray-500 border-t border-gray-200 pt-2">
-        <p>
-          Source: Analysis of development program outcomes (2019-2024) - Index baseline: 2019 = 100
-        </p>
+      {/* Legend with growth stats */}
+      <div className="flex justify-center gap-6 mt-2">
+        {approaches.map((approach) => (
+          <div key={approach.key} className="flex items-center gap-2">
+            <span
+              className="w-3 h-3 rounded-full"
+              style={{ backgroundColor: approach.color }}
+            />
+            <span className="text-xs text-gray-600">
+              {approach.name}{" "}
+              <span className="font-bold" style={{ color: approach.color }}>
+                {approach.growth}
+              </span>
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -135,88 +127,147 @@ export function ScalableImpactChart() {
 
 export function SolutionsArticle() {
   return (
-    <article className="w-full rounded-lg bg-gradient-to-br from-green-100 via-green-200 to-emerald-50 p-6 shadow-md space-y-5">
-      <h3 className="text-2xl font-bold mb-2">
-        Building Solutions That Scale: Beyond Traditional Aid
-      </h3>
-      <p className="leading-relaxed">
-        After years of witnessing well-intentioned aid programs fail to create 
-        lasting change, I've learned that <span className="font-bold italic">sustainable 
-        solutions must be replicable, scalable, and community-owned</span>. Traditional 
-        top-down approaches often create dependency rather than empowerment, while 
-        ignoring the innovative potential within the communities they aim to serve.
-        <sup>
-          <a
-            href="https://www.brookings.edu/articles/why-is-the-world-bank-group-dragging-on-from-billions-to-trillions/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-green-800 underline hover:no-underline"
-          >
-            [1]
-          </a>
-        </sup>
-      </p>
+    <article className="w-full rounded-xl bg-linear-to-br from-green-100 via-green-200 to-emerald-50 p-6 space-y-6">
+      {/* Header */}
+      <header>
+        <h3 className="text-2xl font-bold text-gray-900">
+          Building Solutions That Scale
+        </h3>
+        <p className="text-gray-600 mt-1">
+          Traditional top-down aid often creates dependency rather than
+          empowerment. Sustainable solutions must be replicable, scalable,
+          and community-owned.
+        </p>
+      </header>
 
-      <div className="mt-6">
-        <ScalableImpactChart />
-      </div>
+      {/* Chart */}
+      <section className="bg-gray-50 rounded-lg p-4 space-y-3">
+        <div className="space-y-2">
+          <h4 className="text-lg font-medium">
+            Impact Growth: Traditional vs. Scalable
+          </h4>
+          <p className="text-sm text-gray-600">
+            Tech-enabled and community-led solutions show exponential growth
+            compared to traditional aid models. Index baseline: 2019 = 100.
+          </p>
+        </div>
+        <ImpactChart />
+        <div className="text-xs text-gray-500 border-t border-gray-200 pt-2">
+          <p>
+            Source: Analysis of development program outcomes (2019-2024).
+          </p>
+        </div>
+      </section>
 
-      <p className="leading-relaxed">
-        The most effective solutions I've seen combine three elements: 
-        <span className="font-bold">technology for scale</span>, 
-        <span className="font-bold">local knowledge for relevance</span>, and 
-        <span className="font-bold">sustainable business models for longevity</span>. 
-        In Colombia, we've seen how a single AI-powered agricultural advisory system 
-        can serve thousands of farmers, providing personalized recommendations based 
-        on local soil conditions, weather patterns, and market prices — all at a 
-        fraction of the cost of traditional extension services.
-        <sup>
-          <a
-            href="https://www.fao.org/digital-agriculture/en/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-green-800 underline hover:no-underline"
-          >
-            [2]
-          </a>
-        </sup>
-      </p>
+      {/* Analysis */}
+      <section className="space-y-3">
+        <p className="text-gray-700 leading-relaxed">
+          The most effective solutions combine three key elements that work together.
+        </p>
+        <ul className="space-y-2 text-gray-700">
+          <li className="flex gap-2">
+            <span className="text-green-600 font-bold">•</span>
+            <span>
+              <strong>Technology for scale</strong> — A single AI-powered system
+              can serve thousands of users at a fraction of traditional costs
+              <sup>
+                <a
+                  href="https://www.fao.org/digital-agriculture/en/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-green-700 underline hover:no-underline ml-0.5"
+                >
+                  [1]
+                </a>
+              </sup>
+            </span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-green-600 font-bold">•</span>
+            <span>
+              <strong>Local knowledge for relevance</strong> — Solutions developed
+              in Colombia can be adapted for Kenya, Bangladesh, or Peru
+            </span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-green-600 font-bold">•</span>
+            <span>
+              <strong>Sustainable business models</strong> — Moving from charity
+              to partnership, from temporary relief to permanent change
+              <sup>
+                <a
+                  href="https://www.brookings.edu/articles/why-is-the-world-bank-group-dragging-on-from-billions-to-trillions/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-green-700 underline hover:no-underline ml-0.5"
+                >
+                  [2]
+                </a>
+              </sup>
+            </span>
+          </li>
+        </ul>
+      </section>
 
-      <p className="leading-relaxed">
-        Through <span className="font-semibold">open-source projects</span> and 
-        <span className="font-semibold">knowledge sharing platforms</span>, we're 
-        creating a new model for development: one where solutions developed in 
-        rural Colombia can be adapted for use in Kenya, Bangladesh, or Peru. 
-        By focusing on building local capacity and creating tools that communities 
-        can own and modify, we're moving from aid to empowerment, from charity 
-        to partnership, and from temporary relief to permanent change.
-      </p>
+      {/* Pulpoo CTA */}
+      <section className="bg-white/70 rounded-lg p-4 border border-green-200">
+        <div className="flex items-start gap-3">
+          <Image
+            src={pulpoo}
+            alt=""
+            className="h-10 w-10 rounded-lg object-cover shrink-0"
+          />
+          <div>
+            <h4 className="font-semibold text-gray-900">
+              Scaling impact with{" "}
+              <a
+                href="https://pulpoo.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-green-700 underline hover:no-underline"
+              >
+                Pulpoo
+              </a>
+            </h4>
+            <p className="text-sm text-gray-700 mt-1">
+              We&apos;re building AI-powered tools that integrate into existing
+              workflows, providing personalized recommendations based on local
+              conditions — all at a fraction of traditional service costs.
+              Open-source and designed for adaptation across regions.
+            </p>
+          </div>
+        </div>
+      </section>
 
-      <div className="mt-6 text-xs text-gray-600">
+      {/* References */}
+      <footer className="pt-4 border-t border-green-200 text-xs text-gray-600">
         <span className="font-semibold">References</span>
         <ol className="list-decimal pl-5 mt-1 space-y-1">
-          <li>
-            <a
-              href="https://www.brookings.edu/articles/why-is-the-world-bank-group-dragging-on-from-billions-to-trillions/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-green-800 underline hover:no-underline"
-            >
-              Brookings Institution, "From Billions to Trillions: Transforming Development Finance," 2023.
-            </a>
-          </li>
           <li>
             <a
               href="https://www.fao.org/digital-agriculture/en/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-green-800 underline hover:no-underline"
+              className="underline hover:no-underline"
             >
-              FAO, "Digital Agriculture: Transforming Food Systems in the Digital Age," 2024.
+              FAO, &quot;Digital Agriculture,&quot; 2024
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.brookings.edu/articles/why-is-the-world-bank-group-dragging-on-from-billions-to-trillions/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:no-underline"
+            >
+              Brookings, &quot;From Billions to Trillions,&quot; 2023
             </a>
           </li>
         </ol>
-      </div>
+      </footer>
     </article>
   );
-} 
+}
+
+// Keep for backwards compatibility
+export { ImpactChart as ScalableImpactChart };

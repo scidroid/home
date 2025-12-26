@@ -67,14 +67,14 @@ export function Subtitle() {
 
   return (
     <ul
-      className="flex flex-wrap gap-2 justify-center xl:justify-start mt-2 list-none p-0 m-0"
+      className="flex flex-wrap gap-1.5 sm:gap-2 justify-center xl:justify-start mt-2 list-none p-0 m-0"
       role="list"
       aria-label="Professional roles and affiliations"
     >
       {titlePills.map((pill, idx) => (
         <motion.li
           key={idx}
-          className="relative group inline-flex items-center gap-1 text-sm text-gray-600 bg-gray-50 border border-gray-200 rounded-full px-3 py-1 shadow-sm cursor-default hover:z-50 focus-within:z-50"
+          className="relative group inline-flex items-center gap-1 text-xs sm:text-sm text-gray-600 bg-gray-50 border border-gray-200 rounded-full px-2 py-0.5 sm:px-3 sm:py-1 shadow-sm cursor-default hover:z-50 focus-within:z-50"
           custom={idx}
           initial="hidden"
           animate="visible"
@@ -85,7 +85,7 @@ export function Subtitle() {
           <span aria-hidden="true">
             <HugeiconsIcon
               icon={pill.icon}
-              className="w-4 h-4 motion-safe:transition-transform motion-safe:duration-200 motion-safe:group-hover:scale-125 motion-safe:group-hover:-rotate-6 motion-safe:group-focus-within:scale-125 motion-safe:group-focus-within:-rotate-6"
+              className="w-3 h-3 sm:w-4 sm:h-4 motion-safe:transition-transform motion-safe:duration-200 motion-safe:group-hover:scale-125 motion-safe:group-hover:-rotate-6 motion-safe:group-focus-within:scale-125 motion-safe:group-focus-within:-rotate-6"
               color={pill.color}
               strokeWidth={1.5}
             />

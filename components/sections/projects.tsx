@@ -71,7 +71,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.15 }}
-      className={`bg-gradient-to-br ${colorScheme.bg} border border-gray-200 rounded-xl transition-all duration-500 shadow-lg hover:shadow-xl overflow-hidden group`}
+      className={`bg-linear-to-br ${colorScheme.bg} border border-gray-200 rounded-xl transition-all duration-500 shadow-lg hover:shadow-xl overflow-hidden group`}
     >
       {/* Header Section */}
       <div 
@@ -201,7 +201,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                       transition={{ duration: 0.3, delay: 0.4 + idx * 0.1 }}
                       className="flex items-center gap-2 text-sm text-gray-700"
                     >
-                      <div className={`w-2 h-2 ${colorScheme.accent} rounded-full flex-shrink-0`} />
+                      <div className={`w-2 h-2 ${colorScheme.accent} rounded-full shrink-0`} />
                       {highlight}
                     </motion.li>
                   ))}
@@ -278,7 +278,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
 export function Projects() {
   return (
-    <section className="w-[95%] mx-auto my-12">
+    <section className="px-4 lg:px-8 my-12">
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
