@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { kv } from "@vercel/kv";
+import { generateReplyEmail } from "@/emails/reply";
 
 interface TelegramUpdate {
   update_id: number;
@@ -18,11 +20,30 @@ interface TelegramUpdate {
     };
     data?: string;
   };
+  message?: {
+    message_id: number;
+    from: {
+      id: number;
+    };
+    chat: {
+      id: number;
+    };
+    text?: string;
+    reply_to_message?: {
+      message_id: number;
+    };
+  };
+}
+
+interface PendingReply {
+  email: string;
+  name: string;
+  promptMessageId: number;
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const { TELEGRAM_BOT_TOKEN, TELEGRAM_WEBHOOK_SECRET } = process.env;
+    const { TELEGRAM_BOT_TOKEN, TELEGRAM_WEBHOOK_SECRET, TELEGRAM_CHAT_ID, RESEND_API_KEY } = process.env;
 
     if (!TELEGRAM_BOT_TOKEN) {
       return NextResponse.json({ error: "Bot token not configured" }, { status: 500 });
@@ -35,9 +56,41 @@ export async function POST(request: NextRequest) {
 
     const update: TelegramUpdate = await request.json();
 
+    // Handle callback query (button click)
     if (update.callback_query?.data?.startsWith("reply_")) {
       const [, email, name] = update.callback_query.data.split("_");
-      
+      const decodedEmail = decodeURIComponent(email);
+      const decodedName = decodeURIComponent(name);
+
+      // Send prompt message
+      const promptResponse = await fetch(
+        `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: `📝 Reply to ${decodedName} (${decodedEmail}):\n\nType your message and send it as a reply to this message.`,
+            reply_markup: {
+              force_reply: true,
+              selective: true
+            }
+          })
+        }
+      );
+
+      const promptResult = await promptResponse.json();
+
+      if (promptResult.ok) {
+        // Store pending reply in KV
+        await kv.set(`telegram_reply:${promptResult.result.message_id}`, {
+          email: decodedEmail,
+          name: decodedName,
+          promptMessageId: promptResult.result.message_id
+        }, { ex: 3600 }); // Expires in 1 hour
+      }
+
+      // Answer callback query
       await fetch(
         `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/answerCallbackQuery`,
         {
@@ -45,22 +98,54 @@ export async function POST(request: NextRequest) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             callback_query_id: update.callback_query.id,
-            text: "Reply email sent!"
+            text: "Reply to the message above with your response"
           })
         }
       );
+    }
 
-      const response = await fetch(`${request.nextUrl.origin}/api/telegram/reply`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: decodeURIComponent(email),
-          name: decodeURIComponent(name)
-        })
-      });
+    // Handle reply message
+    if (update.message?.reply_to_message && update.message.text) {
+      const replyToId = update.message.reply_to_message.message_id;
+      const pendingReply = await kv.get<PendingReply>(`telegram_reply:${replyToId}`);
 
-      if (!response.ok) {
-        throw new Error("Failed to send reply email");
+      if (pendingReply) {
+        // Send the reply email
+        const emailResponse = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${RESEND_API_KEY}`
+          },
+          body: JSON.stringify({
+            from: "Juan Almanza <contact@automated.scidroid.co>",
+            reply_to: "hi@scidroid.co",
+            to: pendingReply.email,
+            subject: "Re: Your message to Juan Almanza",
+            html: generateReplyEmail(pendingReply.name, update.message.text)
+          })
+        });
+
+        // Delete the pending reply
+        await kv.del(`telegram_reply:${replyToId}`);
+
+        // Send confirmation
+        const statusText = emailResponse.ok
+          ? `✅ Reply sent to ${pendingReply.name} (${pendingReply.email})`
+          : `❌ Failed to send reply to ${pendingReply.email}`;
+
+        await fetch(
+          `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              chat_id: TELEGRAM_CHAT_ID,
+              text: statusText,
+              reply_to_message_id: update.message.message_id
+            })
+          }
+        );
       }
     }
 
