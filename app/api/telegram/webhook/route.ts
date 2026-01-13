@@ -22,10 +22,15 @@ interface TelegramUpdate {
 
 export async function POST(request: NextRequest) {
   try {
-    const { TELEGRAM_BOT_TOKEN } = process.env;
-    
+    const { TELEGRAM_BOT_TOKEN, TELEGRAM_WEBHOOK_SECRET } = process.env;
+
     if (!TELEGRAM_BOT_TOKEN) {
       return NextResponse.json({ error: "Bot token not configured" }, { status: 500 });
+    }
+
+    const secretToken = request.headers.get("x-telegram-bot-api-secret-token");
+    if (TELEGRAM_WEBHOOK_SECRET && secretToken !== TELEGRAM_WEBHOOK_SECRET) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const update: TelegramUpdate = await request.json();
