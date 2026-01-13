@@ -8,7 +8,8 @@ const lifeCycleData = [
     icon: "👶",
     deaths: "260,000 women die annually",
     description: "Over 99% of maternal deaths occur in low-income countries",
-    source: "https://www.unfpa.org/publications/trends-maternal-mortality-2000-2023",
+    source:
+      "https://www.unfpa.org/publications/trends-maternal-mortality-2000-2023",
     sourceName: "UNFPA"
   },
   {
@@ -40,7 +41,8 @@ const lifeCycleData = [
     icon: "👴",
     deaths: "18M premature NCD deaths under 70",
     description: "82% occur in low- and middle-income countries",
-    source: "https://www.who.int/data/gho/data/themes/topics/sdg-target-3_4-noncommunicable-diseases-and-mental-health",
+    source:
+      "https://www.who.int/data/gho/data/themes/topics/sdg-target-3_4-noncommunicable-diseases-and-mental-health",
     sourceName: "WHO"
   }
 ];
@@ -49,10 +51,12 @@ function LifeCycleInfographic() {
   return (
     <div className="bg-gray-50 rounded-lg p-4 space-y-4">
       <div className="space-y-2">
-        <h4 className="text-lg font-medium">A Life Cycle Interrupted</h4>
+        <h4 className="text-lg font-medium">
+          Preventable Deaths by Life Stage
+        </h4>
         <p className="text-sm text-gray-600">
-          Due to inequality in healthcare access, millions never complete the
-          natural life cycle.
+          Inequity in healthcare access leads to preventable deaths, combined
+          with other factors like unclean water and sanitation.
         </p>
       </div>
 
@@ -75,7 +79,9 @@ function LifeCycleInfographic() {
               <span className="text-xl">{stage.icon}</span>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className="text-sm font-semibold text-gray-900">{stage.stage}</span>
+                  <span className="text-sm font-semibold text-gray-900">
+                    {stage.stage}
+                  </span>
                   <a
                     href={stage.source}
                     target="_blank"
@@ -85,7 +91,9 @@ function LifeCycleInfographic() {
                     {stage.sourceName}
                   </a>
                 </div>
-                <p className="text-sm text-red-600 font-medium">{stage.deaths}</p>
+                <p className="text-sm text-red-600 font-medium">
+                  {stage.deaths}
+                </p>
                 <p className="text-xs text-gray-600">{stage.description}</p>
               </div>
             </div>
@@ -94,7 +102,10 @@ function LifeCycleInfographic() {
       </div>
 
       <div className="text-xs text-gray-500 border-t border-gray-200 pt-2">
-        <p>Sources linked per stage. Data from WHO, UNICEF, UNAIDS, and UNFPA (2023-2024).</p>
+        <p>
+          Sources linked per stage. Data from WHO, UNICEF, UNAIDS, and UNFPA
+          (2023-2024).
+        </p>
       </div>
     </div>
   );
@@ -103,34 +114,32 @@ function LifeCycleInfographic() {
 export function HealthArticle() {
   return (
     <article className="w-full rounded-xl bg-linear-to-br from-red-100 via-red-200 to-rose-50 p-6 space-y-6">
-      {/* Header */}
       <header>
         <h3 className="text-2xl font-bold text-gray-900">
-          Health Equity: A Matter of Life and Death
+          Inequity in Healthcare Access
         </h3>
         <p className="text-gray-600 mt-1">
-          Every year, over 2.7 million people die from diseases that are entirely
-          preventable with basic healthcare access — not because we lack medical
-          knowledge, but because we lack equitable distribution of resources.
+          Every year, over 2.7 million people die from diseases that are
+          entirely preventable. Not because we lack medical knowledge, but
+          because we lack equitable distribution of these technologies.
         </p>
       </header>
 
-      {/* Infographic */}
       <LifeCycleInfographic />
 
-      {/* Analysis */}
       <section className="space-y-3">
         <p className="text-gray-700 leading-relaxed">
           The disparity is staggering. Children in high-income countries receive
-          life-saving vaccines as routine care, while children elsewhere die from
-          diseases eradicated decades ago.
+          life-saving vaccines as routine care, while children elsewhere die
+          from diseases eradicated decades ago.
         </p>
         <ul className="space-y-2 text-gray-700">
           <li className="flex gap-2">
             <span className="text-red-600 font-bold">•</span>
             <span>
-              <strong>Geographic lottery</strong> — Access to clean water, sanitation,
-              and essential medicines depends on where you&apos;re born
+              <strong>Geographic lottery</strong> — Access to clean water,
+              sanitation, and essential medicines depends on where you&apos;re
+              born
             </span>
           </li>
           <li className="flex gap-2">
@@ -143,14 +152,13 @@ export function HealthArticle() {
           <li className="flex gap-2">
             <span className="text-red-600 font-bold">•</span>
             <span>
-              <strong>Funding gaps</strong> — Global health receives a fraction of
-              what&apos;s needed to close the equity gap
+              <strong>Funding gaps</strong> — Global health receives a fraction
+              of what&apos;s needed to close the equity gap
             </span>
           </li>
         </ul>
       </section>
 
-      {/* ASOFI CTA */}
       <section className="bg-white/70 rounded-lg p-4 border border-red-200">
         <div className="flex items-start gap-3">
           <Image
@@ -171,16 +179,15 @@ export function HealthArticle() {
               </a>
             </h4>
             <p className="text-sm text-gray-700 mt-1">
-              We&apos;re developing AI-powered health education platforms to reach
-              underserved rural communities. Technology alone isn&apos;t enough — we
-              need systemic change and political will to prioritize health equity
-              as a human right.
+              We&apos;re developing AI-powered health education platforms to
+              reach underserved rural communities. Technology alone isn&apos;t
+              enough — we need systemic change and political will to prioritize
+              health equity as a human right.
             </p>
           </div>
         </div>
       </section>
 
-      {/* References */}
       <footer className="pt-4 border-t border-red-200 text-xs text-gray-600">
         <span className="font-semibold">References</span>
         <ol className="list-decimal pl-5 mt-1 space-y-1">
@@ -209,6 +216,3 @@ export function HealthArticle() {
     </article>
   );
 }
-
-// Keep for backwards compatibility
-export { LifeCycleInfographic as PreventableDeathsInfographic };

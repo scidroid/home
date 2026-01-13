@@ -20,10 +20,10 @@ export function Bio() {
           />
           Minerva University
         </a>
-        . Passionate about leveraging computational science to solve real-world
-        problems at the intersection of technology and social impact. I have
-        been working for years exploring how to create scalable solutions that
-        make an impact in multiple fields. Always open to collaborating on{" "}
+        . I believe that everyone despite their opportunities in life deserve to
+        benefit from the advances of the humanity. I have been working for years
+        exploring how to create scalable and accessible solutions that make an
+        impact in multiple fields. I'm always open to collaborating on{" "}
         <span className="font-bold">unconventional ideas</span>.{" "}
         <a
           href="/#contact"

@@ -33,7 +33,7 @@ export function Profile() {
 
         <div className="my-2 sm:my-4 flex items-center justify-between w-full gap-2">
           <a
-            href="https://almanza.cc/resume.pdf"
+            href="https://almanza.cc/juan_almanza_cv.pdf"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Read my resume (opens in new tab)"

@@ -60,7 +60,6 @@ const config: Config = {
       }
     }
   },
-  safelist: ["rotate-1", "-rotate-1", "rotate-2", "-rotate-2"],
   plugins: [formsPlugin, typographyPlugin]
 };
 

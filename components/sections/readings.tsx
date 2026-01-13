@@ -7,33 +7,37 @@ import { formatDate } from "@/utils/dates";
 export function Readings() {
   return (
     <section className="px-4 lg:px-8 my-12">
-      <div className="text-center xl:text-left mb-12">
-        <h2 className="text-4xl xl:text-6xl font-bold text-gray-800 font-heading xl:leading-tight leading-tight mb-4">
+      <div className="text-center lg:text-left mb-8">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 font-heading leading-tight mb-3">
           Readings
         </h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto xl:mx-0">
-          Technical deep-dives and tutorials on topics I find interesting.
+        <p className="text-base text-gray-600">
+          I will be writing more thoughtful things near the end of the{" "}
+          <span className="font-bold">Spring 2026</span> semester. Stay tuned!
         </p>
       </div>
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-        {readings.map(({ metadata }, key) => (
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {readings.map(({ metadata }) => (
           <Link
             href={`/${metadata.slug}`}
-            className="bg-gray-50 border border-gray-200 hover:bg-gray-100 rounded-xl p-6 transition-all duration-200 shadow-sm hover:shadow-md group"
-            key={key}
+            key={metadata.slug}
+            className="group bg-gray-50 border border-gray-200 hover:bg-gray-100 hover:border-gray-300 rounded-xl p-5 transition-all"
           >
-            <h3 className="font-semibold text-xl xl:text-2xl font-heading text-gray-800 mb-2">
-              {metadata.title}
-            </h3>
-            <p className="text-gray-600 leading-relaxed mb-4">
+            <div className="flex items-start justify-between gap-4 mb-2">
+              <h3 className="text-lg font-semibold text-gray-800 font-heading">
+                {metadata.title}
+              </h3>
+              <span className="shrink-0 text-sm font-medium text-gray-700 bg-gray-200/80 px-2.5 py-0.5 rounded-full">
+                <Views slug={metadata.slug} />
+              </span>
+            </div>
+            <p className="text-gray-500 text-sm leading-relaxed mb-3 line-clamp-2">
               {metadata.summary}
             </p>
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-500">{formatDate(metadata.date)}</span>
-              <div className="text-base font-semibold text-gray-700">
-                <Views slug={metadata.slug} />
-              </div>
-            </div>
+            <span className="text-xs text-gray-400">
+              {formatDate(metadata.date)}
+            </span>
           </Link>
         ))}
       </div>
