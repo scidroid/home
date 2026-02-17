@@ -4,6 +4,7 @@ import Image, { StaticImageData } from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { galleryData } from "@/content/gallery";
+import { useIsMobile } from "@/hooks/use-is-mobile";
 import { motion, useReducedMotion } from "motion/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -17,11 +18,25 @@ const CARD_POSITIONS = [
   { x: 6, y: 18, zIndex: 0, rotate: 1 }
 ];
 
+const MOBILE_CARD_POSITIONS = [
+  { x: 0, y: 0, zIndex: 3, rotate: 0 },
+  { x: 6, y: 2, zIndex: 2, rotate: 1.5 },
+  { x: -4, y: 4, zIndex: 1, rotate: -1.5 },
+  { x: 2, y: 6, zIndex: 0, rotate: 1 }
+];
+
 const REDUCED_MOTION_POSITIONS = [
   { x: 0, y: 0, zIndex: 3, rotate: 0 },
   { x: 10, y: 4, zIndex: 2, rotate: 0 },
   { x: -6, y: 8, zIndex: 1, rotate: 0 },
   { x: 4, y: 12, zIndex: 0, rotate: 0 }
+];
+
+const MOBILE_REDUCED_MOTION_POSITIONS = [
+  { x: 0, y: 0, zIndex: 3, rotate: 0 },
+  { x: 4, y: 2, zIndex: 2, rotate: 0 },
+  { x: -2, y: 3, zIndex: 1, rotate: 0 },
+  { x: 1, y: 4, zIndex: 0, rotate: 0 }
 ];
 
 function ProfileCard({
@@ -38,7 +53,7 @@ function ProfileCard({
   location?: string;
 }) {
   return (
-    <div className="relative w-48 h-48 sm:w-60 sm:h-60 xl:w-[550px] xl:h-[550px] rounded-xl overflow-hidden text-left shadow-md">
+    <div className="relative w-48 h-48 sm:w-60 sm:h-60 md:w-80 md:h-80 lg:w-96 lg:h-96 xl:w-[550px] xl:h-[550px] rounded-xl overflow-hidden text-left shadow-md">
       <Image
         src={src}
         alt={alt}
@@ -49,7 +64,7 @@ function ProfileCard({
         draggable={false}
       />
       <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent" />
-      <div className="absolute bottom-4 left-4 right-4 hidden xl:block text-left">
+      <div className="absolute bottom-4 left-4 right-4 hidden lg:block text-left">
         <div className="bg-black/30 backdrop-blur-md px-5 py-3 rounded-xl shadow-lg border border-white/10">
           <p className="text-white font-medium leading-relaxed">{caption}</p>
           {(date || location) && (
@@ -71,6 +86,7 @@ export function Gallery() {
   const progressRef = useRef<NodeJS.Timeout | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
+  const isMobile = useIsMobile();
 
   const clearTimers = useCallback(() => {
     setProgress(0);
@@ -124,7 +140,12 @@ export function Gallery() {
   }, [currentIndex, isPlaying, paginate, clearTimers, prefersReducedMotion]);
 
   const getPosition = (index: number) => {
-    const positions = prefersReducedMotion ? REDUCED_MOTION_POSITIONS : CARD_POSITIONS;
+    let positions: typeof CARD_POSITIONS;
+    if (prefersReducedMotion) {
+      positions = isMobile ? MOBILE_REDUCED_MOTION_POSITIONS : REDUCED_MOTION_POSITIONS;
+    } else {
+      positions = isMobile ? MOBILE_CARD_POSITIONS : CARD_POSITIONS;
+    }
     const pos = (index - currentIndex + galleryData.length) % galleryData.length;
     return positions[Math.min(pos, positions.length - 1)];
   };
@@ -142,7 +163,7 @@ export function Gallery() {
       aria-label="Photo gallery"
     >
       <div
-        className="relative w-48 h-48 sm:w-60 sm:h-60 xl:w-[550px] xl:h-[550px]"
+        className="relative w-48 h-48 sm:w-60 sm:h-60 md:w-80 md:h-80 lg:w-96 lg:h-96 xl:w-[550px] xl:h-[550px]"
         aria-live="polite"
         aria-atomic="true"
       >
@@ -163,7 +184,7 @@ export function Gallery() {
                   : { type: "spring", stiffness: 100, damping: 18, mass: 0.9 }
               }
               drag={isActive && !prefersReducedMotion ? "x" : false}
-              dragConstraints={{ left: -25, right: 25 }}
+              dragConstraints={isMobile ? { left: -10, right: 10 } : { left: -25, right: 25 }}
               dragElastic={0.1}
               onDragStart={pause}
               onDragEnd={(_, { offset, velocity }) => {
@@ -208,7 +229,7 @@ export function Gallery() {
 
         <button
           onClick={() => paginate(-1)}
-          className="bg-gray-50 border border-gray-200 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 text-gray-600 rounded-full p-2 motion-safe:transition-colors shadow-lg"
+          className="bg-gray-50 border border-gray-200 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 text-gray-600 rounded-full p-3 sm:p-2 motion-safe:transition-colors shadow-lg"
           aria-label="Previous image"
         >
           <ChevronLeft className="h-4 w-4" aria-hidden="true" />
@@ -216,7 +237,7 @@ export function Gallery() {
 
         <button
           onClick={() => paginate(1)}
-          className="bg-gray-50 border border-gray-200 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 text-gray-600 rounded-full p-2 motion-safe:transition-colors shadow-lg"
+          className="bg-gray-50 border border-gray-200 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 text-gray-600 rounded-full p-3 sm:p-2 motion-safe:transition-colors shadow-lg"
           aria-label="Next image"
         >
           <ChevronRight className="h-4 w-4" aria-hidden="true" />

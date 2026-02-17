@@ -44,7 +44,7 @@ export function Work() {
             rel="noopener noreferrer"
             className="block bg-gray-50 rounded-lg p-3 sm:p-4 lg:p-0 lg:bg-transparent lg:rounded-none group"
           >
-            <div className="flex flex-col sm:flex-row items-center sm:items-center gap-2 sm:gap-3 lg:gap-4 text-center sm:text-left">
+            <div className="flex flex-row items-center gap-2 sm:gap-3 lg:gap-4 text-left">
               <Image
                 src={exp.logo}
                 alt=""

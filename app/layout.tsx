@@ -69,9 +69,9 @@ export default function RootLayout({
 }) {
   return (
     <ViewTransitions>
-      <html lang="en">
+      <html lang="en" className="overflow-x-hidden">
         <body
-          className={`${sansFont.variable} ${monoFont.variable} text-gray-800 dark font-body antialiased bg-fixed bg-linear-to-bl from-blue-50 to-gray-50 p-4`}
+          className={`${sansFont.variable} ${monoFont.variable} text-gray-800 dark font-body antialiased bg-fixed bg-linear-to-bl from-blue-50 to-gray-50 p-2 sm:p-4`}
           suppressHydrationWarning={true}
         >
           <Header />

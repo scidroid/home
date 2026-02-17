@@ -26,7 +26,7 @@ export function Profile() {
           {copy.about.charAt(0).toLowerCase() + copy.about.slice(1)}
         </p>
 
-        <div className="my-2 sm:my-4 flex flex-col xl:flex-row items-center justify-between w-full gap-2">
+        <div className="my-2 sm:my-4 flex flex-col sm:flex-row items-center justify-between w-full gap-2">
           <NowPlaying />
           <Health />
         </div>

@@ -21,7 +21,7 @@ export function MailLink() {
   return (
     <button
       type="button"
-      className="flex items-center gap-2.5 group transition-colors"
+      className="flex items-center gap-2.5 group transition-colors py-2"
       onClick={handleClick}
     >
       <span className="text-gray-400 group-hover:text-gray-600 transition-colors">
@@ -48,7 +48,7 @@ export function SocialLink({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center gap-2.5 group transition-colors"
+      className="flex items-center gap-2.5 group transition-colors py-2"
     >
       <span className="text-gray-400 group-hover:text-gray-600 transition-colors [&>svg]:w-5 [&>svg]:h-5">
         {icon}

@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
+import { useIsMobile } from "@/hooks/use-is-mobile";
 import {
   ScatterChart,
   Scatter,
@@ -94,7 +95,7 @@ function ExpandTrigger({ isExpanded, caption }: { isExpanded: boolean; caption: 
         }}
         transition={{
           duration: 1.2,
-          repeat: isExpanded ? 0 : Infinity,
+          repeat: isExpanded ? 0 : 3,
           ease: "easeInOut",
         }}
         className="relative"
@@ -119,7 +120,7 @@ function ExpandTrigger({ isExpanded, caption }: { isExpanded: boolean; caption: 
             animate={{ scale: 2, opacity: 0 }}
             transition={{
               duration: 1.5,
-              repeat: Infinity,
+              repeat: 3,
               ease: "easeOut",
             }}
             style={{ margin: "-4px" }}
@@ -144,11 +145,11 @@ function LifeCycleTimeline() {
         </p>
       </div>
 
-      <div className="absolute left-[38px] top-[88px] bottom-16 w-0.5 bg-linear-to-b from-amber-400 via-amber-300 to-amber-200" />
+      <div className="absolute left-[28px] sm:left-[38px] top-[88px] bottom-16 w-0.5 bg-linear-to-b from-amber-400 via-amber-300 to-amber-200" />
       <div className="space-y-0.5">
         {lifeCycleData.map((stage, index) => (
-          <div key={index} className="relative flex items-center gap-4 py-3 pl-14">
-            <div className="absolute left-3 w-5 h-5 rounded-full bg-amber-50 border-2 border-amber-400 flex items-center justify-center shadow-sm">
+          <div key={index} className="relative flex items-center gap-3 sm:gap-4 py-3 pl-11 sm:pl-14">
+            <div className="absolute left-1.5 sm:left-3 w-5 h-5 rounded-full bg-amber-50 border-2 border-amber-400 flex items-center justify-center shadow-sm">
               <div className="w-1.5 h-1.5 rounded-full bg-amber-500" />
             </div>
             <span className="text-xl">{stage.icon}</span>
@@ -178,6 +179,8 @@ function LifeCycleTimeline() {
 }
 
 function ProductivityChart() {
+  const isMobile = useIsMobile();
+
   return (
     <div className="bg-white/50 backdrop-blur-sm rounded-xl border border-amber-200/40 p-5">
       <div className="mb-4 pb-3 border-b border-amber-200/40">
@@ -189,19 +192,19 @@ function ProductivityChart() {
         </p>
       </div>
 
-      <div className="h-[360px]">
+      <div className="h-[280px] sm:h-[360px]">
         <ResponsiveContainer>
-          <ScatterChart margin={{ top: 10, right: 20, left: 10, bottom: 35 }}>
-            <ReferenceArea x1={1300} x2={midHours} y1={midWages} y2={100000} fill="#22c55e" fillOpacity={0.08} label={{ value: "Ideal", position: "insideTopLeft", fontSize: 12, fill: "#15803d", fontWeight: 700 }} />
+          <ScatterChart margin={isMobile ? { top: 5, right: 10, left: 5, bottom: 25 } : { top: 10, right: 20, left: 10, bottom: 35 }}>
+            <ReferenceArea x1={1300} x2={midHours} y1={midWages} y2={100000} fill="#22c55e" fillOpacity={0.08} label={{ value: "Ideal", position: "insideTopLeft", fontSize: isMobile ? 10 : 12, fill: "#15803d", fontWeight: 700 }} />
             <ReferenceArea x1={midHours} x2={2300} y1={midWages} y2={100000} fill="#eab308" fillOpacity={0.04} />
             <ReferenceArea x1={1300} x2={midHours} y1={15000} y2={midWages} fill="#6b7280" fillOpacity={0.03} />
-            <ReferenceArea x1={midHours} x2={2300} y1={15000} y2={midWages} fill="#dc2626" fillOpacity={0.08} label={{ value: "Trap", position: "insideBottomRight", fontSize: 12, fill: "#b91c1c", fontWeight: 700 }} />
+            <ReferenceArea x1={midHours} x2={2300} y1={15000} y2={midWages} fill="#dc2626" fillOpacity={0.08} label={{ value: "Trap", position: "insideBottomRight", fontSize: isMobile ? 10 : 12, fill: "#b91c1c", fontWeight: 700 }} />
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" strokeOpacity={0.7} />
-            <XAxis type="number" dataKey="hours" domain={[1300, 2300]} stroke="#9ca3af" fontSize={9} tickFormatter={(v) => v.toLocaleString()}>
-              <Label value="Hours worked per year →" position="bottom" offset={12} style={{ fontSize: 10, fill: "#6b7280" }} />
+            <XAxis type="number" dataKey="hours" domain={[1300, 2300]} stroke="#9ca3af" fontSize={isMobile ? 10 : 9} tickFormatter={(v) => v.toLocaleString()} tickCount={isMobile ? 4 : undefined}>
+              <Label value="Hours worked per year →" position="bottom" offset={isMobile ? 6 : 12} style={{ fontSize: isMobile ? 9 : 10, fill: "#6b7280" }} />
             </XAxis>
-            <YAxis type="number" dataKey="wages" domain={[15000, 100000]} stroke="#9ca3af" fontSize={9} tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`}>
-              <Label value="Annual wages (USD PPP) →" angle={-90} position="insideLeft" offset={0} style={{ fontSize: 10, fill: "#6b7280", textAnchor: "middle" }} />
+            <YAxis type="number" dataKey="wages" domain={[15000, 100000]} stroke="#9ca3af" fontSize={isMobile ? 10 : 9} tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} tickCount={isMobile ? 4 : undefined}>
+              <Label value="Annual wages (USD PPP) →" angle={-90} position="insideLeft" offset={0} style={{ fontSize: isMobile ? 9 : 10, fill: "#6b7280", textAnchor: "middle" }} />
             </YAxis>
             <Tooltip
               content={({ active, payload }) => {
@@ -233,8 +236,8 @@ function ProductivityChart() {
                 );
               }}
             />
-            <Scatter data={productivityData} fill="#8b5cf6">
-              {productivityData.map((entry, index) => (
+            <Scatter data={isMobile ? productivityData.filter(d => d.highlight) : productivityData} fill="#8b5cf6">
+              {(isMobile ? productivityData.filter(d => d.highlight) : productivityData).map((entry, index) => (
                 <Cell key={index} fill={entry.color} stroke={entry.highlight ? "#1e1b4b" : "none"} strokeWidth={entry.highlight ? 2 : 0} r={entry.highlight ? 7 : 5} />
               ))}
               <LabelList
@@ -242,12 +245,19 @@ function ProductivityChart() {
                 position="left"
                 fontSize={9}
                 fill="#374151"
-                formatter={(value: string) => {
-                  if (value === "Chile") return "Chile";
-                  if (value === "Colombia") return "Colombia";
-                  if (value === "OECD Average") return "OECD";
-                  if (value === "Switzerland") return "Switzerland";
-                  if (value === "United States") return "USA";
+                formatter={(value) => {
+                  const v = String(value);
+                  if (isMobile) {
+                    if (v === "Colombia") return "COL";
+                    if (v === "United States") return "USA";
+                    if (v === "OECD Average") return "OECD";
+                    return "";
+                  }
+                  if (v === "Chile") return "Chile";
+                  if (v === "Colombia") return "Colombia";
+                  if (v === "OECD Average") return "OECD";
+                  if (v === "Switzerland") return "Switzerland";
+                  if (v === "United States") return "USA";
                   return "";
                 }}
               />
@@ -257,7 +267,10 @@ function ProductivityChart() {
       </div>
 
       <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-[10px] mt-3 pt-3 border-t border-amber-200/40">
-        {productivityRegions.map((region) => (
+        {(isMobile
+          ? productivityRegions.filter(r => ["Latin America", "North America", "Europe", "OECD Average"].includes(r.name))
+          : productivityRegions
+        ).map((region) => (
           <div key={region.name} className="flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full" style={{ backgroundColor: region.color }} />
             <span className="text-gray-500">{region.name}</span>
@@ -284,9 +297,9 @@ function EducationDivide() {
       </div>
 
       {/* Comparison Grid */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {/* Left: Developed */}
-        <div className="bg-green-50/80 rounded-lg p-4 border border-green-200/60">
+        <div className="bg-green-50/80 rounded-lg p-3 sm:p-4 border border-green-200/60">
           <div className="flex items-center gap-2 mb-3">
             <span className="text-lg">🇨🇭</span>
             <span className="text-xs font-semibold text-green-800">Born in Zurich</span>
@@ -312,7 +325,7 @@ function EducationDivide() {
         </div>
 
         {/* Right: Developing */}
-        <div className="bg-red-50/80 rounded-lg p-4 border border-red-200/60">
+        <div className="bg-red-50/80 rounded-lg p-3 sm:p-4 border border-red-200/60">
           <div className="flex items-center gap-2 mb-3">
             <span className="text-lg">🇹🇩</span>
             <span className="text-xs font-semibold text-red-800">Born in N&apos;Djamena</span>
@@ -431,6 +444,7 @@ function StorySection({ header, detail, isExpanded, index, defaultOpen }: StoryS
 export function Story() {
   const [isExpanded, setIsExpanded] = useState(false);
   const articleRef = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
 
   const handleToggle = () => {
     const willExpand = !isExpanded;
@@ -515,7 +529,7 @@ export function Story() {
   ];
 
   return (
-    <article ref={articleRef} className="w-full h-full rounded-2xl bg-linear-to-br from-amber-50/90 via-yellow-50/80 to-orange-50/70 p-6 md:p-8 flex flex-col border border-amber-200/50 shadow-sm">
+    <article ref={articleRef} className="w-full h-full rounded-2xl bg-linear-to-br from-amber-50/90 via-yellow-50/80 to-orange-50/70 p-4 sm:p-6 md:p-8 flex flex-col border border-amber-200/50 shadow-sm">
       <h3 className="text-2xl font-bold text-gray-900 mb-5 tracking-tight">
         Why I Build
       </h3>

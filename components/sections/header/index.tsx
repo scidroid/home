@@ -40,14 +40,14 @@ export function Header() {
     <motion.header
       initial={{ y: "-200%" }}
       animate={controls}
-      className="fixed top-4 left-2 right-2 z-40 bg-gray-50 border border-gray-200 text-gray-600 bg-opacity-80 p-4 rounded-full flex items-center justify-between max-w-xl mx-auto backdrop-blur-sm"
+      className="fixed top-2 sm:top-4 left-2 right-2 z-40 bg-gray-50 border border-gray-200 text-gray-600 bg-opacity-80 px-3 py-2 sm:p-4 rounded-full flex items-center justify-between max-w-xl mx-auto backdrop-blur-sm"
       aria-hidden={!isVisible}
     >
       <Link href="/" className="font-bold sm:text-xl font-heading">
         Juan Almanza
       </Link>
 
-      <nav aria-label="Social links" className="flex items-center gap-2">
+      <nav aria-label="Social links" className="flex items-center gap-1 sm:gap-2">
         <Clock />
         {socialLinks.map(({ href, icon, label }) => (
           <a
@@ -56,7 +56,7 @@ export function Header() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${label} (opens in new tab)`}
-            className="p-1 rounded-full hover:bg-gray-200/50 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
+            className="p-1.5 sm:p-1 rounded-full hover:bg-gray-200/50 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
           >
             <HugeiconsIcon
               icon={icon}

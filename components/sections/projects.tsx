@@ -46,7 +46,7 @@ function ProjectModalContent({
     <div className="max-h-[85vh] overflow-y-auto md:overflow-hidden md:flex md:flex-row">
       {/* Left panel — identity & visual */}
       <div
-        className={`${c.bg} p-6 md:w-[45%] md:overflow-y-auto flex flex-col items-center justify-center text-center shrink-0`}
+        className={`${c.bg} p-4 md:p-6 md:w-[45%] md:overflow-y-auto flex flex-col items-center justify-center text-center shrink-0`}
       >
         <div className="py-4 md:py-8 space-y-4 w-full">
           {isPulpoo ? (
@@ -105,7 +105,7 @@ function ProjectModalContent({
       </div>
 
       {/* Right panel — information */}
-      <div className="p-6 md:w-[55%] md:overflow-y-auto space-y-4">
+      <div className="p-4 md:p-6 md:w-[55%] md:overflow-y-auto space-y-4">
         <p className="text-base text-gray-600 leading-relaxed">
           {project.fullDescription}
         </p>
@@ -262,7 +262,7 @@ export function Projects() {
                       isPulpoo={isPulpoo}
                       c={c}
                     />
-                    <DialogClose className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/60 hover:bg-white/80 backdrop-blur-sm text-gray-500 hover:text-gray-700 flex items-center justify-center transition-colors" />
+                    <DialogClose className="absolute top-3 right-3 z-10 w-11 h-11 rounded-full bg-white/60 hover:bg-white/80 backdrop-blur-sm text-gray-500 hover:text-gray-700 flex items-center justify-center transition-colors" />
                   </DialogContent>
                 </DialogContainer>
               </Dialog>

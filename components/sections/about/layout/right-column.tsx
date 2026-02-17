@@ -8,8 +8,8 @@ import { HugeiconsIcon } from "@hugeicons/react";
 
 export function RightColumn() {
   return (
-    <aside className="flex-1 w-full max-w-full lg:min-w-[320px] lg:max-w-lg lg:sticky lg:top-24 lg:self-start mb-8 lg:mb-0 text-center lg:text-left">
-      <h2 className="text-3xl font-bold mb-4">
+    <aside className="flex-1 w-full max-w-full lg:min-w-[320px] lg:max-w-lg lg:sticky lg:top-24 lg:self-start mb-8 lg:mb-0 text-left order-1 lg:order-2">
+      <h2 className="text-2xl sm:text-3xl font-bold mb-4">
         I'm building <span className="shiny">innovative solutions</span> for
         global challenges in{" "}
         <span className="inline-flex items-center align-middle gap-1.5">

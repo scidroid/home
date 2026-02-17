@@ -234,7 +234,7 @@ function DialogContainer({ children }: DialogContainerProps) {
             animate={{ opacity: 1, transition: { duration: 0.25 } }}
             exit={{ opacity: 0, transition: { duration: 0.2 } }}
           />
-          <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
             {children}
           </div>
         </>
@@ -368,7 +368,7 @@ function DialogClose({ children, className, variants }: DialogCloseProps) {
       type="button"
       aria-label="Close dialog"
       key={`dialog-close-${uniqueId}`}
-      className={cn("absolute right-6 top-6", className)}
+      className={cn("absolute right-6 top-6 min-w-[44px] min-h-[44px]", className)}
       initial="initial"
       animate="animate"
       exit="exit"

@@ -94,7 +94,7 @@ export function Subtitle() {
           <span
             id={`tooltip-${idx}`}
             role="tooltip"
-            className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-max max-w-xs px-3 py-2 rounded-lg text-white font-semibold shadow-lg border border-white/10 leading-relaxed bg-black/70 backdrop-blur-md text-xs opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 pointer-events-none motion-safe:transition-opacity motion-safe:duration-200 whitespace-pre-line z-50"
+            className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-max max-w-xs px-3 py-2 rounded-lg text-white font-semibold shadow-lg border border-white/10 leading-relaxed bg-black/70 backdrop-blur-md text-xs pointer-events-none motion-safe:transition-opacity motion-safe:duration-200 whitespace-pre-line z-50 hidden sm:block opacity-0 group-hover:opacity-100 group-focus-within:opacity-100"
           >
             {pill.tooltip}
           </span>

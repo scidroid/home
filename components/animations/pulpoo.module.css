@@ -125,7 +125,7 @@
   width: 12px;
   height: 12px;
   flex-shrink: 0;
-  animation: nudgeRight 1.5s ease-in-out infinite;
+  animation: nudgeRight 1.5s ease-in-out 3;
 }
 
 @keyframes nudgeRight {
@@ -145,4 +145,16 @@
   font-weight: 700;
   letter-spacing: 0.01em;
   transition: opacity 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signal {
+    animation: none;
+  }
+  .bubble {
+    animation: none;
+  }
+  .askArrow {
+    animation: none;
+  }
 }

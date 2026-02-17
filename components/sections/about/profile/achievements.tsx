@@ -43,7 +43,7 @@ export function Achievements() {
             key={index}
             className="bg-gray-50 rounded-lg p-3 sm:p-4 lg:p-0 lg:bg-transparent lg:rounded-none"
           >
-            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 text-center sm:text-left">
+            <div className="flex flex-row items-center gap-2 sm:gap-3 text-left">
               <HugeiconsIcon
                 icon={achievement.icon}
                 className="w-6 h-6 shrink-0"

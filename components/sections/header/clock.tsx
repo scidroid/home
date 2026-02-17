@@ -23,7 +23,7 @@ export function Clock() {
   }, []);
 
   return (
-    <span className="sm:text-xl text-neutral-700" suppressHydrationWarning>
+    <span className="hidden sm:inline sm:text-xl text-neutral-700" suppressHydrationWarning>
       {time} in SF
     </span>
   );

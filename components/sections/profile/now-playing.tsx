@@ -38,7 +38,7 @@ function SongCard({
 }) {
   return (
     <article
-      className={`relative h-auto min-h-32 xl:h-52 rounded-xl shadow-lg w-full overflow-hidden bg-red-200 ${className}`}
+      className={`relative h-auto min-h-32 sm:min-h-40 xl:h-52 rounded-xl shadow-lg w-full overflow-hidden bg-red-200 ${className}`}
       aria-label={ariaLabel}
     >
       {children}

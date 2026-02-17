@@ -36,6 +36,12 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .shiny {
+    animation: none;
+  }
+}
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
