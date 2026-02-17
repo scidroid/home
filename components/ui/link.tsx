@@ -54,8 +54,16 @@ export function Link({
   function action(e: MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
 
-    router.push(href as string, {
-      onTransitionReady: slideInOut
+    const target = href as string;
+    const isHashLink = target.startsWith("#") || target.includes("/#");
+
+    router.push(target, {
+      onTransitionReady: () => {
+        slideInOut();
+        if (!isHashLink) {
+          window.scrollTo(0, 0);
+        }
+      }
     });
   }
 

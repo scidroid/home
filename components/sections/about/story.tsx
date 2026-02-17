@@ -193,7 +193,7 @@ function ProductivityChart() {
       </div>
 
       <div className="h-[280px] sm:h-[360px]">
-        <ResponsiveContainer>
+        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
           <ScatterChart margin={isMobile ? { top: 5, right: 10, left: 5, bottom: 25 } : { top: 10, right: 20, left: 10, bottom: 35 }}>
             <ReferenceArea x1={1300} x2={midHours} y1={midWages} y2={100000} fill="#22c55e" fillOpacity={0.08} label={{ value: "Ideal", position: "insideTopLeft", fontSize: isMobile ? 10 : 12, fill: "#15803d", fontWeight: 700 }} />
             <ReferenceArea x1={midHours} x2={2300} y1={midWages} y2={100000} fill="#eab308" fillOpacity={0.04} />
