@@ -1,99 +1,152 @@
 "use client";
 
 import Image from "next/image";
-import { projects, type Project } from "@/content/projects";
+import { projects } from "@/content/projects";
 import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
+import { PulpooAnimation } from "@/components/animations/pulpoo";
+import pulpooLogo from "@/components/sections/about/images/pulpoo.webp";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContainer,
+  DialogContent,
+  DialogClose,
+} from "@/components/ui/dialog";
 
-const bgColors = {
-  purple: "bg-violet-50",
-  green: "bg-emerald-50",
-  orange: "bg-amber-50",
-  blue: "bg-sky-50",
+const colors = {
+  purple: {
+    bg: "bg-violet-50",
+    accent: "text-violet-600",
+  },
+  green: {
+    bg: "bg-emerald-50",
+    accent: "text-emerald-600",
+  },
+  orange: {
+    bg: "bg-amber-50",
+    accent: "text-amber-600",
+  },
+  blue: {
+    bg: "bg-sky-50",
+    accent: "text-sky-600",
+  },
 } as const;
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
-  const bg = bgColors[project.color as keyof typeof bgColors] || bgColors.blue;
-
+function ProjectModalContent({
+  project,
+  isPulpoo,
+  c,
+}: {
+  project: (typeof projects)[0];
+  isPulpoo: boolean;
+  c: { bg: string; accent: string };
+}) {
   return (
-    <article
-      className={`${bg} border border-gray-200 rounded-2xl p-5 sm:p-6 sticky shadow-sm`}
-      style={{ top: `${96 + index * 24}px` }}
-    >
-      <div className="flex flex-col lg:flex-row gap-5 lg:gap-8">
-        {/* Image */}
-        <div className="w-full lg:w-72 shrink-0">
-          <div className="relative aspect-video lg:aspect-4/3 rounded-xl overflow-hidden">
+    <div className="max-h-[85vh] overflow-y-auto md:overflow-hidden md:flex md:flex-row">
+      {/* Left panel — identity & visual */}
+      <div
+        className={`${c.bg} p-6 md:w-[45%] md:overflow-y-auto flex flex-col items-center justify-center text-center shrink-0`}
+      >
+        <div className="py-4 md:py-8 space-y-4 w-full">
+          {isPulpoo ? (
             <Image
-              src={project.image}
-              alt={project.title}
-              fill
-              className="object-cover"
+              src={pulpooLogo}
+              alt="Pulpoo logo"
+              width={56}
+              height={56}
+              className="rounded-xl mx-auto"
             />
-          </div>
-        </div>
+          ) : (
+            <span className="text-5xl block">{project.icon}</span>
+          )}
 
-        {/* Content */}
-        <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between gap-3 mb-2">
-            <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 font-heading flex items-center gap-2">
-              <span>{project.icon}</span>
+          <div>
+            <h3 className="text-2xl font-bold text-gray-800 font-heading leading-tight">
               {project.title}
             </h3>
-            <div className="flex items-center gap-2 shrink-0">
-              <span className={`text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded-full ${
-                project.status === "active"
-                  ? "bg-emerald-100 text-emerald-700"
-                  : "bg-amber-100 text-amber-700"
-              }`}>
-                {project.status === "active" ? "Live" : "Building"}
-              </span>
-              <span className="text-xs text-gray-400">{project.year}</span>
-            </div>
+            <p className="text-sm text-gray-500 mt-1">{project.subtitle}</p>
           </div>
 
-          <p className="text-gray-600 leading-relaxed mb-4">
-            {project.shortDescription}
-          </p>
+          <div className="w-full">
+            {isPulpoo ? (
+              <div onClick={(e) => e.stopPropagation()}>
+                <PulpooAnimation />
+              </div>
+            ) : project.image ? (
+              <div className="aspect-video rounded-xl bg-white/50 text-gray-400 flex items-center justify-center">
+                <span className="text-sm">Screenshot</span>
+              </div>
+            ) : null}
+          </div>
 
-          {/* Highlights */}
-          <ul className="space-y-1.5 mb-4">
-            {project.highlights.map((highlight, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
-                <span className="text-gray-300 mt-0.5">→</span>
-                {highlight}
-              </li>
-            ))}
-          </ul>
-
-          {/* Footer */}
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex flex-wrap gap-1.5">
-              {project.tech.map((tech, i) => (
-                <span
-                  key={i}
-                  className="text-xs text-gray-500 bg-white/80 border border-gray-200 px-2.5 py-1 rounded-full"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-
-            {project.link && (
+          <div className="pt-2">
+            {isPulpoo ? (
               <a
-                href={project.link}
+                href="https://pulpoo.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="shrink-0 text-sm text-gray-700 hover:text-gray-900 transition-colors flex items-center gap-1"
+                onClick={(e) => e.stopPropagation()}
+                className="inline-flex items-center gap-1.5 bg-violet-600 hover:bg-violet-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
               >
-                <span className="underline decoration-gray-300 underline-offset-2">Visit</span>
-                <HugeiconsIcon icon={ArrowUpRight01Icon} className="w-3.5 h-3.5" />
+                Try Pulpoo
+                <HugeiconsIcon
+                  icon={ArrowUpRight01Icon}
+                  className="w-3.5 h-3.5"
+                />
               </a>
+            ) : (
+              <span className={`text-sm font-medium ${c.accent}`}>
+                {project.status === "active" ? "Active" : "In Development"}
+              </span>
             )}
           </div>
         </div>
       </div>
-    </article>
+
+      {/* Right panel — information */}
+      <div className="p-6 md:w-[55%] md:overflow-y-auto space-y-4">
+        <p className="text-base text-gray-600 leading-relaxed">
+          {project.fullDescription}
+        </p>
+
+        <ul className="space-y-2">
+          {project.highlights.map((highlight, i) => (
+            <li
+              key={i}
+              className="flex items-start gap-2 text-base text-gray-600"
+            >
+              <span className="text-gray-400 mt-0.5">→</span>
+              {highlight}
+            </li>
+          ))}
+        </ul>
+
+        <p className="text-sm text-gray-400">
+          {project.tech.join(" · ")}
+        </p>
+
+        {project.link && (
+          <div className="pt-2">
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 transition-colors"
+            >
+              <span className="underline decoration-gray-300 underline-offset-2">
+                Visit project
+              </span>
+              <HugeiconsIcon
+                icon={ArrowUpRight01Icon}
+                className="w-3.5 h-3.5"
+              />
+            </a>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 
@@ -106,10 +159,116 @@ export function Projects() {
         </h2>
       </div>
 
-      <div className="space-y-4">
-        {projects.map((project, index) => (
-          <ProjectCard key={project.id} project={project} index={index} />
-        ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {projects.map((project, index) => {
+          const c =
+            colors[project.color as keyof typeof colors] || colors.blue;
+          const isPulpoo = project.id === "pulpoo";
+
+          return (
+            <div key={project.id}>
+              <Dialog
+                transition={{
+                  type: "spring",
+                  bounce: 0.05,
+                  duration: 0.5,
+                }}
+              >
+                <DialogTrigger
+                  className={`${c.bg} rounded-2xl w-full h-full text-left shadow-lg shadow-black/[0.08] block`}
+                  style={{ borderRadius: 16 }}
+                >
+                  <div className="p-5 flex flex-col h-full">
+                    {/* Zone A: Identity */}
+                    <div className="mb-4">
+                      <div className="flex items-center gap-2.5">
+                        {isPulpoo ? (
+                          <Image
+                            src={pulpooLogo}
+                            alt="Pulpoo logo"
+                            width={28}
+                            height={28}
+                            className="rounded-lg"
+                          />
+                        ) : (
+                          <span className="text-2xl">{project.icon}</span>
+                        )}
+                        <h3 className="text-lg font-bold text-gray-800 font-heading leading-tight">
+                          {project.title}
+                        </h3>
+                      </div>
+                      <p className="text-sm text-gray-500 mt-1">
+                        {project.subtitle}
+                      </p>
+                    </div>
+
+                    {/* Zone B: Visual */}
+                    <div className="mb-4">
+                      {isPulpoo ? (
+                        <div onClick={(e) => e.stopPropagation()}>
+                          <PulpooAnimation />
+                        </div>
+                      ) : (
+                        <div className="aspect-video rounded-xl bg-gray-100 text-gray-400 flex items-center justify-center">
+                          <span className="text-xs">Screenshot</span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Zone C: Description */}
+                    <p className="text-sm text-gray-600 mb-3 leading-relaxed line-clamp-3">
+                      {project.shortDescription}
+                    </p>
+
+                    {/* Zone D: Tech Tags */}
+                    <p className="text-xs text-gray-400 mb-3">
+                      {project.tech.slice(0, 4).join(" · ")}
+                    </p>
+
+                    {/* Zone E: Footer */}
+                    <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-200/40">
+                      {isPulpoo ? (
+                        <a
+                          href="https://pulpoo.com"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-flex items-center gap-1.5 bg-violet-600 hover:bg-violet-700 text-white text-xs font-medium px-3.5 py-1.5 rounded-lg transition-colors"
+                        >
+                          Try Pulpoo
+                          <HugeiconsIcon
+                            icon={ArrowUpRight01Icon}
+                            className="w-3.5 h-3.5"
+                          />
+                        </a>
+                      ) : (
+                        <span className={`text-xs font-medium ${c.accent}`}>
+                          {project.status === "active"
+                            ? "Active"
+                            : "In Development"}
+                        </span>
+                      )}
+                      <span className="text-xs text-gray-400">Details →</span>
+                    </div>
+                  </div>
+                </DialogTrigger>
+                <DialogContainer>
+                  <DialogContent
+                    className="relative max-w-4xl w-full mx-auto bg-white shadow-2xl"
+                    style={{ borderRadius: 16 }}
+                  >
+                    <ProjectModalContent
+                      project={project}
+                      isPulpoo={isPulpoo}
+                      c={c}
+                    />
+                    <DialogClose className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/60 hover:bg-white/80 backdrop-blur-sm text-gray-500 hover:text-gray-700 flex items-center justify-center transition-colors" />
+                  </DialogContent>
+                </DialogContainer>
+              </Dialog>
+            </div>
+          );
+        })}
       </div>
     </section>
   );

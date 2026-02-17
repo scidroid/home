@@ -1,0 +1,148 @@
+@keyframes pulsePurple {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 6px 3px rgba(139, 92, 246, 0);
+  }
+}
+
+@keyframes badgePop {
+  0% {
+    transform: scale(0);
+  }
+  60% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes floatBubble {
+  0% {
+    transform: scale(0) translateY(0);
+    opacity: 0;
+  }
+  15% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(1) translateY(-100%);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0.8) translateY(-130%);
+    opacity: 0;
+  }
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 7 / 3;
+  user-select: none;
+  transition: opacity 0.5s ease;
+}
+
+.scanBeam {
+  position: absolute;
+  inset-block: 0;
+  pointer-events: none;
+  z-index: 10;
+  width: 2px;
+  margin-left: -1px;
+  background: linear-gradient(
+    to bottom,
+    transparent 5%,
+    rgba(139, 92, 246, 0.5) 30%,
+    rgba(139, 92, 246, 0.8) 50%,
+    rgba(139, 92, 246, 0.5) 70%,
+    transparent 95%
+  );
+  box-shadow: 0 0 8px 2px rgba(139, 92, 246, 0.25);
+}
+
+.item {
+  position: absolute;
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.5s ease;
+}
+
+.signal {
+  z-index: 5;
+  border-radius: 50%;
+  animation: pulsePurple 1.4s ease infinite;
+}
+
+.badge {
+  position: absolute;
+  pointer-events: none;
+  z-index: 6;
+  animation: badgePop 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.bubble {
+  position: absolute;
+  pointer-events: none;
+  z-index: 6;
+  animation: floatBubble 1.6s ease-in-out infinite;
+}
+
+.footer {
+  margin-top: 0.75rem;
+  min-height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.askButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6d28d9;
+  background: rgba(139, 92, 246, 0.08);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.askButton:hover {
+  background: rgba(139, 92, 246, 0.15);
+  border-color: rgba(139, 92, 246, 0.35);
+}
+
+.askArrow {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  animation: nudgeRight 1.5s ease-in-out infinite;
+}
+
+@keyframes nudgeRight {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+}
+
+.caption {
+  font-size: 13px;
+  color: #374151;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition: opacity 0.3s ease;
+}
