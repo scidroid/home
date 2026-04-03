@@ -7,7 +7,7 @@ export default function robots() {
         allow: []
       }
     ],
-    sitemap: "https://testing.scidroid.co/sitemap.xml",
-    host: "https://testing.scidroid.co"
+    sitemap: "https://almanza.cc/sitemap.xml",
+    host: "https://almanza.cc"
   };
 }

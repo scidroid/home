@@ -26,7 +26,7 @@ export function generateContactEmail(
         
         <p style="color: #666; font-size: 14px;">
           Juan Almanza<br/>
-          <a href="https://scidroid.co" style="color: #333;">scidroid.co</a>
+          <a href="https://almanza.cc" style="color: #333;">almanza.cc</a>
         </p>
       </body>
     </html>

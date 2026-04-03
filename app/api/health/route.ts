@@ -1,6 +1,6 @@
 // this endpoint is being fetched by a shortcut on my iphone that retrieves data
 // from the heatlh app and send the data to this endpoint to be stored in key-value
-// more info in https://scidroid.co/apple-health
+// more info in https://almanza.cc/apple-health
 import { kv } from "@vercel/kv";
 
 const { PASSWORD } = process.env;

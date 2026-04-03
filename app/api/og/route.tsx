@@ -99,7 +99,7 @@ export async function GET(req: NextRequest) {
             color: "#9CA3AF"
           }}
         >
-          scidroid.co
+          almanza.cc
         </div>
       </div>
     ),

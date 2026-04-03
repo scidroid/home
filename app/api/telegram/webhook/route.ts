@@ -119,7 +119,7 @@ export async function POST(request: NextRequest) {
           },
           body: JSON.stringify({
             from: "Juan Almanza <contact@automated.scidroid.co>",
-            reply_to: "hi@scidroid.co",
+            reply_to: "juan@almanza.cc",
             to: pendingReply.email,
             subject: "Re: Your message to Juan Almanza",
             html: generateReplyEmail(pendingReply.name, update.message.text)

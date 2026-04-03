@@ -25,7 +25,7 @@ const monoFont = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://testing.scidroid.co"),
+  metadataBase: new URL("https://almanza.cc"),
   title: {
     default: copy.name,
     template: `%s | ${copy.name}`
@@ -34,13 +34,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: copy.name,
     description: copy.about,
-    url: "https://testing.scidroid.co",
+    url: "https://almanza.cc",
     siteName: copy.name,
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "https://testing.scidroid.co/api/og"
+        url: "https://almanza.cc/api/og"
       }
     ]
   },
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   twitter: {
     title: copy.name,
     card: "summary_large_image",
-    images: ["https://testing.scidroid.co/api/og"]
+    images: ["https://almanza.cc/api/og"]
   }
 };
 

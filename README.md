@@ -19,7 +19,7 @@
 
 </div>
 
-> Try the live version at [testing.scidroid.co](https://testing.scidroid.co/)
+> Try the live version at [almanza.cc](https://almanza.cc/)
 
 This is my personal website built with the latest web technologies. It serves as my digital home, showcasing my work, thoughts, and experiences.
 
@@ -106,4 +106,4 @@ This project is licensed under the GNU AGPLv3 License - see the [LICENSE](LICENS
 
 ## Contact
 
-If you want to contact me you can reach me at [hi@scidroid.co](mailto:hi@scidroid.co).
+If you want to contact me you can reach me at [juan@almanza.cc](mailto:juan@almanza.cc).

@@ -75,9 +75,9 @@ export async function sendContactForm(
         },
         body: JSON.stringify({
           from: "Juan Almanza <contact@automated.scidroid.co>",
-          reply_to: "hi@scidroid.co",
+          reply_to: "juan@almanza.cc",
           to: email,
-          bcc: "hi@scidroid.co",
+          bcc: "juan@almanza.cc",
           subject: "Message sent to Juan Almanza",
           html: generateContactEmail(name, message, email)
         })
