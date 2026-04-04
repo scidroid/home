@@ -1,13 +1,14 @@
-import asofi from "@/public/images/gallery/asofi.jpg";
-import einstein from "@/public/images/gallery/einstein.jpg";
-import farolito from "@/public/images/gallery/farolito.jpg";
-import ioai from "@/public/images/gallery/ioai.jpg";
-import ioi from "@/public/images/gallery/ioi.jpg";
-import jsconf from "@/public/images/gallery/jsconf.jpg";
-import microplastics from "@/public/images/gallery/microplastics.jpg";
-import mpesa from "@/public/images/gallery/mpesa.jpg";
-import scrapyard from "@/public/images/gallery/scrapyard.jpg";
-import headshot from "@/public/juan.jpg";
+import asofi from "@/public/images/gallery/asofi.webp";
+import fcf from "@/public/images/gallery/fcf.webp";
+import einstein from "@/public/images/gallery/einstein.webp";
+import farolito from "@/public/images/gallery/farolito.webp";
+import ioai from "@/public/images/gallery/ioai.webp";
+import ioi from "@/public/images/gallery/ioi.webp";
+import jsconf from "@/public/images/gallery/jsconf.webp";
+import microplastics from "@/public/images/gallery/microplastics.webp";
+import mpesa from "@/public/images/gallery/mpesa.webp";
+import scrapyard from "@/public/images/gallery/scrapyard.webp";
+import headshot from "@/public/juan.webp";
 
 export const galleryData = [
   {
@@ -82,6 +83,14 @@ export const galleryData = [
     caption: "Measuring microplastics in the Bay Area",
     date: "Oct 2025",
     location: "Sausalito, CA"
+  },
+  {
+    id: "fcf",
+    src: fcf,
+    alt: "Juan at a football match with the Colombia national soccer team",
+    caption: "Watching Colombia play live",
+    date: "Mar 2026",
+    location: "Orlando, FL"
   },
   {
     id: "ioai",

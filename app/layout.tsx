@@ -40,7 +40,9 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://almanza.cc/api/og"
+        url: "https://almanza.cc/api/og",
+        width: 1200,
+        height: 630
       }
     ]
   },

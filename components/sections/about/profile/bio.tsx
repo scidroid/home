@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import minerva from "@/components/sections/about/images/minerva.jpeg";
+import minerva from "@/components/sections/about/images/minerva.webp";
 
 export function Bio() {
   return (

@@ -8,7 +8,7 @@ export function Work() {
   const experiences = [
     {
       logo: pulpoo,
-      role: "Founder",
+      role: "Software Engineer",
       company: "Pulpoo",
       description: "AI-powered productivity tools for scaling operations.",
       url: "https://pulpoo.com",
