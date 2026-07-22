@@ -1,12 +1,14 @@
 "use client";
 
 import Image, { StaticImageData } from "next/image";
+
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { galleryData } from "@/content/gallery";
 import { useIsMobile } from "@/hooks/use-is-mobile";
+import { ArrowLeft01Icon, ArrowRight01Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 import { motion, useReducedMotion } from "motion/react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const TIMER_DURATION = 3000;
 const SWIPE_THRESHOLD = 3000;
@@ -96,7 +98,9 @@ export function Gallery() {
 
   const paginate = useCallback(
     (direction: number) => {
-      setCurrentIndex(i => (i + direction + galleryData.length) % galleryData.length);
+      setCurrentIndex(
+        i => (i + direction + galleryData.length) % galleryData.length
+      );
       clearTimers();
     },
     [clearTimers]
@@ -142,11 +146,14 @@ export function Gallery() {
   const getPosition = (index: number) => {
     let positions: typeof CARD_POSITIONS;
     if (prefersReducedMotion) {
-      positions = isMobile ? MOBILE_REDUCED_MOTION_POSITIONS : REDUCED_MOTION_POSITIONS;
+      positions = isMobile
+        ? MOBILE_REDUCED_MOTION_POSITIONS
+        : REDUCED_MOTION_POSITIONS;
     } else {
       positions = isMobile ? MOBILE_CARD_POSITIONS : CARD_POSITIONS;
     }
-    const pos = (index - currentIndex + galleryData.length) % galleryData.length;
+    const pos =
+      (index - currentIndex + galleryData.length) % galleryData.length;
     return positions[Math.min(pos, positions.length - 1)];
   };
 
@@ -168,7 +175,8 @@ export function Gallery() {
         aria-atomic="true"
       >
         <p className="sr-only">
-          Showing image {currentIndex + 1} of {galleryData.length}: {currentItem.alt}
+          Showing image {currentIndex + 1} of {galleryData.length}:{" "}
+          {currentItem.alt}
         </p>
         {galleryData.map((item, index) => {
           const position = getPosition(index);
@@ -184,7 +192,9 @@ export function Gallery() {
                   : { type: "spring", stiffness: 100, damping: 18, mass: 0.9 }
               }
               drag={isActive && !prefersReducedMotion ? "x" : false}
-              dragConstraints={isMobile ? { left: -10, right: 10 } : { left: -25, right: 25 }}
+              dragConstraints={
+                isMobile ? { left: -10, right: 10 } : { left: -25, right: 25 }
+              }
               dragElastic={0.1}
               onDragStart={pause}
               onDragEnd={(_, { offset, velocity }) => {
@@ -209,7 +219,11 @@ export function Gallery() {
         })}
       </div>
 
-      <div className="flex justify-end items-center gap-2 sm:gap-3 mt-4 sm:mt-8" role="group" aria-label="Gallery controls">
+      <div
+        className="flex justify-end items-center gap-2 sm:gap-3 mt-4 sm:mt-8"
+        role="group"
+        aria-label="Gallery controls"
+      >
         <div
           className="relative bg-gray-50 rounded-full px-4 py-2"
           style={{
@@ -232,7 +246,11 @@ export function Gallery() {
           className="bg-gray-50 border border-gray-200 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 text-gray-600 rounded-full p-3 sm:p-2 motion-safe:transition-colors shadow-lg"
           aria-label="Previous image"
         >
-          <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+          <HugeiconsIcon
+            icon={ArrowLeft01Icon}
+            className="h-4 w-4"
+            aria-hidden="true"
+          />
         </button>
 
         <button
@@ -240,7 +258,11 @@ export function Gallery() {
           className="bg-gray-50 border border-gray-200 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 text-gray-600 rounded-full p-3 sm:p-2 motion-safe:transition-colors shadow-lg"
           aria-label="Next image"
         >
-          <ChevronRight className="h-4 w-4" aria-hidden="true" />
+          <HugeiconsIcon
+            icon={ArrowRight01Icon}
+            className="h-4 w-4"
+            aria-hidden="true"
+          />
         </button>
       </div>
     </div>

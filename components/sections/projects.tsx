@@ -1,45 +1,49 @@
 "use client";
 
 import Image from "next/image";
-import { projects } from "@/content/projects";
-import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
+
+import { ColOvoAnimation } from "@/components/animations/col-ovo";
 import { PulpooAnimation } from "@/components/animations/pulpoo";
 import pulpooLogo from "@/components/sections/about/images/pulpoo.webp";
 import {
   Dialog,
-  DialogTrigger,
+  DialogClose,
   DialogContainer,
   DialogContent,
-  DialogClose,
+  DialogTrigger
 } from "@/components/ui/dialog";
+import { projects } from "@/content/projects";
+import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 
 const colors = {
   purple: {
     bg: "bg-violet-50",
-    accent: "text-violet-600",
+    accent: "text-violet-600"
   },
   green: {
     bg: "bg-emerald-50",
-    accent: "text-emerald-600",
+    accent: "text-emerald-600"
   },
   orange: {
     bg: "bg-amber-50",
-    accent: "text-amber-600",
+    accent: "text-amber-600"
   },
   blue: {
     bg: "bg-sky-50",
-    accent: "text-sky-600",
-  },
+    accent: "text-sky-600"
+  }
 } as const;
 
 function ProjectModalContent({
   project,
   isPulpoo,
-  c,
+  isColOvo,
+  c
 }: {
   project: (typeof projects)[0];
   isPulpoo: boolean;
+  isColOvo: boolean;
   c: { bg: string; accent: string };
 }) {
   return (
@@ -70,8 +74,12 @@ function ProjectModalContent({
 
           <div className="w-full">
             {isPulpoo ? (
-              <div onClick={(e) => e.stopPropagation()}>
+              <div onClick={e => e.stopPropagation()}>
                 <PulpooAnimation />
+              </div>
+            ) : isColOvo ? (
+              <div onClick={e => e.stopPropagation()}>
+                <ColOvoAnimation />
               </div>
             ) : project.image ? (
               <div className="aspect-video rounded-xl bg-white/50 text-gray-400 flex items-center justify-center">
@@ -86,7 +94,7 @@ function ProjectModalContent({
                 href="https://pulpoo.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
+                onClick={e => e.stopPropagation()}
                 className="inline-flex items-center gap-1.5 bg-violet-600 hover:bg-violet-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
               >
                 Try Pulpoo
@@ -122,9 +130,7 @@ function ProjectModalContent({
           ))}
         </ul>
 
-        <p className="text-sm text-gray-400">
-          {project.tech.join(" · ")}
-        </p>
+        <p className="text-sm text-gray-400">{project.tech.join(" · ")}</p>
 
         {project.link && (
           <div className="pt-2">
@@ -132,7 +138,7 @@ function ProjectModalContent({
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
+              onClick={e => e.stopPropagation()}
               className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 transition-colors"
             >
               <span className="underline decoration-gray-300 underline-offset-2">
@@ -160,10 +166,10 @@ export function Projects() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {projects.map((project, index) => {
-          const c =
-            colors[project.color as keyof typeof colors] || colors.blue;
+        {projects.map(project => {
+          const c = colors[project.color as keyof typeof colors] || colors.blue;
           const isPulpoo = project.id === "pulpoo";
+          const isColOvo = project.id === "col-ovo";
 
           return (
             <div key={project.id}>
@@ -171,7 +177,7 @@ export function Projects() {
                 transition={{
                   type: "spring",
                   bounce: 0.05,
-                  duration: 0.5,
+                  duration: 0.5
                 }}
               >
                 <DialogTrigger
@@ -205,8 +211,12 @@ export function Projects() {
                     {/* Zone B: Visual */}
                     <div className="mb-4">
                       {isPulpoo ? (
-                        <div onClick={(e) => e.stopPropagation()}>
+                        <div onClick={e => e.stopPropagation()}>
                           <PulpooAnimation />
+                        </div>
+                      ) : isColOvo ? (
+                        <div onClick={e => e.stopPropagation()}>
+                          <ColOvoAnimation />
                         </div>
                       ) : (
                         <div className="aspect-video rounded-xl bg-gray-100 text-gray-400 flex items-center justify-center">
@@ -232,7 +242,7 @@ export function Projects() {
                           href="https://pulpoo.com"
                           target="_blank"
                           rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
+                          onClick={e => e.stopPropagation()}
                           className="inline-flex items-center gap-1.5 bg-violet-600 hover:bg-violet-700 text-white text-xs font-medium px-3.5 py-1.5 rounded-lg transition-colors"
                         >
                           Try Pulpoo
@@ -260,6 +270,7 @@ export function Projects() {
                     <ProjectModalContent
                       project={project}
                       isPulpoo={isPulpoo}
+                      isColOvo={isColOvo}
                       c={c}
                     />
                     <DialogClose className="absolute top-3 right-3 z-10 w-11 h-11 rounded-full bg-white/60 hover:bg-white/80 backdrop-blur-sm text-gray-500 hover:text-gray-700 flex items-center justify-center transition-colors" />

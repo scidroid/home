@@ -76,7 +76,7 @@ function Page() {
       <Paragraph>
         Once your shortcut is ready, the next step involves setting up your API
         endpoint. The code snippet below outlines the process for Next.js with
-        Vercel KV but you are free to use the service you most like:
+        Upstash Redis but you are free to use the service you most like:
       </Paragraph>
 
       <Paragraph>
@@ -86,7 +86,7 @@ function Page() {
       </Paragraph>
 
       <CodeBlock language="typescript" filename="/api/health/route.ts">
-        {`import { kv } from "@vercel/kv";
+        {`import { redis } from "@/lib/redis";
 
 const { PASSWORD } = process.env;
 
@@ -104,7 +104,7 @@ export async function POST(request: Request) {
 
   const res = await request.json();
 
-  await kv.set("health", res.value);
+  await redis.set("health", res.value);
 
   return Response.json(data);
 }`}
@@ -114,15 +114,14 @@ export async function POST(request: Request) {
 
       <Paragraph>
         If you are using the Next.js app router or any other implementation of
-        React Server Components you can directly fetch the Vercel KV service in
-        the component.
+        React Server Components you can directly fetch Redis in the component.
       </Paragraph>
 
       <CodeBlock language="typescript">
-        {`import { kv } from "@vercel/kv";
+        {`import { redis } from "@/lib/redis";
 
 export async function HealthData() {
-  const bpm = await kv.get("health");
+  const bpm = await redis.get("health");
 
   return <p>{bpm} BPM</p>;
 }`}

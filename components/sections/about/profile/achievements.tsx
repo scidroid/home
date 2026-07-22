@@ -51,8 +51,12 @@ export function Achievements() {
                 strokeWidth={2}
               />
               <div>
-                <h4 className="font-medium text-gray-900">{achievement.title}</h4>
-                <p className="text-sm text-gray-500">{achievement.description}</p>
+                <h4 className="font-medium text-gray-900">
+                  {achievement.title}
+                </h4>
+                <p className="text-sm text-gray-500">
+                  {achievement.description}
+                </p>
               </div>
             </div>
           </div>

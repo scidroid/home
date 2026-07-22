@@ -45,46 +45,37 @@ export function Story() {
       <div className="space-y-5">
         {/* Always visible */}
         <p className="text-gray-600 leading-relaxed text-[15px]">
-          Every human comes to earth with nothing. No skills, no money, no
-          guarantees. Just the gift of life. But{" "}
+          I was born in Colombia. The schools I got into, the people I met, the
+          fact that I&apos;m typing this right now,{" "}
           <span className="text-gray-900 font-semibold">
-            a lottery decides almost everything that follows
+            I didn&apos;t really earn most of it. I got lucky
           </span>
-          , where you&apos;re born, who your parents are, and what countries you
-          can visit with your passport. Whether you get to hug your mother
-          goodbye before she leaves for work, or bury her before you turn ten.
-          Whether your first kiss happens at a school dance, or never happens
-          because you didn&apos;t survive childhood. Whether you walk across a
-          graduation stage or never see the inside of a classroom.
+          . Where you&apos;re born does most of the work. Your parents, your
+          passport, whether you make it to ten.
         </p>
 
         <p className="text-gray-600 leading-relaxed text-[15px]">
-          This lottery affects every aspect of your life.{" "}
+          That luck shows up in three places:{" "}
           <span className="text-gray-900 font-semibold">
-            How much you work
+            how long you live, what your work is worth, and what you get to
+            learn
           </span>
-          , for example.
+          . They look like three separate problems but they&apos;re not. They
+          feed each other. Work is the easiest one to see.
         </p>
 
         <ProductivityChart />
 
         <p className="text-gray-600 leading-relaxed text-[15px]">
-          Colombians work 30% more hours than the OECD average but earn 53%
-          less. Swiss workers work 12% fewer hours and earn 43% more. This
-          isn&apos;t unique to Colombia. Across low and middle-income countries,
-          workers put in longer hours for lower wages. The difference isn&apos;t
-          effort. It&apos;s that limited education, poor infrastructure, and
-          economic and social instability{" "}
+          Colombians work{" "}
           <span className="text-gray-900 font-semibold">
-            make each hour worth less
+            30% more hours than the OECD average and bring home 53% less
           </span>
-          . Low and middle-income nations sit in the trap, more hours for less
-          pay, while high-income nations sit in the ideal, fewer hours for more.
-          The problem isn&apos;t that people don&apos;t work hard enough.{" "}
-          <span className="text-gray-900 font-semibold">
-            It&apos;s that the systems around them devalue every hour they give
-          </span>
-          .
+          . It&apos;s not that people somewhere else are lazier, or that we work
+          harder at home. The hours just count differently. When the schools are
+          broken, the roads are broken, and nothing around you is stable, every
+          hour you put in is worth less. You can&apos;t out-grind the math. And
+          work is only one piece of it.
         </p>
 
         {/* Expanded content */}
@@ -100,30 +91,46 @@ export function Story() {
               <LifeCycleTimeline />
 
               <p className="text-gray-600 leading-relaxed text-[15px]">
-                At the root sits education. During COVID,{" "}
+                It starts the second you&apos;re born.{" "}
                 <span className="text-gray-900 font-semibold">
-                  463 million kids had zero access
-                </span>{" "}
-                to remote learning. Entire villages share one internet
-                connection. Brilliant minds never reach their potential because
-                of where they were born.{" "}
-                <span className="text-gray-900 font-semibold">
-                  Fix education
+                  4.8 million kids die before they turn five every year
                 </span>
-                , and the other crises start to heal.
+                , mostly from things rich countries fixed decades ago. Whether
+                you&apos;re reading this, and whether I&apos;m the one writing
+                it, comes down partly to where our moms happened to be.
               </p>
 
               <EducationDivide />
 
               <p className="text-gray-600 leading-relaxed text-[15px]">
-                These aren&apos;t separate problems — they&apos;re{" "}
+                Underneath all of it is education. A kid born in Bujumbura has
+                about a{" "}
                 <span className="text-gray-900 font-semibold">
-                  one crisis with three faces
+                  6% shot at university
                 </span>
-                . Health, work, and education form a cycle: poor health limits
-                productivity, limited income blocks education, and lack of
-                education perpetuates poor health. Breaking this cycle is why I
-                build.
+                . In Zurich, it&apos;s 77%. Same planet. Brilliant kids never
+                sit in a classroom because of where they were born.
+              </p>
+
+              <p className="text-gray-600 leading-relaxed text-[15px]">
+                Health, work, education. Pull on any of them and the other two
+                start to come loose, but{" "}
+                <span className="text-gray-900 font-semibold">
+                  education is where you get the most back
+                </span>
+                . Teach a kid, and over a generation the rest start fixing
+                themselves.
+              </p>
+
+              <p className="text-gray-600 leading-relaxed text-[15px]">
+                That&apos;s why I build.{" "}
+                <span className="text-gray-900 font-semibold">ASOFI</span>{" "}
+                teaches girls in rural Colombia how to code. Most of them
+                haven&apos;t sat in front of a keyboard before.{" "}
+                <span className="text-gray-900 font-semibold">Pulpoo</span>{" "}
+                helps companies get back the hours bad systems steal from their
+                teams. Different angles, same cycle. They&apos;re small.
+                They&apos;re mine. I&apos;m working on it.
               </p>
 
               <div className="flex flex-wrap gap-3">

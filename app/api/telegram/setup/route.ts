@@ -2,10 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
-    const { TELEGRAM_BOT_TOKEN, TELEGRAM_WEBHOOK_SECRET, PASSWORD } = process.env;
+    const { TELEGRAM_BOT_TOKEN, TELEGRAM_WEBHOOK_SECRET, PASSWORD } =
+      process.env;
 
     if (!TELEGRAM_BOT_TOKEN) {
-      return NextResponse.json({ error: "Bot token not configured" }, { status: 500 });
+      return NextResponse.json(
+        { error: "Bot token not configured" },
+        { status: 500 }
+      );
     }
 
     const { password } = await request.json();
@@ -42,7 +46,10 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error("Webhook setup error:", error);
-    return NextResponse.json({ error: "Failed to set up webhook" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to set up webhook" },
+      { status: 500 }
+    );
   }
 }
 
@@ -51,7 +58,10 @@ export async function GET(request: NextRequest) {
     const { TELEGRAM_BOT_TOKEN } = process.env;
 
     if (!TELEGRAM_BOT_TOKEN) {
-      return NextResponse.json({ error: "Bot token not configured" }, { status: 500 });
+      return NextResponse.json(
+        { error: "Bot token not configured" },
+        { status: 500 }
+      );
     }
 
     const response = await fetch(
@@ -63,6 +73,9 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(result);
   } catch (error) {
     console.error("Webhook info error:", error);
-    return NextResponse.json({ error: "Failed to get webhook info" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to get webhook info" },
+      { status: 500 }
+    );
   }
 }

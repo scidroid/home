@@ -13,7 +13,8 @@ import React, {
 import { createPortal } from "react-dom";
 
 import { useClickOutside } from "@/hooks/click-outside";
-import { XIcon } from "lucide-react";
+import { Cancel01Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 import {
   AnimatePresence,
   MotionConfig,
@@ -368,13 +369,16 @@ function DialogClose({ children, className, variants }: DialogCloseProps) {
       type="button"
       aria-label="Close dialog"
       key={`dialog-close-${uniqueId}`}
-      className={cn("absolute right-6 top-6 min-w-[44px] min-h-[44px]", className)}
+      className={cn(
+        "absolute right-6 top-6 min-w-[44px] min-h-[44px]",
+        className
+      )}
       initial="initial"
       animate="animate"
       exit="exit"
       variants={variants}
     >
-      {children || <XIcon size={24} />}
+      {children || <HugeiconsIcon icon={Cancel01Icon} size={24} />}
     </motion.button>
   );
 }

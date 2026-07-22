@@ -16,10 +16,7 @@ export function Form() {
   return (
     <form action={action} className="w-full max-w-xl mx-auto xl:mx-0">
       <div className="mb-4 flex flex-col gap-2">
-        <label
-          htmlFor="name"
-          className="text-sm font-medium text-gray-600"
-        >
+        <label htmlFor="name" className="text-sm font-medium text-gray-600">
           Name
         </label>
         <input
@@ -35,10 +32,7 @@ export function Form() {
         />
       </div>
       <div className="mb-4 flex flex-col gap-2">
-        <label
-          htmlFor="email"
-          className="text-sm font-medium text-gray-600"
-        >
+        <label htmlFor="email" className="text-sm font-medium text-gray-600">
           Email
         </label>
         <input
@@ -53,10 +47,7 @@ export function Form() {
         />
       </div>
       <div className="mb-4 flex flex-col gap-2">
-        <label
-          htmlFor="message"
-          className="text-sm font-medium text-gray-600"
-        >
+        <label htmlFor="message" className="text-sm font-medium text-gray-600">
           Message
         </label>
         <textarea

@@ -1,5 +1,5 @@
 export function generateReplyEmail(name: string, message: string) {
-  const formattedMessage = message.replace(/\n/g, '<br/>');
+  const formattedMessage = message.replace(/\n/g, "<br/>");
 
   return `
     <!DOCTYPE html>

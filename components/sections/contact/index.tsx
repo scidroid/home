@@ -1,14 +1,16 @@
 import { Form } from "@/components/sections/contact/form";
 import { MailLink, SocialLink } from "@/components/sections/contact/links";
-import { GithubIcon, LinkedinIcon, NewTwitterIcon, InstagramIcon } from "@hugeicons/core-free-icons";
+import {
+  GithubIcon,
+  InstagramIcon,
+  LinkedinIcon,
+  NewTwitterIcon
+} from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 
 export function ContactForm() {
   return (
-    <section
-      id="contact"
-      className="px-4 lg:px-8 my-12"
-    >
+    <section id="contact" className="px-4 lg:px-8 my-12">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
         <div>
           <div className="text-center lg:text-left mb-6">

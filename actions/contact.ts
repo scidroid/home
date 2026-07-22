@@ -50,12 +50,14 @@ export async function sendContactForm(
             chat_id: TELEGRAM_CHAT_ID,
             text: `New message from ${name} (${email}):\n\n${message}`,
             reply_markup: {
-              inline_keyboard: [[
-                {
-                  text: "📧 Send Reply Email",
-                  callback_data: `reply_${encodeURIComponent(email)}_${encodeURIComponent(name)}`
-                }
-              ]]
+              inline_keyboard: [
+                [
+                  {
+                    text: "📧 Send Reply Email",
+                    callback_data: `reply_${encodeURIComponent(email)}_${encodeURIComponent(name)}`
+                  }
+                ]
+              ]
             }
           })
         }

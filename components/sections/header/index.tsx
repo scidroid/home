@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+
 import { useEffect } from "react";
 
 import { Clock } from "@/components/sections/header/clock";
@@ -17,9 +18,21 @@ import { motion, useAnimation } from "motion/react";
 
 const socialLinks = [
   { href: "https://github.com/scidroid", icon: GithubIcon, label: "GitHub" },
-  { href: "https://linkedin.com/in/scidroid", icon: LinkedinIcon, label: "LinkedIn" },
-  { href: "https://x.com/scidroid", icon: NewTwitterIcon, label: "X (Twitter)" },
-  { href: "https://instagram.com/scidroid", icon: InstagramIcon, label: "Instagram" },
+  {
+    href: "https://linkedin.com/in/scidroid",
+    icon: LinkedinIcon,
+    label: "LinkedIn"
+  },
+  {
+    href: "https://x.com/scidroid",
+    icon: NewTwitterIcon,
+    label: "X (Twitter)"
+  },
+  {
+    href: "https://instagram.com/scidroid",
+    icon: InstagramIcon,
+    label: "Instagram"
+  }
 ];
 
 export function Header() {
@@ -47,7 +60,10 @@ export function Header() {
         Juan Almanza
       </Link>
 
-      <nav aria-label="Social links" className="flex items-center gap-1 sm:gap-2">
+      <nav
+        aria-label="Social links"
+        className="flex items-center gap-1 sm:gap-2"
+      >
         <Clock />
         {socialLinks.map(({ href, icon, label }) => (
           <a

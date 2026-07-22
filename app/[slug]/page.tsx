@@ -2,16 +2,17 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-import { Balancer } from "react-wrap-balancer";
-
-import { GithubIcon, LinkedinIcon, NewTwitterIcon } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
-
 import { Views } from "@/components/content/views";
 import { Age } from "@/components/sections/profile/age";
 import { Link } from "@/components/ui/link";
 import { copy } from "@/content/copy";
 import { readings } from "@/content/readings";
+import {
+  GithubIcon,
+  LinkedinIcon,
+  NewTwitterIcon
+} from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 
 import { formatDate } from "@/utils/dates";
 
@@ -97,8 +98,8 @@ export default async function Page({
           }}
         ></script>
 
-        <h1 className="text-center text-4xl font-extrabold xl:text-7xl font-heading mb-8">
-          <Balancer>{metadata.title}</Balancer>
+        <h1 className="text-center text-balance text-4xl font-extrabold xl:text-7xl font-heading mb-8">
+          {metadata.title}
         </h1>
 
         <p className="my-4 text-center text-lg xl:my-6 xl:text-xl">

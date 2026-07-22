@@ -1,130 +1,101 @@
 "use client";
 
+const ZURICH = 77;
+const BUJUMBURA = 6;
+const TOTAL = 100;
+
+function PersonIcon({ color }: { color: string }) {
+  return (
+    <svg
+      viewBox="0 0 16 20"
+      className="w-full h-full"
+      fill={color}
+      aria-hidden="true"
+    >
+      <circle cx="8" cy="4.5" r="3.5" />
+      <path d="M2 19v-3c0-3 2.7-5 6-5s6 2 6 5v3H2z" />
+    </svg>
+  );
+}
+
+function PersonGrid({ filled, color }: { filled: number; color: string }) {
+  return (
+    <div className="grid grid-cols-10 gap-[3px] sm:gap-1">
+      {Array.from({ length: TOTAL }).map((_, i) => (
+        <div key={i} className="aspect-[4/5]">
+          <PersonIcon color={i < filled ? color : "#e5e7eb"} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function EducationDivide() {
   return (
-    <div className="bg-white/50 backdrop-blur-sm rounded-xl p-5 border border-amber-200/40">
-      <div className="mb-4 pb-3 border-b border-amber-200/40">
+    <div className="bg-white/50 backdrop-blur-sm rounded-xl p-5 sm:p-6 border border-amber-200/40">
+      <div className="mb-6 pb-3 border-b border-amber-200/40">
         <h4 className="text-sm font-semibold text-gray-900 tracking-tight">
-          Two Children, Same Planet
+          100 kids, two cities
         </h4>
         <p className="text-xs text-gray-500 mt-0.5">
-          The education lottery at birth
+          How many will set foot in a university
         </p>
       </div>
 
-      {/* Comparison Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {/* Left: Developed */}
-        <div className="bg-green-50/80 rounded-lg p-3 sm:p-4 border border-green-200/60">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="text-lg">🇨🇭</span>
-            <span className="text-xs font-semibold text-green-800">
-              Born in Zurich
-            </span>
+      <div className="grid grid-cols-2 gap-4 sm:gap-8">
+        {/* Zurich */}
+        <div className="flex flex-col">
+          <div className="flex items-baseline justify-between mb-3">
+            <div className="flex items-center gap-1.5 min-w-0">
+              <span className="text-base shrink-0">🇨🇭</span>
+              <span className="text-xs font-semibold text-gray-900 truncate">
+                Zurich
+              </span>
+            </div>
+            <p className="text-2xl sm:text-3xl font-bold text-emerald-700 leading-none tracking-tight tabular-nums">
+              {ZURICH}
+              <span className="text-xs text-gray-400 font-normal">/100</span>
+            </p>
           </div>
-          <div className="space-y-2 text-xs">
-            <div className="flex justify-between">
-              <span className="text-gray-600">School access</span>
-              <span className="font-semibold text-green-700">99%</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Internet at home</span>
-              <span className="font-semibold text-green-700">96%</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Reach university</span>
-              <span className="font-semibold text-green-700">77%</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Teacher ratio</span>
-              <span className="font-semibold text-green-700">1:12</span>
-            </div>
-          </div>
+          <PersonGrid filled={ZURICH} color="#059669" />
         </div>
 
-        {/* Right: Developing */}
-        <div className="bg-red-50/80 rounded-lg p-3 sm:p-4 border border-red-200/60">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="text-lg">🇹🇩</span>
-            <span className="text-xs font-semibold text-red-800">
-              Born in N&apos;Djamena
-            </span>
+        {/* Bujumbura */}
+        <div className="flex flex-col">
+          <div className="flex items-baseline justify-between mb-3">
+            <div className="flex items-center gap-1.5 min-w-0">
+              <span className="text-base shrink-0">🇧🇮</span>
+              <span className="text-xs font-semibold text-gray-900 truncate">
+                Bujumbura
+              </span>
+            </div>
+            <p className="text-2xl sm:text-3xl font-bold text-red-600 leading-none tracking-tight tabular-nums">
+              {BUJUMBURA}
+              <span className="text-xs text-gray-400 font-normal">/100</span>
+            </p>
           </div>
-          <div className="space-y-2 text-xs">
-            <div className="flex justify-between">
-              <span className="text-gray-600">School access</span>
-              <span className="font-semibold text-red-600">52%</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Internet at home</span>
-              <span className="font-semibold text-red-600">7%</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Reach university</span>
-              <span className="font-semibold text-red-600">3%</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Teacher ratio</span>
-              <span className="font-semibold text-red-600">1:58</span>
-            </div>
-          </div>
+          <PersonGrid filled={BUJUMBURA} color="#dc2626" />
         </div>
       </div>
 
-      {/* Gap Visualization */}
-      <div className="mt-4 pt-4 border-t border-amber-200/40">
-        <p className="text-[10px] text-gray-500 text-center mb-3">
-          The gap in probability of completing education
+      <div className="mt-6 pt-4 border-t border-amber-200/40 text-center">
+        <p className="text-sm text-gray-700">
+          <span className="font-bold text-gray-900">71 lives apart.</span>{" "}
+          <span className="text-gray-500">
+            Same age, same planet, different birth.
+          </span>
         </p>
-        <div className="relative h-6 bg-gray-100 rounded-full overflow-hidden">
-          <div
-            className="absolute left-0 top-0 h-full bg-green-500 rounded-l-full"
-            style={{ width: "77%" }}
-          >
-            <span className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] font-bold text-white">
-              77%
-            </span>
-          </div>
-          <div
-            className="absolute right-0 top-0 h-full bg-red-500 rounded-r-full flex items-center justify-end"
-            style={{ width: "23%" }}
-          >
-            <span className="absolute left-2 top-1/2 -translate-y-1/2 text-[10px] font-bold text-white">
-              3%
-            </span>
-          </div>
-        </div>
-        <div className="flex justify-between text-[10px] text-gray-500 mt-1">
-          <span>Switzerland</span>
-          <span className="font-semibold text-gray-700">25x difference</span>
-          <span>Chad</span>
-        </div>
-      </div>
-
-      {/* Key Stats */}
-      <div className="flex justify-center gap-6 text-center mt-4 pt-3 border-t border-amber-200/40">
-        <div>
-          <p className="text-base font-bold text-red-600">258M</p>
-          <p className="text-[10px] text-gray-500">Out of school</p>
-        </div>
-        <div>
-          <p className="text-base font-bold text-amber-600">617M</p>
-          <p className="text-[10px] text-gray-500">Can&apos;t read basics</p>
-        </div>
-        <div>
-          <p className="text-base font-bold text-blue-600">2/3</p>
-          <p className="text-[10px] text-gray-500">Are girls</p>
-        </div>
       </div>
 
       <p className="text-[10px] text-gray-400 mt-3 text-center">
+        Sources:{" "}
         <a
           href="https://www.unesco.org/gem-report"
           target="_blank"
           rel="noopener noreferrer"
           className="underline hover:no-underline"
         >
-          UNESCO GEM Report
+          UNESCO GEM
         </a>
         {" · "}
         <a

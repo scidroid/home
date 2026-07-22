@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { CodeBlock as CodeBlockPrimitive } from "react-code-block";
 
-import { themes } from "prism-react-renderer";
+import { Highlight, themes } from "prism-react-renderer";
 
 export function CodeBlock({
   children,
@@ -35,20 +34,33 @@ export function CodeBlock({
           {copied ? "✓ Copied!" : "Copy"}
         </button>
       </div>
-      <CodeBlockPrimitive
-        code={children}
+      <Highlight
+        code={children.trim()}
         language={language}
         theme={themes.github}
       >
-        <CodeBlockPrimitive.Code className="bg-white p-4 rounded-b-xl shadow-xl overflow-x-auto font-mono text-sm">
-          <div className="grid grid-cols-[auto_1fr] gap-4">
-            <CodeBlockPrimitive.LineNumber className="text-xs text-gray-400 text-right select-none w-[30px]" />
-            <CodeBlockPrimitive.LineContent>
-              <CodeBlockPrimitive.Token />
-            </CodeBlockPrimitive.LineContent>
-          </div>
-        </CodeBlockPrimitive.Code>
-      </CodeBlockPrimitive>
+        {({ style, tokens, getLineProps, getTokenProps }) => (
+          <pre
+            className="bg-white p-4 rounded-b-xl shadow-xl overflow-x-auto font-mono text-sm"
+            style={{ ...style, backgroundColor: "white" }}
+          >
+            <div className="grid grid-cols-[auto_1fr] gap-x-4">
+              {tokens.map((line, i) => (
+                <div key={i} className="contents">
+                  <span className="text-xs text-gray-400 text-right select-none w-[30px] leading-5">
+                    {i + 1}
+                  </span>
+                  <span {...getLineProps({ line })} className="leading-5">
+                    {line.map((token, key) => (
+                      <span key={key} {...getTokenProps({ token })} />
+                    ))}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </pre>
+        )}
+      </Highlight>
     </div>
   );
 }

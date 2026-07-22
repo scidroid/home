@@ -1,7 +1,7 @@
 // this endpoint is being fetched by a shortcut on my iphone that retrieves data
 // from the heatlh app and send the data to this endpoint to be stored in key-value
 // more info in https://almanza.cc/apple-health
-import { kv } from "@vercel/kv";
+import { redis } from "@/lib/redis";
 
 const { PASSWORD } = process.env;
 
@@ -30,7 +30,7 @@ export async function POST(request: Request) {
 
   const data = { date: new Date(res.date).toISOString(), value: res.value };
 
-  await kv.set("health", data);
+  await redis.set("health", data);
 
   return Response.json(data);
 }

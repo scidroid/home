@@ -57,8 +57,14 @@ export function NowPlayingWidget({ song }: { song: Music }) {
         />
         <div className="absolute bottom-4 left-4 right-4">
           <div className="block bg-black/40 backdrop-blur-md px-4 py-2 rounded-lg shadow-lg border border-white/10">
-            <div className="h-4 w-32 bg-white/20 rounded mb-2 motion-safe:animate-pulse" aria-hidden="true" />
-            <div className="h-3 w-24 bg-white/10 rounded motion-safe:animate-pulse" aria-hidden="true" />
+            <div
+              className="h-4 w-32 bg-white/20 rounded mb-2 motion-safe:animate-pulse"
+              aria-hidden="true"
+            />
+            <div
+              className="h-3 w-24 bg-white/10 rounded motion-safe:animate-pulse"
+              aria-hidden="true"
+            />
           </div>
         </div>
       </SongCard>

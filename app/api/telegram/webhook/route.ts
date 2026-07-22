@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { kv } from "@vercel/kv";
+
 import { generateReplyEmail } from "@/emails/reply";
+
+import { redis } from "@/lib/redis";
 
 interface TelegramUpdate {
   update_id: number;
@@ -43,10 +45,18 @@ interface PendingReply {
 
 export async function POST(request: NextRequest) {
   try {
-    const { TELEGRAM_BOT_TOKEN, TELEGRAM_WEBHOOK_SECRET, TELEGRAM_CHAT_ID, RESEND_API_KEY } = process.env;
+    const {
+      TELEGRAM_BOT_TOKEN,
+      TELEGRAM_WEBHOOK_SECRET,
+      TELEGRAM_CHAT_ID,
+      RESEND_API_KEY
+    } = process.env;
 
     if (!TELEGRAM_BOT_TOKEN) {
-      return NextResponse.json({ error: "Bot token not configured" }, { status: 500 });
+      return NextResponse.json(
+        { error: "Bot token not configured" },
+        { status: 500 }
+      );
     }
 
     const secretToken = request.headers.get("x-telegram-bot-api-secret-token");
@@ -83,11 +93,15 @@ export async function POST(request: NextRequest) {
 
       if (promptResult.ok) {
         // Store pending reply in KV
-        await kv.set(`telegram_reply:${promptResult.result.message_id}`, {
-          email: decodedEmail,
-          name: decodedName,
-          promptMessageId: promptResult.result.message_id
-        }, { ex: 3600 }); // Expires in 1 hour
+        await redis.set(
+          `telegram_reply:${promptResult.result.message_id}`,
+          {
+            email: decodedEmail,
+            name: decodedName,
+            promptMessageId: promptResult.result.message_id
+          },
+          { ex: 3600 }
+        ); // Expires in 1 hour
       }
 
       // Answer callback query
@@ -107,7 +121,9 @@ export async function POST(request: NextRequest) {
     // Handle reply message
     if (update.message?.reply_to_message && update.message.text) {
       const replyToId = update.message.reply_to_message.message_id;
-      const pendingReply = await kv.get<PendingReply>(`telegram_reply:${replyToId}`);
+      const pendingReply = await redis.get<PendingReply>(
+        `telegram_reply:${replyToId}`
+      );
 
       if (pendingReply) {
         // Send the reply email
@@ -127,7 +143,7 @@ export async function POST(request: NextRequest) {
         });
 
         // Delete the pending reply
-        await kv.del(`telegram_reply:${replyToId}`);
+        await redis.del(`telegram_reply:${replyToId}`);
 
         // Send confirmation
         const statusText = emailResponse.ok
@@ -152,6 +168,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error("Webhook error:", error);
-    return NextResponse.json({ error: "Webhook processing failed" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Webhook processing failed" },
+      { status: 500 }
+    );
   }
 }

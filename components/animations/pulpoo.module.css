@@ -1,160 +1,232 @@
-@keyframes pulsePurple {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 6px 3px rgba(139, 92, 246, 0);
-  }
+.frame {
+  aspect-ratio: 16 / 9;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  padding: 0.6rem;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(221, 214, 254, 0.4);
+  display: flex;
+  flex-direction: column;
 }
 
-@keyframes badgePop {
-  0% {
-    transform: scale(0);
-  }
-  60% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-  }
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
 }
 
-@keyframes floatBubble {
-  0% {
-    transform: scale(0) translateY(0);
-    opacity: 0;
-  }
-  15% {
-    transform: scale(1) translateY(0);
-    opacity: 1;
-  }
-  80% {
-    transform: scale(1) translateY(-100%);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(0.8) translateY(-130%);
-    opacity: 0;
-  }
+.title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #111827;
+  letter-spacing: -0.01em;
 }
 
-.container {
+.subtitle {
+  margin-top: 0.05rem;
+  font-size: 0.625rem;
+  color: #6b7280;
+  line-height: 1.3;
+}
+
+.stage {
+  flex-shrink: 0;
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.25rem;
+  background: rgba(221, 214, 254, 0.5);
+  color: #7c3aed;
+  font-size: 0.5625rem;
+  font-weight: 600;
+}
+
+.queryBar {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.28rem 0.42rem;
+  border-radius: 0.375rem;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(221, 214, 254, 0.45);
+  margin-bottom: 0.3rem;
+}
+
+.queryIcon {
+  color: #8b5cf6;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.icon {
+  width: 0.65rem;
+  height: 0.65rem;
+}
+
+.queryText {
+  display: flex;
+  align-items: center;
+  color: #374151;
+  font-size: 0.625rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.cursor {
+  width: 1.5px;
+  height: 0.625rem;
+  margin-left: 1px;
+  border-radius: 9999px;
+  background: #8b5cf6;
+  animation: blink 0.8s step-end infinite;
+}
+
+.list {
   position: relative;
-  width: 100%;
-  aspect-ratio: 7 / 3;
-  user-select: none;
-  transition: opacity 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  flex: 1;
+  min-height: 0;
 }
 
 .scanBeam {
   position: absolute;
-  inset-block: 0;
-  pointer-events: none;
-  z-index: 10;
-  width: 2px;
-  margin-left: -1px;
+  left: 0;
+  right: 0;
+  height: 1.5rem;
   background: linear-gradient(
-    to bottom,
-    transparent 5%,
-    rgba(139, 92, 246, 0.5) 30%,
-    rgba(139, 92, 246, 0.8) 50%,
-    rgba(139, 92, 246, 0.5) 70%,
-    transparent 95%
+    180deg,
+    transparent,
+    rgba(139, 92, 246, 0.06) 30%,
+    rgba(139, 92, 246, 0.12) 50%,
+    rgba(139, 92, 246, 0.06) 70%,
+    transparent
   );
-  box-shadow: 0 0 8px 2px rgba(139, 92, 246, 0.25);
+  transform: translateY(-50%);
+  transition: top 200ms linear;
+  pointer-events: none;
+  z-index: 1;
 }
 
-.item {
-  position: absolute;
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+  padding: 0.22rem 0.32rem;
+  border-radius: 0.375rem;
+  border: 1px solid transparent;
   transition:
-    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.5s ease;
+    transform 200ms ease,
+    opacity 200ms ease,
+    border-color 200ms ease,
+    background-color 200ms ease;
 }
 
-.signal {
-  z-index: 5;
-  border-radius: 50%;
-  animation: pulsePurple 1.4s ease infinite;
+.rowMatched {
+  background: rgba(255, 255, 255, 0.65);
+  border-color: rgba(221, 214, 254, 0.6);
+  transform: translateX(2px);
 }
 
-.badge {
-  position: absolute;
-  pointer-events: none;
-  z-index: 6;
-  animation: badgePop 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+.rowDimmed {
+  opacity: 0.25;
 }
 
-.bubble {
-  position: absolute;
-  pointer-events: none;
-  z-index: 6;
-  animation: floatBubble 1.6s ease-in-out infinite;
+.rowLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.28rem;
+  min-width: 0;
 }
 
-.footer {
-  margin-top: 0.75rem;
-  min-height: 2rem;
+.avatar {
+  width: 1.1rem;
+  height: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 9999px;
+  background: #8b5cf6;
+  color: #fff;
+  font-size: 0.4rem;
+  font-weight: 700;
+  flex-shrink: 0;
 }
 
-.askButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  padding: 0.375rem 0.75rem;
-  font-size: 12px;
+.rowText {
+  min-width: 0;
+}
+
+.rowName {
+  color: #111827;
+  font-size: 0.625rem;
   font-weight: 600;
-  color: #6d28d9;
-  background: rgba(139, 92, 246, 0.08);
-  border: 1px solid rgba(139, 92, 246, 0.2);
-  border-radius: 9999px;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.15;
+}
+
+.rowMeta {
+  color: #9ca3af;
+  font-size: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+
+.rowRight {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.rowStatus {
+  color: #6b7280;
+  font-size: 0.5rem;
+  font-weight: 500;
   white-space: nowrap;
 }
 
-.askButton:hover {
-  background: rgba(139, 92, 246, 0.15);
-  border-color: rgba(139, 92, 246, 0.35);
+.sentBadge {
+  padding: 0.06rem 0.25rem;
+  border-radius: 0.25rem;
+  background: rgba(167, 243, 208, 0.4);
+  color: #059669;
+  font-size: 0.5rem;
+  font-weight: 600;
 }
 
-.askArrow {
-  width: 12px;
-  height: 12px;
-  flex-shrink: 0;
-  animation: nudgeRight 1.5s ease-in-out 3;
-}
-
-@keyframes nudgeRight {
+@keyframes blink {
   0%,
-  100% {
-    transform: translateX(0);
+  49% {
+    opacity: 1;
   }
-  50% {
-    transform: translateX(3px);
+  50%,
+  100% {
+    opacity: 0;
   }
 }
 
-.caption {
-  font-size: 13px;
-  color: #374151;
-  text-align: center;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-  transition: opacity 0.3s ease;
+@media (max-width: 480px) {
+  .rowStatus,
+  .rowMeta {
+    display: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .signal {
+  .cursor {
     animation: none;
   }
-  .bubble {
-    animation: none;
-  }
-  .askArrow {
-    animation: none;
+
+  .scanBeam,
+  .row {
+    transition: none;
   }
 }

@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/forms";
 
 @theme inline {
   --font-heading: var(--font-body);

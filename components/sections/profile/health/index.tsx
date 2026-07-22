@@ -2,7 +2,8 @@ import { Suspense } from "react";
 
 import { BPM } from "@/components/sections/profile/health/bpm";
 import { AnimatedHeart } from "@/components/sections/profile/health/hearth";
-import { kv } from "@vercel/kv";
+
+import { redis } from "@/lib/redis";
 
 import { timeAgo } from "@/utils/dates";
 
@@ -12,9 +13,14 @@ function BaseComponent({ bpm, date }: { bpm: number; date?: string }) {
   return (
     <article
       className="h-auto xl:h-52 rounded-xl shadow-lg w-full overflow-hidden bg-linear-to-br from-red-50 via-rose-100 to-red-50 flex flex-col justify-between"
-      aria-label={bpm > 0 ? `Heart rate: ${bpm} beats per minute` : "Heart rate loading"}
+      aria-label={
+        bpm > 0 ? `Heart rate: ${bpm} beats per minute` : "Heart rate loading"
+      }
     >
-      <div className="flex flex-col items-center justify-center h-full pt-4" aria-hidden="true">
+      <div
+        className="flex flex-col items-center justify-center h-full pt-4"
+        aria-hidden="true"
+      >
         <AnimatedHeart bpm={bpm} />
       </div>
 
@@ -30,7 +36,9 @@ function BaseComponent({ bpm, date }: { bpm: number; date?: string }) {
 }
 
 async function AsyncHealthComponent() {
-  const health = (await kv.get("health")) as { value: number; date?: string };
+  const health = await redis.get<{ value: number; date?: string }>("health");
+
+  if (!health) return <BaseComponent bpm={0} />;
 
   return <BaseComponent bpm={health.value} date={health.date} />;
 }
