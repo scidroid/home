@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { useIsMobile } from "@/hooks/use-is-mobile";
+import { useIsMobile } from "@/hooks/mobile";
 
 import {
   OECD,

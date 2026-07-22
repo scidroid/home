@@ -5,7 +5,7 @@ import Image, { StaticImageData } from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { galleryData } from "@/content/gallery";
-import { useIsMobile } from "@/hooks/use-is-mobile";
+import { useIsMobile } from "@/hooks/mobile";
 import { ArrowLeft01Icon, ArrowRight01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { motion, useReducedMotion } from "motion/react";
