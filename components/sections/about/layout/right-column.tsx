@@ -1,10 +1,8 @@
 import { Achievements } from "@/components/sections/about/profile/achievements";
 import { Bio } from "@/components/sections/about/profile/bio";
-import { ColombiaFlag } from "@/components/sections/about/profile/colombia-flag";
 import { Skills } from "@/components/sections/about/profile/skills";
+import { Emoji } from "@/components/ui/emoji";
 import { Work } from "@/components/sections/about/profile/work";
-import { EarthIcon } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
 
 export function RightColumn() {
   return (
@@ -13,17 +11,12 @@ export function RightColumn() {
         I'm building <span className="shiny">innovative solutions</span> for
         global challenges in{" "}
         <span className="inline-flex items-center align-middle gap-1.5">
-          <ColombiaFlag />
+          <Emoji symbol="🇨🇴" className="w-8 h-8" />
           Colombia
         </span>{" "}
         and the{" "}
         <span className="inline-flex items-center align-middle gap-1.5">
-          <HugeiconsIcon
-            icon={EarthIcon}
-            className="w-8 h-8 inline-block"
-            color="#16a34a"
-            strokeWidth={2}
-          />
+          <Emoji symbol="🌍" className="w-8 h-8" />
           world
         </span>
       </h2>

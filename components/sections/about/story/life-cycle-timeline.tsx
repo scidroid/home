@@ -1,5 +1,7 @@
 "use client";
 
+import { Emoji } from "@/components/ui/emoji";
+
 import { lifeCycleData } from "./data";
 
 export function LifeCycleTimeline() {
@@ -24,7 +26,7 @@ export function LifeCycleTimeline() {
             <div className="absolute left-1.5 sm:left-3 w-5 h-5 rounded-full bg-amber-50 border-2 border-amber-400 flex items-center justify-center shadow-sm">
               <div className="w-1.5 h-1.5 rounded-full bg-amber-500" />
             </div>
-            <span className="text-xl">{stage.icon}</span>
+            <Emoji symbol={stage.icon} className="w-5 h-5" />
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-0.5">
                 <span className="text-sm font-semibold text-gray-900">

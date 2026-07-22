@@ -1,5 +1,7 @@
 "use client";
 
+import { Emoji } from "@/components/ui/emoji";
+
 const ZURICH = 77;
 const BUJUMBURA = 6;
 const TOTAL = 100;
@@ -47,7 +49,7 @@ export function EducationDivide() {
         <div className="flex flex-col">
           <div className="flex items-baseline justify-between mb-3">
             <div className="flex items-center gap-1.5 min-w-0">
-              <span className="text-base shrink-0">🇨🇭</span>
+              <Emoji symbol="🇨🇭" className="w-4 h-4 shrink-0" />
               <span className="text-xs font-semibold text-gray-900 truncate">
                 Zurich
               </span>
@@ -64,7 +66,7 @@ export function EducationDivide() {
         <div className="flex flex-col">
           <div className="flex items-baseline justify-between mb-3">
             <div className="flex items-center gap-1.5 min-w-0">
-              <span className="text-base shrink-0">🇧🇮</span>
+              <Emoji symbol="🇧🇮" className="w-4 h-4 shrink-0" />
               <span className="text-xs font-semibold text-gray-900 truncate">
                 Bujumbura
               </span>

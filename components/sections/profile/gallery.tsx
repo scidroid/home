@@ -6,8 +6,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { galleryData } from "@/content/gallery";
 import { useIsMobile } from "@/hooks/mobile";
-import { ArrowLeft01Icon, ArrowRight01Icon } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
 import { motion, useReducedMotion } from "motion/react";
 
 const TIMER_DURATION = 3000;
@@ -46,23 +44,27 @@ function ProfileCard({
   src,
   alt,
   date,
-  location
+  location,
+  priority
 }: {
   caption: string;
   src: StaticImageData;
   alt: string;
   date?: string;
   location?: string;
+  priority?: boolean;
 }) {
   return (
-    <div className="relative w-48 h-48 sm:w-60 sm:h-60 md:w-80 md:h-80 lg:w-96 lg:h-96 xl:w-[550px] xl:h-[550px] rounded-xl overflow-hidden text-left shadow-md">
+    <div className="relative w-48 h-48 sm:w-60 sm:h-60 md:w-80 md:h-80 lg:w-96 lg:h-96 xl:w-137.5 xl:h-137.5 rounded-xl overflow-hidden text-left shadow-md">
       <Image
         src={src}
         alt={alt}
         className="w-full h-full object-cover"
         width={640}
         height={640}
-        priority
+        sizes="(min-width: 1280px) 550px, (min-width: 1024px) 24rem, (min-width: 768px) 20rem, (min-width: 640px) 15rem, 12rem"
+        priority={priority}
+        loading={priority ? undefined : "lazy"}
         draggable={false}
       />
       <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent" />
@@ -83,34 +85,17 @@ function ProfileCard({
 export function Gallery() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [progress, setProgress] = useState(0);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const progressRef = useRef<NodeJS.Timeout | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const isMobile = useIsMobile();
 
-  const clearTimers = useCallback(() => {
-    setProgress(0);
-    if (progressRef.current) clearInterval(progressRef.current);
-    if (timerRef.current) clearTimeout(timerRef.current);
+  const paginate = useCallback((direction: number) => {
+    setCurrentIndex(
+      i => (i + direction + galleryData.length) % galleryData.length
+    );
   }, []);
 
-  const paginate = useCallback(
-    (direction: number) => {
-      setCurrentIndex(
-        i => (i + direction + galleryData.length) % galleryData.length
-      );
-      clearTimers();
-    },
-    [clearTimers]
-  );
-
-  const pause = useCallback(() => {
-    setIsPlaying(false);
-    clearTimers();
-  }, [clearTimers]);
-
+  const pause = useCallback(() => setIsPlaying(false), []);
   const resume = useCallback(() => setIsPlaying(true), []);
 
   // Keyboard navigation
@@ -130,18 +115,14 @@ export function Gallery() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [paginate]);
 
-  // Auto-play timer
+  // Auto-play timer; the visual progress ring is a pure CSS animation
+  // (see .gallery-progress-ring) kept in sync by sharing TIMER_DURATION.
   useEffect(() => {
     if (!isPlaying || prefersReducedMotion) return;
 
-    progressRef.current = setInterval(() => {
-      setProgress(p => (p >= 100 ? 0 : p + 100 / (TIMER_DURATION / 16)));
-    }, 16);
-
-    timerRef.current = setTimeout(() => paginate(1), TIMER_DURATION);
-
-    return clearTimers;
-  }, [currentIndex, isPlaying, paginate, clearTimers, prefersReducedMotion]);
+    const timer = setTimeout(() => paginate(1), TIMER_DURATION);
+    return () => clearTimeout(timer);
+  }, [currentIndex, isPlaying, paginate, prefersReducedMotion]);
 
   const getPosition = (index: number) => {
     let positions: typeof CARD_POSITIONS;
@@ -170,7 +151,7 @@ export function Gallery() {
       aria-label="Photo gallery"
     >
       <div
-        className="relative w-48 h-48 sm:w-60 sm:h-60 md:w-80 md:h-80 lg:w-96 lg:h-96 xl:w-[550px] xl:h-[550px]"
+        className="relative w-48 h-48 sm:w-60 sm:h-60 md:w-80 md:h-80 lg:w-96 lg:h-96 xl:w-137.5 xl:h-137.5"
         aria-live="polite"
         aria-atomic="true"
       >
@@ -213,6 +194,7 @@ export function Gallery() {
                 alt={item.alt}
                 date={item.date}
                 location={item.location}
+                priority={index === 0}
               />
             </motion.div>
           );
@@ -225,14 +207,13 @@ export function Gallery() {
         aria-label="Gallery controls"
       >
         <div
-          className="relative bg-gray-50 rounded-full px-4 py-2"
+          key={`${currentIndex}-${isPlaying}`}
+          className="gallery-progress-ring relative bg-gray-50 rounded-full px-4 py-2"
           style={{
-            border: "2px solid transparent",
-            backgroundImage: prefersReducedMotion
-              ? "none"
-              : `conic-gradient(from 0deg, rgba(0,0,0,0.3) ${progress * 3.6}deg, rgba(0,0,0,0.05) ${progress * 3.6}deg)`,
-            backgroundOrigin: "border-box",
-            backgroundClip: "padding-box, border-box"
+            animation:
+              isPlaying && !prefersReducedMotion
+                ? `gallery-progress ${TIMER_DURATION}ms linear forwards`
+                : "none"
           }}
           aria-live="polite"
         >
@@ -246,11 +227,12 @@ export function Gallery() {
           className="bg-gray-50 border border-gray-200 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 text-gray-600 rounded-full p-3 sm:p-2 motion-safe:transition-colors shadow-lg"
           aria-label="Previous image"
         >
-          <HugeiconsIcon
-            icon={ArrowLeft01Icon}
-            className="h-4 w-4"
+          <span
+            className="block h-4 w-4 leading-4 text-center"
             aria-hidden="true"
-          />
+          >
+            ‹
+          </span>
         </button>
 
         <button
@@ -258,11 +240,12 @@ export function Gallery() {
           className="bg-gray-50 border border-gray-200 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 text-gray-600 rounded-full p-3 sm:p-2 motion-safe:transition-colors shadow-lg"
           aria-label="Next image"
         >
-          <HugeiconsIcon
-            icon={ArrowRight01Icon}
-            className="h-4 w-4"
+          <span
+            className="block h-4 w-4 leading-4 text-center"
             aria-hidden="true"
-          />
+          >
+            ›
+          </span>
         </button>
       </div>
     </div>

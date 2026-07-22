@@ -1,53 +1,39 @@
 "use client";
 
-import {
-  ComputerIcon,
-  EarthIcon,
-  MicroscopeIcon,
-  Mortarboard02Icon,
-  RocketIcon,
-  StudentCardIcon
-} from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
+import { Emoji } from "@/components/ui/emoji";
 import { easeOut, motion, useReducedMotion } from "motion/react";
 
 const titlePills = [
   {
-    icon: EarthIcon,
+    icon: "🌍",
     label: "San Francisco, CA",
-    tooltip: "I'm most of the time in SF",
-    color: "#2563eb"
+    tooltip: "I'm most of the time in SF"
   },
   {
-    icon: RocketIcon,
+    icon: "🚀",
     label: "Founder",
-    tooltip: "I worked founding companies before",
-    color: "#dc2626"
+    tooltip: "I worked founding companies before"
   },
   {
-    icon: MicroscopeIcon,
+    icon: "🔬",
     label: "Researcher",
-    tooltip: "I work on AI and Medical research",
-    color: "#059669"
+    tooltip: "I work on AI and Medical research"
   },
   {
-    icon: ComputerIcon,
+    icon: "💻",
     label: "Software Engineer",
-    tooltip: "I have been coding for the last 5 years",
-    color: "#7c3aed"
+    tooltip: "I have been coding for the last 5 years"
   },
   {
-    icon: Mortarboard02Icon,
+    icon: "🎓",
     label: "Minerva '29",
     tooltip:
-      "I'm a student at Minerva University, Class of 2029, majoring in CS and Biology",
-    color: "#c2410c"
+      "I'm a student at Minerva University, Class of 2029, majoring in CS and Biology"
   },
   {
-    icon: StudentCardIcon,
+    icon: "🪪",
     label: "RISE Fellow",
-    tooltip: "Eric Schmidt pays me to study and do research",
-    color: "#b91c1c"
+    tooltip: "Eric Schmidt pays me to study and do research"
   }
 ];
 
@@ -82,13 +68,11 @@ export function Subtitle() {
           tabIndex={0}
           aria-describedby={`tooltip-${idx}`}
         >
-          <span aria-hidden="true">
-            <HugeiconsIcon
-              icon={pill.icon}
-              className="w-3 h-3 sm:w-4 sm:h-4 motion-safe:transition-transform motion-safe:duration-200 motion-safe:group-hover:scale-125 motion-safe:group-hover:-rotate-6 motion-safe:group-focus-within:scale-125 motion-safe:group-focus-within:-rotate-6"
-              color={pill.color}
-              strokeWidth={1.5}
-            />
+          <span
+            aria-hidden="true"
+            className="inline-block motion-safe:transition-transform motion-safe:duration-200 motion-safe:group-hover:scale-125 motion-safe:group-hover:-rotate-6 motion-safe:group-focus-within:scale-125 motion-safe:group-focus-within:-rotate-6"
+          >
+            <Emoji symbol={pill.icon} className="w-3 h-3 sm:w-4 sm:h-4" />
           </span>
           <span>{pill.label}</span>
           <span

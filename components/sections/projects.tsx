@@ -12,9 +12,8 @@ import {
   DialogContent,
   DialogTrigger
 } from "@/components/ui/dialog";
+import { Emoji } from "@/components/ui/emoji";
 import { projects } from "@/content/projects";
-import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
 
 const colors = {
   purple: {
@@ -62,7 +61,7 @@ function ProjectModalContent({
               className="rounded-xl mx-auto"
             />
           ) : (
-            <span className="text-5xl block">{project.icon}</span>
+            <Emoji symbol={project.icon} className="w-12 h-12 block mx-auto" />
           )}
 
           <div>
@@ -98,10 +97,7 @@ function ProjectModalContent({
                 className="inline-flex items-center gap-1.5 bg-violet-600 hover:bg-violet-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
               >
                 Try Pulpoo
-                <HugeiconsIcon
-                  icon={ArrowUpRight01Icon}
-                  className="w-3.5 h-3.5"
-                />
+                <span aria-hidden="true">↗</span>
               </a>
             ) : (
               <span className={`text-sm font-medium ${c.accent}`}>
@@ -144,10 +140,7 @@ function ProjectModalContent({
               <span className="underline decoration-gray-300 underline-offset-2">
                 Visit project
               </span>
-              <HugeiconsIcon
-                icon={ArrowUpRight01Icon}
-                className="w-3.5 h-3.5"
-              />
+              <span aria-hidden="true">↗</span>
             </a>
           </div>
         )}
@@ -197,7 +190,7 @@ export function Projects() {
                             className="rounded-lg"
                           />
                         ) : (
-                          <span className="text-2xl">{project.icon}</span>
+                          <Emoji symbol={project.icon} className="w-6 h-6" />
                         )}
                         <h3 className="text-lg font-bold text-gray-800 font-heading leading-tight">
                           {project.title}
@@ -246,10 +239,7 @@ export function Projects() {
                           className="inline-flex items-center gap-1.5 bg-violet-600 hover:bg-violet-700 text-white text-xs font-medium px-3.5 py-1.5 rounded-lg transition-colors"
                         >
                           Try Pulpoo
-                          <HugeiconsIcon
-                            icon={ArrowUpRight01Icon}
-                            className="w-3.5 h-3.5"
-                          />
+                          <span aria-hidden="true">↗</span>
                         </a>
                       ) : (
                         <span className={`text-xs font-medium ${c.accent}`}>

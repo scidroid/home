@@ -6,31 +6,30 @@ import { useEffect } from "react";
 
 import { Clock } from "@/components/sections/header/clock";
 import { Link } from "@/components/ui/link";
-import { useScrollPosition } from "@/hooks/scroll";
 import {
-  GithubIcon,
-  InstagramIcon,
-  LinkedinIcon,
-  NewTwitterIcon
-} from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
+  GithubLogo,
+  InstagramLogo,
+  LinkedinLogo,
+  XLogo
+} from "@/components/ui/social-icons";
+import { useScrollPosition } from "@/hooks/scroll";
 import { motion, useAnimation } from "motion/react";
 
 const socialLinks = [
-  { href: "https://github.com/scidroid", icon: GithubIcon, label: "GitHub" },
+  { href: "https://github.com/scidroid", Icon: GithubLogo, label: "GitHub" },
   {
     href: "https://linkedin.com/in/scidroid",
-    icon: LinkedinIcon,
+    Icon: LinkedinLogo,
     label: "LinkedIn"
   },
   {
     href: "https://x.com/scidroid",
-    icon: NewTwitterIcon,
+    Icon: XLogo,
     label: "X (Twitter)"
   },
   {
     href: "https://instagram.com/scidroid",
-    icon: InstagramIcon,
+    Icon: InstagramLogo,
     label: "Instagram"
   }
 ];
@@ -65,22 +64,16 @@ export function Header() {
         className="flex items-center gap-1 sm:gap-2"
       >
         <Clock />
-        {socialLinks.map(({ href, icon, label }) => (
+        {socialLinks.map(({ href, Icon, label }) => (
           <a
             key={label}
             href={href}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${label} (opens in new tab)`}
-            className="p-1.5 sm:p-1 rounded-full hover:bg-gray-200/50 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
+            className="p-1.5 sm:p-1 rounded-full text-black hover:bg-gray-200/50 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
           >
-            <HugeiconsIcon
-              icon={icon}
-              className="h-5 w-5"
-              color="black"
-              strokeWidth={2}
-              aria-hidden="true"
-            />
+            <Icon className="h-5 w-5" />
           </a>
         ))}
       </nav>

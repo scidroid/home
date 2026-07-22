@@ -42,3 +42,35 @@
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* Auto-play progress ring for the gallery counter pill. Animating a
+   registered custom property lets the conic border fill without any
+   JS-driven re-renders. */
+@property --gallery-progress {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes gallery-progress {
+  to {
+    --gallery-progress: 360deg;
+  }
+}
+
+.gallery-progress-ring {
+  border: 2px solid transparent;
+  background-image: conic-gradient(
+    from 0deg,
+    rgba(0, 0, 0, 0.3) var(--gallery-progress),
+    rgba(0, 0, 0, 0.05) var(--gallery-progress)
+  );
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-progress-ring {
+    background-image: none;
+  }
+}

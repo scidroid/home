@@ -5,9 +5,8 @@ import { Gallery } from "@/components/sections/profile/gallery";
 import { Health } from "@/components/sections/profile/health";
 import { NowPlayingSection } from "@/components/sections/profile/now-playing-server";
 import { Subtitle } from "@/components/sections/profile/subtitle";
+import { Emoji } from "@/components/ui/emoji";
 import { copy } from "@/content/copy";
-import { CallIcon, LicenseIcon } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
 
 export function Profile() {
   return (
@@ -39,24 +38,14 @@ export function Profile() {
             aria-label="Read my resume (opens in new tab)"
             className="bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-600 rounded-xl px-3 py-2 sm:px-4 sm:py-3 w-full text-center transition-colors font-medium shadow-lg flex items-center justify-center gap-2 text-sm sm:text-base"
           >
-            <HugeiconsIcon
-              icon={LicenseIcon}
-              className="h-4 w-4 sm:h-5 sm:w-5"
-              color="gray"
-              strokeWidth={1.5}
-            />
+            <Emoji symbol="📄" className="h-4 w-4 sm:h-5 sm:w-5" />
             Resume →
           </a>
           <Link
             href="/#contact"
             className="bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-600 rounded-xl px-3 py-2 sm:px-4 sm:py-3 w-full text-center transition-colors font-medium shadow-lg flex items-center justify-center gap-2 text-sm sm:text-base"
           >
-            <HugeiconsIcon
-              icon={CallIcon}
-              className="h-4 w-4 sm:h-5 sm:w-5"
-              color="gray"
-              strokeWidth={1.5}
-            />
+            <Emoji symbol="📞" className="h-4 w-4 sm:h-5 sm:w-5" />
             Contact →
           </Link>
         </div>

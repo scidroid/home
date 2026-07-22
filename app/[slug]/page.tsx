@@ -5,14 +5,9 @@ import { notFound } from "next/navigation";
 import { Views } from "@/components/content/views";
 import { Age } from "@/components/sections/profile/age";
 import { Link } from "@/components/ui/link";
+import { GithubLogo, LinkedinLogo, XLogo } from "@/components/ui/social-icons";
 import { copy } from "@/content/copy";
 import { readings } from "@/content/readings";
-import {
-  GithubIcon,
-  LinkedinIcon,
-  NewTwitterIcon
-} from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
 
 import { formatDate } from "@/utils/dates";
 
@@ -144,7 +139,7 @@ export default async function Page({
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-gray-700 transition-colors"
                 >
-                  <HugeiconsIcon icon={GithubIcon} className="w-5 h-5" />
+                  <GithubLogo className="w-5 h-5" />
                 </a>
                 <a
                   href="https://x.com/scidroid"
@@ -152,7 +147,7 @@ export default async function Page({
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-gray-700 transition-colors"
                 >
-                  <HugeiconsIcon icon={NewTwitterIcon} className="w-5 h-5" />
+                  <XLogo className="w-5 h-5" />
                 </a>
                 <a
                   href="https://www.linkedin.com/in/scidroid/"
@@ -160,7 +155,7 @@ export default async function Page({
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-gray-700 transition-colors"
                 >
-                  <HugeiconsIcon icon={LinkedinIcon} className="w-5 h-5" />
+                  <LinkedinLogo className="w-5 h-5" />
                 </a>
                 <span className="text-gray-200">|</span>
                 <Link

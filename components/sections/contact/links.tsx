@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 
-import { Mail01Icon } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
+import { Emoji } from "@/components/ui/emoji";
 
 export function MailLink() {
   const [copied, setCopied] = useState(false);
@@ -24,9 +23,7 @@ export function MailLink() {
       className="flex items-center gap-2.5 group transition-colors py-2"
       onClick={handleClick}
     >
-      <span className="text-gray-400 group-hover:text-gray-600 transition-colors">
-        <HugeiconsIcon icon={Mail01Icon} className="w-5 h-5" />
-      </span>
+      <Emoji symbol="✉️" className="w-5 h-5" />
       <span className="text-gray-700 group-hover:text-gray-900 transition-colors text-base sm:text-lg underline decoration-gray-300 group-hover:decoration-gray-500 underline-offset-2">
         {copied ? "Copied!" : "juan@almanza.cc"}
       </span>

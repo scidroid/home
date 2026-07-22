@@ -13,8 +13,6 @@ import React, {
 import { createPortal } from "react-dom";
 
 import { useClickOutside } from "@/hooks/click-outside";
-import { Cancel01Icon } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
 import {
   AnimatePresence,
   MotionConfig,
@@ -277,7 +275,11 @@ function DialogClose({ children, className, variants }: DialogCloseProps) {
       exit="exit"
       variants={variants}
     >
-      {children || <HugeiconsIcon icon={Cancel01Icon} size={24} />}
+      {children || (
+        <span className="text-2xl leading-none" aria-hidden="true">
+          ✕
+        </span>
+      )}
     </motion.button>
   );
 }
