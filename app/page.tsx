@@ -4,6 +4,10 @@ import { Profile } from "@/components/sections/profile";
 import { Projects } from "@/components/sections/projects";
 import { Readings } from "@/components/sections/readings";
 
+// Revalidate so build-time data (heart rate, view counts) stays reasonably
+// fresh on the statically served page.
+export const revalidate = 300;
+
 export default function Home() {
   return (
     <>

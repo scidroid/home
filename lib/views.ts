@@ -7,13 +7,5 @@ export async function getReadingViews(slug: string) {
 
   if (!reading) return 0;
 
-  return await redis.get<number>(reading.metadata.slug);
-}
-
-export async function addView(slug: string) {
-  const reading = readings.find(reading => slug == reading.metadata.slug);
-
-  if (!reading) return 0;
-
-  return await redis.incr(reading.metadata.slug);
+  return (await redis.get<number>(reading.metadata.slug)) ?? 0;
 }

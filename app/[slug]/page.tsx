@@ -103,7 +103,7 @@ export default async function Page({
         </h1>
 
         <p className="my-4 text-center text-lg xl:my-6 xl:text-xl">
-          <Views slug={metadata.slug} />
+          <Views slug={metadata.slug} trackView />
           {" - "}
           {formatDate(metadata.date)}
         </p>

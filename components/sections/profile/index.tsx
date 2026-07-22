@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Age } from "@/components/sections/profile/age";
 import { Gallery } from "@/components/sections/profile/gallery";
 import { Health } from "@/components/sections/profile/health";
-import { NowPlaying } from "@/components/sections/profile/now-playing";
+import { NowPlayingSection } from "@/components/sections/profile/now-playing-server";
 import { Subtitle } from "@/components/sections/profile/subtitle";
 import { copy } from "@/content/copy";
 import { CallIcon, LicenseIcon } from "@hugeicons/core-free-icons";
@@ -27,7 +27,7 @@ export function Profile() {
         </p>
 
         <div className="my-2 sm:my-4 flex flex-col sm:flex-row items-center justify-between w-full gap-2">
-          <NowPlaying />
+          <NowPlayingSection />
           <Health />
         </div>
 

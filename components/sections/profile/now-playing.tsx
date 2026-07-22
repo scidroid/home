@@ -102,11 +102,17 @@ function NowPlayingWidget({ song }: { song: Music }) {
   );
 }
 
-export function NowPlaying() {
-  const [song, setSong] = useState<Music>({ isPlaying: false });
+export function NowPlaying({
+  initial = { isPlaying: false }
+}: {
+  initial?: Music;
+}) {
+  const [song, setSong] = useState<Music>(initial);
 
   useEffect(() => {
     async function fetchSong() {
+      if (document.hidden) return;
+
       try {
         const response = await fetch("/api/music");
 

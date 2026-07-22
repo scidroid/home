@@ -2,7 +2,7 @@ import { Suspense } from "react";
 
 import { ViewsCounter } from "@/components/content/views/counter";
 
-import { addView, getReadingViews } from "@/lib/views";
+import { getReadingViews } from "@/lib/views";
 
 async function ViewsFetcher({
   slug,
@@ -11,13 +11,11 @@ async function ViewsFetcher({
   slug: string;
   trackView?: boolean;
 }) {
-  const number = (
-    trackView ? await addView(slug) : await getReadingViews(slug)
-  ) as number;
+  const number = await getReadingViews(slug);
 
   return (
     <span>
-      <ViewsCounter views={number} /> views
+      <ViewsCounter views={number} slug={slug} track={trackView} /> views
     </span>
   );
 }
