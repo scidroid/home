@@ -1,11 +1,9 @@
 // Zero-dependency client for the Upstash Redis REST API.
-// Works with both Upstash (UPSTASH_REDIS_REST_*) and legacy Vercel KV
-// (KV_REST_API_*) credentials. Values are JSON-serialized like @vercel/kv
-// did, so existing stored data stays readable.
+// Values are JSON-serialized like @vercel/kv did, so data written by the
+// old Vercel KV setup stays readable.
 
-const url = process.env.UPSTASH_REDIS_REST_URL ?? process.env.KV_REST_API_URL;
-const token =
-  process.env.UPSTASH_REDIS_REST_TOKEN ?? process.env.KV_REST_API_TOKEN;
+const url = process.env.REDIS_REST_URL;
+const token = process.env.REDIS_REST_TOKEN;
 
 async function command<T>(...args: (string | number)[]): Promise<T> {
   if (!url || !token) {
