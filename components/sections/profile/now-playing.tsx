@@ -46,7 +46,7 @@ function SongCard({
   );
 }
 
-export function NowPlayingWidget({ song }: { song: Music }) {
+function NowPlayingWidget({ song }: { song: Music }) {
   if (!song.artwork || !song.title) {
     return (
       <SongCard ariaLabel="Music player loading">
