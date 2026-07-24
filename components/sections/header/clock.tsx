@@ -22,12 +22,19 @@ export function Clock() {
     return () => clearInterval(interval);
   }, []);
 
+  const [hours, minutes] = time.split(":");
+
   return (
     <span
-      className="hidden sm:inline sm:text-xl text-neutral-700"
+      className="hidden sm:inline font-mono text-sm tabular-nums text-gray-600 mr-1"
       suppressHydrationWarning
     >
-      {time} in TYO
+      {hours}
+      <span className="clock-colon" aria-hidden="true">
+        :
+      </span>
+      <span className="sr-only">:</span>
+      {minutes} in TYO
     </span>
   );
 }

@@ -78,9 +78,15 @@ export default function RootLayout({
     <ViewTransitions>
       <html lang="en" className="overflow-x-hidden">
         <body
-          className={`${sansFont.variable} ${displayFont.variable} ${monoFont.variable} text-gray-800 dark font-body antialiased bg-fixed bg-linear-to-bl from-blue-50 to-gray-50 p-2 sm:p-4`}
+          className={`${sansFont.variable} ${displayFont.variable} ${monoFont.variable} text-gray-800 dark font-body antialiased p-2 sm:p-4`}
           suppressHydrationWarning={true}
         >
+          {/* Fixed gradient as its own composited layer instead of
+              background-attachment: fixed, which repaints on every scroll. */}
+          <div
+            aria-hidden="true"
+            className="fixed inset-0 -z-10 bg-linear-to-bl from-blue-50 to-gray-50"
+          />
           <Header />
           <div className="flex justify-center">
             <main className="max-w-[95vw] xl:max-w-6xl">{children}</main>

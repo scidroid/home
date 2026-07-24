@@ -43,6 +43,75 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Heartbeat: pure CSS so it runs on the compositor at full display
+   refresh (120Hz on ProMotion) in every browser. Duration is set inline
+   from the live BPM. */
+@keyframes heart-beat {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.06);
+  }
+  70% {
+    transform: scale(0.99);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes heart-glow {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.9;
+  }
+  70% {
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.heart-beat {
+  animation: heart-beat 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.heart-glow {
+  animation: heart-glow 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heart-beat,
+  .heart-glow {
+    animation: none;
+  }
+  .heart-glow {
+    opacity: 0;
+  }
+}
+
+/* The header clock's colon blinks once per second, like a real digital
+   clock. */
+@keyframes clock-blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+.clock-colon {
+  animation: clock-blink 1s step-end infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clock-colon {
+    animation: none;
+  }
+}
+
 /* Auto-play progress ring for the gallery counter pill. Animating a
    registered custom property lets the conic border fill without any
    JS-driven re-renders. */
