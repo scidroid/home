@@ -13,7 +13,7 @@ const metadata = {
   title: "Competitive Programming",
   date: "2023-10-31",
   summary:
-    "Some Competitive Programming snippets and algorithms that I personally use, incluiding my template."
+    "Some Competitive Programming snippets and algorithms that I personally use, including my template."
 };
 
 function Page() {

@@ -28,14 +28,6 @@ export const galleryData = [
     location: "Szeged, Hungary"
   },
   {
-    id: "scrapyard",
-    src: scrapyard,
-    alt: "Group of young hackers collaborating around laptops at Scrapyard",
-    caption: "Organizing a Hack Club hackathon back home",
-    date: "Mar 2025",
-    location: "Barranquilla, Colombia"
-  },
-  {
     id: "jsconf",
     src: jsconf,
     alt: "Juan on stage presenting with slides behind him at JSConf",
@@ -56,13 +48,13 @@ export const galleryData = [
     src: farolito,
     alt: "Juan and friends sharing burritos at a restaurant",
     caption: "Celebrating after surviving the first EA assignment",
-    date: "Sept 2025",
+    date: "Sep 2025",
     location: "Taqueria El Farolito, San Francisco, CA"
   },
   {
     id: "mpesa",
     src: mpesa,
-    alt: "Lecture hall with a speaker presenting slides about MPESA",
+    alt: "Lecture hall with a speaker presenting slides about M-PESA",
     caption: "Oxford lecture about innovation",
     date: "Aug 2025",
     location: "Oxford, UK"
@@ -83,6 +75,14 @@ export const galleryData = [
     caption: "Measuring microplastics in the Bay Area",
     date: "Oct 2025",
     location: "Sausalito, CA"
+  },
+  {
+    id: "scrapyard",
+    src: scrapyard,
+    alt: "Group of young hackers collaborating around laptops at Scrapyard",
+    caption: "Organizing a Hack Club hackathon back home",
+    date: "Mar 2025",
+    location: "Barranquilla, Colombia"
   },
   {
     id: "fcf",
