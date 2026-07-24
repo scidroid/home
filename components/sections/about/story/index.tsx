@@ -38,9 +38,9 @@ export function Story() {
       ref={articleRef}
       className="w-full h-full rounded-2xl bg-linear-to-br from-amber-50/90 via-yellow-50/80 to-orange-50/70 p-4 sm:p-6 md:p-8 flex flex-col border border-amber-200/50 shadow-sm"
     >
-      <h3 className="text-2xl font-bold text-gray-900 mb-5 tracking-tight">
+      <h2 className="text-2xl font-bold text-gray-900 mb-5 tracking-tight">
         Why I Build
-      </h3>
+      </h2>
 
       <div className="space-y-5">
         {/* Always visible */}

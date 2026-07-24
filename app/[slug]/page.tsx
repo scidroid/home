@@ -83,7 +83,7 @@ export default async function Page({
   };
 
   return (
-    <main className="flex mt-24 justify-center">
+    <div className="flex mt-24 justify-center">
       <section className="my-8 max-w-3xl xl:my-12">
         <script
           type="application/ld+json"
@@ -106,7 +106,7 @@ export default async function Page({
           {metadata.summary}
         </p>
 
-        <article className="text-justify mt-12">
+        <article className="mt-12">
           <Page />
         </article>
 
@@ -137,6 +137,7 @@ export default async function Page({
                   href="https://github.com/scidroid"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="GitHub (opens in new tab)"
                   className="text-gray-400 hover:text-gray-700 transition-colors"
                 >
                   <GithubLogo className="w-5 h-5" />
@@ -145,6 +146,7 @@ export default async function Page({
                   href="https://x.com/scidroid"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="X (opens in new tab)"
                   className="text-gray-400 hover:text-gray-700 transition-colors"
                 >
                   <XLogo className="w-5 h-5" />
@@ -153,6 +155,7 @@ export default async function Page({
                   href="https://www.linkedin.com/in/scidroid/"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="LinkedIn (opens in new tab)"
                   className="text-gray-400 hover:text-gray-700 transition-colors"
                 >
                   <LinkedinLogo className="w-5 h-5" />
@@ -178,6 +181,6 @@ export default async function Page({
           </Link>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

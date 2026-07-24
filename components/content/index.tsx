@@ -2,7 +2,7 @@ import Image, { ImageProps } from "next/image";
 
 export function Paragraph({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-base xl:text-lg text-gray-700 font-body leading-relaxed my-4">
+    <p className="text-base xl:text-lg text-gray-700 font-body leading-relaxed my-4 text-pretty">
       {children}
     </p>
   );

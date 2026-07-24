@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-heading: var(--font-body);
+  --font-heading: var(--font-display);
   --font-body: var(--font-body);
   --font-mono: var(--font-mono);
 }

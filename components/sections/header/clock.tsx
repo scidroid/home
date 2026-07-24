@@ -8,7 +8,7 @@ export function Clock() {
       hour: "2-digit",
       minute: "2-digit",
       hour12: false,
-      timeZone: "America/Los_Angeles"
+      timeZone: "Asia/Tokyo"
     });
   }
 
@@ -27,7 +27,7 @@ export function Clock() {
       className="hidden sm:inline sm:text-xl text-neutral-700"
       suppressHydrationWarning
     >
-      {time} in SF
+      {time} in TYO
     </span>
   );
 }

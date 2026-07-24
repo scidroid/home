@@ -64,9 +64,9 @@ export function ProductivityChart() {
   return (
     <div className="bg-white/50 backdrop-blur-sm rounded-xl border border-amber-200/40 p-5">
       <div className="mb-4 pb-3 border-b border-amber-200/40">
-        <h4 className="text-sm font-semibold text-gray-900 tracking-tight">
+        <h3 className="text-sm font-semibold text-gray-900 tracking-tight">
           The Productivity Paradox
-        </h4>
+        </h3>
         <p className="text-xs text-gray-500 mt-0.5">
           Annual hours worked vs. wages across OECD nations
         </p>
@@ -230,6 +230,7 @@ export function ProductivityChart() {
                   r={14}
                   fill="transparent"
                   tabIndex={0}
+                  role="img"
                   aria-label={`${d.name}: ${d.hours.toLocaleString()} hours, $${d.wages.toLocaleString()}`}
                   className="cursor-pointer focus:outline-none"
                   onMouseEnter={() => setHovered(i)}

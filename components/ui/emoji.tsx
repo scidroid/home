@@ -20,6 +20,8 @@ const EMOJI_FILES: Record<string, string> = {
   "🇨🇴": "1f1e8-1f1f4",
   "🇨🇭": "1f1e8-1f1ed",
   "🇧🇮": "1f1e7-1f1ee",
+  "🇯🇵": "1f1ef-1f1f5",
+  "🇺🇸": "1f1fa-1f1f8",
   "👶": "1f476",
   "🧒": "1f9d2",
   "👦": "1f466",

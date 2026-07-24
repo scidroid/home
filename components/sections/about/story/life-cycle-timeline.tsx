@@ -8,9 +8,9 @@ export function LifeCycleTimeline() {
   return (
     <div className="relative bg-white/50 backdrop-blur-sm rounded-xl p-5 border border-amber-200/40">
       <div className="mb-4 pb-3 border-b border-amber-200/40">
-        <h4 className="text-sm font-semibold text-gray-900 tracking-tight">
+        <h3 className="text-sm font-semibold text-gray-900 tracking-tight">
           The Life Cycle of Preventable Death
-        </h4>
+        </h3>
         <p className="text-xs text-gray-500 mt-0.5">
           Global mortality at every stage of human life
         </p>

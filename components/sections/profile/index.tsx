@@ -13,14 +13,14 @@ export function Profile() {
     <section className="px-4 lg:px-8 mx-auto my-2 sm:my-4 flex flex-col-reverse items-center text-center xl:flex-row xl:justify-between xl:gap-8 overflow-visible">
       <div className="w-full max-w-md xl:max-w-lg">
         <div className="my-2 sm:my-4 xl:text-left flex flex-col items-center xl:block">
-          <h1 className="text-3xl sm:text-4xl xl:text-6xl font-extrabold bg-linear-to-t from-gray-600 to-gray-800 bg-clip-text text-transparent font-heading xl:leading-tight leading-tight">
+          <h1 className="text-3xl sm:text-4xl xl:text-6xl font-extrabold tracking-tight bg-linear-to-t from-gray-600 to-gray-800 bg-clip-text text-transparent font-heading xl:leading-tight leading-tight">
             {copy.name}
           </h1>
 
           <Subtitle />
         </div>
 
-        <p className="my-2 sm:my-4 text-base sm:text-lg text-center xl:text-left">
+        <p className="my-2 sm:my-4 text-base sm:text-lg text-center xl:text-left text-pretty leading-relaxed">
           I&apos;m a <Age /> years old{" "}
           {copy.about.charAt(0).toLowerCase() + copy.about.slice(1)}
         </p>
@@ -36,14 +36,14 @@ export function Profile() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Read my resume (opens in new tab)"
-            className="bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-600 rounded-xl px-3 py-2 sm:px-4 sm:py-3 w-full text-center transition-colors font-medium shadow-lg flex items-center justify-center gap-2 text-sm sm:text-base"
+            className="bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-600 rounded-xl px-3 py-2 sm:px-4 sm:py-3 w-full text-center font-medium shadow-lg flex items-center justify-center gap-2 text-sm sm:text-base motion-safe:transition-[transform,box-shadow,background-color] motion-safe:duration-100 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-px hover:shadow-xl active:translate-y-0 active:scale-[0.97] active:shadow-md active:duration-75"
           >
             <Emoji symbol="📄" className="h-4 w-4 sm:h-5 sm:w-5" />
             Resume →
           </a>
           <Link
             href="/#contact"
-            className="bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-600 rounded-xl px-3 py-2 sm:px-4 sm:py-3 w-full text-center transition-colors font-medium shadow-lg flex items-center justify-center gap-2 text-sm sm:text-base"
+            className="bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-600 rounded-xl px-3 py-2 sm:px-4 sm:py-3 w-full text-center font-medium shadow-lg flex items-center justify-center gap-2 text-sm sm:text-base motion-safe:transition-[transform,box-shadow,background-color] motion-safe:duration-100 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-px hover:shadow-xl active:translate-y-0 active:scale-[0.97] active:shadow-md active:duration-75"
           >
             <Emoji symbol="📞" className="h-4 w-4 sm:h-5 sm:w-5" />
             Contact →

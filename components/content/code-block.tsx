@@ -37,7 +37,7 @@ export function CodeBlock({
       <Highlight
         code={children.trim()}
         language={language}
-        theme={themes.github}
+        theme={themes.vsLight}
       >
         {({ style, tokens, getLineProps, getTokenProps }) => (
           <pre
@@ -47,7 +47,7 @@ export function CodeBlock({
             <div className="grid grid-cols-[auto_1fr] gap-x-4">
               {tokens.map((line, i) => (
                 <div key={i} className="contents">
-                  <span className="text-xs text-gray-400 text-right select-none w-[30px] leading-5">
+                  <span className="text-xs text-gray-500 text-right select-none w-[30px] leading-5">
                     {i + 1}
                   </span>
                   <span {...getLineProps({ line })} className="leading-5">

@@ -76,6 +76,7 @@ export function ColOvoAnimation() {
   return (
     <div
       className={styles.frame}
+      role="img"
       aria-label="Col-Ovo mosquito egg detection animation"
     >
       <div className={styles.header}>

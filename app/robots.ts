@@ -3,8 +3,8 @@ export default function robots() {
     rules: [
       {
         userAgent: "*",
-        disallow: "/",
-        allow: []
+        allow: "/",
+        disallow: ["/api/"]
       }
     ],
     sitemap: "https://almanza.cc/sitemap.xml",

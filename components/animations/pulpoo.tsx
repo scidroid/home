@@ -134,6 +134,7 @@ export function PulpooAnimation() {
   return (
     <div
       className={styles.frame}
+      role="img"
       aria-label="Pulpoo client search and outreach animation"
     >
       <div className={styles.header}>

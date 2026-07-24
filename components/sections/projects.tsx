@@ -18,19 +18,19 @@ import { projects } from "@/content/projects";
 const colors = {
   purple: {
     bg: "bg-violet-50",
-    accent: "text-violet-600"
+    accent: "text-violet-700"
   },
   green: {
     bg: "bg-emerald-50",
-    accent: "text-emerald-600"
+    accent: "text-emerald-700"
   },
   orange: {
     bg: "bg-amber-50",
-    accent: "text-amber-600"
+    accent: "text-amber-700"
   },
   blue: {
     bg: "bg-sky-50",
-    accent: "text-sky-600"
+    accent: "text-sky-700"
   }
 } as const;
 
@@ -68,7 +68,7 @@ function ProjectModalContent({
             <h3 className="text-2xl font-bold text-gray-800 font-heading leading-tight">
               {project.title}
             </h3>
-            <p className="text-sm text-gray-500 mt-1">{project.subtitle}</p>
+            <p className="text-sm text-gray-600 mt-1">{project.subtitle}</p>
           </div>
 
           <div className="w-full">
@@ -81,7 +81,7 @@ function ProjectModalContent({
                 <ColOvoAnimation />
               </div>
             ) : project.image ? (
-              <div className="aspect-video rounded-xl bg-white/50 text-gray-400 flex items-center justify-center">
+              <div className="aspect-video rounded-xl bg-white/50 text-gray-600 flex items-center justify-center">
                 <span className="text-sm">Screenshot</span>
               </div>
             ) : null}
@@ -120,13 +120,13 @@ function ProjectModalContent({
               key={i}
               className="flex items-start gap-2 text-base text-gray-600"
             >
-              <span className="text-gray-400 mt-0.5">→</span>
+              <span className="text-gray-500 mt-0.5">→</span>
               {highlight}
             </li>
           ))}
         </ul>
 
-        <p className="text-sm text-gray-400">{project.tech.join(" · ")}</p>
+        <p className="text-sm text-gray-500">{project.tech.join(" · ")}</p>
 
         {project.link && (
           <div className="pt-2">
@@ -196,7 +196,7 @@ export function Projects() {
                           {project.title}
                         </h3>
                       </div>
-                      <p className="text-sm text-gray-500 mt-1">
+                      <p className="text-sm text-gray-600 mt-1">
                         {project.subtitle}
                       </p>
                     </div>
@@ -212,7 +212,7 @@ export function Projects() {
                           <ColOvoAnimation />
                         </div>
                       ) : (
-                        <div className="aspect-video rounded-xl bg-gray-100 text-gray-400 flex items-center justify-center">
+                        <div className="aspect-video rounded-xl bg-gray-100 text-gray-600 flex items-center justify-center">
                           <span className="text-xs">Screenshot</span>
                         </div>
                       )}
@@ -224,7 +224,7 @@ export function Projects() {
                     </p>
 
                     {/* Zone D: Tech Tags */}
-                    <p className="text-xs text-gray-400 mb-3">
+                    <p className="text-xs text-gray-600 mb-3">
                       {project.tech.slice(0, 4).join(" · ")}
                     </p>
 
@@ -248,7 +248,14 @@ export function Projects() {
                             : "In Development"}
                         </span>
                       )}
-                      <span className="text-xs text-gray-400">Details →</span>
+                      <button
+                        type="button"
+                        aria-haspopup="dialog"
+                        aria-label={`View ${project.title} details`}
+                        className="text-xs text-gray-600 hover:text-gray-800 transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2"
+                      >
+                        Details →
+                      </button>
                     </div>
                   </div>
                 </DialogTrigger>

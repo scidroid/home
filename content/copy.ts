@@ -1,5 +1,5 @@
 export const copy = {
   name: "Juan Almanza",
   about:
-    "Working on solving the world's most pressing problems by creating reliable and scalable technologies for underserved communities."
+    "Creating technology so every human can reach their full potential in a sustainable and equitable world."
 };

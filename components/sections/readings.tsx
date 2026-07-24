@@ -35,7 +35,7 @@ export function Readings() {
             <p className="text-gray-500 text-sm leading-relaxed mb-3 line-clamp-2">
               {metadata.summary}
             </p>
-            <span className="text-xs text-gray-400">
+            <span className="text-[10px] font-mono uppercase tracking-wide text-gray-500">
               {formatDate(metadata.date)}
             </span>
           </Link>

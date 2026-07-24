@@ -36,9 +36,9 @@ export function EducationDivide() {
   return (
     <div className="bg-white/50 backdrop-blur-sm rounded-xl p-5 sm:p-6 border border-amber-200/40">
       <div className="mb-6 pb-3 border-b border-amber-200/40">
-        <h4 className="text-sm font-semibold text-gray-900 tracking-tight">
+        <h3 className="text-sm font-semibold text-gray-900 tracking-tight">
           100 kids, two cities
-        </h4>
+        </h3>
         <p className="text-xs text-gray-500 mt-0.5">
           How many will set foot in a university
         </p>

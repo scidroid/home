@@ -93,28 +93,13 @@ function DialogTrigger({
     setIsOpen(!isOpen);
   }, [isOpen, setIsOpen]);
 
-  const handleKeyDown = useCallback(
-    (event: React.KeyboardEvent) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        setIsOpen(!isOpen);
-      }
-    },
-    [isOpen, setIsOpen]
-  );
-
   return (
     <motion.div
       ref={triggerRef}
       layoutId={`dialog-${uniqueId}`}
       className={cn("relative cursor-pointer", className)}
       onClick={handleClick}
-      onKeyDown={handleKeyDown}
       style={style}
-      role="button"
-      aria-haspopup="dialog"
-      aria-expanded={isOpen}
-      aria-controls={`dialog-content-${uniqueId}`}
     >
       {children}
     </motion.div>

@@ -21,8 +21,14 @@ function StatusBadge({
 
   return (
     <div className="absolute top-2 right-2 rounded-full px-1.5 py-0.5 bg-black/50 z-20 flex items-center gap-1">
-      <div className={`w-1.5 h-1.5 rounded-full ${status.color}`} />
-      <p className="text-gray-200 text-[10px]">{status.text}</p>
+      <div
+        className={`w-1.5 h-1.5 rounded-full ${status.color} ${
+          isPlaying ? "animate-pulse motion-reduce:animate-none" : ""
+        }`}
+      />
+      <p className="text-gray-200 text-[9px] font-mono uppercase tracking-wider">
+        {status.text}
+      </p>
     </div>
   );
 }
@@ -38,7 +44,7 @@ function SongCard({
 }) {
   return (
     <article
-      className={`relative h-auto min-h-32 sm:min-h-40 xl:h-52 rounded-xl shadow-lg w-full overflow-hidden bg-red-200 ${className}`}
+      className={`group relative h-auto min-h-32 sm:min-h-40 xl:h-52 rounded-xl shadow-lg hover:shadow-xl motion-safe:transition-[box-shadow,transform] motion-safe:duration-300 active:scale-[0.99] active:duration-75 w-full overflow-hidden bg-red-200 ${className}`}
       aria-label={ariaLabel}
     >
       {children}
@@ -80,23 +86,27 @@ function NowPlayingWidget({ song }: { song: Music }) {
         <img
           src={song.artwork}
           alt=""
-          className="w-full h-full object-cover select-none pointer-events-none"
+          className="w-full h-full object-cover select-none pointer-events-none motion-safe:transition-transform motion-safe:duration-500 group-hover:scale-[1.04]"
           draggable="false"
         />
       </div>
-      <div className="absolute bottom-4 left-4 right-4">
+      {/* Stretched link: the whole card is the click target. */}
+      {song.url && (
         <a
-          href={song.url ?? "/"}
+          href={song.url}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`Listen to ${song.title} by ${song.artist} (opens in new tab)`}
-          className="block bg-black/40 backdrop-blur-md px-4 py-2 rounded-lg text-white shadow-lg border border-white/10 text-left max-w-full focus:outline-none focus:ring-2 focus:ring-white/50"
-        >
+          className="absolute inset-0 z-10 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white/70"
+        />
+      )}
+      <div className="absolute bottom-4 left-4 right-4 pointer-events-none">
+        <div className="block bg-black/40 backdrop-blur-md px-4 py-2 rounded-lg text-white shadow-lg border border-white/10 text-left max-w-full">
           <div className="w-full overflow-hidden">
             <p className="font-semibold text-base truncate">{song.title}</p>
             <p className="text-zinc-300 text-sm truncate">{song.artist}</p>
           </div>
-        </a>
+        </div>
       </div>
     </SongCard>
   );

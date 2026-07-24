@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ViewTransitions } from "next-view-transitions";
-import { IBM_Plex_Mono, Onest } from "next/font/google";
+import { Bricolage_Grotesque, IBM_Plex_Mono } from "next/font/google";
 
 import { ConsoleHelper } from "@/components/console";
 import { Footer } from "@/components/sections/footer";
@@ -10,16 +10,21 @@ import { Analytics } from "@vercel/analytics/react";
 
 import "@/styles/globals.css";
 
-const sansFont = Onest({
+const sansFont = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: "400",
   variable: "--font-body",
+  fallback: ["system-ui", "sans-serif"]
+});
+
+const displayFont = Bricolage_Grotesque({
+  subsets: ["latin"],
+  variable: "--font-display",
   fallback: ["system-ui", "sans-serif"]
 });
 
 const monoFont = IBM_Plex_Mono({
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500"],
   variable: "--font-mono",
   fallback: ["monospace"]
 });
@@ -73,7 +78,7 @@ export default function RootLayout({
     <ViewTransitions>
       <html lang="en" className="overflow-x-hidden">
         <body
-          className={`${sansFont.variable} ${monoFont.variable} text-gray-800 dark font-body antialiased bg-fixed bg-linear-to-bl from-blue-50 to-gray-50 p-2 sm:p-4`}
+          className={`${sansFont.variable} ${displayFont.variable} ${monoFont.variable} text-gray-800 dark font-body antialiased bg-fixed bg-linear-to-bl from-blue-50 to-gray-50 p-2 sm:p-4`}
           suppressHydrationWarning={true}
         >
           <Header />

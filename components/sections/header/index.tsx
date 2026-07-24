@@ -54,6 +54,7 @@ export function Header() {
       animate={controls}
       className="fixed top-2 sm:top-4 left-2 right-2 z-40 bg-gray-50 border border-gray-200 text-gray-600 bg-opacity-80 px-3 py-2 sm:p-4 rounded-full flex items-center justify-between max-w-xl mx-auto backdrop-blur-sm"
       aria-hidden={!isVisible}
+      inert={!isVisible}
     >
       <Link href="/" className="font-bold sm:text-xl font-heading">
         Juan Almanza
