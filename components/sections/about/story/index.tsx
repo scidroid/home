@@ -1,43 +1,40 @@
-"use client";
+import { ReferenceList } from "@/components/sections/about/story/citation";
+import { LifeCycleTimeline } from "@/components/sections/about/story/life-cycle-timeline";
+import { ProductivityChart } from "@/components/sections/about/story/productivity-chart";
+import { WealthPachinko } from "@/components/sections/about/story/wealth-pachinko";
 
-import Image from "next/image";
-
-import { useRef, useState } from "react";
-
-import asofi from "@/components/sections/about/images/asofi.png";
-import pulpoo from "@/components/sections/about/images/pulpoo.webp";
-import { AnimatePresence, motion } from "motion/react";
-
-import { EducationDivide } from "./education-divide";
-import { ExpandTrigger } from "./expand-trigger";
-import { LifeCycleTimeline } from "./life-cycle-timeline";
-import { ProductivityChart } from "./productivity-chart";
+// Inline footnote: a normal link that also reveals a small note card on
+// hover, in the style of the site's tooltips.
+function Note({
+  href,
+  note,
+  children
+}: {
+  href: string;
+  note: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group/note relative inline underline decoration-dotted decoration-gray-400 underline-offset-2 hover:decoration-gray-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400"
+    >
+      {children}
+      <span
+        role="tooltip"
+        className="pointer-events-none absolute left-1/2 top-full z-50 mt-2 hidden w-max max-w-[19rem] -translate-x-1/2 rounded-xl border border-gray-200 bg-white/95 px-4 py-3 text-sm font-medium leading-relaxed text-gray-700 no-underline shadow-xl backdrop-blur-md opacity-0 motion-safe:transition-opacity group-hover/note:opacity-100 group-focus-visible/note:opacity-100 sm:block"
+      >
+        {note}
+      </span>
+    </a>
+  );
+}
 
 export function Story() {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const articleRef = useRef<HTMLElement>(null);
-
-  const handleToggle = () => {
-    const willExpand = !isExpanded;
-    setIsExpanded(willExpand);
-    if (willExpand && articleRef.current) {
-      setTimeout(() => {
-        const headerOffset = 80;
-        const elementPosition =
-          articleRef.current!.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({
-          top: elementPosition - headerOffset,
-          behavior: "smooth"
-        });
-      }, 50);
-    }
-  };
-
   return (
-    <article
-      ref={articleRef}
-      className="w-full h-full rounded-2xl bg-linear-to-br from-amber-50/90 via-yellow-50/80 to-orange-50/70 p-4 sm:p-6 md:p-8 flex flex-col border border-amber-200/50 shadow-sm"
-    >
+    <article className="w-full h-full flex flex-col">
       <h2 className="text-2xl font-bold text-gray-900 mb-5 tracking-tight">
         Why I Build
       </h2>
@@ -45,143 +42,119 @@ export function Story() {
       <div className="space-y-5">
         {/* Always visible */}
         <p className="text-gray-600 leading-relaxed text-[15px]">
-          I was born in Colombia. The schools I got into, the people I met, the
-          fact that I&apos;m typing this right now,{" "}
+          Life is a lottery. When you are born, you enter a pachinko machine
+          that will place you in one of the 4 categories of the wealth
+          distribution. Whether you will be able to graduate from college or
+          will have to walk every day of your life to collect water is{" "}
           <span className="text-gray-900 font-semibold">
-            I didn&apos;t really earn most of it. I got lucky
+            almost entirely decided without your will
           </span>
-          . Where you&apos;re born does most of the work. Your parents, your
-          passport, whether you make it to ten.
+          .
         </p>
+
+        <WealthPachinko />
 
         <p className="text-gray-600 leading-relaxed text-[15px]">
-          That luck shows up in three places:{" "}
-          <span className="text-gray-900 font-semibold">
-            how long you live, what your work is worth, and what you get to
-            learn
-          </span>
-          . They look like three separate problems but they&apos;re not. They
-          feed each other. Work is the easiest one to see.
+          I was born in Colombia, an upper-middle-income country whose economy
+          has been flourishing recently, but violence slowed down the
+          development of the country. Growing up, insecurity stopped innovation,
+          as starting a business would result in extortions from criminal
+          groups, and often people were{" "}
+          <Note
+            href="https://en.wikipedia.org/wiki/%22False_positives%22_scandal"
+            note="Yes, this was a thing."
+          >
+            persecuted and killed either by these groups or the government
+          </Note>
+          .
         </p>
 
-        <ProductivityChart />
-
-        <p className="text-gray-600 leading-relaxed text-[15px]">
-          Colombians work{" "}
-          <span className="text-gray-900 font-semibold">
-            30% more hours than the OECD average and bring home 53% less
-          </span>
-          . It&apos;s not that people somewhere else are lazier, or that we work
-          harder at home. The hours just count differently. When the schools are
-          broken, the roads are broken, and nothing around you is stable, every
-          hour you put in is worth less. You can&apos;t out-grind the math. And
-          work is only one piece of it.
-        </p>
-
-        {/* Expanded content */}
-        <AnimatePresence initial={false}>
-          {isExpanded && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-              className="overflow-hidden space-y-5"
+        <div className="space-y-5">
+          <p className="text-gray-600 leading-relaxed text-[15px]">
+            But this is not unique to Colombia; some of the common denominators
+            among the non-high-income countries are violence, gender inequality,
+            income inequality, resource-poor healthcare systems, and a plethora
+            of{" "}
+            <Note
+              href="https://www.ucpress.edu/books/infections-and-inequalities/paper"
+              note="I highly recommend reading Infections and Inequalities by Paul Farmer."
             >
-              <LifeCycleTimeline />
+              interlocked situations that emerge from poverty
+            </Note>
+            .
+          </p>
 
-              <p className="text-gray-600 leading-relaxed text-[15px]">
-                It starts the second you&apos;re born.{" "}
-                <span className="text-gray-900 font-semibold">
-                  4.8 million kids die before they turn five every year
-                </span>
-                , mostly from things rich countries fixed decades ago. Whether
-                you&apos;re reading this, and whether I&apos;m the one writing
-                it, comes down partly to where our moms happened to be.
-              </p>
+          <p className="text-gray-600 leading-relaxed text-[15px]">
+            A good example of this phenomenon is income distribution; here, I
+            categorize countries into quadrants based on the relationship
+            between their median wages and median working time.
+          </p>
 
-              <EducationDivide />
+          <ProductivityChart />
 
-              <p className="text-gray-600 leading-relaxed text-[15px]">
-                Underneath all of it is education. A kid born in Bujumbura has
-                about a{" "}
-                <span className="text-gray-900 font-semibold">
-                  6% shot at university
-                </span>
-                . In Zurich, it&apos;s 77%. Same planet. Brilliant kids never
-                sit in a classroom because of where they were born.
-              </p>
+          <p className="text-gray-600 leading-relaxed text-[15px]">
+            Some Latin American countries like Colombia or Mexico are located in{" "}
+            <span className="text-gray-900 font-semibold">the Trap</span>, a
+            high labor hours and low income that perpetuates poverty cycles.
+            While others lie on{" "}
+            <span className="text-gray-900 font-semibold">the Ideal</span>, a
+            low-hours, high-wage state. But when we analyze the differences
+            between these two groups, almost none of the variation can be
+            attributed to mere biological characteristics but rather to social
+            factors.
+          </p>
 
-              <p className="text-gray-600 leading-relaxed text-[15px]">
-                Health, work, education. Pull on any of them and the other two
-                start to come loose, but{" "}
-                <span className="text-gray-900 font-semibold">
-                  education is where you get the most back
-                </span>
-                . Teach a kid, and over a generation the rest start fixing
-                themselves.
-              </p>
+          <p className="text-gray-600 leading-relaxed text-[15px]">
+            One approach is to see this through the{" "}
+            <a
+              href="https://www.who.int/health-topics/social-determinants-of-health"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-900 font-medium underline hover:no-underline"
+            >
+              Social Determinants of Health
+            </a>
+            . The naive approach to understanding public health and disease in
+            general is to link them to biological factors; however, in practice,
+            even for non-communicable diseases,{" "}
+            <span className="text-gray-900 font-semibold">
+              social rather than biological phenomena drive most infections
+            </span>
+            .
+          </p>
 
-              <p className="text-gray-600 leading-relaxed text-[15px]">
-                That&apos;s why I build.{" "}
-                <span className="text-gray-900 font-semibold">ASOFI</span>{" "}
-                teaches girls in rural Colombia how to code. Most of them
-                haven&apos;t sat in front of a keyboard before.{" "}
-                <span className="text-gray-900 font-semibold">Pulpoo</span>{" "}
-                helps companies get back the hours bad systems steal from their
-                teams. Different angles, same cycle. They&apos;re small.
-                They&apos;re mine. I&apos;m working on it.
-              </p>
+          <LifeCycleTimeline />
 
-              <div className="flex flex-wrap gap-3">
-                <a
-                  href="https://github.com/asofiorg"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-white/60 rounded-lg px-3 py-2 border border-amber-200/60 hover:border-amber-400 hover:bg-white/80 transition-all"
-                >
-                  <Image
-                    src={asofi}
-                    alt=""
-                    className="h-7 w-7 rounded-md object-cover"
-                  />
-                  <span className="text-sm font-medium text-gray-900">
-                    ASOFI
-                  </span>
-                </a>
-                <a
-                  href="https://pulpoo.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-white/60 rounded-lg px-3 py-2 border border-amber-200/60 hover:border-amber-400 hover:bg-white/80 transition-all"
-                >
-                  <Image
-                    src={pulpoo}
-                    alt=""
-                    className="h-7 w-7 rounded-md object-cover"
-                  />
-                  <span className="text-sm font-medium text-gray-900">
-                    Pulpoo
-                  </span>
-                </a>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+          <p className="text-gray-600 leading-relaxed text-[15px]">
+            When I grew up, I had the opportunity to access vaccines, nutritious
+            food, clean water, electricity, cooling and heating systems,
+            transportation, internet, high-quality education, and many more. But
+            that&apos;s not the situation for everyone. At this moment, in my
+            country and around the world, there are millions of kids and adults
+            who are suffering (mostly driven by factors they could not control),
+            and for a share of the population,{" "}
+            <span className="text-gray-900 font-semibold">
+              living is not guaranteed
+            </span>
+            .
+          </p>
 
-      {/* Expand Trigger */}
-      <div
-        onClick={handleToggle}
-        role="button"
-        tabIndex={0}
-        onKeyDown={e => e.key === "Enter" && handleToggle()}
-        className="focus:outline-none"
-      >
-        <ExpandTrigger
-          isExpanded={isExpanded}
-          caption={isExpanded ? "That's enough" : "Tell me more"}
-        />
+          <p className="text-gray-600 leading-relaxed text-[15px]">
+            Fortunately, in recent times, technology and science have been
+            developed to improve human life, and{" "}
+            <span className="text-gray-900 font-semibold">
+              I want to work to continue in that direction
+            </span>
+            .
+          </p>
+
+          <section className="mt-8 border-t border-gray-200 pt-4">
+            <h3 className="mb-2.5 font-mono text-[10px] uppercase tracking-wider text-gray-400">
+              References
+            </h3>
+            <ReferenceList className="space-y-1.5" />
+          </section>
+        </div>
       </div>
     </article>
   );

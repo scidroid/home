@@ -2,15 +2,14 @@
 
 import { useState } from "react";
 
-import { useIsMobile } from "@/hooks/mobile";
-
 import {
   OECD,
   midHours,
   midWages,
   productivityData,
   productivityRegions
-} from "./data";
+} from "@/components/sections/about/story/data";
+import { useIsMobile } from "@/hooks/mobile";
 
 const X_MIN = 1300;
 const X_MAX = 2300;
@@ -67,7 +66,7 @@ export function ProductivityChart() {
         <h3 className="text-sm font-semibold text-gray-900 tracking-tight">
           The Productivity Paradox
         </h3>
-        <p className="text-xs text-gray-500 mt-0.5">
+        <p className="text-xs text-gray-600 mt-0.5">
           Annual hours worked vs. wages across OECD nations
         </p>
       </div>
@@ -115,7 +114,7 @@ export function ProductivityChart() {
           <text
             x={x(X_MIN) + 8}
             y={y(Y_MAX) + 16}
-            fontSize={isMobile ? 11 : 12}
+            fontSize={isMobile ? 12 : 13}
             fontWeight={700}
             fill="#15803d"
           >
@@ -124,7 +123,7 @@ export function ProductivityChart() {
           <text
             x={x(X_MAX) - 8}
             y={y(Y_MIN) - 8}
-            fontSize={isMobile ? 11 : 12}
+            fontSize={isMobile ? 12 : 13}
             fontWeight={700}
             fill="#b91c1c"
             textAnchor="end"
@@ -147,8 +146,8 @@ export function ProductivityChart() {
               <text
                 x={x(t)}
                 y={pad.top + plotH + 16}
-                fontSize={10}
-                fill="#9ca3af"
+                fontSize={11}
+                fill="#6b7280"
                 textAnchor="middle"
               >
                 {t.toLocaleString()}
@@ -169,8 +168,8 @@ export function ProductivityChart() {
               <text
                 x={pad.left - 8}
                 y={y(t) + 3}
-                fontSize={10}
-                fill="#9ca3af"
+                fontSize={11}
+                fill="#6b7280"
                 textAnchor="end"
               >
                 ${(t / 1000).toFixed(0)}k
@@ -182,8 +181,9 @@ export function ProductivityChart() {
           <text
             x={pad.left + plotW / 2}
             y={height - 8}
-            fontSize={isMobile ? 9 : 10}
-            fill="#6b7280"
+            fontSize={isMobile ? 10 : 11}
+            fill="#4b5563"
+            fontWeight={500}
             textAnchor="middle"
           >
             Hours worked per year →
@@ -191,8 +191,9 @@ export function ProductivityChart() {
           <text
             x={14}
             y={pad.top + plotH / 2}
-            fontSize={isMobile ? 9 : 10}
-            fill="#6b7280"
+            fontSize={isMobile ? 10 : 11}
+            fill="#4b5563"
+            fontWeight={500}
             textAnchor="middle"
             transform={`rotate(-90 14 ${pad.top + plotH / 2})`}
           >
@@ -208,7 +209,8 @@ export function ProductivityChart() {
                   <text
                     x={x(d.hours) - (d.highlight ? 11 : 9)}
                     y={y(d.wages) + 3}
-                    fontSize={9}
+                    fontSize={10}
+                    fontWeight={500}
                     fill="#374151"
                     textAnchor="end"
                   >
@@ -257,28 +259,32 @@ export function ProductivityChart() {
             const flipX = leftPct > 60;
             return (
               <div
-                className="absolute pointer-events-none bg-white/95 backdrop-blur-sm border border-gray-200 rounded-lg px-3 py-2 shadow-lg text-xs z-10"
+                className="absolute pointer-events-none bg-white/95 backdrop-blur-sm border border-gray-200 rounded-xl px-3.5 py-2.5 shadow-xl text-sm z-10"
                 style={{
                   left: `${leftPct}%`,
                   top: `${topPct}%`,
                   transform: `translate(${flipX ? "calc(-100% - 12px)" : "12px"}, -50%)`
                 }}
               >
-                <p className="font-semibold text-gray-900">
+                <p className="font-semibold text-gray-900 leading-tight">
                   {hoveredPoint.name}
                 </p>
-                <p className="text-gray-500 mt-0.5 whitespace-nowrap">
+                <p className="mt-1 whitespace-nowrap text-xs text-gray-600 tabular-nums">
                   {hoveredPoint.hours.toLocaleString()} hrs · $
-                  {hoveredPoint.wages.toLocaleString()} ·{" "}
-                  <span className="font-semibold">
-                    ${hourlyRate.toFixed(0)}/hr
+                  {hoveredPoint.wages.toLocaleString()} USD/yr
+                </p>
+                <p className="mt-0.5 whitespace-nowrap text-sm font-semibold text-gray-900 tabular-nums">
+                  ${hourlyRate.toFixed(0)}
+                  <span className="text-xs font-normal text-gray-500">
+                    {" "}
+                    USD per hour
                   </span>
                 </p>
                 {!isOECD && (
-                  <p className="text-gray-400 mt-1 pt-1 border-t border-gray-100 whitespace-nowrap">
+                  <p className="mt-1.5 whitespace-nowrap border-t border-gray-100 pt-1.5 text-xs text-gray-500 tabular-nums">
                     <span
                       className={
-                        hoursVsOECD > 0 ? "text-red-500" : "text-green-500"
+                        hoursVsOECD > 0 ? "text-red-600" : "text-green-700"
                       }
                     >
                       {hoursVsOECD > 0 ? "+" : ""}
@@ -287,7 +293,7 @@ export function ProductivityChart() {
                     {" · "}
                     <span
                       className={
-                        wagesVsOECD < 0 ? "text-red-500" : "text-green-500"
+                        wagesVsOECD < 0 ? "text-red-600" : "text-green-700"
                       }
                     >
                       {wagesVsOECD > 0 ? "+" : ""}
@@ -301,7 +307,7 @@ export function ProductivityChart() {
           })()}
       </div>
 
-      <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-[10px] mt-3 pt-3 border-t border-amber-200/40">
+      <div className="flex flex-wrap justify-center gap-x-4 gap-y-1.5 text-[11px] mt-3 pt-3 border-t border-amber-200/40">
         {(isMobile
           ? productivityRegions.filter(r =>
               [
@@ -315,14 +321,14 @@ export function ProductivityChart() {
         ).map(region => (
           <div key={region.name} className="flex items-center gap-1.5">
             <span
-              className="w-2 h-2 rounded-full"
+              className="w-2.5 h-2.5 rounded-full"
               style={{ backgroundColor: region.color }}
             />
             <span className="text-gray-500">{region.name}</span>
           </div>
         ))}
       </div>
-      <p className="text-[10px] text-gray-400 text-center mt-2">
+      <p className="mt-2 text-center text-[11px] text-gray-500">
         Source: OECD Data Explorer (2024)
       </p>
     </div>

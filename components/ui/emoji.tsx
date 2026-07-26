@@ -6,6 +6,10 @@
 
 const EMOJI_FILES: Record<string, string> = {
   "🌍": "1f30d",
+  "🌎": "1f30e",
+  "🌏": "1f30f",
+  "✨": "2728",
+  "🦟": "1f99f",
   "🚀": "1f680",
   "🔬": "1f52c",
   "💻": "1f4bb",

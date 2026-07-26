@@ -63,15 +63,9 @@ export function Header() {
 
   return (
     <motion.header
-      initial={{ y: "-120%" }}
-      animate={{ y: isVisible ? "0%" : "-120%" }}
-      transition={
-        prefersReducedMotion
-          ? { duration: 0 }
-          : isVisible
-            ? { duration: 0.15, ease: [0.23, 1, 0.32, 1] }
-            : { duration: 0.2, ease: "easeIn" }
-      }
+      initial={{ y: "-200%" }}
+      animate={{ y: isVisible ? "0%" : "-200%" }}
+      transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.3 }}
       className="fixed top-2 sm:top-4 left-2 right-2 z-40 bg-gray-50/85 border border-gray-200 text-gray-600 px-3 py-2 sm:p-4 rounded-full flex items-center justify-between max-w-xl mx-auto backdrop-blur-md shadow-lg shadow-gray-900/5"
       aria-hidden={!isVisible}
       inert={!isVisible}

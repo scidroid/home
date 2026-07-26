@@ -6,7 +6,7 @@ export function Bio() {
   return (
     <section>
       <p className="text-gray-600 leading-relaxed">
-        Hi! I'm a freshman at{" "}
+        Hi! I'm a sophomore at{" "}
         <a
           href="https://minerva.edu"
           target="_blank"
@@ -20,10 +20,9 @@ export function Bio() {
           />
           Minerva University
         </a>
-        . I believe that everyone despite their opportunities in life deserve to
-        benefit from the advances of the humanity. I have been working for years
-        exploring how to create scalable and accessible solutions that make an
-        impact in multiple fields. I'm always open to collaborating on{" "}
+        , studying biology and math. I split my time working on startups and
+        doing research to ensure humanity's advances reach everyone. I'm always
+        open to collaborating on{" "}
         <span className="font-bold">unconventional ideas</span>.{" "}
         <a
           href="/#contact"

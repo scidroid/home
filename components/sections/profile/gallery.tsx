@@ -194,7 +194,7 @@ export function Gallery() {
                 alt={item.alt}
                 date={item.date}
                 location={item.location}
-                priority={index === 0}
+                priority={index <= 1}
               />
             </motion.div>
           );

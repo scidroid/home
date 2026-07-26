@@ -2,39 +2,32 @@ import Image from "next/image";
 
 import asofi from "@/components/sections/about/images/asofi.png";
 import pulpoo from "@/components/sections/about/images/pulpoo.webp";
-import stanford from "@/components/sections/about/images/stanford.webp";
 
 export function Work() {
   const experiences = [
     {
       logo: pulpoo,
-      role: "Software Engineer",
+      role: "Data Engineer",
       company: "Pulpoo",
-      description: "AI-powered productivity tools for scaling operations.",
+      description:
+        "Data pipelines for enterprise clients, at the AI startup I've grown with since 2023.",
       url: "https://pulpoo.com",
       squared: true
     },
     {
       logo: asofi,
-      role: "Founder",
+      role: "Co-Founder",
       company: "ASOFI",
-      description: "Democratizing AI education in rural communities.",
+      description:
+        "Tech for rural Colombia. Part of the UN Women Multistakeholder Leadership Group.",
       url: "https://github.com/asofiorg",
       squared: true
-    },
-    {
-      logo: stanford,
-      role: "Research Intern",
-      company: "Stanford",
-      description: "ML research in drug discovery and signal processing.",
-      url: "https://www.stanford.edu",
-      squared: false
     }
   ];
 
   return (
     <section>
-      <h3 className="text-xl font-semibold mb-3">Experience</h3>
+      <h3 className="text-xl font-semibold mb-3">Work</h3>
       <div className="space-y-3 lg:space-y-4">
         {experiences.map((exp, index) => (
           <a

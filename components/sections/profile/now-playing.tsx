@@ -1,10 +1,10 @@
 "use client";
 
+import Image from "next/image";
+
 import { useEffect, useState } from "react";
 
 import { type Music } from "@/lib/music";
-
-/* eslint-disable @next/next/no-img-element */
 
 function StatusBadge({
   isPlaying,
@@ -83,11 +83,14 @@ function NowPlayingWidget({ song }: { song: Music }) {
     <SongCard ariaLabel={`${statusText}: ${song.title} by ${song.artist}`}>
       <StatusBadge isPlaying={song.isPlaying} hasContent={!!song.title} />
       <div className="absolute inset-0" aria-hidden="true">
-        <img
+        <Image
           src={song.artwork}
           alt=""
-          className="w-full h-full object-cover select-none pointer-events-none motion-safe:transition-transform motion-safe:duration-500 group-hover:scale-[1.04]"
-          draggable="false"
+          fill
+          priority
+          sizes="(min-width: 1280px) 250px, (min-width: 640px) 45vw, 90vw"
+          className="object-cover select-none pointer-events-none motion-safe:transition-transform motion-safe:duration-500 group-hover:scale-[1.04]"
+          draggable={false}
         />
       </div>
       {/* Stretched link: the whole card is the click target. */}

@@ -11,15 +11,15 @@ export const lifeCycleData = [
   {
     stage: "Grow",
     icon: "🧒",
-    deaths: "4.8M children under 5 died in 2023",
-    description: "13,100 children die daily from preventable diseases",
+    deaths: "4.9M children under 5 died in 2024",
+    description: "13,400 children die daily from preventable diseases",
     source: "https://data.unicef.org/topic/child-survival/under-five-mortality",
     sourceName: "UNICEF"
   },
   {
     stage: "Develop",
     icon: "👦",
-    deaths: "1.25M TB deaths in 2023",
+    deaths: "1.23M TB deaths in 2024",
     description: "Tuberculosis remains the deadliest infectious disease",
     source: "https://www.who.int/news-room/fact-sheets/detail/tuberculosis",
     sourceName: "WHO"
@@ -27,8 +27,9 @@ export const lifeCycleData = [
   {
     stage: "Reproduce",
     icon: "👨‍👩‍👧‍👦",
-    deaths: "630,000 AIDS-related deaths in 2023",
-    description: "1.3M new HIV infections despite 70% decline since 2004",
+    deaths: "570,000 AIDS-related deaths in 2025",
+    description:
+      "1.3M new HIV infections despite a 74% fall in deaths since 2004",
     source: "https://www.unaids.org/en/resources/fact-sheet",
     sourceName: "UNAIDS"
   },

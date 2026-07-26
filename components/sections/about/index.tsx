@@ -1,5 +1,5 @@
-import { LeftColumn } from "./layout/left-column";
-import { RightColumn } from "./layout/right-column";
+import { LeftColumn } from "@/components/sections/about/layout/left-column";
+import { RightColumn } from "@/components/sections/about/layout/right-column";
 
 export function About() {
   return (

@@ -1,8 +1,7 @@
 "use client";
 
+import { lifeCycleData } from "@/components/sections/about/story/data";
 import { Emoji } from "@/components/ui/emoji";
-
-import { lifeCycleData } from "./data";
 
 export function LifeCycleTimeline() {
   return (
@@ -52,7 +51,7 @@ export function LifeCycleTimeline() {
         ))}
       </div>
       <p className="text-[10px] text-gray-400 border-t border-amber-200/40 pt-3 mt-3 ">
-        Data from WHO, UNICEF, UNAIDS, UNFPA (2023–24)
+        Data from WHO, UNICEF, UNAIDS, UNFPA (2023–25)
       </p>
     </div>
   );

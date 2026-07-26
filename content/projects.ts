@@ -4,7 +4,7 @@ export const projects = [
     title: "Pulpoo",
     subtitle: "The AI that knows your company",
     shortDescription:
-      "Your company generates tons of data. Pulpoo finds the signal in the noise — surfacing the insights that drive better decisions and real revenue.",
+      "Your company generates tons of data. Pulpoo finds the signal in the noise. It surfaces the insights that drive better decisions and real revenue.",
     fullDescription:
       "Pulpoo is a comprehensive productivity platform designed to streamline business operations through intelligent automation and AI-driven insights. The platform integrates task management, team collaboration, and performance analytics into a unified solution. With features like smart scheduling, automated workflow optimization, and real-time productivity metrics, Pulpoo helps teams work more efficiently. The platform leverages machine learning to identify bottlenecks, suggest process improvements, and provide personalized productivity recommendations for each team member.",
     tech: ["React", "Node.js", "AI/ML", "PostgreSQL", "AWS", "Docker"],
