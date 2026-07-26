@@ -1,16 +1,17 @@
-import { Views } from "@/components/content/views";
+import { Views } from "@/components/mdx/views";
 import { Link } from "@/components/ui/link";
-import { readings } from "@/content/readings";
+import { SectionTitle } from "@/components/ui/section-title";
+import { getReadings } from "@/content/readings";
 
 import { formatDate } from "@/utils/dates";
 
-export function Readings() {
+export async function Readings() {
+  const readings = await getReadings();
+
   return (
     <section className="px-4 lg:px-8 my-12">
       <div className="text-center lg:text-left mb-8">
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 font-heading leading-tight mb-3">
-          Readings
-        </h2>
+        <SectionTitle className="mb-3">Readings</SectionTitle>
         <p className="text-base text-gray-600">
           I will be writing more thoughtful things near the end of the{" "}
           <span className="font-bold">Spring 2026</span> semester. Stay tuned!
@@ -18,7 +19,7 @@ export function Readings() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {readings.map(({ metadata }) => (
+        {readings.map(metadata => (
           <Link
             href={`/${metadata.slug}`}
             key={metadata.slug}

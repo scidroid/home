@@ -1,7 +1,7 @@
 "use client";
 
-import { lifeCycleData } from "@/components/sections/about/story/data";
 import { Emoji } from "@/components/ui/emoji";
+import { lifeCycleData } from "@/data/life-cycle";
 
 export function LifeCycleTimeline() {
   return (

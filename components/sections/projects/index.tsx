@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 
-import { ColOvoAnimation } from "@/components/animations/col-ovo";
-import { PulpooAnimation } from "@/components/animations/pulpoo";
 import pulpooLogo from "@/components/sections/about/images/pulpoo.webp";
+import { ColOvoAnimation } from "@/components/sections/projects/animations/col-ovo";
+import { PulpooAnimation } from "@/components/sections/projects/animations/pulpoo";
 import {
   Dialog,
   DialogClose,
@@ -13,6 +13,7 @@ import {
   DialogTrigger
 } from "@/components/ui/dialog";
 import { Emoji } from "@/components/ui/emoji";
+import { SectionTitle } from "@/components/ui/section-title";
 import { projects } from "@/content/projects";
 
 const colors = {
@@ -153,9 +154,7 @@ export function Projects() {
   return (
     <section className="px-4 lg:px-8 my-12">
       <div className="text-center lg:text-left mb-12">
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 font-heading leading-tight">
-          Projects
-        </h2>
+        <SectionTitle>Projects</SectionTitle>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

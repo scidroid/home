@@ -1,10 +1,6 @@
-import { readings } from "@/content/readings";
+import { getReading } from "@/content/readings";
 
 import { redis } from "@/lib/redis";
-
-function isValidSlug(slug: string) {
-  return readings.some(reading => reading.metadata.slug === slug);
-}
 
 export async function GET(
   _request: Request,
@@ -12,7 +8,7 @@ export async function GET(
 ) {
   const { slug } = await params;
 
-  if (!isValidSlug(slug)) {
+  if (!(await getReading(slug))) {
     return Response.json({ error: "unknown slug" }, { status: 404 });
   }
 
@@ -27,7 +23,7 @@ export async function POST(
 ) {
   const { slug } = await params;
 
-  if (!isValidSlug(slug)) {
+  if (!(await getReading(slug))) {
     return Response.json({ error: "unknown slug" }, { status: 404 });
   }
 

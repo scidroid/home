@@ -66,12 +66,31 @@ export const REFERENCES: Reference[] = [
     href: "https://www.bls.gov/cpi/"
   },
   {
-    id: "oecd",
-    author: "OECD",
-    year: "2024",
-    title: "Average annual hours actually worked and average annual wages",
-    note: "Data set",
-    href: "https://data-explorer.oecd.org"
+    id: "pip-median",
+    author: "World Bank",
+    short: "World Bank PIP",
+    year: "2026",
+    title: "Median income or consumption per day",
+    note: "Poverty and Inequality Platform, data set, processed by Our World in Data",
+    href: "https://ourworldindata.org/grapher/daily-median-income"
+  },
+  {
+    id: "pip-gini",
+    author: "World Bank",
+    short: "Gini",
+    year: "2026",
+    title: "Income inequality: Gini coefficient",
+    note: "Poverty and Inequality Platform, data set, processed by Our World in Data",
+    href: "https://ourworldindata.org/grapher/economic-inequality-gini-index"
+  },
+  {
+    id: "ilo-hours",
+    author: "International Labour Organization",
+    short: "ILO hours",
+    year: "2026",
+    title: "Employment by sex and weekly hours actually worked",
+    note: "ILOSTAT, data set",
+    href: "https://ilostat.ilo.org/topics/working-time/"
   },
   {
     id: "unfpa",
@@ -141,3 +160,7 @@ export const BOARD_SOURCES = [
   "exchange-rate",
   "us-cpi"
 ];
+
+// What the quadrant chart plots: one source per axis, the halo, and the index
+// that carries every figure to 2025 prices.
+export const CHART_SOURCES = ["pip-median", "ilo-hours", "pip-gini", "us-cpi"];

@@ -1,14 +1,8 @@
-import {
-  ExternalLink,
-  Heading2,
-  ImageWithCaption,
-  Paragraph
-} from "@/components/content";
-import { CodeBlock } from "@/components/content/code-block";
+import { Figure } from "@/components/mdx/figure";
 
 import ioi from "@/public/images/cp/ioi.webp";
 
-const metadata = {
+export const metadata = {
   slug: "cp",
   title: "Competitive Programming",
   date: "2023-10-31",
@@ -16,21 +10,18 @@ const metadata = {
     "Some Competitive Programming snippets and algorithms that I personally use, including my template."
 };
 
-function Page() {
-  return (
-    <>
-      <ImageWithCaption
-        alt="A silly photo of me in the International Olympiad in Informatics Cultural Night."
-        src={ioi}
-        width={1000}
-        height={720}
-        priority
-      />
+<Figure
+  alt="A silly photo of me in the International Olympiad in Informatics Cultural Night."
+  src={ioi}
+  width={1000}
+  height={720}
+  priority
+/>
 
-      <Heading2>My Template</Heading2>
+## My Template
 
-      <CodeBlock language="cpp" filename="template.cpp">
-        {`#include <bits/stdc++.h>
+```cpp:template.cpp
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -52,21 +43,15 @@ int main() {
 	cout.tie(0);
 
     return 0;
-}`}
-      </CodeBlock>
+}
+```
 
-      <Heading2>Fenwick Tree</Heading2>
+## Fenwick Tree
 
-      <Paragraph>
-        This one is my favorite data structure, implemented for the{" "}
-        <ExternalLink href="https://cses.fi/alon/task/1648">
-          Dynamic Range Sum Queries
-        </ExternalLink>{" "}
-        problem.
-      </Paragraph>
+This one is my favorite data structure, implemented for the [Dynamic Range Sum Queries](https://cses.fi/alon/task/1648) problem.
 
-      <CodeBlock language="cpp" filename="fenwick.cpp">
-        {`const ll N = 1e7 + 5;
+```cpp:fenwick.cpp
+const ll N = 1e7 + 5;
 
 ll tree[N];
 
@@ -121,29 +106,15 @@ int main() {
     }
 
     return 0;
-}`}
-      </CodeBlock>
+}
+```
 
-      <Heading2>Segment Tree</Heading2>
+## Segment Tree
 
-      <Paragraph>
-        Inspired in the implementations of{" "}
-        <ExternalLink href="https://codeforces.com/profile/ahoraSoyPeor">
-          Roger
-        </ExternalLink>{" "}
-        and{" "}
-        <ExternalLink href="https://codeforces.com/profile/mcqueencin">
-          Oscar
-        </ExternalLink>{" "}
-        for the{" "}
-        <ExternalLink href="https://codeforces.com/problemset/problem/380/C">
-          Sereja and Brackets
-        </ExternalLink>{" "}
-        problem.
-      </Paragraph>
+Inspired in the implementations of [Roger](https://codeforces.com/profile/ahoraSoyPeor) and [Oscar](https://codeforces.com/profile/mcqueencin) for the [Sereja and Brackets](https://codeforces.com/problemset/problem/380/C) problem.
 
-      <CodeBlock language="cpp" filename="segment-tree.cpp">
-        {`struct info {
+```cpp:segment-tree.cpp
+struct info {
     ll ans = 0;
     ll open = 0;
     ll closed = 0;
@@ -244,21 +215,15 @@ int main() {
     }
 
     return 0;
-}`}
-      </CodeBlock>
+}
+```
 
-      <Heading2>Segment Tree (Lazy Propagation)</Heading2>
+## Segment Tree (Lazy Propagation)
 
-      <Paragraph>
-        This implementation is for the{" "}
-        <ExternalLink href="https://oi.edu.pl/boi2001/task/marzad.html">
-          BOI2001's Mars Map
-        </ExternalLink>{" "}
-        problem.
-      </Paragraph>
+This implementation is for the [BOI2001's Mars Map](https://oi.edu.pl/boi2001/task/marzad.html) problem.
 
-      <CodeBlock language="cpp" filename="segment-tree-lazy.cpp">
-        {`struct info {
+```cpp:segment-tree-lazy.cpp
+struct info {
 	ll min = 0;
 	ll cnt = 1;
 	ll lazy = 0;
@@ -382,20 +347,15 @@ int main() {
 	cout << res;
 
 	return 0;
-}`}
-      </CodeBlock>
+}
+```
 
-      <Heading2>My favorite piece of code</Heading2>
+## My favorite piece of code
 
-      <Paragraph>
-        This is a terrible implementation but it's probably the one I'm most
-        proud of.
-      </Paragraph>
+This is a terrible implementation but it's probably the one I'm most proud of.
 
-      <CodeBlock
-        language="cpp"
-        filename="dont-try-this.cpp"
-      >{`bool isValid(vll list, vll copy) {
+```cpp:dont-try-this.cpp
+bool isValid(vll list, vll copy) {
 	for (ll i = 0; i < list.size(); i++) {
 		for (ll j = i; j < list.size(); j++) {
 			if (i == j) {
@@ -525,9 +485,5 @@ int main()
 	}
 
 	return 0;
-}`}</CodeBlock>
-    </>
-  );
 }
-
-export const cp = { metadata, Page };
+```

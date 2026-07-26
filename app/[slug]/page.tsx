@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-import { Views } from "@/components/content/views";
+import { Views } from "@/components/mdx/views";
 import { Age } from "@/components/sections/profile/age";
 import { Link } from "@/components/ui/link";
 import { GithubLogo, LinkedinLogo, XLogo } from "@/components/ui/social-icons";
 import { copy } from "@/content/copy";
-import { readings } from "@/content/readings";
+import { getReading, getReadings } from "@/content/readings";
 
 import { formatDate } from "@/utils/dates";
 
@@ -20,11 +20,9 @@ export async function generateMetadata({
 }): Promise<Metadata | undefined> {
   const { slug } = await params;
 
-  const reading = readings.find(reading => reading.metadata.slug === slug);
+  const metadata = await getReading(slug);
 
-  if (!reading) return;
-
-  const { metadata } = reading;
+  if (!metadata) return;
 
   const ogImage = `https://almanza.cc/api/og?id=${metadata.slug}`;
 
@@ -49,9 +47,8 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  return readings.map(reading => ({
-    slug: reading.metadata.slug
-  }));
+  const readings = await getReadings();
+  return readings.map(({ slug }) => ({ slug }));
 }
 
 export default async function Page({
@@ -61,11 +58,11 @@ export default async function Page({
 }) {
   const { slug } = await params;
 
-  const reading = readings.find(reading => reading.metadata.slug === slug);
+  const metadata = await getReading(slug);
 
-  if (!reading) notFound();
+  if (!metadata) notFound();
 
-  const { metadata, Page } = reading;
+  const { default: Post } = await import(`@/content/readings/${slug}.mdx`);
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -107,7 +104,7 @@ export default async function Page({
         </p>
 
         <article className="mt-12">
-          <Page />
+          <Post />
         </article>
 
         <hr className="mt-16 mb-12 border-gray-200" />

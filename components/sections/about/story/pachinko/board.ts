@@ -1,48 +1,12 @@
 // Board geometry, bracket data and the peg-field random walk.
 // No canvas, physics engine or React here, so this is testable on its own.
+import { BRACKETS } from "@/data/income-brackets";
 
-// World Bank income groups. `share` is the percentage of world population in
-// each group (2025) and also sets the bin width on the board.
-//
-// Thresholds are the FY2027 Atlas values exactly as the World Bank publishes
-// them, $1,175 / $4,635 / $14,375 of GNI per person per YEAR, divided by 12
-// and rounded to the nearest dollar: 97.9 -> 98, 386.3 -> 386, 1,197.9 ->
-// 1,198. Sources: see SOURCES in dollar-street.ts.
-export const BRACKETS = [
-  {
-    label: "Low",
-    share: 9,
-    tint: "#fee2e2",
-    spark: "#f87171",
-    income: "<$98 USD/mo",
-    message: "low income. Less than $98 a month. 9% of humanity starts here."
-  },
-  {
-    label: "Lower-mid",
-    share: 36,
-    tint: "#ffedd5",
-    spark: "#fb923c",
-    income: "$98-386 USD/mo",
-    message:
-      "lower-middle income. $98-386 a month. More than a third of us start here."
-  },
-  {
-    label: "Upper-mid",
-    share: 38,
-    tint: "#fef3c7",
-    spark: "#fbbf24",
-    income: "$386-1,198 USD/mo",
-    message: "upper-middle income. $386-1,198 a month. Colombia sits here."
-  },
-  {
-    label: "High",
-    share: 17,
-    tint: "#d1fae5",
-    spark: "#34d399",
-    income: ">$1,198 USD/mo",
-    message: "high income. More than $1,198 a month. The luckiest 17%."
-  }
-] as const;
+import { clamp } from "@/utils/math";
+
+// A bracket's `share` doubles as its bin width on the board.
+
+export { BRACKETS };
 
 // Board geometry in logical units; the canvas scales to fit its box.
 export const W = 360;
@@ -103,8 +67,7 @@ export const binAt = (x: number) => {
   return i === -1 ? BRACKETS.length - 1 : i;
 };
 
-export const clamp = (v: number, min: number, max: number) =>
-  Math.min(max, Math.max(min, v));
+export { clamp };
 export const rand = (min: number, max: number) =>
   min + Math.random() * (max - min);
 

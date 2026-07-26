@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { ViewTransitions } from "next-view-transitions";
 import { Bricolage_Grotesque, IBM_Plex_Mono } from "next/font/google";
 
-import { ConsoleHelper } from "@/components/console";
 import { Footer } from "@/components/sections/footer";
 import { Header } from "@/components/sections/header";
+import { ConsoleHelper } from "@/components/ui/console";
 import { copy } from "@/content/copy";
 import { Analytics } from "@vercel/analytics/react";
 

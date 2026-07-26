@@ -1,0 +1,81 @@
+import { Figure } from "@/components/mdx/figure";
+
+import fetch from "@/public/images/apple-health/fetch.webp";
+import post from "@/public/images/apple-health/post.webp";
+
+export const metadata = {
+  slug: "apple-health",
+  title: "Apple Health data in your website",
+  date: "2023-11-08",
+  summary:
+    "Create a shortcut in the iPhone that send data from Apple Health to an endpoint in your website."
+};
+
+While Apple Health data is typically stored solely on the device and lacks an official API for data exposure, there are ways around this. In this guide, we'll explore a creative solution to this challenge by crafting a **custom API**. We'll use an **iPhone shortcut** to automate the process of fetching health data and sending it to an endpoint on your website.
+
+## Creating the shortcut
+
+Let's begin creating the shortcut and retrieving health samples of a specific type. For this demonstration, we'll fetch the **heart rate**.
+
+The `Find Health Sample` action offers different options based on the metric you're seeking. In this case, let's select `Heart rate` with the condition _"is in the last 3 days"_, and create a variable to store the result, as shown in this screenshot:
+
+<Figure
+  alt="Accessing the health data inside the shortcut."
+  src={fetch}
+  width={400}
+  height={720}
+/>
+
+Next, the `Get Contents Of` action is triggered, which sends a request to our endpoint with the body of our POST request. The body of the request is a JSON object containing the current date, along with the `heart` field. This field references the `hrate` variable declared earlier. For the URL, you can add a search parameter with the password to prevent abuse of your database.
+
+<Figure
+  alt="Sending the information to our endpoint."
+  src={post}
+  width={400}
+  height={720}
+/>
+
+## Creating the API Endpoint
+
+Once your shortcut is ready, the next step involves setting up your API endpoint. The code snippet below outlines the process for Next.js with Upstash Redis but you are free to use the service you most like:
+
+Make sure to create a `.env` file and add the `PASSWORD` variable and the keys for the key-value service.
+
+```typescript:/api/health/route.ts
+import { redis } from "@/lib/redis";
+
+const { PASSWORD } = process.env;
+
+export async function POST(request: Request) {
+  const password = new URL(request.url).searchParams.get("password");
+
+  if (password != PASSWORD) {
+    return Response.json(
+      {
+        error: "incorrect password"
+      },
+      { status: 401 }
+    );
+  }
+
+  const res = await request.json();
+
+  await redis.set("health", res.value);
+
+  return Response.json(data);
+}
+```
+
+## Display the data using RSC
+
+If you are using the Next.js app router or any other implementation of React Server Components you can directly fetch Redis in the component.
+
+```typescript
+import { redis } from "@/lib/redis";
+
+export async function HealthData() {
+  const bpm = await redis.get("health");
+
+  return <p>{bpm} BPM</p>;
+}
+```

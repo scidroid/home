@@ -1,9 +1,9 @@
 import { ImageResponse } from "next/og";
 
 import { copy } from "@/content/copy";
-import { readings } from "@/content/readings";
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
+import { getReading } from "@/content/readings";
+import { readFile } from "fs/promises";
+import { join } from "path";
 
 const pills = [
   { label: "San Francisco, CA", color: "#2563eb" },
@@ -26,12 +26,10 @@ export async function GET(request: Request) {
   let summary = "";
 
   if (articleId) {
-    const article = readings.find(
-      reading => reading.metadata.slug === articleId
-    );
+    const article = await getReading(articleId);
     if (article) {
-      title = article.metadata.title;
-      summary = article.metadata.summary;
+      title = article.title;
+      summary = article.summary;
     }
   }
 

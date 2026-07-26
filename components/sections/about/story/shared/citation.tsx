@@ -1,8 +1,5 @@
-import {
-  REFERENCES,
-  referenceById
-} from "@/components/sections/about/story/references";
-import type { Reference } from "@/components/sections/about/story/references";
+import { REFERENCES, referenceById } from "@/data/references";
+import type { Reference } from "@/data/references";
 
 // The APA string itself, reused by every place a source is named.
 export function Apa({ reference }: { reference: Reference }) {
@@ -26,7 +23,6 @@ const CARD =
 const CARET =
   "absolute -bottom-[3px] left-1/2 h-1.5 w-1.5 -translate-x-1/2 rotate-45 border-b border-r border-gray-200 bg-white";
 
-// The hover card both Citation and Term sit inside.
 function Card({
   width,
   children
@@ -42,7 +38,6 @@ function Card({
   );
 }
 
-// A short label that opens the full citation on hover or focus.
 export function Citation({
   reference,
   label
@@ -67,6 +62,28 @@ export function Citation({
         </span>
       </Card>
     </a>
+  );
+}
+
+export function SourceLine({
+  ids,
+  className = ""
+}: {
+  ids: string[];
+  className?: string;
+}) {
+  return (
+    <p
+      className={`text-balance font-mono text-[9px] leading-relaxed text-gray-400 ${className}`}
+    >
+      Sources:{" "}
+      {ids.map((id, i) => (
+        <span key={id} className="whitespace-nowrap">
+          {i > 0 && " · "}
+          <Citation reference={referenceById(id)} />
+        </span>
+      ))}
+    </p>
   );
 }
 

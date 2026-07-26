@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import { ViewsCounter } from "@/components/content/views/counter";
+import { ViewsCounter } from "@/components/mdx/views/counter";
 
 import { getReadingViews } from "@/lib/views";
 

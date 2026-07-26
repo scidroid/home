@@ -1,0 +1,74 @@
+// Two medians, at one moment, in one currency. Getting there takes three
+// corrections, and each one exists because the raw data would otherwise say
+// something false.
+//
+// MEDIAN, NOT MEAN. A mean wage is pulled up by a few very large salaries, and
+// a mean of hours is pulled DOWN by part-time work, which is common in rich
+// countries and rare in poor ones. A mean on either axis would flatter exactly
+// the countries this chart is asking about.
+//
+// ONE YEAR, NOT WHENEVER. Countries survey on their own schedules, so pairing
+// each country's latest readings put a 1992 income next to {{REFERENCE_YEAR}} hours. Income
+// is instead the World Bank's lineup estimate for {{REFERENCE_YEAR}}: every country carried
+// to the same reference year with national accounts growth. `modelled` marks
+// the ones that are a projection rather than a survey year.
+//
+// ONE CURRENCY. The source publishes 2021 international dollars, already
+// deflated by each country's own inflation and converted at purchasing power
+// parity. Every figure here is carried on to 2025 prices with US inflation,
+// x{{FACTOR}}, so this chart and the pachinko above are in the same money. The
+// PPP basket is still the 2021 one; only the price level moves. US CPI-U annual
+// average {{CPI_2021}} (2021) to {{CPI_2025}} (2025), BLS. October 2025 was never
+// published, because of that year's lapse in appropriations, so it is
+// interpolated between September and November; leaving it out moves the factor
+// by 0.065%.
+//
+//   income      median income or consumption per day, {{REFERENCE_YEAR}}, 2025 prices
+//   hours       median hours actually worked in a week, from the ILO banded
+//               distribution of employment by hours
+//   gini        income inequality, 0 to 1, from the latest actual survey,
+//               because a distribution's shape cannot be projected the way a
+//               level can
+//
+// Only income carries a recency rule: the survey behind its {{REFERENCE_YEAR}} estimate has
+// to be within {{MAX_AGE}} years. Income grows, so an old reading really is a different
+// number, and the further the lineup reaches the more of the value is
+// projection rather than measurement.
+//
+// Hours carry no such rule, and that is a measured decision rather than a
+// lenient one. Median weekly hours barely move. Tested every country against
+// itself across every pair of years it reports, a median taken 6 to 8 years
+// earlier predicts the later one to within 0.54 hours, half of them inside
+// that, 90% inside 2.0. Two attempts to do better both made it worse: scaling
+// the ILO modelled mean by each country's own median-to-mean ratio inherits a
+// level offset between the two series, which is 3.8 hours for Germany alone,
+// and carrying a country's median forward on the modelled series as a time
+// index lost to simply leaving it alone at every gap length we could test.
+// Hours are a structural fact about a country, so the newest reading is used
+// whatever year it comes from, and the card names that year.
+//
+// The 8 year rule on income has to be loose. Poor countries survey far less
+// often, so a strict cut quietly deletes them: at 3 years it keeps 88% of high
+// income countries and 57% of low income ones. Deleting the poor from a chart
+// about poverty is a worse error than an old reading. At {{MAX_AGE}} years every income
+// bracket is fully represented. {{COUNT}} of the {{HOURS_UNIVERSE}} countries with a
+// computable median of hours also have an income estimate that recent.
+import type { IncomeGroup } from "@/data/income-brackets";
+
+export type Country = {
+  iso: string;
+  iso2: string; // ISO 3166-1 alpha-2, which the flag file name is built from
+  group: IncomeGroup;
+  name: string;
+  income: number;
+  hours: number;
+  gini: number;
+  region: string;
+  surveyYear: number; // the survey the {{REFERENCE_YEAR}} income estimate rests on
+  hoursYear: number;
+  modelled?: boolean; // income projected to {{REFERENCE_YEAR}} rather than surveyed in it
+  highlight?: boolean;
+};
+
+export const REFERENCE_YEAR = {{REFERENCE_YEAR}};
+

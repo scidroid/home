@@ -1,5 +1,6 @@
 import { Form } from "@/components/sections/contact/form";
 import { MailLink, SocialLink } from "@/components/sections/contact/links";
+import { SectionTitle } from "@/components/ui/section-title";
 import {
   GithubLogo,
   InstagramLogo,
@@ -13,9 +14,7 @@ export function ContactForm() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
         <div>
           <div className="text-center lg:text-left mb-6">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 font-heading leading-tight mb-3">
-              Get in touch
-            </h2>
+            <SectionTitle className="mb-3">Get in touch</SectionTitle>
             <p className="text-base text-gray-600">
               Have a project in mind? Reach out and I&apos;ll get back to you.
             </p>

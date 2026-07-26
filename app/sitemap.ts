@@ -1,9 +1,9 @@
-import { readings } from "@/content/readings";
+import { getReadings } from "@/content/readings";
 
 export default async function sitemap() {
-  const readingsData = readings.map(reading => ({
-    url: `https://almanza.cc/${reading.metadata.slug}`,
-    lastModified: reading.metadata.date
+  const readingsData = (await getReadings()).map(({ slug, date }) => ({
+    url: `https://almanza.cc/${slug}`,
+    lastModified: date
   }));
 
   const routes = [""].map(route => ({

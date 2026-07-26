@@ -1,0 +1,40 @@
+
+
+// For scale, in the same units and the same year: the world population median,
+// the level half of humanity lives below. It sits well under the country
+// median because the countries below the line hold most of the people.
+export const WORLD_MEDIAN_INCOME = 10.99;
+
+// A few countries sit so far along the hours axis that they stretch it until
+// the rest are a smudge. Which ones count as far out is Tukey's rule, 1.5
+// interquartile ranges past the quartiles, rather than a judgement by eye. The
+// chart opens without them and says so in its count; nothing is deleted.
+function fence(values: number[]) {
+  const a = [...values].sort((x, y) => x - y);
+  const at = (p: number) => {
+    const k = (a.length - 1) * p;
+    const lo = Math.floor(k);
+    const hi = Math.ceil(k);
+    return lo === hi ? a[lo] : a[lo] + (a[hi] - a[lo]) * (k - lo);
+  };
+  const q1 = at(0.25);
+  const q3 = at(0.75);
+  const iqr = q3 - q1;
+  return { lo: q1 - 1.5 * iqr, hi: q3 + 1.5 * iqr };
+}
+
+// Income is fenced in log space, the scale it is read on, and nothing falls
+// outside it: every outlier here is an hours outlier.
+const HOURS_FENCE = fence(countries.map(d => d.hours));
+
+export const isOutlier = (d: Country) =>
+  d.hours < HOURS_FENCE.lo || d.hours > HOURS_FENCE.hi;
+
+export const OUTLIERS = countries.filter(isOutlier);
+
+// The window holding everything else, with room for the axis labels.
+const kept = countries.filter(d => !isOutlier(d));
+export const TRIMMED_HOURS = {
+  lo: Math.floor(Math.min(...kept.map(d => d.hours))) - 1,
+  hi: Math.ceil(Math.max(...kept.map(d => d.hours))) + 2
+};

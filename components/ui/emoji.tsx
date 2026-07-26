@@ -36,6 +36,20 @@ const EMOJI_FILES: Record<string, string> = {
   "🎨": "1f3a8"
 };
 
+function Glyph({ file, className }: { file: string; className: string }) {
+  return (
+    <img
+      src={`/emoji/${file}.png`}
+      alt=""
+      aria-hidden="true"
+      width={64}
+      height={64}
+      draggable={false}
+      className={`inline-block select-none ${className}`}
+    />
+  );
+}
+
 export function Emoji({
   symbol,
   className = "w-4 h-4"
@@ -48,15 +62,21 @@ export function Emoji({
   // Fall back to the native glyph for anything not in the map.
   if (!file) return <span aria-hidden="true">{symbol}</span>;
 
-  return (
-    <img
-      src={`/emoji/${file}.png`}
-      alt=""
-      aria-hidden="true"
-      width={64}
-      height={64}
-      draggable={false}
-      className={`inline-block select-none ${className}`}
-    />
-  );
+  return <Glyph file={file} className={className} />;
+}
+
+// Flags need no lookup table: the file name is the two regional indicator
+// code points an ISO 3166-1 alpha-2 code maps to.
+export function Flag({
+  iso2,
+  className = "h-3.5 w-3.5"
+}: {
+  iso2: string;
+  className?: string;
+}) {
+  const file = [...iso2]
+    .map(c => (0x1f1e6 + c.charCodeAt(0) - 65).toString(16))
+    .join("-");
+
+  return <Glyph file={file} className={`shrink-0 ${className}`} />;
 }

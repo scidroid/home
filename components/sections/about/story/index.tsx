@@ -1,7 +1,8 @@
-import { ReferenceList } from "@/components/sections/about/story/citation";
 import { LifeCycleTimeline } from "@/components/sections/about/story/life-cycle-timeline";
-import { ProductivityChart } from "@/components/sections/about/story/productivity-chart";
-import { WealthPachinko } from "@/components/sections/about/story/wealth-pachinko";
+import { WealthPachinko } from "@/components/sections/about/story/pachinko";
+import { ProductivityChart } from "@/components/sections/about/story/productivity";
+import { ReferenceList } from "@/components/sections/about/story/shared/citation";
+import { TextLink } from "@/components/ui/text-link";
 
 // Inline footnote: a normal link that also reveals a small note card on
 // hover, in the style of the site's tooltips.
@@ -32,6 +33,12 @@ function Note({
   );
 }
 
+function P({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="text-gray-600 leading-relaxed text-[15px]">{children}</p>
+  );
+}
+
 export function Story() {
   return (
     <article className="w-full h-full flex flex-col">
@@ -40,8 +47,7 @@ export function Story() {
       </h2>
 
       <div className="space-y-5">
-        {/* Always visible */}
-        <p className="text-gray-600 leading-relaxed text-[15px]">
+        <P>
           Life is a lottery. When you are born, you enter a pachinko machine
           that will place you in one of the 4 categories of the wealth
           distribution. Whether you will be able to graduate from college or
@@ -50,11 +56,11 @@ export function Story() {
             almost entirely decided without your will
           </span>
           .
-        </p>
+        </P>
 
         <WealthPachinko />
 
-        <p className="text-gray-600 leading-relaxed text-[15px]">
+        <P>
           I was born in Colombia, an upper-middle-income country whose economy
           has been flourishing recently, but violence slowed down the
           development of the country. Growing up, insecurity stopped innovation,
@@ -67,10 +73,10 @@ export function Story() {
             persecuted and killed either by these groups or the government
           </Note>
           .
-        </p>
+        </P>
 
         <div className="space-y-5">
-          <p className="text-gray-600 leading-relaxed text-[15px]">
+          <P>
             But this is not unique to Colombia; some of the common denominators
             among the non-high-income countries are violence, gender inequality,
             income inequality, resource-poor healthcare systems, and a plethora
@@ -82,19 +88,21 @@ export function Story() {
               interlocked situations that emerge from poverty
             </Note>
             .
-          </p>
+          </P>
 
-          <p className="text-gray-600 leading-relaxed text-[15px]">
+          <P>
             A good example of this phenomenon is income distribution; here, I
             categorize countries into quadrants based on the relationship
-            between their median wages and median working time.
-          </p>
+            between what a typical person lives on and the hours a typical
+            worker puts in, and how far each country stretches between its best
+            and worst paid.
+          </P>
 
           <ProductivityChart />
 
-          <p className="text-gray-600 leading-relaxed text-[15px]">
-            Some Latin American countries like Colombia or Mexico are located in{" "}
-            <span className="text-gray-900 font-semibold">the Trap</span>, a
+          <P>
+            Some Latin American countries like Colombia or Guatemala are located
+            in <span className="text-gray-900 font-semibold">the Trap</span>, a
             high labor hours and low income that perpetuates poverty cycles.
             While others lie on{" "}
             <span className="text-gray-900 font-semibold">the Ideal</span>, a
@@ -102,18 +110,13 @@ export function Story() {
             between these two groups, almost none of the variation can be
             attributed to mere biological characteristics but rather to social
             factors.
-          </p>
+          </P>
 
-          <p className="text-gray-600 leading-relaxed text-[15px]">
+          <P>
             One approach is to see this through the{" "}
-            <a
-              href="https://www.who.int/health-topics/social-determinants-of-health"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-900 font-medium underline hover:no-underline"
-            >
+            <TextLink href="https://www.who.int/health-topics/social-determinants-of-health">
               Social Determinants of Health
-            </a>
+            </TextLink>
             . The naive approach to understanding public health and disease in
             general is to link them to biological factors; however, in practice,
             even for non-communicable diseases,{" "}
@@ -121,11 +124,11 @@ export function Story() {
               social rather than biological phenomena drive most infections
             </span>
             .
-          </p>
+          </P>
 
           <LifeCycleTimeline />
 
-          <p className="text-gray-600 leading-relaxed text-[15px]">
+          <P>
             When I grew up, I had the opportunity to access vaccines, nutritious
             food, clean water, electricity, cooling and heating systems,
             transportation, internet, high-quality education, and many more. But
@@ -137,16 +140,16 @@ export function Story() {
               living is not guaranteed
             </span>
             .
-          </p>
+          </P>
 
-          <p className="text-gray-600 leading-relaxed text-[15px]">
+          <P>
             Fortunately, in recent times, technology and science have been
             developed to improve human life, and{" "}
             <span className="text-gray-900 font-semibold">
               I want to work to continue in that direction
             </span>
             .
-          </p>
+          </P>
 
           <section className="mt-8 border-t border-gray-200 pt-4">
             <h3 className="mb-2.5 font-mono text-[10px] uppercase tracking-wider text-gray-400">

@@ -2,8 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { Citation } from "@/components/sections/about/story/citation";
-import { DOLLAR_STREET } from "@/components/sections/about/story/dollar-street";
 import {
   BIN_BOTTOM,
   BIN_EDGES,
@@ -45,10 +43,13 @@ import {
   speedOf,
   stepWorld
 } from "@/components/sections/about/story/pachinko/world";
+import { SourceLine } from "@/components/sections/about/story/shared/citation";
 import {
-  BOARD_SOURCES,
-  referenceById
-} from "@/components/sections/about/story/references";
+  Figure,
+  FigureTitle
+} from "@/components/sections/about/story/shared/figure";
+import { DOLLAR_STREET } from "@/data/dollar-street";
+import { BOARD_SOURCES } from "@/data/references";
 import type Matter from "matter-js";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
@@ -363,12 +364,10 @@ export function WealthPachinko() {
   }, []);
 
   return (
-    <div className="rounded-xl border border-amber-200/40 bg-white/50 p-5 backdrop-blur-sm">
+    <Figure>
       <div className="mb-4 flex items-center justify-between gap-3 border-b border-amber-200/40 pb-3">
         <div className="min-w-0">
-          <h3 className="text-sm font-semibold tracking-tight text-gray-900">
-            The Birth Lottery
-          </h3>
+          <FigureTitle>The Birth Lottery</FigureTitle>
           <p
             className={`mt-0.5 font-mono text-[10px] tracking-wide tabular-nums ${
               ballsLeft === 0 ? "text-amber-700" : "text-gray-400"
@@ -613,20 +612,11 @@ export function WealthPachinko() {
       </div>
 
       <div className="mt-4 flex items-start justify-between gap-3 border-t border-amber-200/40 pt-2.5">
-        {/* One quiet line; each name opens its full citation. */}
-        <p className="text-balance font-mono text-[9px] leading-relaxed text-gray-400">
-          Sources:{" "}
-          {BOARD_SOURCES.map((id, i) => (
-            <span key={id} className="whitespace-nowrap">
-              {i > 0 && " · "}
-              <Citation reference={referenceById(id)} />
-            </span>
-          ))}
-        </p>
+        <SourceLine ids={BOARD_SOURCES} />
 
         <MathNote />
       </div>
-    </div>
+    </Figure>
   );
 }
 

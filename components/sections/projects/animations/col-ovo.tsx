@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import { useEffect, useState } from "react";
 
-import styles from "@/components/animations/col-ovo.module.css";
+import styles from "@/components/sections/projects/animations/col-ovo.module.css";
 
 const EGG_COUNT = 67;
 const TOTAL_TICKS = 44;

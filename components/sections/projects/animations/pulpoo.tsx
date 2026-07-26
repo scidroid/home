@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-import styles from "@/components/animations/pulpoo.module.css";
+import styles from "@/components/sections/projects/animations/pulpoo.module.css";
 
 type Client = {
   id: string;
